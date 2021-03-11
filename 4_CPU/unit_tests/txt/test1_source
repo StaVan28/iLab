@@ -1,0 +1,21 @@
+	push 3
+ push 28
+	push eax
+
+push ebx
+		add
+	push 1
+push edx
+sub
+	mul
+push ecx
+push 12
+	mul
+fsqrt
+div
+
+
+out
+out
+hlt
+

@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BINARY	Makefile	/^BINARY  = CPU$/;"	m
+BIN_DIR	Makefile	/^BIN_DIR   = .\/bin$/;"	m
+BIN_TESTS	Makefile	/^BIN_TESTS    = unit_tests$/;"	m
+CPU_accomplishment	CPU.cpp	/^void CPU_accomplishment(CPU_t* CPU) $/;"	f
+CPU_construct	CPU.cpp	/^void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source) $/;"	f
+CPU_destruct	CPU.cpp	/^void CPU_destruct(CPU_t* CPU) $/;"	f
+CXX	Makefile	/^CXX      = g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS = -Wall$/;"	m
+HEADERS	Makefile	/^HEADERS = CPU.h$/;"	m
+HEADERS_TESTS	Makefile	/^HEADERS_TESTS = unit_tests.h$/;"	m
+HEAD_DIR	Makefile	/^HEAD_DIR  = ..\/include\/headers$/;"	m
+LIB_DIR	Makefile	/^LIB_DIR   = ..\/include\/libs$/;"	m
+OBJECTS	Makefile	/^OBJECTS = $(subst .cpp,.o,$(SOURCE))$/;"	m
+OBJECTS_TESTS	Makefile	/^OBJECTS_TESTS = $(subst .cpp,.o,$(SOURCE))$/;"	m
+OBJ_DIR	Makefile	/^OBJ_DIR   = .\/obj$/;"	m
+SOURCE	Makefile	/^SOURCE  = main.cpp CPU.cpp CPU_assembler.cpp$/;"	m
+SOURCE_TESTS	Makefile	/^SOURCE_TESTS = main_tests.cpp unit_tests.cpp$/;"	m
+TESTS_DIR	Makefile	/^TESTS_DIR = .\/unit_tests$/;"	m
+TXT_DIR	Makefile	/^TXT_DIR   = .\/txt$/;"	m
+assembling_file	CPU_assembler.cpp	/^void assembling_file(const char* file_path, const char* source)  $/;"	f
+concat	CPU_assembler.cpp	/^char* concat(const char* file_path, const char* tag, const char* source)$/;"	f
+fopen_file_with_path	CPU_assembler.cpp	/^FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* source, const char* mode)$/;"	f
+main	main.cpp	/^int main(int argc, char const *argv[]) {$/;"	f
+main	unit_tests/main_tests.cpp	/^int main() {$/;"	f
+unit_test_1	unit_tests/unit_tests.cpp	/^void unit_test_1(const char* file_path, const char* source) {$/;"	f
+unit_test_2	unit_tests/unit_tests.cpp	/^void unit_test_2(const char* file_path, const char* obj_source) {$/;"	f

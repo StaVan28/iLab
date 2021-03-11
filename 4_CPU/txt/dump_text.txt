@@ -1,0 +1,29 @@
+
+******************************************************
+Pointer buffer of data: 0x56134dc65320
+Pointer line_t structs: 0x56134dc65380
+
+Number of strings = 12
+Number of structs = 12
+Number of symbols = 78
+
+[Number in structs]{Real number}(Length)
+
+[  1]{  1}(  5)jmp 1
+[  2]{  2}(  7)push 28
+[  3]{  3}(  6)jmp  F
+[  4]{  4}(  6)push 3
+[  5]{  5}(  2)1:
+[  6]{  6}(  5)jmp F
+[  7]{  7}(  6)push 3
+[  8]{  8}(  3)pop
+[  9]{  9}(  6)push 2
+[ 10]{ 10}(  2)F:
+[ 11]{ 11}(  6)push 6
+[ 12]{ 11}(  3)hlt
+
+
+Note! The actual length of the lines is 1 more 
+	due to the '\n' and '\0' characters.
+
+******************************************************

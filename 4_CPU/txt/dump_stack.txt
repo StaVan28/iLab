@@ -1,0 +1,22 @@
+
+******************************************************
+Stack (OK) [0x7ffff0443a88] "stack_CPU" {
+
+Canary left  = 595371386  [0x7ffff0443b60]
+Current size = 1
+Capacity     = 4
+Hash         = 967820927
+Canary right = 752293992  [0x7ffff0443b9c]
+
+Data [0x56134dc64374]
+ {canary_left} : 874895203  [0x56134dc64370]
+
+*{ 1} : 2
+ { 2} : nan (POISON)
+ { 3} : nan (POISON)
+ { 4} : nan (POISON)
+
+ {canary_right} : 934719742  [0x56134dc64394]
+}
+
+******************************************************

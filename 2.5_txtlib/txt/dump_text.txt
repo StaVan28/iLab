@@ -1,0 +1,18 @@
+
+******************************************************
+Pointer buffer of data: 0x55a724e980b0
+Pointer line_t structs: 0x55a724e980d0
+
+Number of strings = 1
+Number of structs = 0
+Number of symbols = 0
+Number of words   = 0
+
+[Number in structs]{Real number}(Length)
+
+
+
+Note! The actual length of the lines is 1 more 
+	due to the '\n' and '\0' characters.
+
+******************************************************
