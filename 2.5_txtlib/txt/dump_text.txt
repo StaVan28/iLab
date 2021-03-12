@@ -1,15 +1,21 @@
 
 ******************************************************
-Pointer buffer of data: 0x55a724e980b0
-Pointer line_t structs: 0x55a724e980d0
+Pointer buffer of data: 0x5582dde2b0b0
+Pointer line_t structs: 0x5582dde2b0d0
 
-Number of strings = 1
-Number of structs = 0
-Number of symbols = 0
-Number of words   = 0
+Number of strings = 6
+Number of structs = 6
+Number of symbols = 21
+Number of words   = 6
 
 [Number in structs]{Real number}(Length)
 
+[  1]{  1}(  3)123
+[  2]{  3}(  1)4
+[  3]{  4}(  1)5
+[  4]{  5}(  1)6
+[  5]{  7}(  1)7
+[  6]{  8}(  2)89
 
 
 Note! The actual length of the lines is 1 more 

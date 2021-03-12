@@ -207,20 +207,59 @@ void text_t::txtlib_fill_line_t_string(void) {
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_fill_line_t_string(void) {
+void text_t::txtlib_fill_line_t_word(void) {
     
-
-    num_structs = num_words;
-
-    int   real_num = 0;       //indx
-    int   length   = 0;       // отнимать 
-    char* line     = nullptr; // указатель strtok
+    int   real_line  = 0;
+    int   indx       = 0;
 
 
+    while (true) {
 
-    char*   buffer_data     = nullptr; // парсим
-    line_t* text            = nullptr; // присваиваем
+        while (isspace(buffer_data[indx]) || buffer_data[indx] == '\0') {
 
+            if (buffer_data[indx] == '\n')
+                real_line++;
+
+            indx++;
+        }
+
+        text[num_structs].line = &(buffer_data[indx]);
+
+        while (!isspace(buffer_data[indx])) {
+
+            if (buffer_data[indx] == '\0') {
+
+                text[num_structs].real_num = real_line;
+
+                int tmp_indx = indx - 1;
+                while (isspace(buffer_data[tmp_indx]))
+                    tmp_indx--;
+
+                text[num_structs].length = &(buffer_data[tmp_indx]) - text[num_structs].line + 1;
+
+                if (indx == num_symbols)
+                    num_structs++;
+
+                return;
+            }
+
+            indx++;
+        }
+
+        real_line++;
+
+        int tmp2_indx = indx - 1;
+        while (isspace(buffer_data[tmp2_indx]))
+            tmp2_indx--;
+
+        buffer_data[tmp2_indx + 1] = '\0';
+
+        text[num_structs].length = &(buffer_data[tmp2_indx]) - text[num_structs].line + 1;
+
+        text[num_structs].real_num = real_line;
+
+        num_structs++;
+    }
 }
 
 //-----------------------------------------------------------------------------
