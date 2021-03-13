@@ -17,7 +17,7 @@ void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source)
 
 	int num_symbols = text_t::txtlib_number_of_symbols_file(obj_file);
 
-    CPU->buffer_cmd = (char*) calloc(num_symbols + 1, sizeof(char));
+    CPU->buffer_cmd = (char*) calloc(num_symbols, sizeof(char));
     assert(CPU->buffer_cmd);
 
     fread(CPU->buffer_cmd, sizeof(char), num_symbols, obj_file);
@@ -56,13 +56,13 @@ void CPU_accomplishment(CPU_t* CPU)
 	//errors
 
 	//check assemling in assembler
-
+/*
 	register size_t cmd_num     = 0;
 	register double value       = 0;
 	register double addit_value = 0;
 	register int    int_value   = 0;
 
-	text_t buffer_CPU(CPU->buffer_cmd);
+	text_t buffer_CPU(CPU->buffer_cmd, WORD_PARSING);
 
 	while (CPU->IP < buffer_CPU.num_structs) {
 
@@ -108,8 +108,8 @@ void CPU_accomplishment(CPU_t* CPU)
 									}
 							   		//проверка регистр
 							}
-/*							else
-								error push;*/
+							else
+								error push;
 
 						   	CPU->IP++;
 						   	break;
@@ -218,7 +218,7 @@ void CPU_accomplishment(CPU_t* CPU)
 							CPU->IP++;
 						   	break;								
 		} 
-	}
+	}*/
 }
 
 //-----------------------------------------------------------------

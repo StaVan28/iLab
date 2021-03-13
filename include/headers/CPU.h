@@ -21,6 +21,11 @@
 
 //-
 
+#define ADD_IN_BUFFER(value, format)																	\
+		*(format*)(buffer_data + tmp_char_IP * sizeof(char) + tmp_double_IP * sizeof(double)) = value;	\
+
+//-
+
 #define CHECK_LABELS(start_of_reading)																\
 		do {																						\
 			for (int tmp_indx = 0; tmp_indx <= num_of_label; tmp_indx++) {							\
@@ -63,7 +68,7 @@ static const int ERROR        = 0;
 struct CPU_t {
 
 	int    IP                = 0;
-	char*  buffer_cmd 	     = 0; 
+	char*  buffer_cmd 	     = nullptr; 
 	double regs[NUM_OF_REGS] = {};
 
 	my_stack_t stack_CPU = {};
@@ -113,6 +118,7 @@ enum REGS {
 	EBX_REG = 33,
 	ECX_REG = 34,
 	EDX_REG = 35,
+	NO_REG  = 36,
 };
 
 //-----------------------------------------------------------------------------

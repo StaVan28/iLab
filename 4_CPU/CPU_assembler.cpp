@@ -9,106 +9,135 @@ void assembling_file(const char* file_path, const char* source)
 	FILE* obj_file = fopen_file_with_path(file_path, "obj_" , source, "wb");
 
 
-	text_t file_info(txt_file);
+	text_t file_info(txt_file, WORD_PARSING);
 	file_info.txtlib_text_dump();
 
 
+	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
+	size_t tmp_char_IP   = 0;
+	size_t tmp_double_IP = 0;
+
+	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
+	assert(buffer_data);
+/*
 	char** label_array = (char**) calloc(file_info.num_structs + 1, sizeof(char*));
 	assert(label_array);
 
 	int num_of_label = 0;
+*/
 
-	for (int indx = 0; indx < file_info.num_structs; indx++) {
+	for (int indx = 0; indx < file_info.num_words; indx++) {
 		if     (!strncmp(file_info.text[indx].line, "push",  PUSH_SIZE)) {
-				fprintf(obj_file, "%d", PUSH_CMD); 
+				ADD_IN_BUFFER(PUSH_CMD, char);
 
-				size_t tmp_indx = PUSH_SIZE;
-				while (isspace(file_info.text[indx].line[tmp_indx]))
-					tmp_indx++;
+				tmp_char_IP++;
+				indx++;
 
-				double value = strtod(file_info.text[indx].line + tmp_indx, nullptr);
+				double value = strtod(file_info.text[indx].line, nullptr);
 				//обработка HUGE_VAL and errno
 
 				if (value == 0) {															
-					if 	   (!strncmp(file_info.text[indx].line + tmp_indx, "eax", REG_SIZE)) 
-							fprintf(obj_file, "%c%c%d%c", REG_MARK,'\n', EAX_REG, '\n'); 			
+					if 	   (!strncmp(file_info.text[indx].line, "eax", REG_SIZE)) {
+							ADD_IN_BUFFER(EAX_REG, double);
+					}
 					else 																		
-						if (!strncmp(file_info.text[indx].line + tmp_indx, "ebx", REG_SIZE))	
-							fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', EBX_REG, '\n');			
+						if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {	
+							ADD_IN_BUFFER(EBX_REG, double); 
+					}
 					else 																	
-						if (!strncmp(file_info.text[indx].line + tmp_indx, "ecx", REG_SIZE))	
-							fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', ECX_REG, '\n');			
-					else 																		
-						if (!strncmp(file_info.text[indx].line + tmp_indx, "edx", REG_SIZE))	
-							fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', EDX_REG, '\n');			
+						if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {
+							ADD_IN_BUFFER(ECX_REG, double); 
+					}
+					else 																	
+						if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {	
+							ADD_IN_BUFFER(EDX_REG, double); 			
+					}
 					else																		
-						if (!strncmp(file_info.text[indx].line + tmp_indx, "in", IN_SIZE)) {
+						if (!strncmp(file_info.text[indx].line, "in", IN_SIZE)) {
 							scanf("%lg", &value);											
-							fprintf(obj_file, "%c%c%lg%c", NUM_MARK, '\n', value, '\n');
+							ADD_IN_BUFFER(value, double);
 						}																		
-					else																		
-						fprintf(obj_file, "%c%c%lg%c", NUM_MARK, '\n', value, '\n');			
+					else {																		
+						ADD_IN_BUFFER(value, double);
+					}		
 				}																				
 				else																			
-					fprintf(obj_file, "%c%c%lg%c", NUM_MARK, '\n', value, '\n');				
-					// разлиие между 0 и регистром												
+					ADD_IN_BUFFER(value, double);		
+					// разлиие между 0 и регистром
+
+				tmp_double_IP++;											
 			}
 		else
-			if (!strncmp(file_info.text[indx].line, "pop",  	POP_SIZE)) {
-				fprintf(obj_file, "%d", POP_CMD);
+			if (!strncmp(file_info.text[indx].line, "pop",  POP_SIZE)) {
+				ADD_IN_BUFFER(POP_CMD, char); 
 
-				size_t tmp_indx = POP_SIZE;
-				while (isspace(file_info.text[indx].line[tmp_indx]))
-					tmp_indx++;
+				tmp_char_IP++;
+				indx++;
 															
-				if 	   (!strncmp(file_info.text[indx].line + tmp_indx, "eax", REG_SIZE)) 
-						fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', EAX_REG, '\n'); 			
+				if 	   (!strncmp(file_info.text[indx].line, "eax", REG_SIZE)) {
+						ADD_IN_BUFFER(EAX_REG, double);
+				}
 				else 																		
-					if (!strncmp(file_info.text[indx].line + tmp_indx, "ebx", REG_SIZE))	
-						fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', EBX_REG, '\n');			
-				else 																		
-					if (!strncmp(file_info.text[indx].line + tmp_indx, "ecx", REG_SIZE))	
-						fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', ECX_REG, '\n');			
-				else 																		
-					if (!strncmp(file_info.text[indx].line + tmp_indx, "edx", REG_SIZE))	
-						fprintf(obj_file, "%c%c%d%c", REG_MARK, '\n', EDX_REG, '\n');				
-				else
-					fprintf(obj_file, "%c", '\n');																		
-					//pop_error					
+					if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {
+						ADD_IN_BUFFER(EBX_REG, double); 
+				}
+				else 																	
+					if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {	
+						ADD_IN_BUFFER(ECX_REG, double); 
+				}
+				else 																	
+					if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {
+						ADD_IN_BUFFER(EDX_REG, double); 			
+				}
+				else																		
+					if (!strncmp(file_info.text[indx].line, "in", IN_SIZE)) {
+						double value = 0;
+						scanf("%lg", &value);											
+						ADD_IN_BUFFER(value, double);
+				}																		
+				else {			
+					ADD_IN_BUFFER(NO_REG, double);																						
+					//pop_error	
+				}
+
+				tmp_double_IP++;				
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "out",   OUT_SIZE)) {
-				fprintf(obj_file, "%d%c", OUT_CMD,   '\n');
+				ADD_IN_BUFFER(OUT_CMD, char);
+				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "add",   ADD_SIZE)) {
-				fprintf(obj_file, "%d%c", ADD_CMD,   '\n');
+				ADD_IN_BUFFER(ADD_CMD, char);
+				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "sub",   SUB_SIZE)) {
-				fprintf(obj_file, "%d%c", SUB_CMD,   '\n');
+				ADD_IN_BUFFER(SUB_CMD, char);
+				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "mul",   MUL_SIZE)) {
-				fprintf(obj_file, "%d%c", MUL_CMD,   '\n');
+				ADD_IN_BUFFER(MUL_CMD, char);
+				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "div",   DIV_SIZE)) {
-				fprintf(obj_file, "%d%c", DIV_CMD,   '\n');
+				ADD_IN_BUFFER(DIV_CMD, char);
+				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "fsqrt", FSQRT_SIZE)) {
-				fprintf(obj_file, "%d%c", FSQRT_CMD, '\n');
-			}
-		else 
-			if (!strncmp(file_info.text[indx].line, "in",    IN_SIZE)) {
-				fprintf(obj_file, "%d%c", IN_CMD,    '\n');
+				ADD_IN_BUFFER(FSQRT_CMD, char);
+				tmp_char_IP++;
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "hlt",   HLT_SIZE)) {
-				fprintf(obj_file, "%d%c", HLT_CMD,   '\n');
+				ADD_IN_BUFFER(HLT_CMD, char);
+				tmp_char_IP++;
 			}
-		else
+/*		else
 			// до конца говнокод, что делать то А?
 			if (!strncmp(file_info.text[indx].line, "jmp",   JMP_SIZE)) {
 				fprintf(obj_file, "%d%c", JMP_CMD,   '\n');
@@ -139,9 +168,11 @@ void assembling_file(const char* file_path, const char* source)
 				fprintf(obj_file, "%d%c", NOP_CMD,   '\n');
 			}
 			// else неправильная команда 
-	}
+	}*/
 
-	free(label_array);
+	fwrite(buffer_data, sizeof(char), num_of_char, obj_file);
+
+//	free(label_array);
 
 	fclose(txt_file);	
 	fclose(obj_file);
@@ -197,6 +228,4 @@ FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* s
 	free(all_file_path);
 
 	return file_name;
-}	
-
-
+}

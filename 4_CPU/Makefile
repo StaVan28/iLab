@@ -55,7 +55,7 @@ $(OBJ_DIR)/%.o: %.cpp $(HEAD_DIR)/$(HEADERS)
 .PHONY: install 
 install: 
 	mkdir -p $(HEAD_DIR) $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR) $(TXT_DIR)
-	touch $(TXT_DIR)/source.txt 
+	touch $(TXT_DIR)/source
 
 # making different tests with flag "unit_test"
 unit_tests: $(BIN_DIR)/$(BIN_TESTS)
