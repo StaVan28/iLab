@@ -69,8 +69,6 @@ text_t::text_t(FILE* source, const int mode) {
 
 text_t::~text_t(void) {
 
-    txtlib_text_dump();
-
     free(buffer_data);
 
     free(text);

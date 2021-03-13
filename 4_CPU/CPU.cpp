@@ -56,117 +56,116 @@ void CPU_accomplishment(CPU_t* CPU)
 	//errors
 
 	//check assemling in assembler
-/*
-	register size_t cmd_num     = 0;
+
 	register double value       = 0;
 	register double addit_value = 0;
-	register int    int_value   = 0;
+	register int 	int_value   = 0;
 
-	text_t buffer_CPU(CPU->buffer_cmd, WORD_PARSING);
+	register size_t tmp_double_IP = 0;
+	register size_t tmp_char_IP   = 0;
+	register size_t tmp_int_IP    = 0;
 
-	while (CPU->IP < buffer_CPU.num_structs) {
+	size_t num_words = POINTER_ON_(CPU->buffer_cmd, int);
+	tmp_int_IP++;
 
-		cmd_num = atoi(buffer_CPU.text[CPU->IP].line);
+	while ((tmp_double_IP + tmp_char_IP + tmp_int_IP) < num_words) {
 
-		if (cmd_num == ERROR) {
-			CPU->IP++;
+		if (POINTER_ON_(CPU->buffer_cmd, char) != HLT_CMD || POINTER_ON_(CPU->buffer_cmd, char) != END_CMD)
 			break;
-		}
 
+		switch(POINTER_ON_(CPU->buffer_cmd, char)) {
+			case PUSH_CMD: 	tmp_char_IP++; 
 
-		if (cmd_num == HLT_CMD)
-			break;
-		//error
+							printf("push\n");
 
-		switch(cmd_num) {
-			case PUSH_CMD: 	if (*(buffer_CPU.text[CPU->IP].line + OBJ_PUSH_SIZE) == NUM_MARK) {
+							value = POINTER_ON_(CPU->buffer_cmd, double);
+							stack_push(&(CPU->stack_CPU), value);
 
-									CPU->IP++; 
-
-							   		value = atof(buffer_CPU.text[CPU->IP].line);
-							   		stack_push(&(CPU->stack_CPU), value);
-							}
-							else 
-								if (*(buffer_CPU.text[CPU->IP].line + OBJ_PUSH_SIZE) == REG_MARK) {
-
-									CPU->IP++; 
-
-							   		int_value = atoi(buffer_CPU.text[CPU->IP].line);
-							   		
-							   		switch(int_value) {												 
-										case EAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EAX_PLACE]);
-														break;
-
-										case EBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EBX_PLACE]);
-														break;
-
-										case ECX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[ECX_PLACE]);
-														break;
-
-										case EDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EDX_PLACE]);
-														break;
-									}
-							   		//проверка регистр
-							}
-							else
-								error push;
-
-						   	CPU->IP++;
+							tmp_double_IP++;
 						   	break;
 
-			case POP_CMD:	value = stack_pop(&(CPU->stack_CPU));
+			case PUSHR_CMD:	tmp_char_IP++;
 
+							int_value = POINTER_ON_(CPU->buffer_cmd, int);
+							
+							switch(int_value) {												 
+								case EAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EAX_PLACE]);
+												tmp_int_IP++;
+												break;
 
-							if (*(buffer_CPU.text[CPU->IP].line + NEXT_ELEMENT) == REG_MARK){
+								case EBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EBX_PLACE]);
+												tmp_int_IP++;
+												break;
 
-								CPU->IP++;
+								case ECX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[ECX_PLACE]);
+												tmp_int_IP++;
+												break;
 
-								int_value = atoi(buffer_CPU.text[CPU->IP].line);
+								case EDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EDX_PLACE]);
+												tmp_int_IP++;
+												break;
+							}
+							//проверка регистр
 
-								switch(int_value) {
-									case EAX_REG:	CPU->regs[EAX_PLACE] = value;
-													break;
+						   	break;
+
+			case POP_CMD:	stack_pop(&(CPU->stack_CPU));
+
+							tmp_char_IP++;
+							break;
+
+			case POPR_CMD:	tmp_char_IP++;
+
+							value     = stack_pop(&(CPU->stack_CPU));
+							int_value = POINTER_ON_(CPU->buffer_cmd, int);
+
+							switch(int_value) {
+								case EAX_REG:	CPU->regs[EAX_PLACE] = value;
+												tmp_int_IP++;
+												break;
+								
+								case EBX_REG:	CPU->regs[EBX_PLACE] = value;
+												tmp_int_IP++;
+												break;												
 									
-									case EBX_REG:	CPU->regs[EBX_PLACE] = value;
-													break;												
-										
-									case ECX_REG:	CPU->regs[ECX_PLACE] = value;
-													break;
-									
-									case EDX_REG:	CPU->regs[EDX_PLACE] = value;
-													break;
-								}
-							}	
+								case ECX_REG:	CPU->regs[ECX_PLACE] = value;
+												tmp_int_IP++;
+												break;
+								
+								case EDX_REG:	CPU->regs[EDX_PLACE] = value;
+												tmp_int_IP++;
+												break;
+							}
 							//проверка на ошибки
 
-						   	CPU->IP++;
+						   	tmp_int_IP++;
 						   	break;
 
 			case OUT_CMD:	value = stack_pop(&(CPU->stack_CPU));
 							printf("%lg\n", value);
 
-						   	CPU->IP++;
+						   	tmp_char_IP++;
 						   	break;
 
 			case ADD_CMD:	POP_TWO_VARIABLES;
 
 							stack_push(&(CPU->stack_CPU), value + addit_value);
 
-						   	CPU->IP++;
+						   	tmp_char_IP++;
 						   	break;
 
 			case SUB_CMD:	POP_TWO_VARIABLES;
 
 							stack_push(&(CPU->stack_CPU), value - addit_value);
 
-						   	CPU->IP++;
+						    tmp_char_IP++;
 						   	break;
 
 			case MUL_CMD:	POP_TWO_VARIABLES;
 
 							stack_push(&(CPU->stack_CPU), value * addit_value);
 
-						   	CPU->IP++;
+						   	tmp_char_IP++;
 						   	break;
 
 			case DIV_CMD:	POP_TWO_VARIABLES;
@@ -174,7 +173,7 @@ void CPU_accomplishment(CPU_t* CPU)
 							stack_push(&(CPU->stack_CPU), value / addit_value);
 							//проверка деления на 0;
 
-						   	CPU->IP++;
+						   	tmp_char_IP++;
 						   	break;
 
 			case FSQRT_CMD: value = stack_pop(&(CPU->stack_CPU));
@@ -182,10 +181,10 @@ void CPU_accomplishment(CPU_t* CPU)
 
 						   	stack_push(&(CPU->stack_CPU), sqrt(value));
 
-						   	CPU->IP++;
+						   	tmp_char_IP++;
 						   	break;
 
-			case JMP_CMD:	{
+/*			case JMP_CMD:	{
 								CPU->IP++; 
 
 						   		int_value = atoi(buffer_CPU.text[CPU->IP].line);
@@ -207,18 +206,18 @@ void CPU_accomplishment(CPU_t* CPU)
 
 								CPU->IP = int_value;
 								break;
-							}
+							}*/
 		
-			case NOP_CMD:	CPU->IP++;
+			case NOP_CMD:	tmp_char_IP++;
 							break;
 
 			default:
 							// error command 
 							printf("default\n");
-							CPU->IP++;
+							tmp_char_IP++;
 						   	break;								
 		} 
-	}*/
+	}
 }
 
 //-----------------------------------------------------------------

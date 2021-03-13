@@ -3,7 +3,7 @@
 
 int main() {
 
-	FILE* source = fopen("./txt/source.txt",  "rw");
+	FILE* source = fopen("./txt/source.txt",  "rb");
 
 	text_t text(source, WORD_PARSING);
 

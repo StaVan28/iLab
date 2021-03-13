@@ -21,8 +21,8 @@
 
 //-
 
-#define ADD_IN_BUFFER(value, format)																	\
-		*(format*)(buffer_data + tmp_char_IP * sizeof(char) + tmp_double_IP * sizeof(double)) = value;	\
+#define POINTER_ON_(ptr_data, format)																					\
+		*(format*)(ptr_data + tmp_char_IP * sizeof(char) + tmp_double_IP * sizeof(double) + tmp_int_IP * sizeof(int))	\
 
 //-
 
@@ -89,6 +89,9 @@ enum CPU_CMDS {
 	HLT_CMD   = 10,
 	NOP_CMD   = 11,
 	JMP_CMD   = 12,
+	END_CMD   = 13,
+	PUSHR_CMD = 14,
+	POPR_CMD  = 15,
 };
 
 //-----------------------------------------------------------------------------
@@ -109,6 +112,7 @@ enum CMDS_SIZE {
 	REG_SIZE      = 3,
 	NOP_SIZE      = 3,
 	JMP_SIZE      = 3,
+	END_SIZE      = 3,
 };
 
 //-----------------------------------------------------------------------------

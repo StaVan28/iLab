@@ -13,12 +13,16 @@ void assembling_file(const char* file_path, const char* source)
 	file_info.txtlib_text_dump();
 
 
-	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
+	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double) + 1 * sizeof(int);
 	size_t tmp_char_IP   = 0;
 	size_t tmp_double_IP = 0;
+	size_t tmp_int_IP    = 0;
 
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
+
+	POINTER_ON_(buffer_data, int) = file_info.num_words;
+	tmp_int_IP++;
 /*
 	char** label_array = (char**) calloc(file_info.num_structs + 1, sizeof(char*));
 	assert(label_array);
@@ -27,10 +31,8 @@ void assembling_file(const char* file_path, const char* source)
 */
 
 	for (int indx = 0; indx < file_info.num_words; indx++) {
-		if     (!strncmp(file_info.text[indx].line, "push",  PUSH_SIZE)) {
-				ADD_IN_BUFFER(PUSH_CMD, char);
+		if     (!strncmp(file_info.text[indx].line, "push",  PUSH_SIZE)) {;
 
-				tmp_char_IP++;
 				indx++;
 
 				double value = strtod(file_info.text[indx].line, nullptr);
@@ -38,103 +40,156 @@ void assembling_file(const char* file_path, const char* source)
 
 				if (value == 0) {															
 					if 	   (!strncmp(file_info.text[indx].line, "eax", REG_SIZE)) {
-							ADD_IN_BUFFER(EAX_REG, double);
+
+							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
+							tmp_char_IP++;
+
+							POINTER_ON_(buffer_data, int)  = EAX_REG;
+							tmp_int_IP++;
 					}
 					else 																		
 						if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {	
-							ADD_IN_BUFFER(EBX_REG, double); 
+
+							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
+							tmp_char_IP++;
+
+							POINTER_ON_(buffer_data, int)  = EBX_REG;
+							tmp_int_IP++; 
 					}
 					else 																	
 						if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {
-							ADD_IN_BUFFER(ECX_REG, double); 
+
+							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
+							tmp_char_IP++;
+
+							POINTER_ON_(buffer_data, int)  = ECX_REG; 
+							tmp_int_IP++;
 					}
 					else 																	
-						if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {	
-							ADD_IN_BUFFER(EDX_REG, double); 			
+						if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {
+
+							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
+							tmp_char_IP++;
+
+							POINTER_ON_(buffer_data, int)  = EDX_REG; 	
+							tmp_int_IP++;		
 					}
 					else																		
 						if (!strncmp(file_info.text[indx].line, "in", IN_SIZE)) {
-							scanf("%lg", &value);											
-							ADD_IN_BUFFER(value, double);
+
+							POINTER_ON_(buffer_data, char)   = PUSH_CMD;
+							tmp_char_IP++;
+							
+							double tmp_value = 0;
+							scanf("%lg", &tmp_value);
+
+							POINTER_ON_(buffer_data, double) = tmp_value;
+							tmp_double_IP++;
 						}																		
-					else {																		
-						ADD_IN_BUFFER(value, double);
+					else {
+
+						POINTER_ON_(buffer_data, char)   = PUSH_CMD;
+						tmp_char_IP++;
+
+						POINTER_ON_(buffer_data, double) = value;
+						tmp_double_IP++;
 					}		
 				}																				
-				else																			
-					ADD_IN_BUFFER(value, double);		
-					// разлиие между 0 и регистром
+				else {
 
-				tmp_double_IP++;											
+					POINTER_ON_(buffer_data, char)   = PUSH_CMD;
+					tmp_char_IP++;
+
+					POINTER_ON_(buffer_data, double) = value;			
+					tmp_double_IP++;
+
+					// разлиие между 0 и регистром
+				}										
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "pop",  POP_SIZE)) {
-				ADD_IN_BUFFER(POP_CMD, char); 
 
-				tmp_char_IP++;
 				indx++;
 															
 				if 	   (!strncmp(file_info.text[indx].line, "eax", REG_SIZE)) {
-						ADD_IN_BUFFER(EAX_REG, double);
+
+						POINTER_ON_(buffer_data, char) = POPR_CMD; 
+						tmp_char_IP++;
+
+						POINTER_ON_(buffer_data, int) = EAX_REG;
+						tmp_int_IP++;
 				}
 				else 																		
-					if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {
-						ADD_IN_BUFFER(EBX_REG, double); 
-				}
-				else 																	
-					if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {	
-						ADD_IN_BUFFER(ECX_REG, double); 
-				}
-				else 																	
-					if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {
-						ADD_IN_BUFFER(EDX_REG, double); 			
-				}
-				else																		
-					if (!strncmp(file_info.text[indx].line, "in", IN_SIZE)) {
-						double value = 0;
-						scanf("%lg", &value);											
-						ADD_IN_BUFFER(value, double);
-				}																		
-				else {			
-					ADD_IN_BUFFER(NO_REG, double);																						
-					//pop_error	
-				}
+					if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {	
 
-				tmp_double_IP++;				
+						POINTER_ON_(buffer_data, char) = POPR_CMD; 
+						tmp_char_IP++;
+
+						POINTER_ON_(buffer_data, int) = EBX_REG;
+						tmp_int_IP++;
+				}
+				else 																	
+					if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {
+
+						POINTER_ON_(buffer_data, char) = POPR_CMD; 
+						tmp_char_IP++;
+
+						POINTER_ON_(buffer_data, int) = ECX_REG;
+						tmp_int_IP++;
+				}
+				else 																	
+					if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {	
+
+						POINTER_ON_(buffer_data, char) = POPR_CMD; 
+						tmp_char_IP++;
+
+						POINTER_ON_(buffer_data, int) = EDX_REG;
+						tmp_int_IP++; 			
+				}																	
+				else {																		
+					POINTER_ON_(buffer_data, char) = POP_CMD; 
+					tmp_char_IP++;																					
+					//pop_error	
+				}				
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "out",   OUT_SIZE)) {
-				ADD_IN_BUFFER(OUT_CMD, char);
+				POINTER_ON_(buffer_data, char) = OUT_CMD;
 				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "add",   ADD_SIZE)) {
-				ADD_IN_BUFFER(ADD_CMD, char);
+				POINTER_ON_(buffer_data, char) = ADD_CMD;
 				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "sub",   SUB_SIZE)) {
-				ADD_IN_BUFFER(SUB_CMD, char);
+				POINTER_ON_(buffer_data, char) = SUB_CMD;
 				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "mul",   MUL_SIZE)) {
-				ADD_IN_BUFFER(MUL_CMD, char);
+				POINTER_ON_(buffer_data, char) = MUL_CMD;
 				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "div",   DIV_SIZE)) {
-				ADD_IN_BUFFER(DIV_CMD, char);
+				POINTER_ON_(buffer_data, char) = DIV_CMD;
 				tmp_char_IP++;
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "fsqrt", FSQRT_SIZE)) {
-				ADD_IN_BUFFER(FSQRT_CMD, char);
+				POINTER_ON_(buffer_data, char) = FSQRT_CMD;
 				tmp_char_IP++;
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "hlt",   HLT_SIZE)) {
-				ADD_IN_BUFFER(HLT_CMD, char);
+				POINTER_ON_(buffer_data, char) = HLT_CMD;
+				tmp_char_IP++;
+			}
+		else
+			if (!strncmp(file_info.text[indx].line, "end",   END_SIZE)) {
+				POINTER_ON_(buffer_data, char) = END_CMD;
 				tmp_char_IP++;
 			}
 /*		else
@@ -167,8 +222,8 @@ void assembling_file(const char* file_path, const char* source)
 			if (!strncmp(file_info.text[indx].line, "nop",   NOP_SIZE)) {
 				fprintf(obj_file, "%d%c", NOP_CMD,   '\n');
 			}
-			// else неправильная команда 
-	}*/
+			// else неправильная команда */
+	}
 
 	fwrite(buffer_data, sizeof(char), num_of_char, obj_file);
 
