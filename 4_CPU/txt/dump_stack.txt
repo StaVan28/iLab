@@ -1,22 +1,22 @@
 
 ******************************************************
-Stack (OK) [0x7ffec9a21898] "stack_CPU" {
+Stack (OK) [0x7ffd96037ce8] "stack_CPU" {
 
-Canary left  = 595371386  [0x7ffec9a21970]
-Current size = 0
+Canary left  = 595371386  [0x7ffd96037dc0]
+Current size = 1
 Capacity     = 4
-Hash         = 483910411
-Canary right = 752293992  [0x7ffec9a219ac]
+Hash         = 967820927
+Canary right = 752293992  [0x7ffd96037dfc]
 
-Data [0x55d087e5a354]
- {canary_left} : 874895203  [0x55d087e5a350]
+Data [0x557e4ff50354]
+ {canary_left} : 874895203  [0x557e4ff50350]
 
- { 1} : nan (POISON)
+*{ 1} : 12
  { 2} : nan (POISON)
  { 3} : nan (POISON)
  { 4} : nan (POISON)
 
- {canary_right} : 934719742  [0x55d087e5a374]
+ {canary_right} : 934719742  [0x557e4ff50374]
 }
 
 ******************************************************

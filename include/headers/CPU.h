@@ -9,6 +9,7 @@
 #include <math.h>
 #include <assert.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "stack.h"
 #include "txtlib.h"

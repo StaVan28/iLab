@@ -20,9 +20,7 @@ void assembling_file(const char* file_path, const char* source)
 
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
-
-	POINTER_ON_(buffer_data, int) = file_info.num_words;
-	tmp_int_IP++;
+	
 /*
 	char** label_array = (char**) calloc(file_info.num_structs + 1, sizeof(char*));
 	assert(label_array);
@@ -192,6 +190,8 @@ void assembling_file(const char* file_path, const char* source)
 				POINTER_ON_(buffer_data, char) = END_CMD;
 				tmp_char_IP++;
 			}
+			else 
+				POINTER_ON_(buffer_data, char) = 255;
 /*		else
 			// до конца говнокод, что делать то А?
 			if (!strncmp(file_info.text[indx].line, "jmp",   JMP_SIZE)) {

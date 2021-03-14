@@ -65,18 +65,14 @@ void CPU_accomplishment(CPU_t* CPU)
 	register size_t tmp_char_IP   = 0;
 	register size_t tmp_int_IP    = 0;
 
-	size_t num_words = POINTER_ON_(CPU->buffer_cmd, int);
-	tmp_int_IP++;
 
-	while ((tmp_double_IP + tmp_char_IP + tmp_int_IP) < num_words) {
+	while (true) {
 
-		if (POINTER_ON_(CPU->buffer_cmd, char) != HLT_CMD || POINTER_ON_(CPU->buffer_cmd, char) != END_CMD)
+		if (POINTER_ON_(CPU->buffer_cmd, char) == HLT_CMD || POINTER_ON_(CPU->buffer_cmd, char) == END_CMD)
 			break;
 
 		switch(POINTER_ON_(CPU->buffer_cmd, char)) {
 			case PUSH_CMD: 	tmp_char_IP++; 
-
-							printf("push\n");
 
 							value = POINTER_ON_(CPU->buffer_cmd, double);
 							stack_push(&(CPU->stack_CPU), value);

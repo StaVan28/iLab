@@ -1,3 +1,3 @@
-	push 28
-	hlt
-	end
+push 12
+hlt 
+end
