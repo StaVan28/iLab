@@ -57,7 +57,6 @@ void CPU_accomplishment(CPU_t* CPU)
 
 	register size_t tmp_double_IP = 0;
 	register size_t tmp_char_IP   = 0;
-	register size_t tmp_int_IP    = 0;
 
 
 	while (true) {
@@ -78,23 +77,23 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			case PUSHR_CMD:	tmp_char_IP++;
 
-							int_value = POINTER_ON_(CPU->buffer_cmd, int);
+							int_value = POINTER_ON_(CPU->buffer_cmd, char);
 							
 							switch(int_value) {												 
 								case RAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RAX_PLACE]);
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 
 								case RBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RBX_PLACE]);
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 
 								case RCX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RCX_PLACE]);
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 
 								case RDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RDX_PLACE]);
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 							}
 							//проверка регистр
@@ -109,28 +108,27 @@ void CPU_accomplishment(CPU_t* CPU)
 			case POPR_CMD:	tmp_char_IP++;
 
 							value     = stack_pop(&(CPU->stack_CPU));
-							int_value = POINTER_ON_(CPU->buffer_cmd, int);
+							int_value = POINTER_ON_(CPU->buffer_cmd, char);
 
 							switch(int_value) {
 								case RAX_REG:	CPU->regs[RAX_PLACE] = value;
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 								
 								case RBX_REG:	CPU->regs[RBX_PLACE] = value;
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;												
 									
 								case RCX_REG:	CPU->regs[RCX_PLACE] = value;
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 								
 								case RDX_REG:	CPU->regs[RDX_PLACE] = value;
-												tmp_int_IP++;
+												tmp_char_IP++;
 												break;
 							}
 							//проверка на ошибки
 
-						   	tmp_int_IP++;
 						   	break;
 
 			case OUT_CMD:	value = stack_pop(&(CPU->stack_CPU));

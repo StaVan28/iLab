@@ -16,7 +16,6 @@ void assembling_file(const char* file_path, const char* source)
 	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
 	size_t tmp_char_IP   = 0;
 	size_t tmp_double_IP = 0;
-	size_t tmp_int_IP    = 0;
 
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
@@ -42,8 +41,8 @@ void assembling_file(const char* file_path, const char* source)
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = RAX_REG;
-							tmp_int_IP++;
+							POINTER_ON_(buffer_data, char)  = RAX_REG;
+							tmp_char_IP++;
 					}
 					else 																		
 						if (!strncmp(file_info.text[indx].line, "rbx", REG_SIZE)) {	
@@ -51,8 +50,8 @@ void assembling_file(const char* file_path, const char* source)
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = RBX_REG;
-							tmp_int_IP++; 
+							POINTER_ON_(buffer_data, char)  = RBX_REG;
+							tmp_char_IP++; 
 					}
 					else 																	
 						if (!strncmp(file_info.text[indx].line, "rcx", REG_SIZE)) {
@@ -60,8 +59,8 @@ void assembling_file(const char* file_path, const char* source)
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = RCX_REG; 
-							tmp_int_IP++;
+							POINTER_ON_(buffer_data, char)  = RCX_REG; 
+							tmp_char_IP++;
 					}
 					else 																	
 						if (!strncmp(file_info.text[indx].line, "rdx", REG_SIZE)) {
@@ -69,8 +68,8 @@ void assembling_file(const char* file_path, const char* source)
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = RDX_REG; 	
-							tmp_int_IP++;		
+							POINTER_ON_(buffer_data, char)  = RDX_REG; 	
+							tmp_char_IP++;		
 					}
 					else																		
 						if (!strncmp(file_info.text[indx].line, "in", IN_SIZE)) {
@@ -106,47 +105,48 @@ void assembling_file(const char* file_path, const char* source)
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "pop",  POP_SIZE)) {
-
-				indx++;
 															
-				if 	   (!strncmp(file_info.text[indx].line, "rax", REG_SIZE)) {
+				if 	   (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rax", REG_SIZE)) {
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = RAX_REG;
-						tmp_int_IP++;
+						POINTER_ON_(buffer_data, char) = RAX_REG;
+						tmp_char_IP++;
 				}
 				else 																		
-					if (!strncmp(file_info.text[indx].line, "rbx", REG_SIZE)) {	
+					if (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rbx", REG_SIZE)) {	
+						indx++;
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = RBX_REG;
-						tmp_int_IP++;
+						POINTER_ON_(buffer_data, char) = RBX_REG;
+						tmp_char_IP++;
 				}
 				else 																	
-					if (!strncmp(file_info.text[indx].line, "rcx", REG_SIZE)) {
+					if (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rcx", REG_SIZE)) {
+						indx++;
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = RCX_REG;
-						tmp_int_IP++;
+						POINTER_ON_(buffer_data, char) = RCX_REG;
+						tmp_char_IP++;
 				}
 				else 																	
-					if (!strncmp(file_info.text[indx].line, "rdx", REG_SIZE)) {	
+					if (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rdx", REG_SIZE)) {	
+						indx++;
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = RDX_REG;
-						tmp_int_IP++; 			
+						POINTER_ON_(buffer_data, char) = RDX_REG;
+						tmp_char_IP++; 			
 				}																	
-				else {																		
+				else {															
 					POINTER_ON_(buffer_data, char) = POP_CMD; 
-					tmp_char_IP++;																					
+					tmp_char_IP++;																				
 					//pop_error	
 				}				
 			}

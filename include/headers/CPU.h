@@ -22,8 +22,8 @@
 
 //-
 
-#define POINTER_ON_(ptr_data, format)																					\
-		*(format*)(ptr_data + tmp_char_IP * sizeof(char) + tmp_double_IP * sizeof(double) + tmp_int_IP * sizeof(int))	\
+#define POINTER_ON_(ptr_data, format)														\
+		*(format*)(ptr_data + tmp_char_IP * sizeof(char) + tmp_double_IP * sizeof(double))	\
 
 //-
 
