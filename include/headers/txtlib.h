@@ -52,6 +52,9 @@ class text_t {
 
     ~text_t(void);
 
+    text_t(const text_t&)             = delete;
+    text_t& operator =(const text_t&) = delete; 
+
     static int txtlib_number_of_symbols_file(FILE* source);
 
     static int txtlib_number_of_symbols_buff(char* buffer);

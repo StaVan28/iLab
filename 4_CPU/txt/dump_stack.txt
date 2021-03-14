@@ -1,22 +1,36 @@
 
 ******************************************************
-Stack (OK) [0x7ffd96037ce8] "stack_CPU" {
+Stack (ERROR 7 : NAN in stack) [0x1ffefffd78] "stack_CPU" {
+In File : stack.cpp, LINE : 90
+In Function : stack_push
 
-Canary left  = 595371386  [0x7ffd96037dc0]
-Current size = 1
-Capacity     = 4
-Hash         = 967820927
-Canary right = 752293992  [0x7ffd96037dfc]
+Canary left  = 595371386  [0x1ffefffe50]
+Current size = 9
+Capacity     = 16
+Hash         = -167713165
+Canary right = 752293992  [0x1ffefffe8c]
 
-Data [0x557e4ff50354]
- {canary_left} : 874895203  [0x557e4ff50350]
+Data [0x5b85034]
+ {canary_left} : 874895203  [0x5b85030]
 
-*{ 1} : 12
- { 2} : nan (POISON)
- { 3} : nan (POISON)
- { 4} : nan (POISON)
+*{ 1} : 1
+*{ 2} : 2.5
+*{ 3} : 3
+*{ 4} : 4.5
+*{ 5} : 5
+*{ 6} : 6.5
+*{ 7} : 7
+*{ 8} : 8.5
+*{ 9} : 9
+ {10} : nan (POISON)
+ {11} : nan (POISON)
+ {12} : nan (POISON)
+ {13} : nan (POISON)
+ {14} : nan (POISON)
+ {15} : nan (POISON)
+ {16} : nan (POISON)
 
- {canary_right} : 934719742  [0x557e4ff50374]
+ {canary_right} : 934719742  [0x5b850b4]
 }
 
 ******************************************************

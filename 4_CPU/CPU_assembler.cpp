@@ -13,7 +13,7 @@ void assembling_file(const char* file_path, const char* source)
 	file_info.txtlib_text_dump();
 
 
-	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double) + 1 * sizeof(int);
+	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
 	size_t tmp_char_IP   = 0;
 	size_t tmp_double_IP = 0;
 	size_t tmp_int_IP    = 0;
@@ -37,39 +37,39 @@ void assembling_file(const char* file_path, const char* source)
 				//обработка HUGE_VAL and errno
 
 				if (value == 0) {															
-					if 	   (!strncmp(file_info.text[indx].line, "eax", REG_SIZE)) {
+					if 	   (!strncmp(file_info.text[indx].line, "rax", REG_SIZE)) {
 
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = EAX_REG;
+							POINTER_ON_(buffer_data, int)  = RAX_REG;
 							tmp_int_IP++;
 					}
 					else 																		
-						if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {	
+						if (!strncmp(file_info.text[indx].line, "rbx", REG_SIZE)) {	
 
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = EBX_REG;
+							POINTER_ON_(buffer_data, int)  = RBX_REG;
 							tmp_int_IP++; 
 					}
 					else 																	
-						if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {
+						if (!strncmp(file_info.text[indx].line, "rcx", REG_SIZE)) {
 
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = ECX_REG; 
+							POINTER_ON_(buffer_data, int)  = RCX_REG; 
 							tmp_int_IP++;
 					}
 					else 																	
-						if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {
+						if (!strncmp(file_info.text[indx].line, "rdx", REG_SIZE)) {
 
 							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
 							tmp_char_IP++;
 
-							POINTER_ON_(buffer_data, int)  = EDX_REG; 	
+							POINTER_ON_(buffer_data, int)  = RDX_REG; 	
 							tmp_int_IP++;		
 					}
 					else																		
@@ -109,39 +109,39 @@ void assembling_file(const char* file_path, const char* source)
 
 				indx++;
 															
-				if 	   (!strncmp(file_info.text[indx].line, "eax", REG_SIZE)) {
+				if 	   (!strncmp(file_info.text[indx].line, "rax", REG_SIZE)) {
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = EAX_REG;
+						POINTER_ON_(buffer_data, int) = RAX_REG;
 						tmp_int_IP++;
 				}
 				else 																		
-					if (!strncmp(file_info.text[indx].line, "ebx", REG_SIZE)) {	
+					if (!strncmp(file_info.text[indx].line, "rbx", REG_SIZE)) {	
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = EBX_REG;
+						POINTER_ON_(buffer_data, int) = RBX_REG;
 						tmp_int_IP++;
 				}
 				else 																	
-					if (!strncmp(file_info.text[indx].line, "ecx", REG_SIZE)) {
+					if (!strncmp(file_info.text[indx].line, "rcx", REG_SIZE)) {
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = ECX_REG;
+						POINTER_ON_(buffer_data, int) = RCX_REG;
 						tmp_int_IP++;
 				}
 				else 																	
-					if (!strncmp(file_info.text[indx].line, "edx", REG_SIZE)) {	
+					if (!strncmp(file_info.text[indx].line, "rdx", REG_SIZE)) {	
 
 						POINTER_ON_(buffer_data, char) = POPR_CMD; 
 						tmp_char_IP++;
 
-						POINTER_ON_(buffer_data, int) = EDX_REG;
+						POINTER_ON_(buffer_data, int) = RDX_REG;
 						tmp_int_IP++; 			
 				}																	
 				else {																		
@@ -227,6 +227,9 @@ void assembling_file(const char* file_path, const char* source)
 
 	fwrite(buffer_data, sizeof(char), num_of_char, obj_file);
 
+	free(buffer_data);
+	buffer_data = nullptr;
+
 //	free(label_array);
 
 	fclose(txt_file);	
@@ -250,7 +253,7 @@ char* concat(const char* file_path, const char* tag, const char* source)
 	    assert(result);
  	
 	    memcpy(result                          , file_path, len_file_path    );
-	    memcpy(result           + len_file_path, source   , len_source    + 1);    
+	    memcpy(result+ len_file_path           , source   , len_source    + 1);    
 
     	return result;
 	}
@@ -281,6 +284,7 @@ FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* s
 	assert(file_name);
 
 	free(all_file_path);
+	all_file_path = nullptr;
 
 	return file_name;
 }

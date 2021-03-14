@@ -3,12 +3,6 @@
 
 //-----------------------------------------------------------------
 
-//void.operate(struct.CPU*.cpu,.FILE*.commads){
-	//здесьможномпользоваьтекстовуюбиблиотекудляпарсингакоманд
-	//возвращаешьмассивстрокспомощьюлибы
-	//
-//}
-
 void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source) 
 {
 	//errors
@@ -68,10 +62,12 @@ void CPU_accomplishment(CPU_t* CPU)
 
 	while (true) {
 
-		if (POINTER_ON_(CPU->buffer_cmd, char) == HLT_CMD || POINTER_ON_(CPU->buffer_cmd, char) == END_CMD)
+		int_value = POINTER_ON_(CPU->buffer_cmd, char);
+
+		if (int_value == HLT_CMD || int_value == END_CMD)
 			break;
 
-		switch(POINTER_ON_(CPU->buffer_cmd, char)) {
+		switch(int_value) {
 			case PUSH_CMD: 	tmp_char_IP++; 
 
 							value = POINTER_ON_(CPU->buffer_cmd, double);
@@ -85,19 +81,19 @@ void CPU_accomplishment(CPU_t* CPU)
 							int_value = POINTER_ON_(CPU->buffer_cmd, int);
 							
 							switch(int_value) {												 
-								case EAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EAX_PLACE]);
+								case RAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RAX_PLACE]);
 												tmp_int_IP++;
 												break;
 
-								case EBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EBX_PLACE]);
+								case RBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RBX_PLACE]);
 												tmp_int_IP++;
 												break;
 
-								case ECX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[ECX_PLACE]);
+								case RCX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RCX_PLACE]);
 												tmp_int_IP++;
 												break;
 
-								case EDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[EDX_PLACE]);
+								case RDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RDX_PLACE]);
 												tmp_int_IP++;
 												break;
 							}
@@ -116,19 +112,19 @@ void CPU_accomplishment(CPU_t* CPU)
 							int_value = POINTER_ON_(CPU->buffer_cmd, int);
 
 							switch(int_value) {
-								case EAX_REG:	CPU->regs[EAX_PLACE] = value;
+								case RAX_REG:	CPU->regs[RAX_PLACE] = value;
 												tmp_int_IP++;
 												break;
 								
-								case EBX_REG:	CPU->regs[EBX_PLACE] = value;
+								case RBX_REG:	CPU->regs[RBX_PLACE] = value;
 												tmp_int_IP++;
 												break;												
 									
-								case ECX_REG:	CPU->regs[ECX_PLACE] = value;
+								case RCX_REG:	CPU->regs[RCX_PLACE] = value;
 												tmp_int_IP++;
 												break;
 								
-								case EDX_REG:	CPU->regs[EDX_PLACE] = value;
+								case RDX_REG:	CPU->regs[RDX_PLACE] = value;
 												tmp_int_IP++;
 												break;
 							}

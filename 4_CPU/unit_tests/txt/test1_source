@@ -1,21 +1,33 @@
-	push 3
- push 28
-	push eax
+push 1
+push 2.5
+push 3
+push 4.5
+push 5
+push 6.5
+push 7
+		push 8.5
+push 9
+push 10.5
+	
+push rax
+push rbx
+push rcx
+push rdx		
 
-push ebx
-		add
-	push 1
-push edx
+pop		
+pop rax
+pop rbx
+pop    rcx
+pop rdx
+
+out 
+		add 
 sub
-	mul
-push ecx
-push 12
-	mul
-fsqrt
+mul
 div
+fsqrt
 
 
-out
-out
-hlt
 
+hlt 
+end

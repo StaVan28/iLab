@@ -11,8 +11,11 @@
 #--------------------------------------------------------------------------------------
 
 # compiler settings
-CXX      = g++
-CXXFLAGS = -Wall
+CXX      = g++ 
+CXXFLAGS = -Wall  
+
+DEBUG_MODE   = -g3 -O0 
+RELEASE_MODE = -g0 -Ofast 
 
 # path for directories
 HEAD_DIR  = ../include/headers
@@ -29,8 +32,8 @@ OBJECTS = $(subst .cpp,.o,$(SOURCE))
 HEADERS = CPU.h
 
 # unit_tests settings
-BIN_TESTS    = unit_tests
-SOURCE_TESTS = main_tests.cpp unit_tests.cpp
+BIN_TESTS     = unit_tests
+SOURCE_TESTS  = main_tests.cpp unit_tests.cpp
 OBJECTS_TESTS = $(subst .cpp,.o,$(SOURCE))
 HEADERS_TESTS = unit_tests.h
 
@@ -39,17 +42,8 @@ HEADERS_TESTS = unit_tests.h
 #--------------------------------------------------------------------------------------
 
 # make program
-.PHONY: all
+.PHONY: all 
 all: $(BIN_DIR)/$(BINARY)
-	
-# linking all OBJECTS files and Library for getting BINARY and launch CPU
-$(BIN_DIR)/$(BINARY): $(OBJ_DIR)/main.o $(OBJ_DIR)/CPU.o $(OBJ_DIR)/CPU_assembler.o
-	$(CXX) -o $(BIN_DIR)/$(BINARY) $^ -L$(LIB_DIR) -ltxtlib -lstack 
-	./bin/CPU
-
-# getting all OBJECTS files from SOURCES
-$(OBJ_DIR)/%.o: %.cpp $(HEAD_DIR)/$(HEADERS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(HEAD_DIR)
 
 # installs all the necessary dirs and file for input(source.txt)
 .PHONY: install 
@@ -57,13 +51,27 @@ install:
 	mkdir -p $(HEAD_DIR) $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR) $(TXT_DIR)
 	touch $(TXT_DIR)/source
 
+# compiling with using valgrind
+.PHONY: no_valgrind 
+no_valgrind: $(BIN_DIR)/$(BINARY)
+	$(BIN_DIR)/$(BINARY)
+
 # making different tests with flag "unit_test"
 unit_tests: $(BIN_DIR)/$(BIN_TESTS)
 
+# linking all OBJECTS files and Library for getting BINARY and launch CPU
+$(BIN_DIR)/$(BINARY): $(OBJ_DIR)/main.o $(OBJ_DIR)/CPU.o $(OBJ_DIR)/CPU_assembler.o
+	$(CXX) $^ -L$(LIB_DIR) -ltxtlib -lstack -o $(BIN_DIR)/$(BINARY)
+	valgrind ./bin/CPU
+
 # linking OBJECTS files for unit_tests and Library for getting unit_tests BINARY and launch unit_tests
 $(BIN_DIR)/$(BIN_TESTS): $(OBJ_DIR)/CPU.o $(OBJ_DIR)/CPU_assembler.o $(TESTS_DIR)/$(OBJ_DIR)/main_tests.o $(TESTS_DIR)/$(OBJ_DIR)/unit_tests.o
-	$(CXX) -o $(BIN_DIR)/$(BIN_TESTS) $^ -L$(LIB_DIR) -ltxtlib -lstack
+	$(CXX) $^ -L$(LIB_DIR) -ltxtlib -lstack -o $(BIN_DIR)/$(BIN_TESTS)
 	./bin/unit_tests
+
+# getting all OBJECTS files from SOURCES
+$(OBJ_DIR)/%.o: %.cpp $(HEAD_DIR)/$(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(HEAD_DIR)
 
 # getting all OBJECTS files from unit_tests SOURCES
 $(TESTS_DIR)/$(OBJ_DIR)/main_tests.o: $(TESTS_DIR)/main_tests.cpp $(TESTS_DIR)/headers/$(HEADERS_TESTS) $(HEAD_DIR)/$(HEADERS)

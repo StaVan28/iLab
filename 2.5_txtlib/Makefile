@@ -38,7 +38,7 @@ all: $(BIN_DIR)/$(BINARY)
 # linking all OBJECTS files and Library for getting BINARY 
 $(BIN_DIR)/$(BINARY): $(OBJ_DIR)/main.o $(OBJ_DIR)/txtlib.o $(LIB_DIR)/libtxtlib.a
 	$(CXX) -o $(BIN_DIR)/$(BINARY) $^
-	$(BIN_DIR)/$(BINARY)
+	valgrind $(BIN_DIR)/$(BINARY)
 
 # creating a txt_lib library in ../libs
 $(LIB_DIR)/libtxtlib.a: $(OBJ_DIR)/txtlib.o

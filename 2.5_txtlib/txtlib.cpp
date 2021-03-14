@@ -9,6 +9,8 @@ text_t::text_t(char* buffer, const int mode) {
 
     num_symbols = txtlib_number_of_symbols_buff(buffer);
 
+    printf("\n\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1%d\n\n", num_symbols);
+
     buffer_data = (char*) calloc(num_symbols + 1, sizeof(char));
     assert(buffer_data);
 
@@ -109,11 +111,32 @@ int text_t::txtlib_number_of_strings(char* buffer) {
 
     assert(buffer);
 
-    int tmp_num_strings = 1;
+    int tmp_num_strings = 0;
 
-    for (int indx = 0; buffer[indx] != '\0'; indx++) 
-        if (buffer[indx] == '\n') 
+    for (int tmp_indx = 0; buffer[tmp_indx] != '\0'; tmp_indx++) {
+
+        while (isspace(buffer[tmp_indx])) {
+
+            if (buffer[tmp_indx] == '\0')
+                break;
+
+            tmp_indx++;
+        }
+
+        if (buffer[tmp_indx] != '\0')
             tmp_num_strings++;
+
+        while (buffer[tmp_indx] != '\n') {
+            
+            if (buffer[tmp_indx] == '\0')
+                break;
+
+            tmp_indx++;
+        }
+
+        if (buffer[tmp_indx] == '\0')
+            break;
+    }
 
     return tmp_num_strings;
 }
@@ -154,7 +177,7 @@ void text_t::txtlib_fill_line_t_string(void) {
     int real_line = 0;
     int indx      = 0;
 
-    while (true) {
+    while (num_structs < num_strings) {
 
         while (isspace(buffer_data[indx]) || buffer_data[indx] == '\0') {
 
@@ -207,11 +230,11 @@ void text_t::txtlib_fill_line_t_string(void) {
 
 void text_t::txtlib_fill_line_t_word(void) {
     
-    int   real_line  = 0;
-    int   indx       = 0;
+    int real_line = 0;
+    int tmp_indx  = 0;
+    int indx      = 0;
 
-
-    while (true) {
+    while (num_structs < num_words) {
 
         while (isspace(buffer_data[indx]) || buffer_data[indx] == '\0') {
 
@@ -229,7 +252,7 @@ void text_t::txtlib_fill_line_t_word(void) {
 
                 text[num_structs].real_num = real_line;
 
-                int tmp_indx = indx - 1;
+                tmp_indx = indx - 1;
                 while (isspace(buffer_data[tmp_indx]))
                     tmp_indx--;
 
@@ -246,13 +269,13 @@ void text_t::txtlib_fill_line_t_word(void) {
 
         real_line++;
 
-        int tmp2_indx = indx - 1;
-        while (isspace(buffer_data[tmp2_indx]))
-            tmp2_indx--;
+        tmp_indx = indx - 1;
+        while (isspace(buffer_data[tmp_indx]))
+            tmp_indx--;
 
-        buffer_data[tmp2_indx + 1] = '\0';
+        buffer_data[tmp_indx + 1] = '\0';
 
-        text[num_structs].length = &(buffer_data[tmp2_indx]) - text[num_structs].line + 1;
+        text[num_structs].length = &(buffer_data[tmp_indx]) - text[num_structs].line + 1;
 
         text[num_structs].real_num = real_line;
 

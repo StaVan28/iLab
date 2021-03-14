@@ -53,10 +53,6 @@
 
 static const int NUM_OF_REGS = 4;
 
-static const char REG_MARK = '~';
-static const char NUM_MARK = '_';
-static const char JMP_MARK = ':';
-
 static const int    POISON_INT_CPU    = 0x7F3428BE;
 static const double POISON_DOUBLE_CPU = NAN;
 static const int    START_CAPACITY    = 4;
@@ -119,20 +115,19 @@ enum CMDS_SIZE {
 //-----------------------------------------------------------------------------
 
 enum REGS {
-	EAX_REG = 32,
-	EBX_REG = 33,
-	ECX_REG = 34,
-	EDX_REG = 35,
-	NO_REG  = 36,
+	RAX_REG = 32,
+	RBX_REG = 33,
+	RCX_REG = 34,
+	RDX_REG = 35,
 };
 
 //-----------------------------------------------------------------------------
 
 enum PLACE_REGS {
-	EAX_PLACE = 0,
-	EBX_PLACE = 1,
-	ECX_PLACE = 2,
-	EDX_PLACE = 3,
+	RAX_PLACE = 0,
+	RBX_PLACE = 1,
+	RCX_PLACE = 2,
+	RDX_PLACE = 3,
 };
 
 //-----------------------------------------------------------------------------
