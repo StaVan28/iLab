@@ -121,12 +121,14 @@ unit_tests: $(BIN_TEST)
 	@ $(BIN_TEST)
 
 git:
-	git add --all
-	git commit -m "auto commit: 4_CPU"
+	@ echo "  AUTO COMMIT  "
+	@ git add --all
+	@ git commit -m "auto commit: 4_CPU"
 
 #
 ## generate lib and copy main header to ../include
 project: $(PROJ_LIB) $(BIN) CPU.h
+	@ echo "  MAKE PROJECT"
 	@ cp CPU.h    $(HEAD_DIR)/
 	@ mv $(PROJ_LIB) $(LIB_DIR)/
 
