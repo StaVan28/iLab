@@ -12,6 +12,7 @@ void assembling_file(const char* file_path, const char* source)
 	text_t file_info(txt_file, WORD_PARSING);
 	file_info.txtlib_text_dump();
 
+	labels table_labels;
 
 	size_t num_of_char = file_info.num_strings * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
 	size_t tmp_IP      = 0;
@@ -24,6 +25,7 @@ void assembling_file(const char* file_path, const char* source)
 	assert(label_array);
 
 	int num_of_label = 0;
+
 */
 
 	for (int indx = 0; indx < file_info.num_words; indx++) {
@@ -198,10 +200,18 @@ void assembling_file(const char* file_path, const char* source)
 
 				//проверка на правильное написание джампа : (!)
 				indx++;
+
+				int value = table_labels.check_label(file_info.text[indx].line, POISON_POSETION, JUMP);
+
+				POINTER_ON_(buffer_data, tmp_IP, int) = value;
+				tmp_IP += sizeof(int);
 			}
 		else 
 			if (strchr(file_info.text[indx].line, MARK_LABEL)) {
-				tmp_IP += sizeof(char);																		
+
+				table_labels.check_label(file_info.text[indx].line, tmp_IP, MARK_SYMB);
+
+				tmp_IP += sizeof(char);	
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "nop",   NOP_SIZE)) {
@@ -210,6 +220,7 @@ void assembling_file(const char* file_path, const char* source)
 			}
 			// else неправильная команда
 	}
+	
 
 	fwrite(buffer_data, sizeof(char), num_of_char, obj_file);
 
@@ -274,3 +285,6 @@ FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* s
 
 	return file_name;
 }
+
+
+//-----------------------------------------------------------------
