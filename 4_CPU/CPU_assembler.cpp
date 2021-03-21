@@ -13,9 +13,8 @@ void assembling_file(const char* file_path, const char* source)
 	file_info.txtlib_text_dump();
 
 
-	size_t num_of_char   = file_info.num_words * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
-	size_t tmp_char_IP   = 0;
-	size_t tmp_double_IP = 0;
+	size_t num_of_char = file_info.num_strings * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
+	size_t tmp_IP      = 0;
 
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
@@ -38,67 +37,69 @@ void assembling_file(const char* file_path, const char* source)
 				if (value == 0) {															
 					if 	   (!strncmp(file_info.text[indx].line, "rax", REG_SIZE)) {
 
-							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
-							tmp_char_IP++;
+							// check git set credentials git config
 
-							POINTER_ON_(buffer_data, char)  = RAX_REG;
-							tmp_char_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, char) = PUSHR_CMD;
+							tmp_IP += sizeof(char);
+
+							POINTER_ON_(buffer_data, tmp_IP, char)  = RAX_REG;
+							tmp_IP += sizeof(char);
 					}
 					else 																		
 						if (!strncmp(file_info.text[indx].line, "rbx", REG_SIZE)) {	
 
-							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
-							tmp_char_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, char) = PUSHR_CMD;
+							tmp_IP += sizeof(char);
 
-							POINTER_ON_(buffer_data, char)  = RBX_REG;
-							tmp_char_IP++; 
+							POINTER_ON_(buffer_data, tmp_IP, char)  = RBX_REG;
+							tmp_IP += sizeof(char);
 					}
 					else 																	
 						if (!strncmp(file_info.text[indx].line, "rcx", REG_SIZE)) {
 
-							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
-							tmp_char_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, char) = PUSHR_CMD;
+							tmp_IP += sizeof(char);
 
-							POINTER_ON_(buffer_data, char)  = RCX_REG; 
-							tmp_char_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, char)  = RCX_REG; 
+							tmp_IP += sizeof(char);
 					}
 					else 																	
 						if (!strncmp(file_info.text[indx].line, "rdx", REG_SIZE)) {
 
-							POINTER_ON_(buffer_data, char) = PUSHR_CMD;
-							tmp_char_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, char) = PUSHR_CMD;
+							tmp_IP += sizeof(char);
 
-							POINTER_ON_(buffer_data, char)  = RDX_REG; 	
-							tmp_char_IP++;		
+							POINTER_ON_(buffer_data, tmp_IP, char)  = RDX_REG; 	
+							tmp_IP += sizeof(char);		
 					}
 					else																		
 						if (!strncmp(file_info.text[indx].line, "in", IN_SIZE)) {
 
-							POINTER_ON_(buffer_data, char)   = PUSH_CMD;
-							tmp_char_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, char)   = PUSH_CMD;
+							tmp_IP += sizeof(char);
 							
 							double tmp_value = 0;
 							scanf("%lg", &tmp_value);
 
-							POINTER_ON_(buffer_data, double) = tmp_value;
-							tmp_double_IP++;
+							POINTER_ON_(buffer_data, tmp_IP, double) = tmp_value;
+							tmp_IP += sizeof(double);
 						}																		
 					else {
 
-						POINTER_ON_(buffer_data, char)   = PUSH_CMD;
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char)   = PUSH_CMD;
+						tmp_IP += sizeof(char);
 
-						POINTER_ON_(buffer_data, double) = value;
-						tmp_double_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, double) = value;
+						tmp_IP += sizeof(double);
 					}		
 				}																				
 				else {
 
-					POINTER_ON_(buffer_data, char)   = PUSH_CMD;
-					tmp_char_IP++;
+					POINTER_ON_(buffer_data, tmp_IP, char)   = PUSH_CMD;
+					tmp_IP += sizeof(char);
 
-					POINTER_ON_(buffer_data, double) = value;			
-					tmp_double_IP++;
+					POINTER_ON_(buffer_data, tmp_IP, double) = value;			
+					tmp_IP += sizeof(double);
 
 					// разлиие между 0 и регистром
 				}										
@@ -108,94 +109,93 @@ void assembling_file(const char* file_path, const char* source)
 															
 				if 	   (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rax", REG_SIZE)) {
 
-						POINTER_ON_(buffer_data, char) = POPR_CMD; 
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = POPR_CMD; 
+						tmp_IP += sizeof(char);
 
-						POINTER_ON_(buffer_data, char) = RAX_REG;
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = RAX_REG;
+						tmp_IP += sizeof(char);
 				}
 				else 																		
 					if (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rbx", REG_SIZE)) {	
 						indx++;
 
-						POINTER_ON_(buffer_data, char) = POPR_CMD; 
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = POPR_CMD; 
+						tmp_IP += sizeof(char);
 
-						POINTER_ON_(buffer_data, char) = RBX_REG;
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = RBX_REG;
+						tmp_IP += sizeof(char);
 				}
 				else 																	
 					if (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rcx", REG_SIZE)) {
 						indx++;
 
-						POINTER_ON_(buffer_data, char) = POPR_CMD; 
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = POPR_CMD; 
+						tmp_IP += sizeof(char);
 
-						POINTER_ON_(buffer_data, char) = RCX_REG;
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = RCX_REG;
+						tmp_IP += sizeof(char);
 				}
 				else 																	
 					if (!strncmp(file_info.text[indx + NEXT_ELEMENT].line, "rdx", REG_SIZE)) {	
 						indx++;
 
-						POINTER_ON_(buffer_data, char) = POPR_CMD; 
-						tmp_char_IP++;
+						POINTER_ON_(buffer_data, tmp_IP, char) = POPR_CMD; 
+						tmp_IP += sizeof(char);
 
-						POINTER_ON_(buffer_data, char) = RDX_REG;
-						tmp_char_IP++; 			
+						POINTER_ON_(buffer_data, tmp_IP, char) = RDX_REG;
+						tmp_IP += sizeof(char); 			
 				}																	
 				else {															
-					POINTER_ON_(buffer_data, char) = POP_CMD; 
-					tmp_char_IP++;																				
+					POINTER_ON_(buffer_data, tmp_IP, char) = POP_CMD; 
+					tmp_IP += sizeof(char);																				
 					//pop_error	
 				}				
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "out",   OUT_SIZE)) {
-				POINTER_ON_(buffer_data, char) = OUT_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = OUT_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "add",   ADD_SIZE)) {
-				POINTER_ON_(buffer_data, char) = ADD_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = ADD_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "sub",   SUB_SIZE)) {
-				POINTER_ON_(buffer_data, char) = SUB_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = SUB_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "mul",   MUL_SIZE)) {
-				POINTER_ON_(buffer_data, char) = MUL_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = MUL_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "div",   DIV_SIZE)) {
-				POINTER_ON_(buffer_data, char) = DIV_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = DIV_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else 
 			if (!strncmp(file_info.text[indx].line, "fsqrt", FSQRT_SIZE)) {
-				POINTER_ON_(buffer_data, char) = FSQRT_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = FSQRT_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "hlt",   HLT_SIZE)) {
-				POINTER_ON_(buffer_data, char) = HLT_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = HLT_CMD;
+				tmp_IP += sizeof(char);
 			}
 		else
 			if (!strncmp(file_info.text[indx].line, "end",   END_SIZE)) {
-				POINTER_ON_(buffer_data, char) = END_CMD;
-				tmp_char_IP++;
+				POINTER_ON_(buffer_data, tmp_IP, char) = END_CMD;
+				tmp_IP += sizeof(char);
 			}
-			else 
-				POINTER_ON_(buffer_data, char) = 255;
 /*		else
 			// до конца говнокод, что делать то А?
 			if (!strncmp(file_info.text[indx].line, "jmp",   JMP_SIZE)) {
-				fprintf(obj_file, "%d%c", JMP_CMD,   '\n');
+				POINTER_ON_(buffer_data, tmp_IP, char) = JMP_CMD;
+				tmp_IP += sizeof(char);
 
 				//проверка на правильное написание джампа
 
@@ -217,12 +217,13 @@ void assembling_file(const char* file_path, const char* source)
 				file_info.text[indx].line[tmp_indx] = '\0'; 
 
 				CHECK_LABELS(0);																						
-			}
+			}*/
 		else
 			if (!strncmp(file_info.text[indx].line, "nop",   NOP_SIZE)) {
-				fprintf(obj_file, "%d%c", NOP_CMD,   '\n');
+				POINTER_ON_(buffer_data, tmp_IP, char) = NOP_CMD;
+				tmp_IP += sizeof(char);
 			}
-			// else неправильная команда */
+			// else неправильная команда
 	}
 
 	fwrite(buffer_data, sizeof(char), num_of_char, obj_file);

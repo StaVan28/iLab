@@ -3,7 +3,7 @@
 
 //-----------------------------------------------------------------
 
-int main(int argc, char const *argv[]) {
+int main() {
 
 	assembling_file();
 

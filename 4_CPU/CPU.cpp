@@ -55,45 +55,42 @@ void CPU_accomplishment(CPU_t* CPU)
 	register double addit_value = 0;
 	register int 	int_value   = 0;
 
-	register size_t tmp_double_IP = 0;
-	register size_t tmp_char_IP   = 0;
-
 
 	while (true) {
 
-		int_value = POINTER_ON_(CPU->buffer_cmd, char);
+		int_value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, char);
 
 		if (int_value == HLT_CMD || int_value == END_CMD)
 			break;
 
 		switch(int_value) {
-			case PUSH_CMD: 	tmp_char_IP++; 
+			case PUSH_CMD: 	CPU->IP += sizeof(char); 
 
-							value = POINTER_ON_(CPU->buffer_cmd, double);
+							value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, double);
 							stack_push(&(CPU->stack_CPU), value);
 
-							tmp_double_IP++;
+							CPU->IP += sizeof(double);
 						   	break;
 
-			case PUSHR_CMD:	tmp_char_IP++;
+			case PUSHR_CMD:	CPU->IP += sizeof(char);
 
-							int_value = POINTER_ON_(CPU->buffer_cmd, char);
+							int_value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, char);
 							
 							switch(int_value) {												 
 								case RAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RAX_PLACE]);
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 
 								case RBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RBX_PLACE]);
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 
 								case RCX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RCX_PLACE]);
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 
 								case RDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RDX_PLACE]);
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 							}
 							//проверка регистр
@@ -102,29 +99,29 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			case POP_CMD:	stack_pop(&(CPU->stack_CPU));
 
-							tmp_char_IP++;
+							CPU->IP += sizeof(char);
 							break;
 
-			case POPR_CMD:	tmp_char_IP++;
+			case POPR_CMD:	CPU->IP += sizeof(char);
 
 							value     = stack_pop(&(CPU->stack_CPU));
-							int_value = POINTER_ON_(CPU->buffer_cmd, char);
+							int_value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, char);
 
 							switch(int_value) {
 								case RAX_REG:	CPU->regs[RAX_PLACE] = value;
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 								
 								case RBX_REG:	CPU->regs[RBX_PLACE] = value;
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;												
 									
 								case RCX_REG:	CPU->regs[RCX_PLACE] = value;
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 								
 								case RDX_REG:	CPU->regs[RDX_PLACE] = value;
-												tmp_char_IP++;
+												CPU->IP += sizeof(char);
 												break;
 							}
 							//проверка на ошибки
@@ -134,28 +131,28 @@ void CPU_accomplishment(CPU_t* CPU)
 			case OUT_CMD:	value = stack_pop(&(CPU->stack_CPU));
 							printf("%lg\n", value);
 
-						   	tmp_char_IP++;
+						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case ADD_CMD:	POP_TWO_VARIABLES;
 
 							stack_push(&(CPU->stack_CPU), value + addit_value);
 
-						   	tmp_char_IP++;
+						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case SUB_CMD:	POP_TWO_VARIABLES;
 
 							stack_push(&(CPU->stack_CPU), value - addit_value);
 
-						    tmp_char_IP++;
+						    CPU->IP += sizeof(char);
 						   	break;
 
 			case MUL_CMD:	POP_TWO_VARIABLES;
 
 							stack_push(&(CPU->stack_CPU), value * addit_value);
 
-						   	tmp_char_IP++;
+						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case DIV_CMD:	POP_TWO_VARIABLES;
@@ -163,7 +160,7 @@ void CPU_accomplishment(CPU_t* CPU)
 							stack_push(&(CPU->stack_CPU), value / addit_value);
 							//проверка деления на 0;
 
-						   	tmp_char_IP++;
+						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case FSQRT_CMD: value = stack_pop(&(CPU->stack_CPU));
@@ -171,7 +168,7 @@ void CPU_accomplishment(CPU_t* CPU)
 
 						   	stack_push(&(CPU->stack_CPU), sqrt(value));
 
-						   	tmp_char_IP++;
+						   	CPU->IP += sizeof(char);
 						   	break;
 
 /*			case JMP_CMD:	{
@@ -198,13 +195,13 @@ void CPU_accomplishment(CPU_t* CPU)
 								break;
 							}*/
 		
-			case NOP_CMD:	tmp_char_IP++;
+			case NOP_CMD:	CPU->IP += sizeof(char);
 							break;
 
 			default:
 							// error command 
 							printf("default\n");
-							tmp_char_IP++;
+							CPU->IP += sizeof(char);
 						   	break;								
 		} 
 	}
