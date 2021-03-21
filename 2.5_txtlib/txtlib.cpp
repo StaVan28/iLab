@@ -9,8 +9,6 @@ text_t::text_t(char* buffer, const int mode) {
 
     num_symbols = txtlib_number_of_symbols_buff(buffer);
 
-    printf("\n\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1%d\n\n", num_symbols);
-
     buffer_data = (char*) calloc(num_symbols + 1, sizeof(char));
     assert(buffer_data);
 
