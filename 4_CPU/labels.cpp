@@ -103,3 +103,26 @@ void labels::add_label(char* name_of_label, int position)
 
 //-----------------------------------------------------------------
 
+void labels::labels_dump(void)
+{
+	FILE* labels_dump = fopen("./txt/dump_labels.txt", "wb");
+    assert(labels_dump);
+
+    fprintf(labels_dump, "\n******************************************************\n");
+
+    fprintf(labels_dump, "Pointer array of labels: %p\n\n", array_of_labels);
+
+    fprintf(labels_dump, "Capacity = %ld\n\n", capacity);
+
+    fprintf(labels_dump, "\n{Number in array}[position]\n\n");
+
+    for (size_t indx = 0; indx < capacity; indx++) {
+        fprintf(labels_dump, "{%ld}[%d] %s", indx + 1, array_of_labels[indx].position, array_of_labels[indx].name_of_label);
+    }
+
+    fprintf(labels_dump, "\n******************************************************\n");
+
+    fclose(labels_dump);
+
+}
+

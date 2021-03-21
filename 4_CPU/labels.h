@@ -44,21 +44,11 @@ public:
 	labels(const labels&)              = delete;
 	labels& operator = (const labels&) = delete;
 
-	int check_label (char* name_of_label, int position, bool type);
-	
+	int check_label(char* name_of_label, int position, bool type);
+		
+	void labels_dump(void);
 };
 
 //-----------------------------------------------------------------
 
-//-----------------------------------------------------------------
-
-//-----------------------------------------------------------------
-
-//-----------------------------------------------------------------
-
-//-----------------------------------------------------------------
-
-//-----------------------------------------------------------------
-
-
-#endif // CPU_H_INCLUDED
+#endif // LABELS_H_INCLUDED

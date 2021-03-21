@@ -22,9 +22,9 @@ LIB_DIR  = ../include/libs
 BIN      = $(BIN_DIR)/CPU
 BIN_TEST = $(BIN_DIR)/unit_tests
 
-SRC_ALL = CPU.cpp CPU_assembler.cpp labels.cpp
-OBJ_ALL = CPU.o   CPU_assembler.o   labels.o
-HDR_ALL = CPU.h                     labels.h   $(HEAD_DIR)/stack.h $(HEAD_DIR)/txtlib.h
+SRC_ALL = CPU.cpp CPU_assembler.cpp labels.cpp settings.cpp
+OBJ_ALL = CPU.o   CPU_assembler.o   labels.o   settings.o
+HDR_ALL = CPU.h   CPU_assembler.h   labels.h   settings.h   $(HEAD_DIR)/stack.h $(HEAD_DIR)/txtlib.h
 
 SRC = $(SRC_ALL) main.cpp
 OBJ = $(OBJ_ALL) main.o
@@ -96,10 +96,11 @@ CPU.o:           CPU.cpp $(HDR)
 CPU_assembler.o: CPU_assembler.cpp $(HDR)  
 labels.o:        labels.cpp $(HDR)
 unit_tests.o:    unit_tests.cpp $(HDR) 
+settings.o:      settings.cpp $(HDR)
 
 #
 ## additional features
-.PHONY: clean errors tags rebuild git no_valgrind unit_tests project
+.PHONY: clean errors tags rebuild git no_valgrind unit_tests project log
 
 clean:
 	@ echo "  CLEAN"
@@ -125,6 +126,9 @@ git:
 	@ echo "  AUTO COMMIT  "
 	@ git add --all
 	@ git commit -m "auto commit: 4_CPU"
+
+log:
+	@ git log --oneline --all --graph
 
 #
 ## generate lib and copy main header to ../include
