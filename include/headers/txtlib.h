@@ -20,7 +20,7 @@
 
 enum modes_text_t {
     STRING_PARSING = 1,
-      WORD_PARSING = 2,
+    WORD_PARSING   = 2,
 };
 
 //-----------------------------------------------------------------------------
@@ -52,8 +52,8 @@ class text_t {
 
     ~text_t(void);
 
-    text_t(const text_t&)             = delete;
-    text_t& operator =(const text_t&) = delete; 
+    text_t(const text_t&)              = delete;
+    text_t& operator = (const text_t&) = delete; 
 
     static int txtlib_number_of_symbols_file(FILE* source);
 

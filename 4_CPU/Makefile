@@ -31,15 +31,15 @@ OBJ = $(OBJ_ALL) main.o
 HDR = $(HDR_ALL)
 LIB = -lstack -ltxtlib
 
-SRC_TEST = $(SRC) unit_tests.cpp main_tests.cpp
-OBJ_TEST = $(OBJ) unit_tests.o   main_tests.o
-HDR_TEST = $(HDR) unit_tests.h
+SRC_TEST = $(SRC_ALL) unit_tests.cpp main_tests.cpp
+OBJ_TEST = $(OBJ_ALL) unit_tests.o   main_tests.o
+HDR_TEST = $(HDR_ALL) unit_tests.h
 
 PROJ_LIB = libCPU.a
 
 # compiler settings
 CXX      = g++ 
-WARNINGS = -Wall -Werror -Wextra 
+WARNINGS = -Wall -Wextra 
 CXXFLAGS =   
 
 DEBUG_MODE   = -g3 -O0 
@@ -68,7 +68,8 @@ endif
 #
 ## launch with valgrind(default)
 all: $(BIN)
-	valgrind $(BIN)
+	@ echo "  LAUNCH:" $(BIN)
+	@ valgrind $(BIN)
 
 #
 ## linking

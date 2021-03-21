@@ -191,33 +191,18 @@ void assembling_file(const char* file_path, const char* source)
 				POINTER_ON_(buffer_data, tmp_IP, char) = END_CMD;
 				tmp_IP += sizeof(char);
 			}
-/*		else
-			// до конца говнокод, что делать то А?
+		else
 			if (!strncmp(file_info.text[indx].line, "jmp",   JMP_SIZE)) {
 				POINTER_ON_(buffer_data, tmp_IP, char) = JMP_CMD;
 				tmp_IP += sizeof(char);
 
-				//проверка на правильное написание джампа
-
-				size_t tmp_indx_1 = JMP_SIZE;
-				while (isspace(file_info.text[indx].line[tmp_indx_1]))
-					tmp_indx_1++;
-
-				CHECK_LABELS(tmp_indx_1)
+				//проверка на правильное написание джампа : (!)
+				indx++;
 			}
 		else 
-			// какие нахер 2 вызова strchr? Ту-ту?
-			if (strchr(file_info.text[indx].line, JMP_MARK)) {
-				fprintf(obj_file, "%c", JMP_MARK);
-
-				size_t tmp_indx = 0;
-				while (file_info.text[indx].line[tmp_indx] != JMP_MARK)
-					tmp_indx++;
-
-				file_info.text[indx].line[tmp_indx] = '\0'; 
-
-				CHECK_LABELS(0);																						
-			}*/
+			if (strchr(file_info.text[indx].line, MARK_LABEL)) {
+				tmp_IP += sizeof(char);																		
+			}
 		else
 			if (!strncmp(file_info.text[indx].line, "nop",   NOP_SIZE)) {
 				POINTER_ON_(buffer_data, tmp_IP, char) = NOP_CMD;

@@ -183,7 +183,6 @@ int stack_realloc(my_stack_t *stck) {
 
     char *temp_stck_data = stck->data;
 
-
     #ifdef DEFENCE_STACK
         stck->data -= sizeof(int);
         stck->data = (char*) realloc(stck->data, stck->capacity * sizeof(double) + TWO_CANARIES * sizeof(int));
