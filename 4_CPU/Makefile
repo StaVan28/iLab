@@ -13,10 +13,14 @@
 # choose release or debug mode
 LAUNCH_MODE = debug
 
+Q = @  
+E = $(Q) echo
+
 # path for directories
 BIN_DIR  = bin
 HEAD_DIR = ../include/headers
 LIB_DIR  = ../include/libs
+TXT_DIR  = txt
 
 # source
 BIN      = $(BIN_DIR)/CPU
@@ -43,7 +47,9 @@ WARNINGS = -Wall -Wextra
 CXXFLAGS =   
 
 DEBUG_MODE   = -g3 -O0 
-RELEASE_MODE = -g0 -Ofast 
+RELEASE_MODE = -g0 -Ofast
+
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v
 
 ifeq ($(LAUNCH_MODE),debug)
 	CXXFLAGS += $(DEBUG_MODE)
@@ -63,33 +69,34 @@ endif
 # RULES
 #--------------------------------------------------------------------------------------
 
-.PHONY: all
+.PHONY: debug
 
 #
 ## launch with valgrind(default)
-all: $(BIN)
-	@ echo "  LAUNCH:" $(BIN)
-	@ valgrind $(BIN)
+default: $(BIN)
+	$(E) "  LAUNCH:     " $(BIN)
+	$(Q) valgrind $(BIN)
+	cat $(TXT_DIR)/dump_labels.txt
 
 #
 ## linking
 $(BIN): $(OBJ)
-	@ echo "  LINK:  " $@
-	@ $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@  
+	$(E) "  LINK:       " $@
+	$(Q) $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@  
 
 $(BIN_TEST): $(OBJ_TEST)
-	@ echo "  LINK:  " $@
-	@ $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@ 
+	$(E) "  LINK:       " $@
+	$(Q) $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@ 
 
 #
 ## compiling
 .cpp.o:
-	@ echo "  C++    " $@
-	@ ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.cpp 
+	$(E) "  C++         " $@
+	$(Q) ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.cpp 
 
 .c.o:
-	@ echo "  C      " $@
-	@ ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.c 
+	$(E) "  C           " $@
+	$(Q) ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.c 
 
 main.o:          main.cpp $(HDR)
 CPU.o:           CPU.cpp $(HDR)
@@ -100,42 +107,48 @@ settings.o:      settings.cpp $(HDR)
 
 #
 ## additional features
-.PHONY: clean errors tags rebuild git no_valgrind unit_tests project log
+.PHONY: clean errors tags rebuild git no_valgrind unit_tests project log full_check_valgrind
 
 clean:
-	@ echo "  CLEAN"
-	@ rm -f $(BIN) makeout tags *.o
+	$(E) "  CLEAN"
+	$(Q) rm -f $(BIN) $(TXT_DIR)/log_Makefile tags *.o
 
 errors:
-	@rm -f makeout
-	make $(BIN) > makeout
+	$(Q) rm -f makeout
+	$(Q) make $(BIN) > $(TXT_DIR)/log_Makefile
 
 tags: ${SRC}
-	@rm -f tags
-	ctags ${SRC}
+	$(Q) rm -f tags
+	$(Q) ctags ${SRC}
 
 rebuild: clean all
 
 no_valgrind: $(BIN)
-	@ $(BIN)
+	$(E) "  LAUNCH STD: " $(BIN)
+	$(Q) $(BIN)
+
+full_check_valgrind: $(BIN)
+	$(E) "  LAUNCH FULL:" $(BIN)
+	$(Q) valgrind  $(VALGRIND_FLAGS) $(BIN)
 
 unit_tests: $(BIN_TEST)
-	@ $(BIN_TEST)
+	$(E) "  UNIT_TESTS:" $(BIN)
+	$(Q) $(BIN_TEST)
 
 git:
-	@ echo "  AUTO COMMIT  "
-	@ git add --all
-	@ git commit -m "auto commit: 4_CPU"
+	$(E) "  AUTO COMMIT  "
+	$(Q) git add --all
+	$(Q) git commit -m "auto commit: 4_CPU"
 
 log:
-	@ git log --oneline --all --graph
+	$(Q) git log --oneline --all --graph
 
 #
 ## generate lib and copy main header to ../include
 project: $(PROJ_LIB) $(BIN) CPU.h
-	@ echo "  MAKE PROJECT"
-	@ cp CPU.h    $(HEAD_DIR)/
-	@ mv $(PROJ_LIB) $(LIB_DIR)/
+	$(E) "  MAKE PROJECT"
+	$(Q) cp CPU.h    $(HEAD_DIR)/
+	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
 
 $(PROJ_LIB): $(OBJ)
-	@ ar cr $@ $^
+	$(Q) ar cr $@ $^

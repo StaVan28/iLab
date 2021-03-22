@@ -56,7 +56,7 @@ static const int NUM_OF_REGS = 4;
 
 static const int    POISON_INT_CPU    = 0x7F3428BE;
 static const double POISON_DOUBLE_CPU = NAN;
-static const int    START_CAPACITY    = 4;
+static const int    START_CAPACITY    = 8;
 
 static const int NEXT_ELEMENT = 1;
 static const int ERROR        = 0;
