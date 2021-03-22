@@ -1,9 +1,8 @@
-a:
+label:
+	jmp mark
 mark:
 	push 3
-	jmp a
+	jmp label
 	push 2
-	jmp mark
 	hlt
 	end
-	

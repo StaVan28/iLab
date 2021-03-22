@@ -22,7 +22,7 @@ void assembling_file(const char* file_path, const char* source)
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
 	
-	
+
 	for (int indx = 0; indx < file_info.num_words; indx++) {
 		if     (!strncmp(file_info.text[indx].line, "push",  PUSH_SIZE)) {;
 
@@ -196,7 +196,7 @@ void assembling_file(const char* file_path, const char* source)
 				//проверка на правильное написание джампа : (!)
 				indx++;
 
-				int jmp_IP = table_labels.check_label(file_info.text[indx].line, POISON_POSETION, JUMP);
+				int jmp_IP = table_labels.check_label(file_info.text[indx].line, POISON_POSITION, JUMP);
 
 				POINTER_ON_(buffer_data, tmp_IP, int) = jmp_IP;
 				tmp_IP += sizeof(int);

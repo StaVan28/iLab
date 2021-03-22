@@ -5,21 +5,21 @@ Pointer line_t structs: 0x5b812d0
 
 Number of strings = 8
 Number of structs = 12
-Number of symbols = 53
+Number of symbols = 61
 Number of words   = 12
 
 [Number in structs]{Real number}(Length)
 
-[  1]{  1}(  2)a:
-[  2]{  2}(  5)mark:
-[  3]{  3}(  4)push
-[  4]{  4}(  1)3
-[  5]{  5}(  3)jmp
-[  6]{  6}(  1)a
-[  7]{  7}(  4)push
-[  8]{  8}(  1)2
-[  9]{  9}(  3)jmp
-[ 10]{ 10}(  4)mark
+[  1]{  1}(  6)label:
+[  2]{  2}(  3)jmp
+[  3]{  3}(  4)mark
+[  4]{  4}(  5)mark:
+[  5]{  5}(  4)push
+[  6]{  6}(  1)3
+[  7]{  7}(  3)jmp
+[  8]{  8}(  5)label
+[  9]{  9}(  4)push
+[ 10]{ 10}(  1)2
 [ 11]{ 11}(  3)hlt
 [ 12]{ 12}(  3)end
 

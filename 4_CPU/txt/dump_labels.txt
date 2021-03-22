@@ -6,10 +6,10 @@ Capacity = 8
 
 {Number in array}[position]
 
-{0}[0] a
-{1}[1] mark
-{2}[-1] a
-{3}[-1] mark
+{0}[0] label
+{1}[6] mark
+{2}[-1] label
+{3}[0] (null)
 {4}[0] (null)
 {5}[0] (null)
 {6}[0] (null)

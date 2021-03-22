@@ -4,13 +4,10 @@
 
 //-----------------------------------------------------------------
 
-static const int  POISON_POSETION = -1;
+static const int  POISON_POSITION = -1;
 
 static const bool JUMP      = 0;
 static const bool MARK_SYMB = 1;
-
-static const bool UNCOMPLETE = 0;
-static const bool COMPLETE   = 1;
 
 static const char MARK_LABEL = ':';
 
@@ -18,8 +15,7 @@ static const char MARK_LABEL = ':';
 
 struct label_info_t {
 	char* name_of_label = nullptr;
-	int   position      = POISON_POSETION;
-	bool  flag_complete = UNCOMPLETE;
+	int   position      = POISON_POSITION;
 };
 
 //-
@@ -33,8 +29,8 @@ class labels {
 		size_t        label_counter   = 0;
 
 		void   realloc_array_of_label(void);
-		size_t parsing_labels(char* name_of_label, bool type);
-		void   add_label     (char* name_of_label, int position);
+		size_t parsing_label(char* name_of_label, bool type);
+		void   add_label    (char* name_of_label, int position);
 
 	public:
 

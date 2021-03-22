@@ -76,7 +76,7 @@ endif
 default: $(BIN)
 	$(E) "  LAUNCH:     " $(BIN)
 	$(Q) valgrind $(BIN)
-	cat $(TXT_DIR)/dump_labels.txt
+	$(Q) cat $(TXT_DIR)/dump_labels.txt
 
 #
 ## linking

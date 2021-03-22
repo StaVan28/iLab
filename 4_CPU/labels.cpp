@@ -29,34 +29,29 @@ labels::~labels(void)
 int labels::check_label(char* name_of_label, int position, bool type)
 {
 	assert(name_of_label);
-	assert(position >= POISON_POSETION);
+	assert(position >= POISON_POSITION);
 
-	size_t tmp_IP = parsing_labels(name_of_label, type);
+	size_t tmp_IP = parsing_label(name_of_label, type);
 	size_t indx   = 0;
 
 	while (indx < label_counter) {
 
-		if (array_of_labels[indx].name_of_label == nullptr)
-			break;
-
 		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label + tmp_IP)){
 
-			if (position != POISON_POSETION) {
-				array_of_labels[indx].position      = position;
-				array_of_labels[indx].flag_complete = COMPLETE;
+			if (position != POISON_POSITION) {
+				array_of_labels[indx].position = position;
 				return position;
 			}
-			
-			return POISON_POSETION;
+
+			return POISON_POSITION;
 		}
 
 		indx++;
 	}
 
-	if (array_of_labels[indx].flag_complete == UNCOMPLETE)
-		add_label(name_of_label, position);
+	add_label(name_of_label, position);
 
-	return POISON_POSETION;
+	return POISON_POSITION;
 }
 
 //-----------------------------------------------------------------
@@ -78,7 +73,7 @@ void labels::realloc_array_of_label(void)
 
 //-----------------------------------------------------------------
 
-size_t labels::parsing_labels(char* name_of_label, bool type)
+size_t labels::parsing_label(char* name_of_label, bool type)
 {
 	assert(name_of_label);
 
@@ -102,7 +97,7 @@ size_t labels::parsing_labels(char* name_of_label, bool type)
 void labels::add_label(char* name_of_label, int position)
 {
 	assert(name_of_label);
-	assert(position >= POISON_POSETION);
+	assert(position >= POISON_POSITION);
 
 	if (label_counter == capacity)
 		realloc_array_of_label();
