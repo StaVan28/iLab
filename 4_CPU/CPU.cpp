@@ -171,29 +171,12 @@ void CPU_accomplishment(CPU_t* CPU)
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-/*			case JMP_CMD:	{
-								CPU->IP++; 
+			case JMP_CMD:	CPU->IP += sizeof(char); 
 
-						   		int_value = atoi(buffer_CPU.text[CPU->IP].line);
-		   								   			
-						   		int indx = 0;
-
-						   		while (indx < buffer_CPU.num_structs) {				   								   			
-
-									if (*(buffer_CPU.text[indx].line) == JMP_MARK){
-
-										if (*(buffer_CPU.text[indx].line + 2) == int_value){
-											int_value = indx + 2;
-											break;
-										}
-									}
-
-						   			indx++;
-						   		}
-
-								CPU->IP = int_value;
-								break;
-							}*/
+							CPU->IP = POINTER_ON_(CPU->buffer_cmd, CPU->IP, int);
+							printf("%d\n", CPU->IP);
+							return;
+							break;
 		
 			case NOP_CMD:	CPU->IP += sizeof(char);
 							break;

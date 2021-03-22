@@ -1,8 +1,13 @@
-label:
-	jmp mark
-mark:
 	push 3
-	jmp label
 	push 2
-	hlt
+	jmp label
+	push 1
+
+label:
+	push 1
+	fsqrt
+
+
+	hlt 
 	end
+	

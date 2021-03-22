@@ -29,7 +29,7 @@ class labels {
 		size_t        label_counter   = 0;
 
 		void   realloc_array_of_label(void);
-		size_t parsing_label(char* name_of_label, bool type);
+		size_t parsing_label(char* name_of_label);
 		void   add_label    (char* name_of_label, int position);
 
 	public:
@@ -40,8 +40,11 @@ class labels {
 		labels(const labels&)              = delete;
 		labels& operator = (const labels&) = delete;
 
-		int check_label(char* name_of_label, int position, bool type);
-			
+		void check_label_jmp (char* name_of_label, int position);
+		void check_label_mark(char* name_of_label, int position);
+
+		int find_label(char* name_of_label);
+
 		void labels_dump(void);
 };
 

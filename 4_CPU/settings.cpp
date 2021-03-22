@@ -54,5 +54,4 @@ FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* s
 	return file_name;
 }
 
-
 //-----------------------------------------------------------------

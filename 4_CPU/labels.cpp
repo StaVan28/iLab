@@ -26,30 +26,52 @@ labels::~labels(void)
 
 //-----------------------------------------------------------------
 //!TODO
-int labels::check_label(char* name_of_label, int position, bool type)
+void labels::check_label_jmp(char* name_of_label, int position)
 {
 	assert(name_of_label);
 	assert(position >= POISON_POSITION);
 
-	size_t tmp_IP = parsing_label(name_of_label, type);
-	size_t indx   = 0;
-
-	while (indx < label_counter) {
-
-		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label + tmp_IP)){
-
-			if (position != POISON_POSITION) {
+	for (size_t indx = 0; indx < label_counter; indx++) 
+		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label))
+			if (position != POISON_POSITION)  {
 				array_of_labels[indx].position = position;
-				return position;
+				return;
 			}
 
-			return POISON_POSITION;
-		}
+	add_label(name_of_label, position);
 
-		indx++;
-	}
+	return;
+}
+
+//-----------------------------------------------------------------
+//!TODO
+void labels::check_label_mark(char* name_of_label, int position)
+{
+	assert(name_of_label);
+	assert(position >= POISON_POSITION);
+
+	const char* ptr_on_MARK_LABEL = strchr(name_of_label, MARK_LABEL);
+	POINTER_ON_(name_of_label, (ptr_on_MARK_LABEL - name_of_label), char) = '\0';
+
+	for (size_t indx = 0; indx < label_counter; indx++) 
+		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label))
+			if (position != POISON_POSITION) {
+				array_of_labels[indx].position = position;
+				return;
+			}
 
 	add_label(name_of_label, position);
+
+	return;
+}
+
+//-----------------------------------------------------------------
+
+int labels::find_label(char* name_of_label) 
+{
+	for (size_t indx = 0; indx < label_counter; indx++)
+		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label))
+				return array_of_labels[indx].position;
 
 	return POISON_POSITION;
 }
@@ -69,27 +91,6 @@ void labels::realloc_array_of_label(void)
 		// error
 	}
 
-}
-
-//-----------------------------------------------------------------
-
-size_t labels::parsing_label(char* name_of_label, bool type)
-{
-	assert(name_of_label);
-
-	size_t tmp_IP = 0;
-
-	if (type == MARK_SYMB) {
-		const char* ptr_on_MARK_LABEL = strchr(name_of_label, MARK_LABEL);
-		POINTER_ON_(name_of_label, (ptr_on_MARK_LABEL - name_of_label), char) = '\0';
-	}
-	else {
-		tmp_IP = JMP_SIZE;
-		while (isspace(name_of_label[tmp_IP]))
-			tmp_IP++;				
-	}
-
-	return tmp_IP;
 }
 
 //-----------------------------------------------------------------
@@ -133,3 +134,4 @@ void labels::labels_dump(void)
 
 }
 
+//-----------------------------------------------------------------

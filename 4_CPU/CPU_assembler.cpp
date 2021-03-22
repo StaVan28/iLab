@@ -15,13 +15,14 @@ void assembling_file(const char* file_path, const char* source)
 
 	labels table_labels;
 
+	fill_table_labels(&file_info, &table_labels);
+	table_labels.labels_dump();
 
-	size_t num_of_char = file_info.num_strings * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
+	size_t num_of_char = (file_info.num_strings + 1) * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
 	size_t tmp_IP      = 0;
 
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
-	
 
 	for (int indx = 0; indx < file_info.num_words; indx++) {
 		if     (!strncmp(file_info.text[indx].line, "push",  PUSH_SIZE)) {;
@@ -179,7 +180,7 @@ void assembling_file(const char* file_path, const char* source)
 				tmp_IP += sizeof(char);
 			}
 		else
-			if (!strncmp(file_info.text[indx].line, "hlt",   HLT_SIZE)) {
+			if (!strncmp(file_info.text[indx].line, "hlt",   HLT_SIZE)) { 
 				POINTER_ON_(buffer_data, tmp_IP, char) = HLT_CMD;
 				tmp_IP += sizeof(char);
 			}
@@ -196,16 +197,15 @@ void assembling_file(const char* file_path, const char* source)
 				//проверка на правильное написание джампа : (!)
 				indx++;
 
-				int jmp_IP = table_labels.check_label(file_info.text[indx].line, POISON_POSITION, JUMP);
+				int position = table_labels.find_label(file_info.text[indx].line);
 
-				POINTER_ON_(buffer_data, tmp_IP, int) = jmp_IP;
+				POINTER_ON_(buffer_data, tmp_IP, int) = position;
+
 				tmp_IP += sizeof(int);
 			}
 		else 
 			if (strchr(file_info.text[indx].line, MARK_LABEL)) {
-
-				table_labels.check_label(file_info.text[indx].line, tmp_IP, MARK_SYMB);
-
+				POINTER_ON_(buffer_data, tmp_IP, char) = NOP_CMD;	
 				tmp_IP += sizeof(char);	
 			}
 		else
@@ -214,7 +214,8 @@ void assembling_file(const char* file_path, const char* source)
 				tmp_IP += sizeof(char);
 			}
 			// else неправильная команда
-	}
+	}	
+
 
 	table_labels.labels_dump();
 
@@ -228,3 +229,28 @@ void assembling_file(const char* file_path, const char* source)
 }
 
 //-----------------------------------------------------------------
+
+void fill_table_labels(text_t* file_info, labels* table_labels) {
+
+	for (int indx = 0; indx < file_info->num_words; indx++) {
+
+		size_t tmp_IP = 0;
+
+		if     (!strncmp(file_info->text[indx].line, "jmp",   JMP_SIZE)) {
+				tmp_IP += sizeof(char);
+
+				//проверка на правильное написание джампа : (!)
+				indx++;
+
+				table_labels->check_label_jmp(file_info->text[indx].line, POISON_POSITION);
+				tmp_IP += sizeof(int);
+			}
+		else 
+			if (strchr(file_info->text[indx].line, MARK_LABEL)) {
+
+				table_labels->check_label_mark(file_info->text[indx].line, tmp_IP);	
+				tmp_IP += sizeof(char);	
+			} 
+	}
+
+}

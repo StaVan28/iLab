@@ -10,7 +10,7 @@ int main() {
 	CPU_t CPU = {};
 	CPU_construct(&CPU);
 
-	//CPU_accomplishment(&CPU); 
+	CPU_accomplishment(&CPU); 
 
 	CPU_destruct(&CPU);
 
