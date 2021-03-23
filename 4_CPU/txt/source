@@ -1,13 +1,6 @@
-	push 3
-	push 2
 	jmp label
-	push 1
 
 label:
-	push 1
-	fsqrt
-
-
 	hlt 
 	end
 	

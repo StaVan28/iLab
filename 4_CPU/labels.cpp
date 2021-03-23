@@ -26,10 +26,12 @@ labels::~labels(void)
 
 //-----------------------------------------------------------------
 //!TODO
-void labels::check_label_jmp(char* name_of_label, int position)
+void labels::check_label(char* name_of_label, int position, int func_call)
 {
 	assert(name_of_label);
 	assert(position >= POISON_POSITION);
+
+	parsing_label(name_of_label, func_call);
 
 	for (size_t indx = 0; indx < label_counter; indx++) 
 		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label))
@@ -44,38 +46,39 @@ void labels::check_label_jmp(char* name_of_label, int position)
 }
 
 //-----------------------------------------------------------------
-//!TODO
-void labels::check_label_mark(char* name_of_label, int position)
+
+void labels::parsing_label(char* name_of_label, int func_call) 
 {
 	assert(name_of_label);
-	assert(position >= POISON_POSITION);
 
-	const char* ptr_on_MARK_LABEL = strchr(name_of_label, MARK_LABEL);
-	POINTER_ON_(name_of_label, (ptr_on_MARK_LABEL - name_of_label), char) = '\0';
+	switch(func_call) {
 
-	for (size_t indx = 0; indx < label_counter; indx++) 
-		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label))
-			if (position != POISON_POSITION) {
-				array_of_labels[indx].position = position;
-				return;
-			}
+		case FROM_JMP_CMD:		break;
 
-	add_label(name_of_label, position);
+		case FROM_MARK_LABEL:	const char* ptr_on_MARK_LABEL = strchr(name_of_label, MARK_LABEL);
+								POINTER_ON_(name_of_label, (ptr_on_MARK_LABEL - name_of_label), char) = '\0';
+								break;
+	}
 
-	return;
 }
-
+    
 //-----------------------------------------------------------------
 
 int labels::find_label(char* name_of_label) 
 {
-	for (size_t indx = 0; indx < label_counter; indx++)
-		if (!strcmp(array_of_labels[indx].name_of_label, name_of_label))
-				return array_of_labels[indx].position;
+	size_t indx = 0;
 
-	return POISON_POSITION;
+	while (indx < label_counter) {
+		if (!strcmp(name_of_label, array_of_labels[indx].name_of_label))
+			break;	
+		indx++;
+	}
+
+	for (size_t indx_tmp = 0; indx_tmp < label_counter; indx_tmp++)
+		printf("array_of_labels[indx].position = %d\n", array_of_labels[indx].position);
+
+	return array_of_labels[indx].position;
 }
-
 //-----------------------------------------------------------------
 
 void labels::realloc_array_of_label(void)

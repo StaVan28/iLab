@@ -5,11 +5,14 @@
 //-----------------------------------------------------------------
 
 static const int  POISON_POSITION = -1;
+static const char MARK_LABEL      = ':';
 
-static const bool JUMP      = 0;
-static const bool MARK_SYMB = 1;
+//-----------------------------------------------------------------
 
-static const char MARK_LABEL = ':';
+enum func_calls {
+	FROM_JMP_CMD    = 0,
+	FROM_MARK_LABEL = 1,
+};
 
 //-----------------------------------------------------------------
 
@@ -28,9 +31,9 @@ class labels {
 		size_t        capacity        = 0;
 		size_t        label_counter   = 0;
 
-		void   realloc_array_of_label(void);
-		size_t parsing_label(char* name_of_label);
-		void   add_label    (char* name_of_label, int position);
+		void realloc_array_of_label(void);
+		void parsing_label(char* name_of_label, int func_call);
+		void add_label    (char* name_of_label, int position);
 
 	public:
 
@@ -40,10 +43,8 @@ class labels {
 		labels(const labels&)              = delete;
 		labels& operator = (const labels&) = delete;
 
-		void check_label_jmp (char* name_of_label, int position);
-		void check_label_mark(char* name_of_label, int position);
-
-		int find_label(char* name_of_label);
+		void check_label(char* name_of_label, int position, int func_call);
+		int  find_label(char* name_of_label);
 
 		void labels_dump(void);
 };

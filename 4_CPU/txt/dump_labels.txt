@@ -1,12 +1,12 @@
 
 ******************************************************
-Pointer array of labels: 0x5b826b0
+Pointer array of labels: 0x5b825f0
 
 Capacity = 8
 
 {Number in array}[position]
 
-{0}[0] label
+{0}[5] label
 {1}[0] (null)
 {2}[0] (null)
 {3}[0] (null)

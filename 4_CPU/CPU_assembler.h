@@ -4,7 +4,9 @@
 
 //-----------------------------------------------------------------
 
-static const int NUM_OF_PASS = 2;
+static const int FIRST_PASS  = 0;
+static const int SECOND_PASS = 1;
+static const int NUM_OF_PASS	 = 2;
 
 //-----------------------------------------------------------------
 

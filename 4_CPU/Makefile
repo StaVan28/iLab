@@ -119,7 +119,7 @@ errors:
 
 tags: ${SRC}
 	$(Q) rm -f tags
-	$(Q) ctags ${SRC}
+	$(Q) ctags -R -f .tags
 
 rebuild: clean all
 

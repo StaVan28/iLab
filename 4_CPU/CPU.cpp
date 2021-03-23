@@ -173,8 +173,10 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			case JMP_CMD:	CPU->IP += sizeof(char); 
 
-							CPU->IP = POINTER_ON_(CPU->buffer_cmd, CPU->IP, int);
-							printf("%d\n", CPU->IP);
+							printf("POINTER_  %d\n", POINTER_ON_(CPU->buffer_cmd, CPU->IP, int));
+
+							CPU->IP = POINTER_ON_(CPU->buffer_cmd, CPU->IP, double);
+							printf("CPU->IP = %d\n", CPU->IP);
 							return;
 							break;
 		
