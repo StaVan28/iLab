@@ -35,10 +35,10 @@ void CPU_dump(CPU_t* CPU)
     		fprintf(listning_CPU, "*{");
 
     	switch(indx) {
-    		FPRINTF_REG(listning_CPU, RAX_REG, "rax");
-    		FPRINTF_REG(listning_CPU, RBX_REG, "rbx");
-    		FPRINTF_REG(listning_CPU, RCX_REG, "rcx");
-    		FPRINTF_REG(listning_CPU, RDX_REG, "rdx");
+    		FPRINTF_REG(listning_CPU, RAX_REG, "rax")
+    		FPRINTF_REG(listning_CPU, RBX_REG, "rbx")
+    		FPRINTF_REG(listning_CPU, RCX_REG, "rcx")
+    		FPRINTF_REG(listning_CPU, RDX_REG, "rdx")
     	}
     	
     	if (CPU->regs[indx] != POISON_DOUBLE_STACK)

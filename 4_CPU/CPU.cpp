@@ -7,6 +7,8 @@ void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source)
 {
 	//errors
 
+	RECREATE_DUMP_CPU_FILE
+
 	FILE* obj_file = fopen_file_with_path(file_path, nullptr, obj_source, "rb");
 
 	int num_symbols = text_t::txtlib_number_of_symbols_file(obj_file);

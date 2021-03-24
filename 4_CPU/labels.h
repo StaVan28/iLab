@@ -1,7 +1,7 @@
 
 #ifndef LABELS_H_INCLUDED
 #define LABELS_H_INCLUDED
-
+	
 //-----------------------------------------------------------------
 
 static const int  POISON_POSITION = -1;

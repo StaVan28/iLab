@@ -57,11 +57,11 @@ void labels::parsing_label(char* name_of_label, int func_call)
 
 	switch(func_call) {
 
-		case FROM_JMP_CMD:		break;
+		case FROM_JMP_CMD:		return;
 
 		case FROM_MARK_LABEL:	const char* ptr_on_MARK_LABEL = strchr(name_of_label, MARK_LABEL);
 								POINTER_ON_(name_of_label, (ptr_on_MARK_LABEL - name_of_label), char) = '\0';
-								break;
+								return;
 	}
 
 }
@@ -77,9 +77,6 @@ int labels::find_label(char* name_of_label)
 			break;	
 		indx++;
 	}
-
-	printf("indx = %ld\n", indx);
-	printf("array_of_labels[indx].pos_to_jmp = %d\n", array_of_labels[indx].pos_to_jmp);
 
 	return array_of_labels[indx].pos_to_jmp;
 }
