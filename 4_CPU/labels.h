@@ -43,8 +43,8 @@ class labels {
 		labels(const labels&)              = delete;
 		labels& operator = (const labels&) = delete;
 
-		int  check_label(char* name_of_label, int pos_to_jmp, int func_call);
-		int  find_label (char* name_of_label);
+		int check_label(char* name_of_label, int pos_to_jmp, int func_call);
+		int find_label (char* name_of_label);
 
 		void labels_dump(void);
 };

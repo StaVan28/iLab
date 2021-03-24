@@ -18,10 +18,13 @@ void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source)
 
     fclose(obj_file);
 
-    for (int indx = 0; indx < NUM_OF_REGS; indx++) 
+    for (int indx = 0; indx < NUM_OF_REGS; indx++) {
     	CPU->regs[indx] = POISON_DOUBLE_CPU;
+    }
 
 	stack_construct(&(CPU->stack_CPU), "stack_CPU", START_CAPACITY);
+
+	CPU_dump(CPU);
 }
 
 //-----------------------------------------------------------------
@@ -36,8 +39,9 @@ void CPU_destruct(CPU_t* CPU)
 	free(CPU->buffer_cmd);
 	CPU->buffer_cmd = nullptr;	
 
-    for (int indx = 0; indx < NUM_OF_REGS; indx++) 
+    for (int indx = 0; indx < NUM_OF_REGS; indx++) {
     	CPU->regs[indx] = POISON_DOUBLE_CPU;
+    }
 
 	stack_destruct(&(CPU->stack_CPU));
 }
@@ -53,7 +57,6 @@ void CPU_accomplishment(CPU_t* CPU)
 	register double value       = 0;
 	register double addit_value = 0;
 	register int 	int_value   = 0;
-
 
 	while (true) {
 
@@ -189,62 +192,3 @@ void CPU_accomplishment(CPU_t* CPU)
 }
 
 //-----------------------------------------------------------------
-
-void CPU_dump(CPU_t* CPU)
-{
-	FILE* listning_CPU = fopen("./txt/dump_CPU.txt", "ab");
-    assert(listning_CPU);
-
-    fprintf(listning_CPU, "\n******************************************************\n\n");
-
-    fprintf(listning_CPU, "CPU (OK) [%p] \n\n", &CPU);
-
-    fprintf(listning_CPU, "IP = %d\n", CPU->IP);
-
-    fprintf(listning_CPU, "\nBuffer_cmd [%p]\n",   CPU->buffer_cmd);
-/*  rewrite
-    int indx = 0;
-    for ( ; indx < stck->cur_size; indx++)
-        fprintf(dump_stack, "*{%2d} : %lg\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-    for ( ; indx < stck->capacity; indx++)
-        fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-*/
-
-    fprintf(listning_CPU, "\nPointer on regs [%p[]n", CPU->regs);
-
-  	int indx = 0;
-    for ( ; indx < stck->cur_size; indx++)
-        fprintf(dump_stack, "*{%2d} : %lg\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-    for ( ; indx < stck->capacity; indx++)
-        fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-
-    fprintf(listning_CPU, "Pointer on stack      = %p\n\n", &(CPU->stack_CPU));
-    
-	//////////////////////
-	
-	fprintf(dump_stack, "\nData [%p]\n", stck->data);
-
-    if (stck->capacity != POISON_INT_STACK) {
-        #ifdef DEFENCE_STACK
-            fprintf(dump_stack, " {canary_left} : %d  [%p]\n\n", *(int*)(stck->data - 1 * sizeof(int)), (int*)(stck->data - 1 * sizeof(int)));
-        #endif
-
-        int indx = 0;
-        for ( ; indx < stck->cur_size; indx++)
-            fprintf(dump_stack, "*{%2d} : %lg\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-        for ( ; indx < stck->capacity; indx++)
-            fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-
-        #ifdef DEFENCE_STACK
-            fprintf(dump_stack, "\n {canary_right} : %d  [%p]\n", *(int*)(stck->data + stck->capacity * sizeof(double)), (int*)(stck->data + stck->capacity * sizeof(double)));
-        #endif
-    }
-
-
-	fprintf(listning_CPU, "For see stack please call stack dump\n\n");
-
-    fprintf(listning_CPU, "\n******************************************************\n");
-
-	fclose(listning_CPU);
-
-}

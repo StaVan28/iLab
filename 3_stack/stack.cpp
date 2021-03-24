@@ -247,14 +247,13 @@ int stack_hash(my_stack_t* stck) {
 
 void stack_dump(my_stack_t *stck) {
 
-    #ifdef DEBUG
-        printf("call stack_dump to %s\n", stck->name);
-    #endif
 
     FILE* dump_stack = fopen("./txt/dump_stack.txt", "ab");
     assert(dump_stack);
 
     PRINT_DIVIDING_DUMP_STACK_STRIP
+
+    fprintf(dump_stack, "       Stack:\n\n");
 
     if (!stck->error)
         fprintf(dump_stack, "Stack (OK) [%p] \"%s\" {\n\n", &stck, stck->name);

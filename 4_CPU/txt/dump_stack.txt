@@ -1,12 +1,14 @@
 
 ******************************************************
-Stack (OK) [0x1ffefffd98] "stack_CPU" {
+       Stack:
 
-Canary left  = 595371386  [0x1ffefffe60]
+Stack (OK) [0x1ffefffd88] "stack_CPU" {
+
+Canary left  = 595371386  [0x1ffefffe50]
 Current size = 4
 Capacity     = 8
 Hash         = 259520371
-Canary right = 752293992  [0x1ffefffe9c]
+Canary right = 752293992  [0x1ffefffe8c]
 
 Data [0x5b86524]
  {canary_left} : 874895203  [0x5b86520]

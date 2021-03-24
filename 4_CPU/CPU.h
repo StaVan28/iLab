@@ -12,10 +12,11 @@
 #include <stdbool.h>
 
 #include "stack.h"
-#include "assembler.h"
 #include "txtlib.h"
 #include "labels.h"
+#include "assembler.h"
 #include "settings.h"
+#include "errors.h"
 
 //-----------------------------------------------------------------------------
 
@@ -64,7 +65,5 @@ void CPU_construct(CPU_t* CPU, const char* file_path = "./txt/", const char* obj
 void CPU_destruct(CPU_t* CPU);
 
 void CPU_accomplishment(CPU_t* CPU); 
-
-void CPU_dump(CPU_t* CPU);
 
 #endif // CPU_H_INCLUDED
