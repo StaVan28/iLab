@@ -18,7 +18,7 @@ enum func_calls {
 
 struct label_info_t {
 	char* name_of_label = nullptr;
-	int   position      = POISON_POSITION;
+	int   pos_to_jmp    = POISON_POSITION;
 };
 
 //-
@@ -33,7 +33,7 @@ class labels {
 
 		void realloc_array_of_label(void);
 		void parsing_label(char* name_of_label, int func_call);
-		void add_label    (char* name_of_label, int position);
+		void add_label    (char* name_of_label, int pos_to_jmp);
 
 	public:
 
@@ -43,8 +43,8 @@ class labels {
 		labels(const labels&)              = delete;
 		labels& operator = (const labels&) = delete;
 
-		void check_label(char* name_of_label, int position, int func_call);
-		int  find_label(char* name_of_label);
+		int  check_label(char* name_of_label, int pos_to_jmp, int func_call);
+		int  find_label (char* name_of_label);
 
 		void labels_dump(void);
 };

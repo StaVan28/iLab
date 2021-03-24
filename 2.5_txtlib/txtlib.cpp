@@ -290,6 +290,8 @@ void text_t::txtlib_text_dump(void) {
 
     PRINT_DIVIDING_DUMP_TEXT_STRIP
 
+    fprintf(text_dump, "        TEXT:\n\n");
+
     fprintf(text_dump, "Pointer buffer of data: %p\n"  , buffer_data);
     fprintf(text_dump, "Pointer line_t structs: %p\n\n", text);
 

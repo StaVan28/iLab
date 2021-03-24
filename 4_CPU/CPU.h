@@ -12,9 +12,9 @@
 #include <stdbool.h>
 
 #include "stack.h"
+#include "assembler.h"
 #include "txtlib.h"
 #include "labels.h"
-#include "CPU_assembler.h"
 #include "settings.h"
 
 //-----------------------------------------------------------------------------
@@ -65,8 +65,6 @@ void CPU_destruct(CPU_t* CPU);
 
 void CPU_accomplishment(CPU_t* CPU); 
 
-char* concat(const char* str1, const char* str2, const char* str3);
-
-FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* source, const char* mode);
+void CPU_dump(CPU_t* CPU);
 
 #endif // CPU_H_INCLUDED

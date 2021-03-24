@@ -1,6 +1,11 @@
-	jmp label
 
-label:
-	hlt 
-	end
-	
+	push 28
+a:
+	push 1
+	jmp a
+	push 3
+	push 4
+
+	push 5
+	hlt
+	end	

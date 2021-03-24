@@ -26,9 +26,9 @@ TXT_DIR  = txt
 BIN      = $(BIN_DIR)/CPU
 BIN_TEST = $(BIN_DIR)/unit_tests
 
-SRC_ALL = CPU.cpp CPU_assembler.cpp labels.cpp settings.cpp
-OBJ_ALL = CPU.o   CPU_assembler.o   labels.o   settings.o
-HDR_ALL = CPU.h   CPU_assembler.h   labels.h   settings.h   $(HEAD_DIR)/stack.h $(HEAD_DIR)/txtlib.h
+SRC_ALL = CPU.cpp assembler.cpp errors.cpp labels.cpp settings.cpp
+OBJ_ALL = CPU.o   assembler.o   errors.o   labels.o   settings.o
+HDR_ALL = CPU.h   assembler.h   errors.h   labels.h   settings.h   $(HEAD_DIR)/stack.h $(HEAD_DIR)/txtlib.h
 
 SRC = $(SRC_ALL) main.cpp
 OBJ = $(OBJ_ALL) main.o
@@ -69,15 +69,22 @@ endif
 # RULES
 #--------------------------------------------------------------------------------------
 
-.PHONY: debug
+.PHONY: debug default
 
 #
-## launch with valgrind(default)
-default: $(BIN)
-	$(E) "  LAUNCH:     " $(BIN)
-	$(Q) valgrind $(BIN)
-	$(Q) cat $(TXT_DIR)/dump_labels.txt
+## launch with debug valgrind(default)
+default: print_logs 
 
+print_logs: $(LAUNCH_MODE)
+
+debug: $(BIN) 
+	$(E) "  LAUNCH(DBG):" $(BIN)
+	$(Q) valgrind $(BIN)
+
+release: clean  $(BIN)
+	$(E) "  LAUNCH(RLS):" $(BIN)
+	$(Q) $(BIN)
+	
 #
 ## linking
 $(BIN): $(OBJ)
@@ -98,16 +105,17 @@ $(BIN_TEST): $(OBJ_TEST)
 	$(E) "  C           " $@
 	$(Q) ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.c 
 
-main.o:          main.cpp $(HDR)
-CPU.o:           CPU.cpp $(HDR)
-CPU_assembler.o: CPU_assembler.cpp $(HDR)  
-labels.o:        labels.cpp $(HDR)
+main.o:          main.cpp       $(HDR)
+CPU.o:           CPU.cpp        $(HDR)
+assembler.o:     assembler.cpp  $(HDR)  
+errors.o:        errors.cpp     $(HDR) 
+labels.o:        labels.cpp     $(HDR)
 unit_tests.o:    unit_tests.cpp $(HDR) 
-settings.o:      settings.cpp $(HDR)
+settings.o:      settings.cpp   $(HDR)
 
 #
 ## additional features
-.PHONY: clean errors tags rebuild git no_valgrind unit_tests project log full_check_valgrind
+.PHONY: clean errors tags rebuild git no_valgrind unit_tests project log full_check_valgrind print_logs
 
 clean:
 	$(E) "  CLEAN"
@@ -121,7 +129,7 @@ tags: ${SRC}
 	$(Q) rm -f tags
 	$(Q) ctags -R -f .tags
 
-rebuild: clean all
+rebuild: clean default
 
 no_valgrind: $(BIN)
 	$(E) "  LAUNCH STD: " $(BIN)
@@ -142,6 +150,12 @@ git:
 
 log:
 	$(Q) git log --oneline --all --graph
+
+print_logs:
+	$(Q) cat $(TXT_DIR)/dump_CPU.txt
+	$(Q) cat $(TXT_DIR)/dump_stack.txt
+	$(Q) cat $(TXT_DIR)/dump_labels.txt
+	$(Q) cat $(TXT_DIR)/dump_text.txt
 
 #
 ## generate lib and copy main header to ../include

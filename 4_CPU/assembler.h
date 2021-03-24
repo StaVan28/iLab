@@ -4,15 +4,11 @@
 
 //-----------------------------------------------------------------
 
-static const int FIRST_PASS  = 0;
-static const int SECOND_PASS = 1;
-static const int NUM_OF_PASS	 = 2;
-
-//-----------------------------------------------------------------
-
 void assembling_file(const char* file_path = "./txt/", const char* source = "source");
 
-void fill_table_labels(text_t* file_info, labels* table_labels);
+void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data);
+
+void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data);
 
 //-----------------------------------------------------------------
 

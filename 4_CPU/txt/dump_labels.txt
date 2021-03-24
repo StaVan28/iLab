@@ -1,18 +1,21 @@
 
 ******************************************************
-Pointer array of labels: 0x5b825f0
+		LABELS:
 
-Capacity = 8
+Pointer array of labels: 0x5b826b0
+
+Capacity      = 8
+Label counter = 1
 
 {Number in array}[position]
 
-{0}[5] label
-{1}[0] (null)
+{1}[9] a
 {2}[0] (null)
 {3}[0] (null)
 {4}[0] (null)
 {5}[0] (null)
 {6}[0] (null)
 {7}[0] (null)
+{8}[0] (null)
 
 ******************************************************
