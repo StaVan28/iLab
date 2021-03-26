@@ -1,11 +1,3 @@
-	push 1
-	push 2
-	push 3
-	push 4
-	pop rax
-	pop rbx
-	pop rcx
-	pop rdx
 	push 3
 	push 4
 	push 5

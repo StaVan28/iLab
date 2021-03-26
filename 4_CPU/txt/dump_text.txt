@@ -3,39 +3,23 @@
         TEXT:
 
 Pointer buffer of data: 0x5b81250
-Pointer line_t structs: 0x5b81300
+Pointer line_t structs: 0x5b812c0
 
-Number of strings = 13
-Number of structs = 24
-Number of symbols = 102
-Number of words   = 24
+Number of strings = 5
+Number of structs = 8
+Number of symbols = 34
+Number of words   = 8
 
 [Number in structs]{Real number}(Length)
 
 [  1]{  1}(  4)push
-[  2]{  2}(  1)1
+[  2]{  2}(  1)3
 [  3]{  3}(  4)push
-[  4]{  4}(  1)2
+[  4]{  4}(  1)4
 [  5]{  5}(  4)push
-[  6]{  6}(  1)3
-[  7]{  7}(  4)push
-[  8]{  8}(  1)4
-[  9]{  9}(  3)pop
-[ 10]{ 10}(  3)rax
-[ 11]{ 11}(  3)pop
-[ 12]{ 12}(  3)rbx
-[ 13]{ 13}(  3)pop
-[ 14]{ 14}(  3)rcx
-[ 15]{ 15}(  3)pop
-[ 16]{ 16}(  3)rdx
-[ 17]{ 17}(  4)push
-[ 18]{ 18}(  1)3
-[ 19]{ 19}(  4)push
-[ 20]{ 20}(  1)4
-[ 21]{ 21}(  4)push
-[ 22]{ 22}(  1)5
-[ 23]{ 23}(  3)hlt
-[ 24]{ 24}(  3)end
+[  6]{  6}(  1)5
+[  7]{  7}(  3)hlt
+[  8]{  8}(  3)end
 
 
 Note! The actual length of the lines is 1 more 
