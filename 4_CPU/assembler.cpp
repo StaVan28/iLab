@@ -316,12 +316,12 @@ void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 				POINTER_ON_(*buffer_data, tmp_IP, int) = position;
 				tmp_IP += sizeof(int);
 			}
-		else if (strchr(file_info->text[indx].line, MARK_LABEL)) {
-				tmp_IP += sizeof(char);	
-			}
 		else if (!strncmp(file_info->text[indx].line, "nop",   NOP_SIZE)) {
 				tmp_IP += sizeof(char);
 			}
+		else {
+				tmp_IP += sizeof(char);
+		}
 			// else неправильная команда
 	}
 }

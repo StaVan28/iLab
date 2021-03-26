@@ -69,7 +69,7 @@ endif
 # RULES
 #--------------------------------------------------------------------------------------
 
-.PHONY: debug default
+.PHONY: debug release default
 
 #
 ## launch with debug valgrind(default)
@@ -128,6 +128,10 @@ errors:
 tags: ${SRC}
 	$(Q) rm -f tags
 	$(Q) ctags -R -f .tags
+
+gdb: $(BIN)
+	$(E) "  GDB:        " $(BIN)
+	$(Q) gdb $(BIN) 
 
 rebuild: clean default
 
