@@ -67,18 +67,15 @@ void labels::parsing_label(char* name_of_label, int func_call)
 }
     
 //-----------------------------------------------------------------
-// небезопасно
+
 int labels::find_label(char* name_of_label) 
 {
-	size_t indx = 0;
-
-	while (indx < label_counter) {
-		if (!strcmp(name_of_label, array_of_labels[indx].name_of_label))
-			break;	
-		indx++;
+	for(size_t indx = 0; indx < label_counter; indx++) {
+		if (!strcmp(name_of_label, array_of_labels[indx].name_of_label))	
+			return array_of_labels[indx].pos_to_jmp;	
 	}
 
-	return array_of_labels[indx].pos_to_jmp;
+	return POISON_POSITION;
 }
 //-----------------------------------------------------------------
 

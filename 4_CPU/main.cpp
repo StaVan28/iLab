@@ -12,6 +12,8 @@ int main() {
 
 	CPU_accomplishment(&CPU); 
 
+	CPU_dump(&CPU);
+
 	CPU_destruct(&CPU);
 
 }

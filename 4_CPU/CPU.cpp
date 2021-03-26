@@ -25,8 +25,6 @@ void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source)
     }
 
 	stack_construct(&(CPU->stack_CPU), "stack_CPU", START_CAPACITY);
-
-	CPU_dump(CPU);
 }
 
 //-----------------------------------------------------------------
@@ -173,7 +171,6 @@ void CPU_accomplishment(CPU_t* CPU)
 						   	stack_push(&(CPU->stack_CPU), sqrt(value));
 
 						   	CPU->IP += sizeof(char);
-						   	return;
 						   	break;
 
 			case JMP_CMD:	CPU->IP += sizeof(char); 
@@ -186,7 +183,7 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			default:
 							// error command 
-							printf("default\n");
+							printf("default coomand? check buffer\n");
 							CPU->IP += sizeof(char);
 							break;								
 		} 

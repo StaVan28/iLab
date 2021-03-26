@@ -29,19 +29,19 @@ void CPU_dump(CPU_t* CPU)
 
     for (int indx = 0; indx < NUM_OF_REGS; indx++) {
 
-    	if (CPU->regs[indx] != POISON_DOUBLE_STACK)
+    	if (CPU->regs[indx] == POISON_DOUBLE_STACK)
     		fprintf(listning_CPU, " {");
     	else	
     		fprintf(listning_CPU, "*{");
 
-    	switch(indx) {
-    		FPRINTF_REG(listning_CPU, RAX_REG, "rax")
+    	switch(indx + REGISTER_BIT) {
+            FPRINTF_REG(listning_CPU, RAX_REG, "rax")
     		FPRINTF_REG(listning_CPU, RBX_REG, "rbx")
     		FPRINTF_REG(listning_CPU, RCX_REG, "rcx")
     		FPRINTF_REG(listning_CPU, RDX_REG, "rdx")
     	}
     	
-    	if (CPU->regs[indx] != POISON_DOUBLE_STACK)
+    	if (CPU->regs[indx] == POISON_DOUBLE_STACK)
     		fprintf(listning_CPU, "} : %lg (POISON)\n", CPU->regs[indx]);
     	else	
     		fprintf(listning_CPU, "} : %lg\n"         , CPU->regs[indx]);

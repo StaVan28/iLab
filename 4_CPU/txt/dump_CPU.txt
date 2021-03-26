@@ -2,19 +2,19 @@
 ******************************************************
 		CPU:
 
-CPU (OK) [0x7fffffffde28] 
+CPU (OK) [0x1ffefffe08] 
 
-IP = 0
+IP = 71
 
-Buffer_cmd [0x55555576e330]
+Buffer_cmd [0x5b86150]
 
-Pointer on regs [0x7fffffffdeb0]
- {} : nan (POISON)
- {} : nan (POISON)
- {} : nan (POISON)
- {} : nan (POISON)
+Pointer on regs [0x1ffefffe40]
+*{rax} : 4
+*{rbx} : 3
+*{rcx} : 2
+*{rdx} : 1
 
-Pointer on stack = [0x7fffffffded0]
+Pointer on stack = [0x1ffefffe60]
 For see stack please call stack dump
 
 
