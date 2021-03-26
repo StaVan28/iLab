@@ -1,8 +1,6 @@
 
 #include "CPU.h"
 
-// id - процессора, кол-во байт 
-
 //-----------------------------------------------------------------
 
 void assembling_file(const char* file_path, const char* source)  
@@ -49,36 +47,36 @@ void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 				//обработка HUGE_VAL and errno
 
 				if (value == 0) {															
-					if 	   (!strncmp(file_info->text[indx].line, "rax", REG_SIZE)) {
+					if 	   (!strncmp(file_info->text[indx].line, "eax", REG_SIZE)) {
 
 							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
 							tmp_IP += sizeof(char);
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = RAX_REG;
+							POINTER_ON_(*buffer_data, tmp_IP, char)  = EAX_REG;
 							tmp_IP += sizeof(char);
 					}
-					else if (!strncmp(file_info->text[indx].line, "rbx", REG_SIZE)) {	
+					else if (!strncmp(file_info->text[indx].line, "ebx", REG_SIZE)) {	
 
 							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
 							tmp_IP += sizeof(char);
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = RBX_REG;
+							POINTER_ON_(*buffer_data, tmp_IP, char)  = EBX_REG;
 							tmp_IP += sizeof(char);
 					}
-					else if (!strncmp(file_info->text[indx].line, "rcx", REG_SIZE)) {
+					else if (!strncmp(file_info->text[indx].line, "ecx", REG_SIZE)) {
 
 							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
 							tmp_IP += sizeof(char);
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = RCX_REG; 
+							POINTER_ON_(*buffer_data, tmp_IP, char)  = ECX_REG; 
 							tmp_IP += sizeof(char);
 					}
-					else if (!strncmp(file_info->text[indx].line, "rdx", REG_SIZE)) {
+					else if (!strncmp(file_info->text[indx].line, "edx", REG_SIZE)) {
 
 							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
 							tmp_IP += sizeof(char);
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = RDX_REG; 	
+							POINTER_ON_(*buffer_data, tmp_IP, char)  = EDX_REG; 	
 							tmp_IP += sizeof(char);		
 					}
 					else if (!strncmp(file_info->text[indx].line, "in", IN_SIZE)) {
@@ -114,39 +112,39 @@ void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 			}
 		else if (!strncmp(file_info->text[indx].line, "pop",  POP_SIZE)) {
 															
-				if 	   (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rax", REG_SIZE)) {
+				if 	   (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "eax", REG_SIZE)) {
 
 						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
 						tmp_IP += sizeof(char);
 
-						POINTER_ON_(*buffer_data, tmp_IP, char) = RAX_REG;
+						POINTER_ON_(*buffer_data, tmp_IP, char) = EAX_REG;
 						tmp_IP += sizeof(char);
 				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rbx", REG_SIZE)) {	
+				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ebx", REG_SIZE)) {	
 						indx++;
 
 						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
 						tmp_IP += sizeof(char);
 
-						POINTER_ON_(*buffer_data, tmp_IP, char) = RBX_REG;
+						POINTER_ON_(*buffer_data, tmp_IP, char) = EBX_REG;
 						tmp_IP += sizeof(char);
 				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rcx", REG_SIZE)) {
+				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ecx", REG_SIZE)) {
 						indx++;
 
 						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
 						tmp_IP += sizeof(char);
 
-						POINTER_ON_(*buffer_data, tmp_IP, char) = RCX_REG;
+						POINTER_ON_(*buffer_data, tmp_IP, char) = ECX_REG;
 						tmp_IP += sizeof(char);
 				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rdx", REG_SIZE)) {	
+				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "edx", REG_SIZE)) {	
 						indx++;
 
 						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
 						tmp_IP += sizeof(char);
 
-						POINTER_ON_(*buffer_data, tmp_IP, char) = RDX_REG;
+						POINTER_ON_(*buffer_data, tmp_IP, char) = EDX_REG;
 						tmp_IP += sizeof(char); 			
 				}																	
 				else {															
@@ -225,19 +223,19 @@ void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 				//обработка HUGE_VAL and errno
 
 				if (value == 0) {															
-					if 	   (!strncmp(file_info->text[indx].line, "rax", REG_SIZE)) {
+					if 	   (!strncmp(file_info->text[indx].line,  "eax", REG_SIZE)) {
 							tmp_IP += sizeof(char);
 							tmp_IP += sizeof(char);
 					}
-					else if (!strncmp(file_info->text[indx].line, "rbx", REG_SIZE)) {	
+					else if (!strncmp(file_info->text[indx].line, "ebx", REG_SIZE)) {	
 							tmp_IP += sizeof(char);
 							tmp_IP += sizeof(char);
 					}
-					else if (!strncmp(file_info->text[indx].line, "rcx", REG_SIZE)) {
+					else if (!strncmp(file_info->text[indx].line, "ecx", REG_SIZE)) {
 							tmp_IP += sizeof(char);
 							tmp_IP += sizeof(char);
 					}
-					else if (!strncmp(file_info->text[indx].line, "rdx", REG_SIZE)) {
+					else if (!strncmp(file_info->text[indx].line, "edx", REG_SIZE)) {
 							tmp_IP += sizeof(char);
 							tmp_IP += sizeof(char);		
 					}
@@ -259,21 +257,21 @@ void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 			}
 		else if (!strncmp(file_info->text[indx].line, "pop",  POP_SIZE)) {
 															
-				if 	   (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rax", REG_SIZE)) {
+				if 	   (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "eax", REG_SIZE)) {
 						tmp_IP += sizeof(char);
 						tmp_IP += sizeof(char);
 				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rbx", REG_SIZE)) {	
+				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ebx", REG_SIZE)) {	
 						indx++;
 						tmp_IP += sizeof(char);
 						tmp_IP += sizeof(char);
 				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rcx", REG_SIZE)) {
+				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ecx", REG_SIZE)) {
 						indx++;
 						tmp_IP += sizeof(char);
 						tmp_IP += sizeof(char);
 				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "rdx", REG_SIZE)) {	
+				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "edx", REG_SIZE)) {	
 						indx++; 
 						tmp_IP += sizeof(char);
 						tmp_IP += sizeof(char); 			

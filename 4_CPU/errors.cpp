@@ -16,7 +16,8 @@ void CPU_dump(CPU_t* CPU)
 
     fprintf(listning_CPU, "IP = %d\n", CPU->IP);
 
-    fprintf(listning_CPU, "\nBuffer_cmd [%p]\n",   CPU->buffer_cmd);
+    fprintf(listning_CPU, "\nEBP(buffer_cmd) [%p]\n", CPU->EBP);
+
 /*  rewrite
     int indx = 0;
     for ( ; indx < stck->cur_size; indx++)
@@ -25,30 +26,14 @@ void CPU_dump(CPU_t* CPU)
         fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
 */
 
-    fprintf(listning_CPU, "\nPointer on regs [%p]\n", CPU->regs);
+    fprintf(listning_CPU, "\nRegs\n");
 
-    for (int indx = 0; indx < NUM_OF_REGS; indx++) {
+    FPRINTF_REG(EAX, "eax");
+    FPRINTF_REG(EBX, "ebx");
+    FPRINTF_REG(ECX, "ecx");
+    FPRINTF_REG(EDX, "edx");
 
-    	if (CPU->regs[indx] == POISON_DOUBLE_STACK)
-    		fprintf(listning_CPU, " {");
-    	else	
-    		fprintf(listning_CPU, "*{");
-
-    	switch(indx + REGISTER_BIT) {
-            FPRINTF_REG(listning_CPU, RAX_REG, "rax")
-    		FPRINTF_REG(listning_CPU, RBX_REG, "rbx")
-    		FPRINTF_REG(listning_CPU, RCX_REG, "rcx")
-    		FPRINTF_REG(listning_CPU, RDX_REG, "rdx")
-    	}
-    	
-    	if (CPU->regs[indx] == POISON_DOUBLE_STACK)
-    		fprintf(listning_CPU, "} : %lg (POISON)\n", CPU->regs[indx]);
-    	else	
-    		fprintf(listning_CPU, "} : %lg\n"         , CPU->regs[indx]);
-    }
-
-
-    fprintf(listning_CPU, "\nPointer on stack = [%p]\n", &(CPU->stack_CPU));
+    fprintf(listning_CPU, "\nPointer on stack = [%p]\n", &(CPU->ESP));
 	fprintf(listning_CPU, "For see stack please call stack dump\n\n");
 
     fprintf(listning_CPU, "\n******************************************************\n");

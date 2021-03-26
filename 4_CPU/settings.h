@@ -5,9 +5,9 @@
 
 //-----------------------------------------------------------------------------
 
-#define POP_TWO_VARIABLES							\
-		value       = stack_pop(&(CPU->stack_CPU));	\
-		addit_value = stack_pop(&(CPU->stack_CPU));	\
+#define POP_TWO_VARIABLES						\
+		value       = stack_pop(&(CPU->ESP));	\
+		addit_value = stack_pop(&(CPU->ESP));	\
 
 //-
 
@@ -16,7 +16,7 @@
 
 //-----------------------------------------------------------------------------
 
-static const int NUM_OF_REGS = 4;
+//static const int NUM_OF_REGS = 4;
 
 static const int    POISON_INT_CPU    = 0x7F3428BE;
 static const double POISON_DOUBLE_CPU = NAN;

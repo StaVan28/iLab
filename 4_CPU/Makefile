@@ -26,9 +26,9 @@ TXT_DIR  = txt
 BIN      = $(BIN_DIR)/CPU
 BIN_TEST = $(BIN_DIR)/unit_tests
 
-SRC_ALL = CPU.cpp assembler.cpp errors.cpp labels.cpp settings.cpp
-OBJ_ALL = CPU.o   assembler.o   errors.o   labels.o   settings.o
-HDR_ALL = CPU.h   assembler.h   errors.h   labels.h   settings.h   $(HEAD_DIR)/stack.h $(HEAD_DIR)/txtlib.h
+SRC_ALL = CPU.cpp assembler.cpp errors.cpp labels.cpp settings.cpp flags.cpp
+OBJ_ALL = CPU.o   assembler.o   errors.o   labels.o   settings.o   flags.o
+HDR_ALL = CPU.h   assembler.h   errors.h   labels.h   settings.h   flags.h   $(HEAD_DIR)/stack.h $(HEAD_DIR)/txtlib.h
 
 SRC = $(SRC_ALL) main.cpp
 OBJ = $(OBJ_ALL) main.o
@@ -112,6 +112,7 @@ errors.o:        errors.cpp     $(HDR)
 labels.o:        labels.cpp     $(HDR)
 unit_tests.o:    unit_tests.cpp $(HDR) 
 settings.o:      settings.cpp   $(HDR)
+flags.o:	     flags.cpp      $(HDR)
 
 #
 ## additional features

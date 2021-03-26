@@ -16,22 +16,27 @@
 #include "labels.h"
 #include "assembler.h"
 #include "settings.h"
-
-//-----------------------------------------------------------------------------
-
-#define RECREATE_DUMP_CPU_FILE								\
-        FILE* dump_CPU = fopen("./txt/dump_CPU.txt", "wb");	\
-        fclose(dump_CPU);									\
+#include "flags.h"
 
 //-----------------------------------------------------------------------------
 
 struct CPU_t {
 
-	int    IP                = 0;
-	char*  buffer_cmd 	     = nullptr; 
-	double regs[NUM_OF_REGS] = {};
+	// general purpose registers
+	double EAX = POISON_DOUBLE_CPU;
+	double EBX = POISON_DOUBLE_CPU;
+	double ECX = POISON_DOUBLE_CPU;
+	double EDX = POISON_DOUBLE_CPU;
 
-	my_stack_t stack_CPU = {};
+	// data	segment
+	char* EBP = nullptr;
+
+	// stack ptr with instraction ptr
+	int        IP  = 0;
+	my_stack_t ESP = {};
+
+	// flag register
+	char CF = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -61,11 +66,11 @@ enum CPU_CMDS {
 
 //-----------------------------------------------------------------------------
 
-enum REGS {
-	RAX_REG = 32,
-	RBX_REG = 33,
-	RCX_REG = 34,
-	RDX_REG = 35,
+enum REGS_CMDS {
+	EAX_REG = 32,
+	EBX_REG = 33,
+	ECX_REG = 34,
+	EDX_REG = 35,
 };
 
 //-----------------------------------------------------------------------------

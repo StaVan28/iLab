@@ -1,5 +1,32 @@
-	push 3
-	push 4
-	push 5
-	hlt
-	end	
+push 1
+push 2.5
+push 3
+push 4.5
+push 5
+push 6.5
+push 7
+push 8.5
+push 9
+push 10.5
+
+pop eax
+pop ebx
+pop ecx
+pop edx
+	
+push eax
+push ebx
+push ecx
+push edx		
+
+pop		
+
+out 
+add 
+sub
+mul
+div
+fsqrt
+
+hlt 
+end

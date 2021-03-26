@@ -13,18 +13,14 @@ void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source)
 
 	int num_symbols = text_t::txtlib_number_of_symbols_file(obj_file);
 
-    CPU->buffer_cmd = (char*) calloc(num_symbols, sizeof(char));
-    assert(CPU->buffer_cmd);
+    CPU->EBP = (char*) calloc(num_symbols, sizeof(char));
+    assert(CPU->EBP);
 
-    fread(CPU->buffer_cmd, sizeof(char), num_symbols, obj_file);
+    fread(CPU->EBP, sizeof(char), num_symbols, obj_file);
 
     fclose(obj_file);
 
-    for (int indx = 0; indx < NUM_OF_REGS; indx++) {
-    	CPU->regs[indx] = POISON_DOUBLE_CPU;
-    }
-
-	stack_construct(&(CPU->stack_CPU), "stack_CPU", START_CAPACITY);
+	stack_construct(&(CPU->ESP), "stack_CPU", START_CAPACITY);
 }
 
 //-----------------------------------------------------------------
@@ -34,16 +30,10 @@ void CPU_destruct(CPU_t* CPU)
 	//errors
 	//Есть ли смысл всё заливать ядом, ведь всё это доп работа для проца?
 
-	CPU->IP = POISON_INT_CPU;
+	free(CPU->EBP);
+	CPU->EBP = nullptr;	
 
-	free(CPU->buffer_cmd);
-	CPU->buffer_cmd = nullptr;	
-
-    for (int indx = 0; indx < NUM_OF_REGS; indx++) {
-    	CPU->regs[indx] = POISON_DOUBLE_CPU;
-    }
-
-	stack_destruct(&(CPU->stack_CPU));
+	stack_destruct(&(CPU->ESP));
 }
 
 //-----------------------------------------------------------------
@@ -60,7 +50,7 @@ void CPU_accomplishment(CPU_t* CPU)
 
 	while (true) {
 
-		int_value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, char);
+		int_value = POINTER_ON_(CPU->EBP, CPU->IP, char);
 
 		if (int_value == HLT_CMD || int_value == END_CMD)
 			break;
@@ -68,30 +58,30 @@ void CPU_accomplishment(CPU_t* CPU)
 		switch(int_value) {
 			case PUSH_CMD: 	CPU->IP += sizeof(char); 
 
-							value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, double);
-							stack_push(&(CPU->stack_CPU), value);
+							value = POINTER_ON_(CPU->EBP, CPU->IP, double);
+							stack_push(&(CPU->ESP), value);
 
 							CPU->IP += sizeof(double);
 						   	break;
 
 			case PUSHR_CMD:	CPU->IP += sizeof(char);
 
-							int_value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, char);
+							int_value = POINTER_ON_(CPU->EBP, CPU->IP, char);
 							
 							switch(int_value) {												 
-								case RAX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RAX_PLACE]);
+								case EAX_REG:	stack_push(&(CPU->ESP), CPU->EAX);
 												CPU->IP += sizeof(char);
 												break;
 
-								case RBX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RBX_PLACE]);
+								case EBX_REG:	stack_push(&(CPU->ESP), CPU->EBX);
 												CPU->IP += sizeof(char);
 												break;
 
-								case RCX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RCX_PLACE]);
+								case ECX_REG:	stack_push(&(CPU->ESP), CPU->ECX);
 												CPU->IP += sizeof(char);
 												break;
 
-								case RDX_REG:	stack_push(&(CPU->stack_CPU), CPU->regs[RDX_PLACE]);
+								case EDX_REG:	stack_push(&(CPU->ESP), CPU->EDX);
 												CPU->IP += sizeof(char);
 												break;
 							}
@@ -99,30 +89,30 @@ void CPU_accomplishment(CPU_t* CPU)
 
 						   	break;
 
-			case POP_CMD:	stack_pop(&(CPU->stack_CPU));
+			case POP_CMD:	stack_pop(&(CPU->ESP));
 
 							CPU->IP += sizeof(char);
 							break;
 
 			case POPR_CMD:	CPU->IP += sizeof(char);
 
-							value     = stack_pop(&(CPU->stack_CPU));
-							int_value = POINTER_ON_(CPU->buffer_cmd, CPU->IP, char);
+							value     = stack_pop(&(CPU->ESP));
+							int_value = POINTER_ON_(CPU->EBP, CPU->IP, char);
 
 							switch(int_value) {
-								case RAX_REG:	CPU->regs[RAX_PLACE] = value;
+								case EAX_REG:	CPU->EAX = value;
 												CPU->IP += sizeof(char);
 												break;
 								
-								case RBX_REG:	CPU->regs[RBX_PLACE] = value;
+								case EBX_REG:	CPU->EBX = value;
 												CPU->IP += sizeof(char);
 												break;												
 									
-								case RCX_REG:	CPU->regs[RCX_PLACE] = value;
+								case ECX_REG:	CPU->ECX = value;
 												CPU->IP += sizeof(char);
 												break;
 								
-								case RDX_REG:	CPU->regs[RDX_PLACE] = value;
+								case EDX_REG:	CPU->EDX = value;
 												CPU->IP += sizeof(char);
 												break;
 							}
@@ -130,7 +120,7 @@ void CPU_accomplishment(CPU_t* CPU)
 
 						   	break;
 
-			case OUT_CMD:	value = stack_pop(&(CPU->stack_CPU));
+			case OUT_CMD:	value = stack_pop(&(CPU->ESP));
 							printf("%lg\n", value);
 
 						   	CPU->IP += sizeof(char);
@@ -138,44 +128,44 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			case ADD_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->stack_CPU), value + addit_value);
+							stack_push(&(CPU->ESP), value + addit_value);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case SUB_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->stack_CPU), value - addit_value);
+							stack_push(&(CPU->ESP), value - addit_value);
 
 						    CPU->IP += sizeof(char);
 						   	break;
 
 			case MUL_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->stack_CPU), value * addit_value);
+							stack_push(&(CPU->ESP), value * addit_value);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case DIV_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->stack_CPU), value / addit_value);
+							stack_push(&(CPU->ESP), value / addit_value);
 							//проверка деления на 0;
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case FSQRT_CMD: value = stack_pop(&(CPU->stack_CPU));
+			case FSQRT_CMD: value = stack_pop(&(CPU->ESP));
 							//check negative sqrt
 
-						   	stack_push(&(CPU->stack_CPU), sqrt(value));
+						   	stack_push(&(CPU->ESP), sqrt(value));
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case JMP_CMD:	CPU->IP += sizeof(char); 
 
-							CPU->IP = POINTER_ON_(CPU->buffer_cmd, CPU->IP, int);
+							CPU->IP = POINTER_ON_(CPU->EBP, CPU->IP, int);
 							break;
 		
 			case NOP_CMD:	CPU->IP += sizeof(char);

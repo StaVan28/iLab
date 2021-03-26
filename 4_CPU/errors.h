@@ -4,13 +4,27 @@
 
 //-----------------------------------------------------------------
 
-static const int REGISTER_BIT = 32;
+#define RECREATE_DUMP_CPU_FILE								\
+        FILE* dump_CPU = fopen("./txt/dump_CPU.txt", "wb");	\
+        fclose(dump_CPU);									\
 
 //-----------------------------------------------------------------
 
-#define FPRINTF_REG(file, enum_reg, string_reg) 	\
-		case enum_reg:	fprintf(file, string_reg);	\
-							break;					\
+#define FPRINTF_REG(reg, reg_str)										\
+        if (true) {														\
+			if (CPU->reg == POISON_DOUBLE_STACK) {						\
+				fprintf(listning_CPU, " {");							\
+			}															\
+			else														\
+				fprintf(listning_CPU, "*{");							\
+																		\
+		    fprintf(listning_CPU, reg_str);                   			\
+		    															\
+			if (CPU->EAX == POISON_DOUBLE_STACK)						\
+				fprintf(listning_CPU, "} : %lg (POISON)\n", CPU->reg);	\
+			else														\
+				fprintf(listning_CPU, "} : %lg\n"         , CPU->reg);	\
+		}																\
 
 //-----------------------------------------------------------------
 

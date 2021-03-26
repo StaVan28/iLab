@@ -4,15 +4,15 @@
 
 CPU (OK) [0x1ffefffe08] 
 
-IP = 27
+IP = 113
 
-Buffer_cmd [0x5b85fc0]
+EBP(buffer_cmd) [0x5b86340]
 
-Pointer on regs [0x1ffefffe40]
-*{rax} : nan
-*{rbx} : nan
-*{rcx} : nan
-*{rdx} : nan
+Regs
+*{eax} : 10.5
+*{ebx} : 9
+*{ecx} : 8.5
+*{edx} : 7
 
 Pointer on stack = [0x1ffefffe60]
 For see stack please call stack dump
