@@ -2,61 +2,26 @@
 ******************************************************
         TEXT:
 
-Pointer buffer of data: 0x5b81250
-Pointer line_t structs: 0x5b81360
+Pointer buffer of data: 0x555555770320
+Pointer line_t structs: 0x555555770360
 
-Number of strings = 27
-Number of structs = 45
-Number of symbols = 202
-Number of words   = 45
+Number of strings = 6
+Number of structs = 10
+Number of symbols = 44
+Number of words   = 10
 
 [Number in structs]{Real number}(Length)
 
 [  1]{  1}(  4)push
 [  2]{  2}(  1)1
-[  3]{  3}(  4)push
-[  4]{  4}(  3)2.5
-[  5]{  5}(  4)push
-[  6]{  6}(  1)3
-[  7]{  7}(  4)push
-[  8]{  8}(  3)4.5
-[  9]{  9}(  4)push
-[ 10]{ 10}(  1)5
-[ 11]{ 11}(  4)push
-[ 12]{ 12}(  3)6.5
-[ 13]{ 13}(  4)push
-[ 14]{ 14}(  1)7
-[ 15]{ 15}(  4)push
-[ 16]{ 16}(  3)8.5
-[ 17]{ 17}(  4)push
-[ 18]{ 18}(  1)9
-[ 19]{ 19}(  4)push
-[ 20]{ 20}(  4)10.5
-[ 21]{ 22}(  3)pop
-[ 22]{ 23}(  3)eax
-[ 23]{ 24}(  3)pop
-[ 24]{ 25}(  3)ebx
-[ 25]{ 26}(  3)pop
-[ 26]{ 27}(  3)ecx
-[ 27]{ 28}(  3)pop
-[ 28]{ 29}(  3)edx
-[ 29]{ 31}(  4)push
-[ 30]{ 32}(  3)eax
-[ 31]{ 33}(  4)push
-[ 32]{ 34}(  3)ebx
-[ 33]{ 35}(  4)push
-[ 34]{ 36}(  3)ecx
-[ 35]{ 37}(  4)push
-[ 36]{ 38}(  3)edx
-[ 37]{ 41}(  3)pop
-[ 38]{ 45}(  3)out
-[ 39]{ 47}(  3)add
-[ 40]{ 49}(  3)sub
-[ 41]{ 50}(  3)mul
-[ 42]{ 51}(  3)div
-[ 43]{ 52}(  5)fsqrt
-[ 44]{ 56}(  3)hlt
-[ 45]{ 57}(  3)end
+[  3]{  4}(  3)pop
+[  4]{  5}(  3)eax
+[  5]{  7}(  4)push
+[  6]{  8}(  1)2
+[  7]{ 10}(  3)pop
+[  8]{ 11}(  3)ebx
+[  9]{ 15}(  3)hlt
+[ 10]{ 16}(  3)end
 
 
 Note! The actual length of the lines is 1 more 

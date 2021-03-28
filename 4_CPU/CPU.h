@@ -10,13 +10,13 @@
 #include <assert.h>
 #include <string.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #include "stack.h"
 #include "txtlib.h"
 #include "labels.h"
 #include "assembler.h"
 #include "settings.h"
-#include "flags.h"
 
 //-----------------------------------------------------------------------------
 
@@ -28,6 +28,11 @@ struct CPU_t {
 	double ECX = POISON_DOUBLE_CPU;
 	double EDX = POISON_DOUBLE_CPU;
 
+	// regs for only CPU using
+	double DR  = POISON_DOUBLE_CPU;
+	double DAR = POISON_DOUBLE_CPU;
+	int    IR  = POISON_INT_CPU;
+
 	// data	segment
 	char* EBP = nullptr;
 
@@ -36,11 +41,12 @@ struct CPU_t {
 	my_stack_t ESP = {};
 
 	// flag register
-	char CF = 0;
+	char FLAGS = 0;
 };
 
 //-----------------------------------------------------------------------------
 
+#include "flags.h"
 #include "errors.h"
 
 //-----------------------------------------------------------------------------
@@ -62,6 +68,12 @@ enum CPU_CMDS {
 	PUSHR_CMD = 14,
 	POPR_CMD  = 15,
 	CMP_CMD   = 16,
+	JNE_CMD   = 17,
+	JE_CMD    = 18,
+	JBE_CMD   = 19,
+	JB_CMD    = 20,
+	JAE_CMD   = 21,
+	JA_CMD    = 22,
 };
 
 //-----------------------------------------------------------------------------

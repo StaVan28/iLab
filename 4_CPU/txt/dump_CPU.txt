@@ -2,19 +2,19 @@
 ******************************************************
 		CPU:
 
-CPU (OK) [0x1ffefffe08] 
+CPU (OK) [0x7fffffffde58] 
 
-IP = 113
+IP = 22
 
-EBP(buffer_cmd) [0x5b86340]
+EBP(buffer_cmd) [0x55555576f330]
 
 Regs
-*{eax} : 10.5
-*{ebx} : 9
-*{ecx} : 8.5
-*{edx} : 7
+*{eax} : 1
+*{ebx} : 2
+*{ecx} : nan
+*{edx} : nan
 
-Pointer on stack = [0x1ffefffe60]
+Pointer on stack = [0x7fffffffdec8]
 For see stack please call stack dump
 
 

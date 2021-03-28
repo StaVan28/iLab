@@ -2,7 +2,7 @@
 ******************************************************
 		LABELS:
 
-Pointer array of labels: 0x5b82920
+Pointer array of labels: 0x555555770640
 
 Capacity      = 8
 Label counter = 0

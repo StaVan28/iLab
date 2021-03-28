@@ -44,31 +44,27 @@ void CPU_accomplishment(CPU_t* CPU)
 
 	//check assemling in assembler
 
-	register double value       = 0;
-	register double addit_value = 0;
-	register int 	int_value   = 0;
-
 	while (true) {
 
-		int_value = POINTER_ON_(CPU->EBP, CPU->IP, char);
+		CPU->IR = POINTER_ON_(CPU->EBP, CPU->IP, char);
 
-		if (int_value == HLT_CMD || int_value == END_CMD)
+		if (CPU->IR == HLT_CMD || CPU->IR == END_CMD)
 			break;
 
-		switch(int_value) {
+		switch(CPU->IR) {
 			case PUSH_CMD: 	CPU->IP += sizeof(char); 
 
-							value = POINTER_ON_(CPU->EBP, CPU->IP, double);
-							stack_push(&(CPU->ESP), value);
+							CPU->DR = POINTER_ON_(CPU->EBP, CPU->IP, double);
+							stack_push(&(CPU->ESP), CPU->DR);
 
 							CPU->IP += sizeof(double);
 						   	break;
 
 			case PUSHR_CMD:	CPU->IP += sizeof(char);
 
-							int_value = POINTER_ON_(CPU->EBP, CPU->IP, char);
+							CPU->IR = POINTER_ON_(CPU->EBP, CPU->IP, char);
 							
-							switch(int_value) {												 
+							switch(CPU->IR) {												 
 								case EAX_REG:	stack_push(&(CPU->ESP), CPU->EAX);
 												CPU->IP += sizeof(char);
 												break;
@@ -96,23 +92,23 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			case POPR_CMD:	CPU->IP += sizeof(char);
 
-							value     = stack_pop(&(CPU->ESP));
-							int_value = POINTER_ON_(CPU->EBP, CPU->IP, char);
+							CPU->DR = stack_pop(&(CPU->ESP));
+							CPU->IR = POINTER_ON_(CPU->EBP, CPU->IP, char);
 
-							switch(int_value) {
-								case EAX_REG:	CPU->EAX = value;
+							switch(CPU->IR) {
+								case EAX_REG:	CPU->EAX = CPU->DR;
 												CPU->IP += sizeof(char);
 												break;
 								
-								case EBX_REG:	CPU->EBX = value;
+								case EBX_REG:	CPU->EBX = CPU->DR;
 												CPU->IP += sizeof(char);
 												break;												
 									
-								case ECX_REG:	CPU->ECX = value;
+								case ECX_REG:	CPU->ECX = CPU->DR;
 												CPU->IP += sizeof(char);
 												break;
 								
-								case EDX_REG:	CPU->EDX = value;
+								case EDX_REG:	CPU->EDX = CPU->DR;
 												CPU->IP += sizeof(char);
 												break;
 							}
@@ -120,45 +116,45 @@ void CPU_accomplishment(CPU_t* CPU)
 
 						   	break;
 
-			case OUT_CMD:	value = stack_pop(&(CPU->ESP));
-							printf("%lg\n", value);
+			case OUT_CMD:	CPU->DR = stack_pop(&(CPU->ESP));
+							printf("%lg\n", CPU->DR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case ADD_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->ESP), value + addit_value);
+							stack_push(&(CPU->ESP), CPU->DR + CPU->DAR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case SUB_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->ESP), value - addit_value);
+							stack_push(&(CPU->ESP), CPU->DR - CPU->DAR);
 
 						    CPU->IP += sizeof(char);
 						   	break;
 
 			case MUL_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->ESP), value * addit_value);
+							stack_push(&(CPU->ESP), CPU->DR * CPU->DAR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case DIV_CMD:	POP_TWO_VARIABLES;
 
-							stack_push(&(CPU->ESP), value / addit_value);
+							stack_push(&(CPU->ESP), CPU->DR / CPU->DAR);
 							//проверка деления на 0;
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case FSQRT_CMD: value = stack_pop(&(CPU->ESP));
+			case FSQRT_CMD: CPU->DR = stack_pop(&(CPU->ESP));
 							//check negative sqrt
 
-						   	stack_push(&(CPU->ESP), sqrt(value));
+						   	stack_push(&(CPU->ESP), sqrt(CPU->DR));
 
 						   	CPU->IP += sizeof(char);
 						   	break;

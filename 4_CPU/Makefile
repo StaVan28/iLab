@@ -42,11 +42,11 @@ HDR_TEST = $(HDR_ALL) unit_tests.h
 PROJ_LIB = libCPU.a
 
 # compiler settings
-CXX      = g++ 
+CXX      = g++ -std=c++14
 WARNINGS = -Wall -Wextra 
-CXXFLAGS =   
+CXXFLAGS = 
 
-DEBUG_MODE   = -g3 -O0 
+DEBUG_MODE   = -g3 -O0 	
 RELEASE_MODE = -g0 -Ofast
 
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v

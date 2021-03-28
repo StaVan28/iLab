@@ -55,3 +55,13 @@ FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* s
 }
 
 //-----------------------------------------------------------------
+
+double is_different(double value_1, double value_2)
+{
+	if (fabs(value_1 - value_2) > EPSILON)
+		return value_1 - value_2;
+	else
+		return false;
+}
+
+//-----------------------------------------------------------------

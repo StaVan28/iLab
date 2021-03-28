@@ -13,7 +13,7 @@ void assembling_file(const char* file_path, const char* source)
 
 	labels table_labels;
 
-	size_t num_of_char = (file_info.num_strings + 1) * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
+	size_t num_of_char = (file_info.num_strings) * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
  
 	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
 	assert(buffer_data);
@@ -39,172 +39,51 @@ void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 	size_t tmp_IP = 0;
 
 	for (int indx = 0; indx < file_info->num_words; indx++) {
-		if     (!strncmp(file_info->text[indx].line, "push",  PUSH_SIZE)) {
 
-				indx++;
+		// regs cmd
+		IF_STRCMP_PUSH(PUSH_CMD, "push")
+		
+		else IF_STRCMP_POP(POP_CMD,   "pop")
 
-				double value = strtod(file_info->text[indx].line, nullptr);
-				//обработка HUGE_VAL and errno
+		// one cmd in row
+		else IF_STRCMP_ORD(OUT_CMD,   "out")
 
-				if (value == 0) {															
-					if 	   (!strncmp(file_info->text[indx].line, "eax", REG_SIZE)) {
+		else IF_STRCMP_ORD(ADD_CMD,   "add")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
-							tmp_IP += sizeof(char);
+		else IF_STRCMP_ORD(SUB_CMD,   "sub")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = EAX_REG;
-							tmp_IP += sizeof(char);
-					}
-					else if (!strncmp(file_info->text[indx].line, "ebx", REG_SIZE)) {	
+		else IF_STRCMP_ORD(MUL_CMD,   "mul")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
-							tmp_IP += sizeof(char);
+		else IF_STRCMP_ORD(DIV_CMD,   "div")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = EBX_REG;
-							tmp_IP += sizeof(char);
-					}
-					else if (!strncmp(file_info->text[indx].line, "ecx", REG_SIZE)) {
+		else IF_STRCMP_ORD(FSQRT_CMD, "fsqrt")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
-							tmp_IP += sizeof(char);
+		else IF_STRCMP_ORD(NOP_CMD,   "nop")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = ECX_REG; 
-							tmp_IP += sizeof(char);
-					}
-					else if (!strncmp(file_info->text[indx].line, "edx", REG_SIZE)) {
+		else IF_STRCMP_ORD(CMP_CMD,   "cmp")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char) = PUSHR_CMD;
-							tmp_IP += sizeof(char);
+		// jmps
+		else IF_STRCMP_JMP(JMP_CMD,   "jmp")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)  = EDX_REG; 	
-							tmp_IP += sizeof(char);		
-					}
-					else if (!strncmp(file_info->text[indx].line, "in", IN_SIZE)) {
+		else IF_STRCMP_JMP(JNE_CMD,   "jne")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)   = PUSH_CMD;
-							tmp_IP += sizeof(char);
-							
-							double tmp_value = 0;
-							scanf("%lg", &tmp_value);
+		else IF_STRCMP_JMP(JE_CMD,    "je")
 
-							POINTER_ON_(*buffer_data, tmp_IP, double) = tmp_value;
-							tmp_IP += sizeof(double);
-						}																		
-					else {
+		else IF_STRCMP_JMP(JBE_CMD,   "jbe")
 
-							POINTER_ON_(*buffer_data, tmp_IP, char)   = PUSH_CMD;
-							tmp_IP += sizeof(char);
+		else IF_STRCMP_JMP(JB_CMD,    "jb")
 
-							POINTER_ON_(*buffer_data, tmp_IP, double) = value;
-							tmp_IP += sizeof(double);
-					}		
-				}																				
-				else {
+		else IF_STRCMP_JMP(JAE_CMD,   "jae")
 
-					POINTER_ON_(*buffer_data, tmp_IP, char)   = PUSH_CMD;
-					tmp_IP += sizeof(char);
+		else IF_STRCMP_JMP(JA_CMD,    "ja")
 
-					POINTER_ON_(*buffer_data, tmp_IP, double) = value;			
-					tmp_IP += sizeof(double);
+		else IF_STRCMP_MRK(MARK_LABEL)	
 
-					// разлиие между 0 и регистром
-				}										
-			}
-		else if (!strncmp(file_info->text[indx].line, "pop",  POP_SIZE)) {
-															
-				if 	   (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "eax", REG_SIZE)) {
+		// end
+		else IF_STRCMP_ORD(HLT_CMD,   "hlt")
 
-						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
-						tmp_IP += sizeof(char);
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = EAX_REG;
-						tmp_IP += sizeof(char);
-				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ebx", REG_SIZE)) {	
-						indx++;
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
-						tmp_IP += sizeof(char);
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = EBX_REG;
-						tmp_IP += sizeof(char);
-				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ecx", REG_SIZE)) {
-						indx++;
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
-						tmp_IP += sizeof(char);
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = ECX_REG;
-						tmp_IP += sizeof(char);
-				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "edx", REG_SIZE)) {	
-						indx++;
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = POPR_CMD; 
-						tmp_IP += sizeof(char);
-
-						POINTER_ON_(*buffer_data, tmp_IP, char) = EDX_REG;
-						tmp_IP += sizeof(char); 			
-				}																	
-				else {															
-						POINTER_ON_(*buffer_data, tmp_IP, char) = POP_CMD; 
-						tmp_IP += sizeof(char);																				
-						//pop_error	
-				}				
-			}
-		else if (!strncmp(file_info->text[indx].line, "out",   OUT_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = OUT_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "add",   ADD_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = ADD_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "sub",   SUB_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = SUB_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "mul",   MUL_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = MUL_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "div",   DIV_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = DIV_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "fsqrt", FSQRT_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = FSQRT_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "hlt",   HLT_SIZE)) { 
-				POINTER_ON_(*buffer_data, tmp_IP, char) = HLT_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "end",   END_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = END_CMD;
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "jmp",   JMP_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = JMP_CMD;
-				tmp_IP += sizeof(char);
-
-				indx++;
-				table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);
-				tmp_IP += sizeof(int);
-			}
-		else if (strchr(file_info->text[indx].line, MARK_LABEL)) {	
-
-				table_labels->check_label(file_info->text[indx].line, tmp_IP, FROM_MARK_LABEL);
-
-				POINTER_ON_(*buffer_data, tmp_IP, char) = NOP_CMD;
-				tmp_IP += sizeof(char);	
-			}
-		else if (!strncmp(file_info->text[indx].line, "nop",   NOP_SIZE)) {
-				POINTER_ON_(*buffer_data, tmp_IP, char) = NOP_CMD;
-				tmp_IP += sizeof(char);
-			}
-			// else неправильная команда
+		else IF_STRCMP_ORD(END_CMD,   "end")	
+		// else неправильная команда
 	}	
 }
 
@@ -215,111 +94,63 @@ void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 	size_t tmp_IP = 0;
 
 	for (int indx = 0; indx < file_info->num_words; indx++) {
-		if     (!strncmp(file_info->text[indx].line, "push",  PUSH_SIZE)) {
+		if (!strcmp(file_info->text[indx].line, "push")) {
 
-				indx++;
+			indx++;
+			tmp_IP += sizeof(char);
 
-				double value = strtod(file_info->text[indx].line, nullptr);
-				//обработка HUGE_VAL and errno
+			double value = strtod(file_info->text[indx].line, nullptr);
+			//обработка HUGE_VAL and errno
 
-				if (value == 0) {															
-					if 	   (!strncmp(file_info->text[indx].line,  "eax", REG_SIZE)) {
-							tmp_IP += sizeof(char);
-							tmp_IP += sizeof(char);
-					}
-					else if (!strncmp(file_info->text[indx].line, "ebx", REG_SIZE)) {	
-							tmp_IP += sizeof(char);
-							tmp_IP += sizeof(char);
-					}
-					else if (!strncmp(file_info->text[indx].line, "ecx", REG_SIZE)) {
-							tmp_IP += sizeof(char);
-							tmp_IP += sizeof(char);
-					}
-					else if (!strncmp(file_info->text[indx].line, "edx", REG_SIZE)) {
-							tmp_IP += sizeof(char);
-							tmp_IP += sizeof(char);		
-					}
-					else if (!strncmp(file_info->text[indx].line, "in", IN_SIZE)) {
-							tmp_IP += sizeof(char);
-							tmp_IP += sizeof(double);
-						}																		
-					else {
-							tmp_IP += sizeof(char);
-							tmp_IP += sizeof(double);
-					}		
-				}																				
-				else {
-					tmp_IP += sizeof(char);		
-					tmp_IP += sizeof(double);
+			if (!is_different(value, 0)) {			
+				IF_STRCMP_REG_SCND(file_info->text[indx].line, "eax", tmp_IP)		
 
-					// разлиие между 0 и регистром
-				}										
-			}
-		else if (!strncmp(file_info->text[indx].line, "pop",  POP_SIZE)) {
-															
-				if 	   (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "eax", REG_SIZE)) {
-						tmp_IP += sizeof(char);
-						tmp_IP += sizeof(char);
-				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ebx", REG_SIZE)) {	
-						indx++;
-						tmp_IP += sizeof(char);
-						tmp_IP += sizeof(char);
-				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "ecx", REG_SIZE)) {
-						indx++;
-						tmp_IP += sizeof(char);
-						tmp_IP += sizeof(char);
-				}
-				else if (!strncmp(file_info->text[indx + NEXT_ELEMENT].line, "edx", REG_SIZE)) {	
-						indx++; 
-						tmp_IP += sizeof(char);
-						tmp_IP += sizeof(char); 			
-				}																	
-				else {															
-						tmp_IP += sizeof(char);																				
-						//pop_error	
-				}				
-			}
-		else if (!strncmp(file_info->text[indx].line, "out",   OUT_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "add",   ADD_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "sub",   SUB_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "mul",   MUL_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "div",   DIV_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "fsqrt", FSQRT_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "hlt",   HLT_SIZE)) { 
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "end",   END_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else if (!strncmp(file_info->text[indx].line, "jmp",   JMP_SIZE)) {
-				tmp_IP += sizeof(char);
+				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "ebx", tmp_IP)
 
-				indx++;
-				int position = table_labels->find_label(file_info->text[indx].line);
+				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "ecx", tmp_IP)
 
-				POINTER_ON_(*buffer_data, tmp_IP, int) = position;
-				tmp_IP += sizeof(int);
-			}
-		else if (!strncmp(file_info->text[indx].line, "nop",   NOP_SIZE)) {
-				tmp_IP += sizeof(char);
-			}
-		else {
-				tmp_IP += sizeof(char);
+				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "edx", tmp_IP)
+
+				else IF_STRCMP_IN_SCND(file_info->text[indx].line, "in",  tmp_IP)
+
+				else 
+					tmp_IP += sizeof(double);		
+			}														
+			else 	
+				tmp_IP += sizeof(double);
+			// разлиие между 0 и регистром							
+
 		}
-			// else неправильная команда
+		else if (!strcmp(file_info->text[indx].line, "pop")) {
+
+			tmp_IP += sizeof(char);
+
+			IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "eax", tmp_IP)		
+
+			else IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "ebx", tmp_IP)
+
+			else IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "ecx", tmp_IP)
+
+			else IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "edx", tmp_IP)	
+
+		}
+		else IF_STRCMP_JMP_SCND("jmp")
+
+		else IF_STRCMP_JMP_SCND("jne")
+
+		else IF_STRCMP_JMP_SCND("je")
+
+		else IF_STRCMP_JMP_SCND("jbe")	
+
+		else IF_STRCMP_JMP_SCND("jb")
+
+		else IF_STRCMP_JMP_SCND("jae")
+
+		else IF_STRCMP_JMP_SCND("ja")
+
+		else 
+			tmp_IP += sizeof(char);
+		
+		// else неправильная команда
 	}
 }
