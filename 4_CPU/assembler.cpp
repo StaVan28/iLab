@@ -13,17 +13,21 @@ void assembling_file(const char* file_path, const char* source)
 
 	labels table_labels;
 
-	size_t num_of_char = (file_info.num_strings) * sizeof(char) + (file_info.num_words - file_info.num_strings) * sizeof(double);
+	int num_of_bytes = (file_info.num_strings)                       * sizeof(char)   + \
+	                   (file_info.num_words - file_info.num_strings) * sizeof(double) + \
+	                   START_IP;
  
-	char* buffer_data = (char*) calloc(num_of_char, sizeof(char));
+	char* buffer_data = (char*) calloc(num_of_bytes, sizeof(char));
 	assert(buffer_data);
 
+	add_CPU_info_in_buf(buffer_data, num_of_bytes);
+
 	frst_pass_of_assembler(&file_info, &table_labels, &buffer_data);
-	scnd_pass_of_assembler(&file_info, &table_labels, &buffer_data);
+	//scnd_pass_of_assembler(&file_info, &table_labels, &buffer_data);
 
 	table_labels.labels_dump();
 
-	fwrite(buffer_data, sizeof(char), num_of_char, obj_file);
+	fwrite(buffer_data, sizeof(char), num_of_bytes, obj_file);
 
 	free(buffer_data);
 	buffer_data = nullptr;
@@ -36,16 +40,61 @@ void assembling_file(const char* file_path, const char* source)
 
 void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data)
 {
-	size_t tmp_IP = 0;
+	int tmp_IP = START_IP;
 
 	for (int indx = 0; indx < file_info->num_words; indx++) {
 
-		// regs cmd
-		IF_STRCMP_PUSH(PUSH_CMD, "push")
+		if (!strcmp(file_info->text[indx].line, "push")) {										
+																								
+			indx++;																				
+																							
+			double value = strtod(file_info->text[indx].line, nullptr);							
+			/*обработка HUGE_VAL and errno*/													
+																								
+			if (!is_different(value, 0)) {		
+
+				IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, EAX_REG, "eax")	
+
+				else IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, EBX_REG, "ebx")	
+
+				else IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, ECX_REG, "ecx")	
+
+				else IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, EDX_REG, "edx")	
+													
+				else {																			
+					READING_DATA(PUSH_CMD, char)													
+					READING_DATA(value   , double)													
+				}																				
+			}																					
+			else {																				
+				READING_DATA(PUSH_CMD, char)														
+				READING_DATA(value   , double)														
+				/*разлиие между 0 и регистром*/													
+			}																					
+		}																						
 		
-		else IF_STRCMP_POP(POP_CMD,   "pop")
+		else if (!strcmp(file_info->text[indx].line, "pop")) {
+
+			indx++;																							
+																								
+			IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, EAX_REG, "eax")	
+
+			else IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, EBX_REG, "ebx")
+
+			else IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, ECX_REG, "ecx")
+
+			else IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, EDX_REG, "edx")
+
+			else {																							
+				indx--;																						
+				READING_DATA(POP_CMD, char)																		
+					/*pop_error*/																			
+			}																								
+		}																									
 
 		// one cmd in row
+		else IF_STRCMP_ORD(IN_CMD,    "in")
+
 		else IF_STRCMP_ORD(OUT_CMD,   "out")
 
 		else IF_STRCMP_ORD(ADD_CMD,   "add")
@@ -91,7 +140,7 @@ void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 
 void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data)
 {
-	size_t tmp_IP = 0;
+	size_t tmp_IP = START_IP;
 
 	for (int indx = 0; indx < file_info->num_words; indx++) {
 		if (!strcmp(file_info->text[indx].line, "push")) {
@@ -110,8 +159,6 @@ void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "ecx", tmp_IP)
 
 				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "edx", tmp_IP)
-
-				else IF_STRCMP_IN_SCND(file_info->text[indx].line, "in",  tmp_IP)
 
 				else 
 					tmp_IP += sizeof(double);		
@@ -153,4 +200,17 @@ void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 		
 		// else неправильная команда
 	}
+}
+
+//-----------------------------------------------------------------
+
+void add_CPU_info_in_buf(char* buffer_data, int num_of_bytes)
+{
+	int tmp_IP = 0;
+
+	POINTER_ON_(buffer_data, tmp_IP, long long int) = CPU_UNIQUE_NUMBER;
+	tmp_IP += sizeof(long long int);
+
+	POINTER_ON_(buffer_data, tmp_IP, int) = num_of_bytes;
+	tmp_IP += sizeof(int);	
 }

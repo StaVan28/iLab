@@ -116,45 +116,63 @@ void CPU_accomplishment(CPU_t* CPU)
 
 						   	break;
 
-			case OUT_CMD:	CPU->DR = stack_pop(&(CPU->ESP));
-							printf("%lg\n", CPU->DR);
+			case IN_CMD:	printf("IN CMD: ");
+							scanf("%lg", &(CPU->DR));
+
+							stack_push(&(CPU->ESP), CPU->DR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case ADD_CMD:	POP_TWO_VARIABLES;
+			case OUT_CMD:	CPU->DR = stack_pop(&(CPU->ESP));
+							printf("%lg\n", CPU->DR);
+
+							stack_push(&(CPU->ESP), CPU->DR);
+
+						   	CPU->IP += sizeof(char);
+						   	break;
+ 
+			case ADD_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 							stack_push(&(CPU->ESP), CPU->DR + CPU->DAR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case SUB_CMD:	POP_TWO_VARIABLES;
+			case SUB_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
-							stack_push(&(CPU->ESP), CPU->DR - CPU->DAR);
+							stack_push(&(CPU->ESP), CPU->DAR - CPU->DR);
 
 						    CPU->IP += sizeof(char);
 						   	break;
 
-			case MUL_CMD:	POP_TWO_VARIABLES;
+			case MUL_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 							stack_push(&(CPU->ESP), CPU->DR * CPU->DAR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case DIV_CMD:	POP_TWO_VARIABLES;
+			case DIV_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
-							stack_push(&(CPU->ESP), CPU->DR / CPU->DAR);
-							//проверка деления на 0;
+							stack_push(&(CPU->ESP), CPU->DAR / CPU->DR);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
 
 			case FSQRT_CMD: CPU->DR = stack_pop(&(CPU->ESP));
-							//check negative sqrt
 
 						   	stack_push(&(CPU->ESP), sqrt(CPU->DR));
+
+						   	CPU->IP += sizeof(char);
+						   	break;
+
+			case CMP_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+
+							set_CF(CPU);
+							set_ZF(CPU);
+
+							PUSH_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 						   	CPU->IP += sizeof(char);
 						   	break;
@@ -163,7 +181,61 @@ void CPU_accomplishment(CPU_t* CPU)
 
 							CPU->IP = POINTER_ON_(CPU->EBP, CPU->IP, int);
 							break;
-		
+
+			case JNE_CMD:	CPU->IP += sizeof(char);
+
+							if (CPU->FLAGS & ZF)
+								CPU->IP += sizeof(int);
+							else 
+								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+
+							break;
+
+			case JE_CMD:	CPU->IP += sizeof(char);
+
+							if (CPU->FLAGS & ZF)
+								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							else 
+								CPU->IP += sizeof(int);
+
+							break;
+
+			case JBE_CMD:	CPU->IP += sizeof(char); 
+
+							if ((CPU->FLAGS & ZF) || (CPU->FLAGS & CF))
+								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							else 
+								CPU->IP += sizeof(int);
+
+							break;
+
+			case JB_CMD:	CPU->IP += sizeof(char); 
+
+							if ((CPU->FLAGS & ZF) || (CPU->FLAGS & CF))
+								CPU->IP += sizeof(int);
+							else 
+								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+
+							break;
+
+			case JAE_CMD:	CPU->IP += sizeof(char); 
+
+							if (CPU->FLAGS & CF)
+								CPU->IP += sizeof(int);
+							else 
+								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+
+							break;
+
+			case JA_CMD:	CPU->IP += sizeof(char);
+
+							if (CPU->FLAGS & ZF)
+								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							else 
+								CPU->IP += sizeof(int);
+
+							break;
+
 			case NOP_CMD:	CPU->IP += sizeof(char);
 							break;
 

@@ -2,20 +2,16 @@
 ******************************************************
 		LABELS:
 
-Pointer array of labels: 0x555555770640
+Pointer array of labels: 0x5b82850
 
-Capacity      = 8
-Label counter = 0
+Capacity      = 4
+Label counter = 1
 
 {Number in array}[position]
 
-{1}[0] (null)
+{1}[26] fact
 {2}[0] (null)
 {3}[0] (null)
 {4}[0] (null)
-{5}[0] (null)
-{6}[0] (null)
-{7}[0] (null)
-{8}[0] (null)
 
 ******************************************************

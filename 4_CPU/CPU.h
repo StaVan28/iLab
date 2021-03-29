@@ -37,7 +37,7 @@ struct CPU_t {
 	char* EBP = nullptr;
 
 	// stack ptr with instraction ptr
-	int        IP  = 0;
+	int        IP  = START_IP;
 	my_stack_t ESP = {};
 
 	// flag register

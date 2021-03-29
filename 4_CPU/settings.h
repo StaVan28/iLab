@@ -5,9 +5,15 @@
 
 //-----------------------------------------------------------------------------
 
-#define POP_TWO_VARIABLES					\
-		CPU->DR  = stack_pop(&(CPU->ESP));	\
-		CPU->DAR   = stack_pop(&(CPU->ESP));	\
+#define POP_TWO_VARIABLES(value_1, value_2, stack)	\
+		value_1  = stack_pop(&(stack));				\
+		value_2  = stack_pop(&(stack));				\
+
+//-
+
+#define PUSH_TWO_VARIABLES(value_1, value_2, stack)	\
+		stack_push(&(stack), value_2);				\
+		stack_push(&(stack), value_1);				\
 
 //-
 
@@ -16,10 +22,13 @@
 
 //-----------------------------------------------------------------------------
 
+static const long long int CPU_UNIQUE_NUMBER = 0x75E7348131; 
+
+static const int START_IP = sizeof(long long int) + sizeof(int);
 
 static const int    POISON_INT_CPU    = 0x7F3428BE;
 static const double POISON_DOUBLE_CPU = NAN;
-static const int    START_CAPACITY    = 8;
+static const int    START_CAPACITY    = 4;
 
 static const double EPSILON = 1e-6;
 

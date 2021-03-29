@@ -1,13 +1,13 @@
 	
 	in
-	pop eax  
+	pop eax
 
-	push 1   
-	pop ebx  
+	push 1
+	pop ebx
 
 fact:
-	push eax           
-	push ebx				
+	push eax
+	push ebx
 	mul
 	pop ebx
 
@@ -21,7 +21,7 @@ fact:
 
 	pop eax
 
-	jne fact
+	jne 
 
 
 	push ebx
