@@ -2,25 +2,23 @@
 ******************************************************
        Stack:
 
-Stack (ERROR 2 : NEGATIVE CURRENT SIZE) [0x1ffefffd88] "stack_CPU" {
-In File : stack.cpp, LINE : 147
-In Function : stack_destruct
+Stack (OK) [0x1ffefffd88] "stack_CPU" {
 
 Canary left  = 595371386  [0x1ffefffe58]
-Current size = -1
+Current size = 1
 Capacity     = 4
-Hash         = 483910411
+Hash         = 967820927
 Canary right = 752293992  [0x1ffefffe94]
 
-Data [0x5b86514]
- {canary_left} : 874895203  [0x5b86510]
+Data [0x5b862e4]
+ {canary_left} : 874895203  [0x5b862e0]
 
- { 1} : nan (POISON)
+*{ 1} : 1
  { 2} : nan (POISON)
  { 3} : nan (POISON)
  { 4} : nan (POISON)
 
- {canary_right} : 934719742  [0x5b86534]
+ {canary_right} : 934719742  [0x5b86304]
 }
 
 ******************************************************

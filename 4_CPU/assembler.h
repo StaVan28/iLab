@@ -4,65 +4,96 @@
 
 //-----------------------------------------------------------------
 
+enum pass_of_asm {
+	FRST_PASS = 1,
+	SCND_PASS = 2,
+};
+
+//-----------------------------------------------------------------
+
 #define IF_STRCMP_ORD(cmd, cmd_str)							\
 		if (!strcmp(file_info->text[indx].line, cmd_str)) {	\
 			READING_DATA(cmd, char)							\
 		}													\
 
 //-
+/*
+#define IF_STRCMP_JMP(cmd, cmd_str)																		\
+		if (!strcmp(file_info->text[indx].line, cmd_str)) {												\
+			if (pass_of_asm == FRST_PASS) {																\
+				POINTER_ON_(*buffer_data, tmp_IP, char) = cmd;											\
+				tmp_IP += sizeof(char);																	\
+																										\
+				indx++;																					\
+				table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);	\
+																										\
+				tmp_IP += sizeof(int);																	\
+			}																							\
+			if (pass_of_asm == SCND_PASS) {																\
+				tmp_IP += sizeof(char);																	\
+																										\
+				indx++;																					\
+				int position = table_labels->find_label(file_info->text[indx].line);					\
+																										\
+				POINTER_ON_(*buffer_data, tmp_IP, int) = position;										\
+				tmp_IP += sizeof(int);																	\
+			}																							\
+		}																								\
+*/
+//-
 
-#define IF_STRCMP_JMP(cmd, cmd_str)																	\
-		if (!strcmp(file_info->text[indx].line, cmd_str)) {											\
-			READING_DATA(cmd, char)																	\
-																									\
-			indx++;																					\
-			table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);	\
-			tmp_IP += sizeof(int);																	\
-		}																							\
+#define IF_STRCMP_JMP(cmd, cmd_str)																		\
+		if (!strcmp(file_info->text[indx].line, cmd_str)) {												\
+																										\
+			if (pass_of_asm == FRST_PASS) {																\
+				POINTER_ON_(*buffer_data, tmp_IP, char) = cmd;											\
+			}																							\
+																										\
+			tmp_IP += sizeof(char);																		\
+			indx++;																						\
+																										\
+			if (pass_of_asm == FRST_PASS) {																\
+				table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);	\
+			}																							\
+			if (pass_of_asm == SCND_PASS) {																\
+				int position = table_labels->find_label(file_info->text[indx].line);					\
+				POINTER_ON_(*buffer_data, tmp_IP, int) = position;										\
+			}																							\
+																										\
+			tmp_IP += sizeof(int);																		\
+																										\
+		}																								\
 
 //-
 
-#define IF_STRCMP_MRK(label)																\
-		if (strchr(file_info->text[indx].line, MARK_LABEL)) {								\
-																							\
-			table_labels->check_label(file_info->text[indx].line, tmp_IP, FROM_MARK_LABEL);	\
-			READING_DATA(NOP_CMD, char)														\
-		}																					\
+#define IF_STRCMP_MRK(label)																	\
+		if (strchr(file_info->text[indx].line, label)) {										\
+																								\
+			if (pass_of_asm == FRST_PASS) {														\
+				table_labels->check_label(file_info->text[indx].line, tmp_IP, FROM_MARK_LABEL);	\
+				POINTER_ON_(*buffer_data, tmp_IP, char) = NOP_CMD;								\
+			}																					\
+																								\
+			tmp_IP += sizeof(char);																\
+		}																						\
 
 //-
-		
-#define READING_DATA(cmd, format)							\
-		POINTER_ON_(*buffer_data, tmp_IP, format) = cmd;	\
-		tmp_IP += sizeof(format);							\
 
-//-
-
-#define IF_STRCMP_REG_FRST(buffer_cmd, cmd, reg, cmd_str)	\
-		if (!strcmp(buffer_cmd, cmd_str)) {					\
+#define IF_STRCMP_REG(cmd, reg, cmd_str)					\
+		if (!strcmp(file_info->text[indx].line, cmd_str)) {	\
 			READING_DATA(cmd, char)							\
 			READING_DATA(reg, char)							\
 		}													\
 
 //-
-
-#define IF_STRCMP_REG_SCND(buffer_cmd, cmd_str, IP)	\
-		if (!strcmp(buffer_cmd, cmd_str)) {			\
-			indx++;									\
-			IP += sizeof(char);						\
-		}											\
-
-//-
-
-#define IF_STRCMP_JMP_SCND(str_cmd)													\
-		if (!strcmp(file_info->text[indx].line, str_cmd)) {							\
-			tmp_IP += sizeof(char);													\
-																					\
-			indx++;																	\
-			int position = table_labels->find_label(file_info->text[indx].line);	\
-																					\
-			POINTER_ON_(*buffer_data, tmp_IP, int) = position;						\
-			tmp_IP += sizeof(int);													\
-		}																			\
+		
+#define READING_DATA(cmd, format)								\
+																\
+		if (pass_of_asm == FRST_PASS) {							\
+			POINTER_ON_(*buffer_data, tmp_IP, format) = cmd;	\
+		}														\
+																\
+		tmp_IP += sizeof(format);								\
 
 //-
 
@@ -71,7 +102,7 @@
 
 void assembling_file(const char* file_path = "./txt/", const char* source = "source");
 
-void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data);
+void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels, char** buffer_data);
 
 void scnd_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data);
 

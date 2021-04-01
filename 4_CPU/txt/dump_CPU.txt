@@ -4,19 +4,19 @@
 
 CPU (OK) [0x1ffefffde8] 
 
-IP = 65
+IP = 0
 
-EBP(buffer_cmd) [0x5b861e0]
+EBP(buffer_cmd) [0x5b85ff0]
 
 Regs
  {eax} : nan (POISON)
- {ebx} : 3 (POISON)
+ {ebx} : nan (POISON)
  {ecx} : nan (POISON)
  {edx} : nan (POISON)
 
 FLAGS:
  CF PF AF ZF SF OF
-  0  0  0  1  0  0 
+  0  0  0  0  0  0 
 
 Pointer on stack = [0x1ffefffe58]
 For see stack please call stack dump

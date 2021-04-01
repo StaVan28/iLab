@@ -27,7 +27,7 @@ class Labels {
 
 	private:
 
-		label_info_t* array_of_Labels = nullptr;
+		label_info_t* array_of_labels = nullptr;
 		size_t        capacity        = 0;
 		size_t        label_counter   = 0;
 

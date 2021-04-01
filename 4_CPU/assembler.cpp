@@ -22,8 +22,8 @@ void assembling_file(const char* file_path, const char* source)
 
 	add_CPU_info_in_buf(buffer_data, num_of_bytes);
 
-	frst_pass_of_assembler(&file_info, &table_labels, &buffer_data);
-	scnd_pass_of_assembler(&file_info, &table_labels, &buffer_data);
+	pass_of_assembler(FRST_PASS, &file_info, &table_labels, &buffer_data);
+	pass_of_assembler(SCND_PASS, &file_info, &table_labels, &buffer_data);
 
 	table_labels.labels_dump();
 
@@ -38,7 +38,7 @@ void assembling_file(const char* file_path, const char* source)
 
 //-----------------------------------------------------------------
 
-void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data)
+void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels, char** buffer_data)
 {
 	int tmp_IP = START_IP;
 
@@ -53,13 +53,13 @@ void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buff
 																								
 			if (!is_different(value, 0)) {		
 
-				IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, EAX_REG, "eax")	
+				IF_STRCMP_REG(PUSHR_CMD, EAX_REG, "eax")							
 
-				else IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, EBX_REG, "ebx")	
+				else IF_STRCMP_REG(PUSHR_CMD, EBX_REG, "ebx")	
 
-				else IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, ECX_REG, "ecx")	
+				else IF_STRCMP_REG(PUSHR_CMD, ECX_REG, "ecx")	
 
-				else IF_STRCMP_REG_FRST(file_info->text[indx].line, PUSHR_CMD, EDX_REG, "edx")	
+				else IF_STRCMP_REG(PUSHR_CMD, EDX_REG, "edx")	
 													
 				else {																			
 					READING_DATA(PUSH_CMD, char)													
@@ -77,13 +77,13 @@ void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buff
 
 			indx++;																							
 																								
-			IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, EAX_REG, "eax")	
+			IF_STRCMP_REG(POPR_CMD, EAX_REG, "eax")	
 
-			else IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, EBX_REG, "ebx")
+			else IF_STRCMP_REG(POPR_CMD, EBX_REG, "ebx")
 
-			else IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, ECX_REG, "ecx")
+			else IF_STRCMP_REG(POPR_CMD, ECX_REG, "ecx")
 
-			else IF_STRCMP_REG_FRST(file_info->text[indx].line, POPR_CMD, EDX_REG, "edx")
+			else IF_STRCMP_REG(POPR_CMD, EDX_REG, "edx")
 
 			else {																							
 				indx--;																						
@@ -112,7 +112,26 @@ void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buff
 		else IF_STRCMP_ORD(CMP_CMD,   "cmp")
 
 		// jmps
-		else IF_STRCMP_JMP(JMP_CMD,   "jmp")
+		else if (!strcmp(file_info->text[indx].line, "jmp")) {												
+																										
+			if (pass_of_asm == FRST_PASS) {																
+				POINTER_ON_(*buffer_data, tmp_IP, char) = JMP_CMD;											
+			}																							
+																										
+			tmp_IP += sizeof(char);																		
+			indx++;																						
+																										
+			if (pass_of_asm == FRST_PASS) {																
+				table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);	
+			}																							
+			if (pass_of_asm == SCND_PASS) {																
+				int position = table_labels->find_label(file_info->text[indx].line);					
+				POINTER_ON_(*buffer_data, tmp_IP , int) = position;										
+			}																							
+																										
+			tmp_IP += sizeof(int);																		
+																									
+		}																																													
 
 		else IF_STRCMP_JMP(JNE_CMD,   "jne")
 
@@ -126,80 +145,22 @@ void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buff
 
 		else IF_STRCMP_JMP(JA_CMD,    "ja")
 
-		else IF_STRCMP_MRK(MARK_LABEL)	
-
+		else if (strchr(file_info->text[indx].line, MARK_LABEL)) {									
+																								
+			if (pass_of_asm == FRST_PASS) {														
+				table_labels->check_label(file_info->text[indx].line, tmp_IP, FROM_MARK_LABEL);	
+				POINTER_ON_(*buffer_data, tmp_IP, char) = NOP_CMD;								
+			}																					
+																								
+			tmp_IP += sizeof(char);																
+		}																						
+		
 		// end
 		else IF_STRCMP_ORD(HLT_CMD,   "hlt")
 
 		else IF_STRCMP_ORD(END_CMD,   "end")	
 		// else неправильная команда
 	}	
-}
-
-//-----------------------------------------------------------------
-
-void scnd_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data)
-{
-	size_t tmp_IP = START_IP;
-
-	for (int indx = 0; indx < file_info->num_words; indx++) {
-		if (!strcmp(file_info->text[indx].line, "push")) {
-
-			indx++;
-			tmp_IP += sizeof(char);
-
-			double value = strtod(file_info->text[indx].line, nullptr);
-			//обработка HUGE_VAL and errno
-
-			if (!is_different(value, 0)) {			
-				IF_STRCMP_REG_SCND(file_info->text[indx].line, "eax", tmp_IP)		
-
-				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "ebx", tmp_IP)
-
-				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "ecx", tmp_IP)
-
-				else IF_STRCMP_REG_SCND(file_info->text[indx].line, "edx", tmp_IP)
-
-				else 
-					tmp_IP += sizeof(double);		
-			}														
-			else 	
-				tmp_IP += sizeof(double);
-			// разлиие между 0 и регистром							
-
-		}
-		else if (!strcmp(file_info->text[indx].line, "pop")) {
-
-			tmp_IP += sizeof(char);
-
-			IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "eax", tmp_IP)		
-
-			else IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "ebx", tmp_IP)
-
-			else IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "ecx", tmp_IP)
-
-			else IF_STRCMP_REG_SCND(file_info->text[indx + NEXT_ELEMENT].line, "edx", tmp_IP)	
-
-		}
-		else IF_STRCMP_JMP_SCND("jmp")
-
-		else IF_STRCMP_JMP_SCND("jne")
-
-		else IF_STRCMP_JMP_SCND("je")
-
-		else IF_STRCMP_JMP_SCND("jbe")	
-
-		else IF_STRCMP_JMP_SCND("jb")
-
-		else IF_STRCMP_JMP_SCND("jae")
-
-		else IF_STRCMP_JMP_SCND("ja")
-
-		else 
-			tmp_IP += sizeof(char);
-		
-		// else неправильная команда
-	}
 }
 
 //-----------------------------------------------------------------

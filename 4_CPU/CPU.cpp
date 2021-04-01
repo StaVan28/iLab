@@ -38,7 +38,7 @@ void CPU_destruct(CPU_t* CPU)
 
 //-----------------------------------------------------------------
 
-void CPU_accomplishment(CPU_t* CPU) 
+void CPU_run(CPU_t* CPU) 
 {
 	//errors
 
@@ -167,8 +167,7 @@ void CPU_accomplishment(CPU_t* CPU)
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case CMP_CMD: {	
-							POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case CMP_CMD: 	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 							set_CF(CPU);
 							set_ZF(CPU);
@@ -176,7 +175,6 @@ void CPU_accomplishment(CPU_t* CPU)
 							PUSH_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 						   	CPU->IP += sizeof(char);
-						   }
 						   	break;
 
 			case JMP_CMD:	CPU->IP += sizeof(char); 
@@ -188,8 +186,11 @@ void CPU_accomplishment(CPU_t* CPU)
 
 							if (CPU->FLAGS & ZF)
 								CPU->IP += sizeof(int);
-							else 
+							else {
+								printf("CPU->IP1 = %d\n", CPU->IP);
 								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+								printf("CPU->IP2 = %d\n", CPU->IP);
+							}
 
 							break;
 
@@ -243,8 +244,9 @@ void CPU_accomplishment(CPU_t* CPU)
 
 			default:
 							// error command 
-							printf("default coomand? check buffer\n");
-							CPU->IP += sizeof(char);
+							printf("default command? check buffer\n");
+							printf("CPU->IP = %d\n", CPU->IP);
+							return;
 							break;								
 		} 
 	}

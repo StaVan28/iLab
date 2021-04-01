@@ -91,6 +91,6 @@ void CPU_construct(CPU_t* CPU, const char* file_path = "./txt/", const char* obj
 
 void CPU_destruct(CPU_t* CPU);
 
-void CPU_accomplishment(CPU_t* CPU); 
+void CPU_run(CPU_t* CPU); 
 
 #endif // CPU_H_INCLUDED
