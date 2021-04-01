@@ -21,7 +21,7 @@ fact:
 
 	pop eax
 
-	jne 
+	jne fact
 
 
 	push ebx

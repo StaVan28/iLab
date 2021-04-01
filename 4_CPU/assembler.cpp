@@ -11,7 +11,7 @@ void assembling_file(const char* file_path, const char* source)
 	text_t file_info(txt_file, WORD_PARSING);
 	file_info.txtlib_text_dump();
 
-	labels table_labels;
+	Labels table_labels;
 
 	int num_of_bytes = (file_info.num_strings)                       * sizeof(char)   + \
 	                   (file_info.num_words - file_info.num_strings) * sizeof(double) + \
@@ -23,7 +23,7 @@ void assembling_file(const char* file_path, const char* source)
 	add_CPU_info_in_buf(buffer_data, num_of_bytes);
 
 	frst_pass_of_assembler(&file_info, &table_labels, &buffer_data);
-	//scnd_pass_of_assembler(&file_info, &table_labels, &buffer_data);
+	scnd_pass_of_assembler(&file_info, &table_labels, &buffer_data);
 
 	table_labels.labels_dump();
 
@@ -38,7 +38,7 @@ void assembling_file(const char* file_path, const char* source)
 
 //-----------------------------------------------------------------
 
-void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data)
+void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data)
 {
 	int tmp_IP = START_IP;
 
@@ -138,7 +138,7 @@ void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buff
 
 //-----------------------------------------------------------------
 
-void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data)
+void scnd_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data)
 {
 	size_t tmp_IP = START_IP;
 

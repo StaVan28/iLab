@@ -99,7 +99,7 @@ $(BIN_TEST): $(OBJ_TEST)
 ## compiling
 .cpp.o:
 	$(E) "  C++         " $@
-	$(Q) ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.cpp 
+	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.cpp
 
 .c.o:
 	$(E) "  C           " $@

@@ -30,10 +30,10 @@ void CPU_dump(CPU_t* CPU)
 
     fprintf(dump_CPU, "\nRegs\n");
 
-    FPRINTF_REG(EAX, "eax");
-    FPRINTF_REG(EBX, "ebx");
-    FPRINTF_REG(ECX, "ecx");
-    FPRINTF_REG(EDX, "edx");
+    FPRINTF_REG(CPU->EAX, "eax");
+    FPRINTF_REG(CPU->EBX, "ebx");
+    FPRINTF_REG(CPU->ECX, "ecx");
+    FPRINTF_REG(CPU->EDX, "edx");
 
     fprintf(dump_CPU, "\nFLAGS:\n");
 

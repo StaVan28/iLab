@@ -23,11 +23,11 @@ struct label_info_t {
 
 //-
 
-class labels {
+class Labels {
 
 	private:
 
-		label_info_t* array_of_labels = nullptr;
+		label_info_t* array_of_Labels = nullptr;
 		size_t        capacity        = 0;
 		size_t        label_counter   = 0;
 
@@ -37,11 +37,11 @@ class labels {
 
 	public:
 
-		labels(void);
-		~labels(void);
+		Labels(void);
+		~Labels(void);
 
-		labels(const labels&)              = delete;
-		labels& operator = (const labels&) = delete;
+		Labels(const Labels&)              = delete;
+		Labels& operator = (const Labels&) = delete;
 
 		int check_label(char* name_of_label, int pos_to_jmp, int func_call);
 		int find_label (char* name_of_label);

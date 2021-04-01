@@ -10,21 +10,21 @@
 
 //-----------------------------------------------------------------
 
-#define FPRINTF_REG(reg, reg_str)									\
-        if (true) {													\
-			if (CPU->reg == POISON_DOUBLE_STACK) {					\
-				fprintf(dump_CPU, " {");							\
-			}														\
-			else													\
-				fprintf(dump_CPU, "*{");							\
-																	\
-		    fprintf(dump_CPU, reg_str);                   			\
-		    														\
-			if (CPU->EAX == POISON_DOUBLE_STACK)					\
-				fprintf(dump_CPU, "} : %lg (POISON)\n", CPU->reg);	\
-			else													\
-				fprintf(dump_CPU, "} : %lg\n"         , CPU->reg);	\
-		}															\
+#define FPRINTF_REG(reg, reg_str)								\
+        if (true) {												\
+			if (!is_different(reg, POISON_DOUBLE_CPU)) {		\
+				fprintf(dump_CPU, " {");						\
+			}													\
+			else												\
+				fprintf(dump_CPU, "*{");						\
+																\
+		    fprintf(dump_CPU, reg_str);                   		\
+		    													\
+			if (!is_different(reg, POISON_DOUBLE_CPU))			\
+				fprintf(dump_CPU, "} : %lg (POISON)\n", reg);	\
+			else												\
+				fprintf(dump_CPU, "} : %lg\n"         , reg);	\
+		}														\
 
 //-----------------------------------------------------------------
 

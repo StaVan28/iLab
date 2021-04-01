@@ -167,7 +167,8 @@ void CPU_accomplishment(CPU_t* CPU)
 						   	CPU->IP += sizeof(char);
 						   	break;
 
-			case CMP_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case CMP_CMD: {	
+							POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 							set_CF(CPU);
 							set_ZF(CPU);
@@ -175,6 +176,7 @@ void CPU_accomplishment(CPU_t* CPU)
 							PUSH_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
 
 						   	CPU->IP += sizeof(char);
+						   }
 						   	break;
 
 			case JMP_CMD:	CPU->IP += sizeof(char); 

@@ -10,7 +10,7 @@ int main() {
 	CPU_t CPU = {};
 	CPU_construct(&CPU);
 
-	//CPU_accomplishment(&CPU); 
+	CPU_accomplishment(&CPU); 
 
 	CPU_dump(&CPU);
 
@@ -18,6 +18,8 @@ int main() {
 
 }
 /* TODO
+	-- remove two pass functions
+	-- directories in project
 	V	-- работа с разными фалами
 	V	-- unit_tests на конструктор и деструктор
 	V	-- assembling
@@ -30,7 +32,7 @@ int main() {
 	-- listing 
 	V	-- регистры
 	-- unit test регистры
-	-- jump 
+	V	-- jump 
 	-- unit test jump
 	-- обработка ошибок в текстовой библиотеки
 	-- обработка ошибок в CPU

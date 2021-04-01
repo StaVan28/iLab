@@ -71,9 +71,9 @@
 
 void assembling_file(const char* file_path = "./txt/", const char* source = "source");
 
-void frst_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data);
+void frst_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data);
 
-void scnd_pass_of_assembler(text_t* file_info, labels* table_labels, char** buffer_data);
+void scnd_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data);
 
 void add_CPU_info_in_buf(char* buffer_data, int num_of_bytes);
 
