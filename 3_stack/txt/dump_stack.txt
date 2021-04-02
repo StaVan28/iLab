@@ -2,24 +2,29 @@
 ******************************************************
        Stack:
 
-Stack (OK) [0x1ffefffdd8] "stck3" {
+Stack (OK) [0x1ffefffe40] "stck3" {
 
-Canary left  = 595371386  [0x1ffefffe60]
-Current size = 1
-Capacity     = 5
-Hash         = 967820927
-Canary right = 752293992  [0x1ffefffe9c]
+Canary left  = 595371386  [0x1ffefffe40]
+Current size = 4
+Capacity     = 10
+Hash         = -148906893
+Canary right = 752293992  [0x1ffefffe7c]
 
-Data [0x522f524]
- {canary_left} : 874895203  [0x522f520]
+Data [0x5b801d4]
+ {canary_left} : 874895203  [0x5b801d0]
 
 *{ 1} : 1
- { 2} : nan (POISON)
- { 3} : nan (POISON)
- { 4} : nan (POISON)
+*{ 2} : 4
+*{ 3} : 1
+*{ 4} : 4
  { 5} : nan (POISON)
+ { 6} : nan (POISON)
+ { 7} : nan (POISON)
+ { 8} : nan (POISON)
+ { 9} : nan (POISON)
+ {10} : nan (POISON)
 
- {canary_right} : 934719742  [0x522f54c]
+ {canary_right} : 934719742  [0x5b80224]
 }
 
 ******************************************************

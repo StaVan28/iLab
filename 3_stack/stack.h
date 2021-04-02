@@ -23,11 +23,11 @@
         fclose(dump_stack);                                     \
 
 //!
-
-#define STACK_CONSTRUCT(name, capacity)          \
-        my_stack_t name = {};                    \
-        stack_construct(&name, #name, capacity); \
-
+/*
+* #define STACK_CONSTRUCT(name, capacity)          \
+*        my_stack_t name = {};                    \
+*        stack_construct(&name, #name, capacity); \
+*/
 //!
 
 #define PRINT_DIVIDING_DUMP_STACK_STRIP                                                    \
@@ -35,11 +35,11 @@
 
 //!
 
-#define ASSERT_STACK_OK(retrn)        \
-        if (stack_error(stck) != 0) { \
-                ERROR_INFO            \
-                retrn                 \
-        }                             \
+#define ASSERT_STACK_OK(retrn)  \
+        if (error() != 0) {     \
+                ERROR_INFO      \
+                retrn           \
+        }                       \
 
 //!
 
@@ -65,7 +65,7 @@ static const int CANARY_LEFT_DATA   = 0X3425D763;
 static const int CANARY_RIGHT_DATA  = 0X37B6B0FE;
 
 //-----------------------------------------------------------------------------
-
+/*
 struct my_stack_t {
     int   canary_left_stack  = 0;
     char* data               = nullptr;
@@ -75,6 +75,37 @@ struct my_stack_t {
     int   hash_              = 0;
     int   error              = 0;
     int   canary_right_stack = 0;
+};
+*/
+
+class Stack {
+
+    private:
+        int   canary_left_stack_  = 0;
+        char* data_               = nullptr;
+        char  name_[CHAR_MEMORY]  = {};
+        int   capacity_           = 0;
+        int   cur_size_           = 0;
+        int   hash_               = 0;
+        int   error_              = 0;
+        int   canary_right_stack_ = 0;
+
+        int realloc_data(void);
+        int hash(void);
+
+        int         error(void);
+        const char* text_error(void);
+
+    public:
+        Stack(const char* name, int capacity);
+       ~Stack(void);
+
+        Stack(const Stack&)              = delete;
+        Stack& operator = (const Stack&) = delete;
+
+        void   push(double data);
+        double pop (void);
+        void   dump(void);
 };
 
 //-----------------------------------------------------------------------------
@@ -105,7 +136,7 @@ enum {
 };
 
 //-----------------------------------------------------------------------------
-
+/*
 void   stack_construct(my_stack_t *stck, const char* name, int capacity);
 
 void   stack_destruct(my_stack_t *stck);
@@ -123,7 +154,7 @@ int stack_hash(my_stack_t* stck);
 int stack_error(my_stack_t *stck);
 
 const char* stack_text_error(my_stack_t *stck);
-
+*/
 //-----------------------------------------------------------------------------
 
 #endif // STACK_H_INCLUDED
