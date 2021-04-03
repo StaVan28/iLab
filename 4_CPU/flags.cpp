@@ -3,24 +3,24 @@
 
 //-----------------------------------------------------------------
 
-void set_CF(CPU_t* CPU)
+void CPU::set_CF(void)
 {
-	if (CPU->DR > CPU->DAR) {
-		SET_FLAG(CF, CPU->FLAGS);
+	if (DR_ > DAR_) {
+		SET_FLAG(CF, FLAGS_);
 	}
 	else {
-		CLEAR_FLAG(CF, CPU->FLAGS);
+		CLEAR_FLAG(CF, FLAGS_);
 	}
 }
 
 //-----------------------------------------------------------------
 
-void set_ZF(CPU_t* CPU)
+void CPU::set_ZF(void)
 {
-	if (!is_different(CPU->DR, CPU->DAR)) {
-		SET_FLAG(ZF, CPU->FLAGS);
+	if (!is_different(DR_, DAR_)) {
+		SET_FLAG(ZF, FLAGS_);
 	}
 	else {
-		CLEAR_FLAG(ZF, CPU->FLAGS);
+		CLEAR_FLAG(ZF, FLAGS_);
 	}
 }

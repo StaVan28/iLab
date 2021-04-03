@@ -3,58 +3,58 @@
 
 //-----------------------------------------------------------------------------
 
-int stack_error(my_stack_t *stck) {
+int Stack::error(void) {
 
-    if (stck == nullptr) {
+    if (this == nullptr) {
         return NULL_PTR_STACK;
     } 
 
-    if (stck->cur_size < 0) {
-        stck->error = NEGATIVE_CURRENT_SIZE;
+    if (cur_size_ < 0) {
+        error_ = NEGATIVE_CURRENT_SIZE;
         return NEGATIVE_CURRENT_SIZE;
     }
 
-    if (stck->capacity < 0) {
-        stck->error = NEGATIVE_CAPACITY;
+    if (capacity_ < 0) {
+        error_ = NEGATIVE_CAPACITY;
         return NEGATIVE_CAPACITY;
     }
 
-    if (stck->cur_size > stck->capacity) {
-        stck->error = CUR_SIZE_MORE_CAPACITY;
+    if (cur_size_ > capacity_) {
+        error_ = CUR_SIZE_MORE_CAPACITY;
         return CUR_SIZE_MORE_CAPACITY;
     }
 
-    if (stck->data == nullptr) {
-        stck->error = NULL_PTR_DATA;
+    if (data_ == nullptr) {
+        error_ = NULL_PTR_DATA;
         return NULL_PTR_DATA;
     }
 
-    if (stck->error != 0)
+    if (error_ != 0)
         return HAVE_ERROR; 
 
     #ifdef DEFENCE_STACK
-    if (*(int*)(stck->data - 1 * sizeof(int)) != CANARY_LEFT_DATA) {
-        stck->error = CANARY_DATA_ERROR;
+    if (*(int*)(data_ - 1 * sizeof(int)) != CANARY_LEFT_DATA) {
+        error_ = CANARY_DATA_ERROR;
         return CANARY_DATA_ERROR;
     }
 
-    if (*(int*)(stck->data + stck->capacity * sizeof(double)) != CANARY_RIGHT_DATA) {
-        stck->error = CANARY_DATA_ERROR;
+    if (*(int*)(data_ + capacity_ * sizeof(double)) != CANARY_RIGHT_DATA) {
+        error_ = CANARY_DATA_ERROR;
         return CANARY_DATA_ERROR;
     }
 
-    if (stck->canary_left_stack != CANARY_LEFT_STACK) {
-        stck->error = CANARY_STACK_ERROR;
+    if (canary_left_stack_ != CANARY_LEFT_STACK) {
+        error_ = CANARY_STACK_ERROR;
         return CANARY_STACK_ERROR;
     }
 
-    if (stck->canary_right_stack != CANARY_RIGHT_STACK) {
-        stck->error = CANARY_STACK_ERROR;
+    if (canary_right_stack_ != CANARY_RIGHT_STACK) {
+        error_ = CANARY_STACK_ERROR;
         return CANARY_STACK_ERROR;
     }
 
-    if (stck->hash_ != stack_hash(stck)) {
-        stck->error = HASH_ERROR;
+    if (hash_ != hash()) {
+        error_ = HASH_ERROR;
         return HASH_ERROR;
     }
     #endif
@@ -64,8 +64,8 @@ int stack_error(my_stack_t *stck) {
 
 //-----------------------------------------------------------------------------
 
-const char* stack_text_error(my_stack_t *stck) {
-    switch(stck->error) {
+const char* Stack::text_error(void) {
+    switch(error_) {
         case NEGATIVE_CURRENT_SIZE:
             return "NEGATIVE CURRENT SIZE";
         case NEGATIVE_CAPACITY:

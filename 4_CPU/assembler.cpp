@@ -112,26 +112,7 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 		else IF_STRCMP_ORD(CMP_CMD,   "cmp")
 
 		// jmps
-		else if (!strcmp(file_info->text[indx].line, "jmp")) {												
-																										
-			if (pass_of_asm == FRST_PASS) {																
-				POINTER_ON_(*buffer_data, tmp_IP, char) = JMP_CMD;											
-			}																							
-																										
-			tmp_IP += sizeof(char);																		
-			indx++;																						
-																										
-			if (pass_of_asm == FRST_PASS) {																
-				table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);	
-			}																							
-			if (pass_of_asm == SCND_PASS) {																
-				int position = table_labels->find_label(file_info->text[indx].line);					
-				POINTER_ON_(*buffer_data, tmp_IP , int) = position;										
-			}																							
-																										
-			tmp_IP += sizeof(int);																		
-																									
-		}																																													
+		else IF_STRCMP_JMP(JMP_CMD,   "jmp")
 
 		else IF_STRCMP_JMP(JNE_CMD,   "jne")
 
@@ -145,21 +126,20 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 
 		else IF_STRCMP_JMP(JA_CMD,    "ja")
 
-		else if (strchr(file_info->text[indx].line, MARK_LABEL)) {									
-																								
-			if (pass_of_asm == FRST_PASS) {														
-				table_labels->check_label(file_info->text[indx].line, tmp_IP, FROM_MARK_LABEL);	
-				POINTER_ON_(*buffer_data, tmp_IP, char) = NOP_CMD;								
-			}																					
-																								
-			tmp_IP += sizeof(char);																
-		}																						
+		else IF_STRCMP_MRK(MARK_LABEL)																					
 		
 		// end
 		else IF_STRCMP_ORD(HLT_CMD,   "hlt")
 
-		else IF_STRCMP_ORD(END_CMD,   "end")	
-		// else неправильная команда
+		else IF_STRCMP_ORD(END_CMD,   "end")
+
+		else if (pass_of_asm == FRST_PASS){
+			// else неправильная команда
+		}
+
+		else if (pass_of_asm == SCND_PASS){
+			tmp_IP += sizeof(char);
+		}
 	}	
 }
 

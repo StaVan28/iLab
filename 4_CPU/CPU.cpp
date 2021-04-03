@@ -3,9 +3,31 @@
 
 //-----------------------------------------------------------------
 
-void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source) 
+CPU::CPU(void) : 
+	ESP_("CPU_stack", START_CAPACITY) 
 {
-	//errors
+	//TODO errors
+
+	RECREATE_DUMP_CPU_FILE
+
+	FILE* obj_file = fopen_file_with_path("./txt/", nullptr, "obj_source", "rb");
+
+	int num_symbols = text_t::txtlib_number_of_symbols_file(obj_file);
+
+    EBP_ = (char*) calloc(num_symbols, sizeof(char));
+    assert(EBP_);
+
+    fread(EBP_, sizeof(char), num_symbols, obj_file);
+
+    fclose(obj_file);
+}
+
+//-----------------------------------------------------------------
+
+CPU::CPU(const char* file_path, const char* obj_source) :
+	ESP_("CPU_stack", START_CAPACITY)
+{
+	//TODO errors
 
 	RECREATE_DUMP_CPU_FILE
 
@@ -13,32 +35,29 @@ void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source)
 
 	int num_symbols = text_t::txtlib_number_of_symbols_file(obj_file);
 
-    CPU->EBP = (char*) calloc(num_symbols, sizeof(char));
-    assert(CPU->EBP);
+	Stack ESP_("CPU_stack", START_CAPACITY);
 
-    fread(CPU->EBP, sizeof(char), num_symbols, obj_file);
+    EBP_ = (char*) calloc(num_symbols, sizeof(char));
+    assert(EBP_);
+
+    fread(EBP_, sizeof(char), num_symbols, obj_file);
 
     fclose(obj_file);
-
-	stack_construct(&(CPU->ESP), "stack_CPU", START_CAPACITY);
 }
 
 //-----------------------------------------------------------------
 
-void CPU_destruct(CPU_t* CPU) 
+CPU::~CPU(void) 
 {
-	//errors
-	//Есть ли смысл всё заливать ядом, ведь всё это доп работа для проца?
+	//TODO errors
 
-	free(CPU->EBP);
-	CPU->EBP = nullptr;	
-
-	stack_destruct(&(CPU->ESP));
+	free(EBP_);
+	EBP_ = nullptr;	
 }
 
 //-----------------------------------------------------------------
 
-void CPU_run(CPU_t* CPU) 
+void CPU::run(void)
 {
 	//errors
 
@@ -46,206 +65,203 @@ void CPU_run(CPU_t* CPU)
 
 	while (true) {
 
-		CPU->IR = POINTER_ON_(CPU->EBP, CPU->IP, char);
+		IR_ = POINTER_ON_(EBP_, IP_, char);
 
-		if (CPU->IR == HLT_CMD || CPU->IR == END_CMD)
+		if (IR_ == HLT_CMD || IR_ == END_CMD)
 			break;
 
-		switch(CPU->IR) {
-			case PUSH_CMD: 	CPU->IP += sizeof(char); 
+		switch(IR_) {
+			case PUSH_CMD: 	IP_ += sizeof(char); 
 
-							CPU->DR = POINTER_ON_(CPU->EBP, CPU->IP, double);
-							stack_push(&(CPU->ESP), CPU->DR);
+							DR_ = POINTER_ON_(EBP_, IP_, double);
+							ESP_.push(DR_);
 
-							CPU->IP += sizeof(double);
+							IP_ += sizeof(double);
 						   	break;
 
-			case PUSHR_CMD:	CPU->IP += sizeof(char);
+			case PUSHR_CMD:	IP_ += sizeof(char);
 
-							CPU->IR = POINTER_ON_(CPU->EBP, CPU->IP, char);
+							IR_ = POINTER_ON_(EBP_, IP_, char);
 							
-							switch(CPU->IR) {												 
-								case EAX_REG:	stack_push(&(CPU->ESP), CPU->EAX);
-												CPU->IP += sizeof(char);
+							switch(IR_) {												 
+								case EAX_REG:	ESP_.push(EAX_);
+												IP_ += sizeof(char);
 												break;
 
-								case EBX_REG:	stack_push(&(CPU->ESP), CPU->EBX);
-												CPU->IP += sizeof(char);
+								case EBX_REG:	ESP_.push(EBX_);
+												IP_ += sizeof(char);
 												break;
 
-								case ECX_REG:	stack_push(&(CPU->ESP), CPU->ECX);
-												CPU->IP += sizeof(char);
+								case ECX_REG:	ESP_.push(ECX_);
+												IP_ += sizeof(char);
 												break;
 
-								case EDX_REG:	stack_push(&(CPU->ESP), CPU->EDX);
-												CPU->IP += sizeof(char);
+								case EDX_REG:	ESP_.push(EDX_);
+												IP_ += sizeof(char);
 												break;
 							}
 							//проверка регистр
 
 						   	break;
 
-			case POP_CMD:	stack_pop(&(CPU->ESP));
+			case POP_CMD:	ESP_.pop();
 
-							CPU->IP += sizeof(char);
+							IP_ += sizeof(char);
 							break;
 
-			case POPR_CMD:	CPU->IP += sizeof(char);
+			case POPR_CMD:	IP_ += sizeof(char);
 
-							CPU->DR = stack_pop(&(CPU->ESP));
-							CPU->IR = POINTER_ON_(CPU->EBP, CPU->IP, char);
+							DR_ = ESP_.pop();
+							IR_ = POINTER_ON_(EBP_, IP_, char);
 
-							switch(CPU->IR) {
-								case EAX_REG:	CPU->EAX = CPU->DR;
-												CPU->IP += sizeof(char);
+							switch(IR_) {
+								case EAX_REG:	EAX_ = DR_;
+												IP_ += sizeof(char);
 												break;
 								
-								case EBX_REG:	CPU->EBX = CPU->DR;
-												CPU->IP += sizeof(char);
+								case EBX_REG:	EBX_ = DR_;
+												IP_ += sizeof(char);
 												break;												
 									
-								case ECX_REG:	CPU->ECX = CPU->DR;
-												CPU->IP += sizeof(char);
+								case ECX_REG:	ECX_ = DR_;
+												IP_ += sizeof(char);
 												break;
 								
-								case EDX_REG:	CPU->EDX = CPU->DR;
-												CPU->IP += sizeof(char);
+								case EDX_REG:	EDX_ = DR_;
+												IP_ += sizeof(char);
 												break;
 							}
 							//проверка на ошибки
 
 						   	break;
 
-			case IN_CMD:	printf("IN CMD: ");
-							scanf("%lg", &(CPU->DR));
+			case IN_CMD:	printf("IN enter: ");
+							scanf("%lg", &(DR_));
 
-							stack_push(&(CPU->ESP), CPU->DR);
+							ESP_.push(DR_);
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
 
-			case OUT_CMD:	CPU->DR = stack_pop(&(CPU->ESP));
-							printf("%lg\n", CPU->DR);
+			case OUT_CMD:	DR_ = ESP_.pop();
+							printf("%lg\n", DR_);
 
-							stack_push(&(CPU->ESP), CPU->DR);
+							ESP_.push(DR_);
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
  
-			case ADD_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case ADD_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
 
-							stack_push(&(CPU->ESP), CPU->DR + CPU->DAR);
+							ESP_.push(DR_ + DAR_);
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
 
-			case SUB_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case SUB_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
 
-							stack_push(&(CPU->ESP), CPU->DAR - CPU->DR);
+							ESP_.push(DAR_ - DR_);
 
-						    CPU->IP += sizeof(char);
+						    IP_ += sizeof(char);
 						   	break;
 
-			case MUL_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case MUL_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
 
-							stack_push(&(CPU->ESP), CPU->DR * CPU->DAR);
+							ESP_.push(DR_ * DAR_);
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
 
-			case DIV_CMD:	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case DIV_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
 
-							stack_push(&(CPU->ESP), CPU->DAR / CPU->DR);
+							ESP_.push(DAR_ / DR_);
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
 
-			case FSQRT_CMD: CPU->DR = stack_pop(&(CPU->ESP));
+			case FSQRT_CMD: DR_ = ESP_.pop();
 
-						   	stack_push(&(CPU->ESP), sqrt(CPU->DR));
+						   	ESP_.push(sqrt(DR_));
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
 
-			case CMP_CMD: 	POP_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+			case CMP_CMD: 	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
 
-							set_CF(CPU);
-							set_ZF(CPU);
+							set_CF();
+							set_ZF();
 
-							PUSH_TWO_VARIABLES(CPU->DR, CPU->DAR, CPU->ESP);
+							PUSH_TWO_VARIABLES(DR_, DAR_, ESP_);
 
-						   	CPU->IP += sizeof(char);
+						   	IP_ += sizeof(char);
 						   	break;
 
-			case JMP_CMD:	CPU->IP += sizeof(char); 
+			case JMP_CMD:	IP_ += sizeof(char); 
 
-							CPU->IP = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							IP_ = POINTER_ON_(EBP_, IP_, int);
 							break;
 
-			case JNE_CMD:	CPU->IP += sizeof(char);
+			case JNE_CMD:	IP_ += sizeof(char);
 
-							if (CPU->FLAGS & ZF)
-								CPU->IP += sizeof(int);
-							else {
-								printf("CPU->IP1 = %d\n", CPU->IP);
-								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
-								printf("CPU->IP2 = %d\n", CPU->IP);
-							}
-
-							break;
-
-			case JE_CMD:	CPU->IP += sizeof(char);
-
-							if (CPU->FLAGS & ZF)
-								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							if (FLAGS_ & ZF)
+								IP_ += sizeof(int);
 							else 
-								CPU->IP += sizeof(int);
+								IP_  = POINTER_ON_(EBP_, IP_, int);
 
 							break;
 
-			case JBE_CMD:	CPU->IP += sizeof(char); 
+			case JE_CMD:	IP_ += sizeof(char);
 
-							if ((CPU->FLAGS & ZF) || (CPU->FLAGS & CF))
-								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							if (FLAGS_ & ZF)
+								IP_  = POINTER_ON_(EBP_, IP_, int);
 							else 
-								CPU->IP += sizeof(int);
+								IP_ += sizeof(int);
 
 							break;
 
-			case JB_CMD:	CPU->IP += sizeof(char); 
+			case JBE_CMD:	IP_ += sizeof(char); 
 
-							if ((CPU->FLAGS & ZF) || (CPU->FLAGS & CF))
-								CPU->IP += sizeof(int);
+							if ((FLAGS_ & ZF) || (FLAGS_ & CF))
+								IP_  = POINTER_ON_(EBP_, IP_, int);
 							else 
-								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+								IP_ += sizeof(int);
 
 							break;
 
-			case JAE_CMD:	CPU->IP += sizeof(char); 
+			case JB_CMD:	IP_ += sizeof(char); 
 
-							if (CPU->FLAGS & CF)
-								CPU->IP += sizeof(int);
+							if ((FLAGS_ & ZF) || (FLAGS_ & CF))
+								IP_ += sizeof(int);
 							else 
-								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+								IP_  = POINTER_ON_(EBP_, IP_, int);
 
 							break;
 
-			case JA_CMD:	CPU->IP += sizeof(char);
+			case JAE_CMD:	IP_ += sizeof(char); 
 
-							if (CPU->FLAGS & ZF)
-								CPU->IP  = POINTER_ON_(CPU->EBP, CPU->IP, int);
+							if (FLAGS_ & CF)
+								IP_ += sizeof(int);
 							else 
-								CPU->IP += sizeof(int);
+								IP_  = POINTER_ON_(EBP_, IP_, int);
 
 							break;
 
-			case NOP_CMD:	CPU->IP += sizeof(char);
+			case JA_CMD:	IP_ += sizeof(char);
+
+							if (FLAGS_ & ZF)
+								IP_  = POINTER_ON_(EBP_, IP_, int);
+							else 
+								IP_ += sizeof(int);
+
+							break;
+
+			case NOP_CMD:	IP_ += sizeof(char);
 							break;
 
 			default:
 							// error command 
 							printf("default command? check buffer\n");
-							printf("CPU->IP = %d\n", CPU->IP);
+							printf("IP_ = %d\n", IP_);
 							return;
 							break;								
 		} 

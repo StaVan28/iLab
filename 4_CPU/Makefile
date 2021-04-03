@@ -116,7 +116,7 @@ flags.o:	     flags.cpp      $(HDR)
 
 #
 ## additional features
-.PHONY: clean errors tags rebuild git no_valgrind unit_tests project log full_check_valgrind print_logs
+.PHONY: clean errors tags rebuild git no_valgrind unit_tests library log full_check_valgrind print_logs
 
 clean:
 	$(E) "  CLEAN"
@@ -164,9 +164,9 @@ print_logs:
 
 #
 ## generate lib and copy main header to ../include
-project: $(PROJ_LIB) $(BIN) CPU.h
-	$(E) "  MAKE PROJECT"
-	$(Q) cp CPU.h    $(HEAD_DIR)/
+library: $(PROJ_LIB) $(BIN) CPU.h
+	$(E) "  MAKE LIBRARY"
+	$(Q) cp CPU.h $(HEAD_DIR)/
 	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
 
 $(PROJ_LIB): $(OBJ)

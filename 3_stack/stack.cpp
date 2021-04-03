@@ -8,72 +8,72 @@ static error_stack_t error_info = {};
 
 //-----------------------------------------------------------------------------
 
-void stack_construct(my_stack_t *stck, const char* name, int capacity) {
+Stack::Stack(const char* name, int capacity) {
 
     RECREATE_DUMP_STACK_FILE
 
-    if (stck->canary_left_stack != 0) {
+    if (canary_left_stack_ != 0) {
 
-        stck->error = CONSTRUCT_ERROR;
+        error_ = CONSTRUCT_ERROR;
         ERROR_INFO
 
         return;
     }
-
-    if (stck == nullptr) {
-
-        stck->error = NULL_PTR_STACK;
-        ERROR_INFO
-
-        return;
-    }
-
+/*
+*   if (this == nullptr) {
+*
+*        error_ = NULL_PTR_STACK;
+*       ERROR_INFO
+*
+*        return;
+*    }
+*/
     if (capacity < 0) {
 
-        stck->error = UNKNOWN_NUMBER;
+        error_ = UNKNOWN_NUMBER;
         ERROR_INFO
 
         return;
     }
 
-    my_stack_t *temp_stck = stck;
+    // Stack *temp_stck = this;       ?????? как переаллочить стек
 
     #ifdef DEFENCE_STACK
-        stck->data = (char*) calloc(capacity * sizeof(double) + TWO_CANARIES * sizeof(int), sizeof(char));
+        data_ = (char*) calloc(capacity * sizeof(double) + TWO_CANARIES * sizeof(int), sizeof(char));
     #else
-        stck->data = (char*) calloc(capacity * sizeof(double), sizeof(char));
+        data_ = (char*) calloc(capacity * sizeof(double), sizeof(char));
     #endif
 
-    if (stck->data == nullptr) {
-        stck = temp_stck;
-        stck->error = CALLOC_ERROR;
+    if (data_ == nullptr) {
+        //this = temp_stck;           ?????? как переаллочить стек
+        error_ = CALLOC_ERROR;
         ERROR_INFO
         return;
     }
 
     #ifdef DEFENCE_STACK
-        stck->data += sizeof(int);
+        data_ += sizeof(int);
 
-        *(int*)(stck->data - 1 * sizeof(int))           = CANARY_LEFT_DATA;
-        *(int*)(stck->data + capacity * sizeof(double)) = CANARY_RIGHT_DATA;
+        *(int*)(data_ - 1 * sizeof(int))           = CANARY_LEFT_DATA;
+        *(int*)(data_ + capacity * sizeof(double)) = CANARY_RIGHT_DATA;
     #endif
 
-    stck->capacity = capacity;
+    capacity_ = capacity;
 
-    for (int indx = 0; indx < stck->capacity; indx++)
-        *(double*)(stck->data + indx * sizeof(double)) = POISON_DOUBLE_STACK;
+    for (int indx = 0; indx < capacity_; indx++)
+        *(double*)(data_ + indx * sizeof(double)) = POISON_DOUBLE_STACK;
 
-    stck->cur_size = 0;
+    cur_size_ = 0;
 
-    strcpy(stck->name, name);
+    strcpy(name_, name);
 
-    stck->error = 0;
+    error_ = 0;
 
     #ifdef DEFENCE_STACK
-        stck->hash_ = stack_hash(stck);
+        hash_ = hash();
 
-        stck->canary_left_stack = CANARY_LEFT_STACK;
-        stck->canary_right_stack = CANARY_RIGHT_STACK;
+        canary_left_stack_  = CANARY_LEFT_STACK;
+        canary_right_stack_ = CANARY_RIGHT_STACK;
     #endif
 
     ASSERT_STACK_OK({return;})
@@ -81,13 +81,13 @@ void stack_construct(my_stack_t *stck, const char* name, int capacity) {
 
 //-----------------------------------------------------------------------------
 
-void stack_push(my_stack_t *stck, double data) {
+void Stack::push(double data) {
 
     ASSERT_STACK_OK({return;})
 
     if (!isfinite(data)) {
 
-        stck->error = UNKNOWN_NUMBER;
+        error_ = UNKNOWN_NUMBER;
         ERROR_INFO
 
         return;
@@ -95,16 +95,16 @@ void stack_push(my_stack_t *stck, double data) {
 
     int status_realloc = SUCCESS;
 
-    if (stck->cur_size == stck->capacity || stck->capacity < CAPACITY_MIN)
-        status_realloc = stack_realloc(stck);
+    if (cur_size_ == capacity_ || capacity_ < CAPACITY_MIN)
+        status_realloc = realloc_data();
 
     if (status_realloc == SUCCESS) {
-        *(double*)(stck->data + stck->cur_size * sizeof(double)) = data;
-        stck->cur_size++;
+        *(double*)(data_ + cur_size_ * sizeof(double)) = data;
+        cur_size_++;
     }
 
     #ifdef DEFENCE_STACK
-        stck->hash_ = stack_hash(stck);
+        hash_ = hash();
     #endif
 
     ASSERT_STACK_OK({return;})
@@ -112,27 +112,27 @@ void stack_push(my_stack_t *stck, double data) {
 
 //-----------------------------------------------------------------------------
 
-double stack_pop(my_stack_t *stck) {
+double Stack::pop(void) {
 
     ASSERT_STACK_OK({return POISON_DOUBLE_STACK;})
 
     int status_realloc = SUCCESS;
 
-    if (stck->capacity > CAPACITY_MIN && stck->cur_size * CAPACITY_DIF < stck->capacity)
-        status_realloc = stack_realloc(stck);
+    if (capacity_ > CAPACITY_MIN && cur_size_ * CAPACITY_DIF < capacity_)
+        status_realloc = realloc_data();
 
     double temp_data = 0;
 
     if (status_realloc == SUCCESS) {
-        stck->cur_size--;
-        temp_data = *(double*)(stck->data + stck->cur_size * sizeof(double));
+        cur_size_--;
+        temp_data = *(double*)(data_ + cur_size_ * sizeof(double));
         
-        if (stck->cur_size >= 0)
-            *(double*)(stck->data + stck->cur_size * sizeof(double)) = POISON_DOUBLE_STACK;
+        if (cur_size_ >= 0)
+            *(double*)(data_ + cur_size_ * sizeof(double)) = POISON_DOUBLE_STACK;
     }
 
     #ifdef DEFENCE_STACK
-        stck->hash_ = stack_hash(stck);
+        hash_ = hash();
     #endif
 
     ASSERT_STACK_OK({return POISON_DOUBLE_STACK;})
@@ -142,75 +142,76 @@ double stack_pop(my_stack_t *stck) {
 
 //-----------------------------------------------------------------------------
 
-void stack_destruct(my_stack_t *stck) {
+Stack::~Stack(void) {
 
     ASSERT_STACK_OK()
 
-    stack_dump(stck);
+    dump();
 
-    stck->canary_left_stack = POISON_INT_STACK;
+    canary_left_stack_ = POISON_INT_STACK;
 
-    for (int indx = 0; indx < stck->capacity; indx++)
-        *(double*)(stck->data + indx * sizeof(double)) = POISON_INT_STACK;
+    for (int indx = 0; indx < capacity_; indx++)
+        *(double*)(data_ + indx * sizeof(double)) = POISON_INT_STACK;
 
-    stck->capacity = POISON_INT_STACK;
-    stck->cur_size = POISON_INT_STACK;
+    capacity_ = POISON_INT_STACK;
+    cur_size_ = POISON_INT_STACK;
 
     #ifdef DEFENCE_STACK
-        stck->data -= sizeof(int);
+        data_ -= sizeof(int);
     #endif
-    free(stck->data);
-    stck->data = nullptr;
 
-    stck->hash_ = POISON_INT_STACK;
+    free(data_);
+    data_ = nullptr;
 
-    stck->canary_right_stack = POISON_INT_STACK;
+    hash_ = POISON_INT_STACK;
+
+    canary_right_stack_ = POISON_INT_STACK;
 }
 
 //-----------------------------------------------------------------------------
 
-int stack_realloc(my_stack_t *stck) {
+int Stack::realloc_data(void) {
 
     ASSERT_STACK_OK({return POISON_INT_STACK;})
 
-    int temp_capacity = stck->capacity;
+    int temp_capacity = capacity_;
 
-    if (stck->capacity < CAPACITY_MIN)
-        stck->capacity  = CAPACITY_MIN;
-    else if (stck->cur_size * CAPACITY_DIF < stck->capacity)
-        stck->capacity /= 2;
+    if (capacity_ < CAPACITY_MIN)
+        capacity_  = CAPACITY_MIN;
+    else if (cur_size_ * CAPACITY_DIF < capacity_)
+        capacity_ /= 2;
     else
-        stck->capacity *= 2;
+        capacity_ *= 2;
 
-    char *temp_stck_data = stck->data;
+    char *temp_stck_data = data_;
 
     #ifdef DEFENCE_STACK
-        stck->data -= sizeof(int);
-        stck->data = (char*) realloc(stck->data, stck->capacity * sizeof(double) + TWO_CANARIES * sizeof(int));
+        data_ -= sizeof(int);
+        data_  = (char*) realloc(data_, capacity_ * sizeof(double) + TWO_CANARIES * sizeof(int));
     #else
-        stck->data = (char*) realloc(stck->data, stck->capacity * sizeof(double));
+        data_  = (char*) realloc(data_, capacity_ * sizeof(double));
     #endif
 
-    if (stck->data == nullptr) {
+    if (data_ == nullptr) {
 
-        stck->data = temp_stck_data;
+        data_  = temp_stck_data;
 
-        stck->error = REALLOC_ERROR;
+        error_ = REALLOC_ERROR;
         ERROR_INFO
 
         return REALLOC_ERROR;
     }
 
     #ifdef DEFENCE_STACK
-        stck->data += sizeof(int);
+        data_ += sizeof(int);
     #endif
 
-    for (int indx = temp_capacity; indx < stck->capacity; indx++)
-        *(double*)(stck->data + indx * sizeof(double)) = POISON_DOUBLE_STACK;
+    for (int indx = temp_capacity; indx < capacity_; indx++)
+        *(double*)(data_ + indx * sizeof(double)) = POISON_DOUBLE_STACK;
 
     #ifdef DEFENCE_STACK
-        *(int*)(stck->data + stck->capacity * sizeof(double)) = CANARY_RIGHT_DATA;
-        stck->hash_ = stack_hash(stck);
+        *(int*)(data_ + capacity_ * sizeof(double)) = CANARY_RIGHT_DATA;
+        hash_ = hash();
     #endif
 
     ASSERT_STACK_OK({return POISON_INT_STACK;})
@@ -220,23 +221,23 @@ int stack_realloc(my_stack_t *stck) {
 
 //-----------------------------------------------------------------------------
 
-int stack_hash(my_stack_t* stck) {
+int Stack::hash(void) {
 
     int hash_ = POISON_INT_STACK;
 
-    for (int indx = 0; indx < stck->cur_size; indx++) {
+    for (int indx = 0; indx < cur_size_; indx++) {
 
-        hash_ = hash_ + (int)(stck->data[indx * sizeof(double)]);
+        hash_ = hash_ + (int)(data_[indx * sizeof(double)]);
 
         if (indx % 2) {
-            hash_  |= stck->cur_size;
-            hash_ <<= stck->capacity;
-            hash_  |= *(stck->name);
+            hash_  |= cur_size_;
+            hash_ <<= capacity_;
+            hash_  |= *(name_);
         }
         else {
-            hash_  |= stck->capacity;
-            hash_ <<= stck->cur_size;
-            hash_  |= *(stck->name);
+            hash_  |= capacity_;
+            hash_ <<= cur_size_;
+            hash_  |= *(name_);
         }
     }
 
@@ -245,7 +246,7 @@ int stack_hash(my_stack_t* stck) {
 
 //-----------------------------------------------------------------------------
 
-void stack_dump(my_stack_t *stck) {
+void Stack::dump(void) {
 
 
     FILE* dump_stack = fopen("./txt/dump_stack.txt", "ab");
@@ -255,43 +256,45 @@ void stack_dump(my_stack_t *stck) {
 
     fprintf(dump_stack, "       Stack:\n\n");
 
-    if (!stck->error)
-        fprintf(dump_stack, "Stack (OK) [%p] \"%s\" {\n\n", &stck, stck->name);
+    if (!error_)
+        fprintf(dump_stack, "Stack (OK) [%p] \"%s\" {\n\n", this, name_);
     else {
-        fprintf(dump_stack, "Stack (ERROR %d : %s) [%p] \"%s\" {\n", stck->error, stack_text_error(stck), &stck, stck->name);
+        fprintf(dump_stack, "Stack (ERROR %d : %s) [%p] \"%s\" {\n", error_, text_error(), this, name_);
         fprintf(dump_stack, "In File : %s, LINE : %d\n", error_info.file, error_info.line);
         fprintf(dump_stack, "In Function : %s\n\n",    error_info.func);
 
-        printf(             "Stack (ERROR %d : %s) [%p] \"%s\" {\n", stck->error, stack_text_error(stck), &stck, stck->name);
+        printf(             "Stack (ERROR %d : %s) [%p] \"%s\" {\n", error_, text_error(), this, name_);
         printf(             "In File : %s, LINE : %d\n", error_info.file, error_info.line);
         printf(             "In Function : %s\n\n",    error_info.func);
     }
 
     #ifdef DEFENCE_STACK
-        fprintf(dump_stack, "Canary left  = %d  [%p]\n", stck->canary_left_stack, &(stck->canary_left_stack));
+        fprintf(dump_stack, "Canary left  = %d  [%p]\n", canary_left_stack_, &(canary_left_stack_));
     #endif
-    fprintf(dump_stack, "Current size = %d\n", stck->cur_size);
-    fprintf(dump_stack, "Capacity     = %d\n", stck->capacity);
+    fprintf(dump_stack, "Current size = %d\n", cur_size_);
+    fprintf(dump_stack, "Capacity     = %d\n", capacity_);
     #ifdef DEFENCE_STACK
-        fprintf(dump_stack, "Hash         = %d\n", stck->hash_);
-        fprintf(dump_stack, "Canary right = %d  [%p]\n", stck->canary_right_stack, &(stck->canary_right_stack));
+        fprintf(dump_stack, "Hash         = %d\n", hash_);
+        fprintf(dump_stack, "Canary right = %d  [%p]\n", canary_right_stack_, &(canary_right_stack_));
     #endif
 
-    fprintf(dump_stack, "\nData [%p]\n", stck->data);
+    fprintf(dump_stack, "\nData [%p]\n", data_);
 
-    if (stck->capacity != POISON_INT_STACK) {
+    if (capacity_ != POISON_INT_STACK) {
         #ifdef DEFENCE_STACK
-            fprintf(dump_stack, " {canary_left} : %d  [%p]\n\n", *(int*)(stck->data - 1 * sizeof(int)), (int*)(stck->data - 1 * sizeof(int)));
+            fprintf(dump_stack, " {canary_left} : %d  [%p]\n\n", *(int*)(data_ - 1 * sizeof(int)), \
+                                                                  (int*)(data_ - 1 * sizeof(int)));
         #endif
 
         int indx = 0;
-        for ( ; indx < stck->cur_size; indx++)
-            fprintf(dump_stack, "*{%2d} : %lg\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-        for ( ; indx < stck->capacity; indx++)
-            fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
+        for ( ; indx < cur_size_; indx++)
+            fprintf(dump_stack, "*{%2d} : %lg\n", indx + 1, *(double*)(data_ + indx * sizeof(double)));
+        for ( ; indx < capacity_; indx++)
+            fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(data_ + indx * sizeof(double)));
 
         #ifdef DEFENCE_STACK
-            fprintf(dump_stack, "\n {canary_right} : %d  [%p]\n", *(int*)(stck->data + stck->capacity * sizeof(double)), (int*)(stck->data + stck->capacity * sizeof(double)));
+            fprintf(dump_stack, "\n {canary_right} : %d  [%p]\n", *(int*)(data_ + capacity_ * sizeof(double)), \
+                                                                   (int*)(data_ + capacity_ * sizeof(double)));
         #endif
     }
 

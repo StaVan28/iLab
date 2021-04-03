@@ -10,61 +10,145 @@
 # SETTINGS
 #--------------------------------------------------------------------------------------
 
-# compiler settings
-CXX      = g++
-CXXFLAGS = -Wall
+# choose release or debug mode
+LAUNCH_MODE = debug
+
+Q = @  
+E = $(Q) echo
 
 # path for directories
+BIN_DIR  = bin
 HEAD_DIR = ../include/headers
 LIB_DIR  = ../include/libs
-OBJ_DIR  = ./obj
-BIN_DIR  = ./bin
-TXT_DIR = ./txt
+TXT_DIR  = txt
 
-# files settings
-BINARY  = txtlib
-SOURCE  = main.cpp txtlib.cpp 
-OBJECTS = $(subst .cpp,.o,$(SOURCE))
-HEADERS = txtlib.h
+# source
+BIN = $(BIN_DIR)/txtlib
+
+SRC = txtlib.cpp main.cpp 
+OBJ = txtlib.o    main.o
+HDR = txtlib.h   
+
+PROJ_LIB = libtxtlib.a
+
+# compiler settings
+CXX      = g++ -std=c++14
+WARNINGS = -Wall -Wextra 
+CXXFLAGS = 
+
+DEBUG_MODE   = -g3 -O0 	
+RELEASE_MODE = -g0 -Ofast
+
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v
+
+ifeq ($(LAUNCH_MODE),debug)
+	CXXFLAGS += $(DEBUG_MODE)
+else
+	CXXFLAGS += $(RELEASE_MODE)
+endif
+
+# defines for OS
+#DEFINES  =
+#uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+#
+#ifeq ($(uname_S),Linux)
+#    DEFINES = -DPOSIX -D_XOPEN_SOURCE=700 
+#endif
 
 #--------------------------------------------------------------------------------------
 # RULES
 #--------------------------------------------------------------------------------------
 
-# make program
-.PHONY: all
-all: $(BIN_DIR)/$(BINARY)
+.PHONY: debug release default
 
-# linking all OBJECTS files and Library for getting BINARY 
-$(BIN_DIR)/$(BINARY): $(OBJ_DIR)/main.o $(OBJ_DIR)/txtlib.o $(LIB_DIR)/libtxtlib.a
-	$(CXX) -o $(BIN_DIR)/$(BINARY) $^
-	valgrind $(BIN_DIR)/$(BINARY)
+#
+## launch with debug valgrind(default)
+default: print_logs library
 
-# creating a txt_lib library in ../libs
-$(LIB_DIR)/libtxtlib.a: $(OBJ_DIR)/txtlib.o
-	ar cr $(LIB_DIR)/libtxtlib.a $^
+print_logs: $(LAUNCH_MODE)
 
-# getting all OBJECTS files from SOURCES
-$(OBJ_DIR)/%.o: %.cpp $(HEAD_DIR)/$(HEADERS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(HEAD_DIR) 
+debug: $(BIN) 
+	$(E) "  LAUNCH(DBG):" $(BIN)
+	$(Q) valgrind $(BIN)
 
-# installs all the necessary dirs
-.PHONY: install 
-install: 
-	mkdir -p $(HEAD_DIR) $(LIB_DIR) $(OBJ_DIR) $(BIN_DIR) $(TXT_DIR) 
+release: clean  $(BIN)
+	$(E) "  LAUNCH(RLS):" $(BIN)
+	$(Q) $(BIN)
+	
+#
+## linking
+$(BIN): $(OBJ)
+	$(E) "  LINK:       " $@
+	$(Q) $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@  
 
-# cleans all OBJECTS, LIBS and BINARY files when using the "cleanall" flag
-.PHONY: cleanall cleanbin cleanobj cleanlib cleandump
-cleanall: cleanbin cleanobj cleanlib cleandump
+$(BIN_TEST): $(OBJ_TEST)
+	$(E) "  LINK:       " $@
+	$(Q) $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@ 
 
-cleanbin:
-	-rm $(BIN_DIR)/$(BINARY) 
+#
+## compiling
+.cpp.o:
+	$(E) "  C++         " $@
+	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.cpp
 
-cleanobj:
-	-rm $(OBJ_DIR)/$(OBJECTS)
+.c.o:
+	$(E) "  C           " $@
+	$(Q) ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.c 
 
-cleanlib:
-	-rm $(LIB_DIR)/libtxtlib.a
+main.o:   main.cpp   $(HDR)
+stack.o:  stack.cpp  $(HDR)
+errors.o: errors.cpp $(HDR)
 
-cleandump:
-	-rm $(TXT_DIR)/dump_txtlib.txt
+#
+## additional features
+.PHONY: clean errors tags rebuild git no_valgrind unit_tests library log full_check_valgrind print_logs
+
+clean:
+	$(E) "  CLEAN"
+	$(Q) rm -f $(BIN) $(TXT_DIR)/log_Makefile tags *.o
+
+errors:
+	$(Q) rm -f $(TXT_DIR)/log_Makefile
+	$(Q) make $(BIN) > $(TXT_DIR)/log_Makefile
+
+tags: ${SRC}
+	$(Q) rm -f tags
+	$(Q) ctags -R -f .tags
+
+gdb: $(BIN)
+	$(E) "  GDB:        " $(BIN)
+	$(Q) gdb $(BIN) 
+
+rebuild: clean default
+
+no_valgrind: $(BIN)
+	$(E) "  LAUNCH STD: " $(BIN)
+	$(Q) $(BIN)
+
+full_check_valgrind: $(BIN)
+	$(E) "  LAUNCH FULL:" $(BIN)
+	$(Q) valgrind  $(VALGRIND_FLAGS) $(BIN)
+
+unit_tests: $(BIN_TEST)
+	$(E) "  UNIT_TESTS:" $(BIN)
+	$(Q) $(BIN_TEST)
+
+git:
+	$(E) "  AUTO COMMIT  "
+	$(Q) git add --all
+	$(Q) git commit -m "auto commit: 4_CPU"
+
+log:
+	$(Q) git log --oneline --all --graph
+
+print_logs:
+	$(Q) cat $(TXT_DIR)/dump_text.txt
+#
+## generate lib and copy main header to ../include
+library: $(PROJ_LIB) $(BIN) txtlib.h
+	$(E) "  MAKE LIBRARY"
+	$(Q) cp txtlib.h $(HEAD_DIR)/
+	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
+
+$(PROJ_LIB): $(OBJ)
+	$(Q) ar cr $@ $^

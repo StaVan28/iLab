@@ -5,11 +5,11 @@ int main() {
 
     RECREATE_DUMP_STACK_FILE
 
-    STACK_CONSTRUCT(stck3, 5);
+	Stack test_stck("stck3", 5);
 
-    stack_push(&stck3, 1);
+    test_stck.push(1);
 
-    stack_destruct(&stck3);
+    test_stck.pop();
 
     return 0;
 }

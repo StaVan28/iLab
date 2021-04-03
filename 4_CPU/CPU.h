@@ -20,28 +20,45 @@
 
 //-----------------------------------------------------------------------------
 
-struct CPU_t {
+class CPU {
 
-	// general purpose registers
-	double EAX = POISON_DOUBLE_CPU;
-	double EBX = POISON_DOUBLE_CPU;
-	double ECX = POISON_DOUBLE_CPU;
-	double EDX = POISON_DOUBLE_CPU;
+	private:
+		// general purpose registers
+		double EAX_ = POISON_DOUBLE_CPU;
+		double EBX_ = POISON_DOUBLE_CPU;
+		double ECX_ = POISON_DOUBLE_CPU;
+		double EDX_ = POISON_DOUBLE_CPU;
 
-	// regs for only CPU using
-	double DR  = POISON_DOUBLE_CPU;
-	double DAR = POISON_DOUBLE_CPU;
-	int    IR  = POISON_INT_CPU;
+		// regs for only CPU using
+		double DR_  = POISON_DOUBLE_CPU;
+		double DAR_ = POISON_DOUBLE_CPU;
+		int    IR_  = POISON_INT_CPU;
 
-	// data	segment
-	char* EBP = nullptr;
+		// data	segment
+		char* EBP_ = nullptr;
 
-	// stack ptr with instraction ptr
-	int        IP  = START_IP;
-	my_stack_t ESP = {};
+		// stack ptr with instraction ptr
+		int   IP_  = START_IP;
+		Stack ESP_;
 
-	// flag register
-	char FLAGS = 0;
+		// flag register
+		char FLAGS_ = 0;
+
+	   	void set_CF(void);
+	   	void set_ZF(void);
+
+	public:
+
+		CPU(void);
+		CPU(const char* file_path, const char* obj_source);
+
+	   ~CPU(void);
+
+        CPU(const CPU&)              = delete;
+        CPU& operator = (const CPU&) = delete;
+
+	   	void run(void);
+	   	void dump(void);
 };
 
 //-----------------------------------------------------------------------------
@@ -84,13 +101,5 @@ enum REGS_CMDS {
 	ECX_REG = 34,
 	EDX_REG = 35,
 };
-
-//-----------------------------------------------------------------------------
-
-void CPU_construct(CPU_t* CPU, const char* file_path = "./txt/", const char* obj_source = "obj_source");
-
-void CPU_destruct(CPU_t* CPU);
-
-void CPU_run(CPU_t* CPU); 
 
 #endif // CPU_H_INCLUDED

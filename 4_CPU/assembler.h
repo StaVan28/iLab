@@ -17,30 +17,6 @@ enum pass_of_asm {
 		}													\
 
 //-
-/*
-#define IF_STRCMP_JMP(cmd, cmd_str)																		\
-		if (!strcmp(file_info->text[indx].line, cmd_str)) {												\
-			if (pass_of_asm == FRST_PASS) {																\
-				POINTER_ON_(*buffer_data, tmp_IP, char) = cmd;											\
-				tmp_IP += sizeof(char);																	\
-																										\
-				indx++;																					\
-				table_labels->check_label(file_info->text[indx].line, POISON_POSITION, FROM_JMP_CMD);	\
-																										\
-				tmp_IP += sizeof(int);																	\
-			}																							\
-			if (pass_of_asm == SCND_PASS) {																\
-				tmp_IP += sizeof(char);																	\
-																										\
-				indx++;																					\
-				int position = table_labels->find_label(file_info->text[indx].line);					\
-																										\
-				POINTER_ON_(*buffer_data, tmp_IP, int) = position;										\
-				tmp_IP += sizeof(int);																	\
-			}																							\
-		}																								\
-*/
-//-
 
 #define IF_STRCMP_JMP(cmd, cmd_str)																		\
 		if (!strcmp(file_info->text[indx].line, cmd_str)) {												\

@@ -23,6 +23,12 @@
         fclose(dump_stack);                                     \
 
 //!
+/*
+* #define STACK_CONSTRUCT(name, capacity)          \
+*        my_stack_t name = {};                    \
+*        stack_construct(&name, #name, capacity); \
+*/
+//!
 
 #define PRINT_DIVIDING_DUMP_STACK_STRIP                                                    \
         fprintf(dump_stack, "\n******************************************************\n"); \
@@ -59,6 +65,18 @@ static const int CANARY_LEFT_DATA   = 0X3425D763;
 static const int CANARY_RIGHT_DATA  = 0X37B6B0FE;
 
 //-----------------------------------------------------------------------------
+/*
+struct my_stack_t {
+    int   canary_left_stack  = 0;
+    char* data               = nullptr;
+    char  name[CHAR_MEMORY]  = {};
+    int   capacity           = 0;
+    int   cur_size           = 0;
+    int   hash_              = 0;
+    int   error              = 0;
+    int   canary_right_stack = 0;
+};
+*/
 
 class Stack {
 
@@ -117,6 +135,26 @@ enum {
     CONSTRUCT_ERROR          = 13,
 };
 
+//-----------------------------------------------------------------------------
+/*
+void   stack_construct(my_stack_t *stck, const char* name, int capacity);
+
+void   stack_destruct(my_stack_t *stck);
+
+void   stack_push(my_stack_t *stck, double data);
+
+double stack_pop(my_stack_t *stck);
+
+void   stack_dump(my_stack_t *stck);
+
+int stack_realloc(my_stack_t *stck);
+
+int stack_hash(my_stack_t* stck);
+
+int stack_error(my_stack_t *stck);
+
+const char* stack_text_error(my_stack_t *stck);
+*/
 //-----------------------------------------------------------------------------
 
 #endif // STACK_H_INCLUDED
