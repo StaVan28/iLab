@@ -98,7 +98,7 @@ class Stack {
 
     public:
         Stack(const char* name, int capacity);
-       ~Stack(void);
+       ~Stack();
 
         Stack(const Stack&)              = delete;
         Stack& operator = (const Stack&) = delete;

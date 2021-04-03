@@ -63,7 +63,7 @@ endif
 
 #
 ## launch with debug valgrind(default)
-default: print_logs 
+default: print_logs library
 
 print_logs: $(LAUNCH_MODE)
 
