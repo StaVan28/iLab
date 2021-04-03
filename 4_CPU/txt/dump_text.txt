@@ -2,28 +2,25 @@
 ******************************************************
         TEXT:
 
-Pointer buffer of data: 0x5b81250
-Pointer line_t structs: 0x5b812d0
+Pointer buffer of data: 0x555555770320
+Pointer line_t structs: 0x555555770360
 
-Number of strings = 8
-Number of structs = 12
-Number of symbols = 56
-Number of words   = 12
+Number of strings = 6
+Number of structs = 9
+Number of symbols = 46
+Number of words   = 9
 
 [Number in structs]{Real number}(Length)
 
 [  1]{  1}(  4)push
 [  2]{  2}(  1)1
 [  3]{  3}(  6)label:
-[  4]{  4}(  3)jmp
-[  5]{  5}(  1)a
-[  6]{  6}(  4)push
-[  7]{  7}(  1)2
-[  8]{  8}(  2)a:
-[  9]{  9}(  3)jmp
-[ 10]{ 10}(  5)label
-[ 11]{ 11}(  3)hlt
-[ 12]{ 12}(  3)end
+[  4]{  4}(  4)push
+[  5]{  5}(  1)2
+[  6]{  6}(  3)jmp
+[  7]{  7}(  5)label
+[  8]{  8}(  3)hlt
+[  9]{  9}(  3)end
 
 
 Note! The actual length of the lines is 1 more 

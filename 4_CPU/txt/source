@@ -1,8 +1,7 @@
 	push 1
 	label:
-	jmp a
 	push 2
-	a:
 	jmp label
 	hlt
 	end
+
