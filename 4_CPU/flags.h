@@ -48,12 +48,12 @@ static const int NUM_OF_FLAGS = 6;
 
 //-----------------------------------------------------------------
 
-void set_CF(CPU_t* CPU); // V
-void set_PF(CPU_t* CPU);
-void set_AF(CPU_t* CPU);
-void set_ZF(CPU_t* CPU); // V
-void set_SF(CPU_t* CPU);
-void set_OF(CPU_t* CPU);
+//void set_CF(CPU_t* CPU); // V
+//void set_PF(CPU_t* CPU);
+//void set_AF(CPU_t* CPU);
+//void set_ZF(CPU_t* CPU); // V
+//void set_SF(CPU_t* CPU);
+//void set_OF(CPU_t* CPU);
 
 //-----------------------------------------------------------------
 

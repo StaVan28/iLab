@@ -7,14 +7,10 @@ int main() {
 
 	assembling_file();
 
-	CPU_t CPU = {};
-	CPU_construct(&CPU);
+	CPU_t CPU;
 
-	CPU_run(&CPU); 
-
-	CPU_dump(&CPU);
-
-	CPU_destruct(&CPU);
+	CPU.run(); 
+	CPU.dump();
 
 }
 /* TODO

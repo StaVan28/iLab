@@ -6,14 +6,14 @@
 //-----------------------------------------------------------------------------
 
 #define POP_TWO_VARIABLES(value_1, value_2, stack)	\
-		value_1  = stack_pop(&(stack));				\
-		value_2  = stack_pop(&(stack));				\
+		value_1  = stack.pop();						\
+		value_2  = stack.pop();						\
 
 //-
 
 #define PUSH_TWO_VARIABLES(value_1, value_2, stack)	\
-		stack_push(&(stack), value_2);				\
-		stack_push(&(stack), value_1);				\
+		stack.push(value_2);						\
+		stack.push(value_1);						\
 
 //-
 
