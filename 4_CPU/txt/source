@@ -1,8 +1,30 @@
+	
+	in
+	pop eax
+
 	push 1
-	label:
-	jmp a
-	push 2
-	a:
-	jmp label
+	pop ebx
+
+fact:
+	push eax
+	push ebx
+	mul
+	pop ebx
+
+	push eax
+	push 1
+	sub
+
+	push 1
+	cmp
+	pop
+
+	pop eax
+
+	jne fact
+
+
+	push ebx
+	out
 	hlt
 	end

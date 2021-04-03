@@ -3,8 +3,8 @@
 
 //-----------------------------------------------------------------
 
-CPU::CPU(void) :
-	Stack ESP_("CPU_stack", START_CAPACITY)
+CPU::CPU(void) : 
+	ESP_("CPU_stack", START_CAPACITY) 
 {
 	//TODO errors
 
@@ -24,7 +24,8 @@ CPU::CPU(void) :
 
 //-----------------------------------------------------------------
 
-CPU::CPU(const char* file_path, const char* obj_source) 
+CPU::CPU(const char* file_path, const char* obj_source) :
+	ESP_("CPU_stack", START_CAPACITY)
 {
 	//TODO errors
 
@@ -33,6 +34,8 @@ CPU::CPU(const char* file_path, const char* obj_source)
 	FILE* obj_file = fopen_file_with_path(file_path, nullptr, obj_source, "rb");
 
 	int num_symbols = text_t::txtlib_number_of_symbols_file(obj_file);
+
+	Stack ESP_("CPU_stack", START_CAPACITY);
 
     EBP_ = (char*) calloc(num_symbols, sizeof(char));
     assert(EBP_);
@@ -132,7 +135,8 @@ void CPU::run(void)
 
 						   	break;
 
-			case IN_CMD:	scanf("%lg", &(DR_));
+			case IN_CMD:	printf("IN enter: ");
+							scanf("%lg", &(DR_));
 
 							ESP_.push(DR_);
 

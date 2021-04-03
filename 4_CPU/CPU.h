@@ -39,7 +39,7 @@ class CPU {
 
 		// stack ptr with instraction ptr
 		int   IP_  = START_IP;
-		Stack ESP_("CPU_stack", START_CAPACITY);
+		Stack ESP_;
 
 		// flag register
 		char FLAGS_ = 0;
@@ -102,12 +102,4 @@ enum REGS_CMDS {
 	EDX_REG = 35,
 };
 
-//-----------------------------------------------------------------------------
-/*
-void CPU_construct(CPU_t* CPU, const char* file_path = "./txt/", const char* obj_source = "obj_source");
-
-void CPU_destruct(CPU_t* CPU);
-
-void CPU_run(CPU_t* CPU); 
-*/
 #endif // CPU_H_INCLUDED
