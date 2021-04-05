@@ -10,7 +10,7 @@ EBP(buffer_cmd) [0x5b864e0]
 
 Regs
  {eax} : 1 (POISON)
- {ebx} : 5040 (POISON)
+ {ebx} : 24 (POISON)
  {ecx} : nan (POISON)
  {edx} : nan (POISON)
 
