@@ -1,7 +1,8 @@
 
 ******************************************************
        Stack:
-
+ 
+ 
 Stack (OK) [0x1ffefffe48] "CPU_stack" {
 
 Canary left  = 595371386  [0x1ffefffe48]

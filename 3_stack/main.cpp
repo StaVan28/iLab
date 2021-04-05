@@ -11,6 +11,8 @@ int main() {
 
     test_stck.pop();
 
+    test_stck.data_[1] = 55;
+
     return 0;
 }
 
