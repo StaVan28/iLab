@@ -5,8 +5,6 @@
 
 int main() {
 
-	assembling_file();
-
 	CPU my_CPU;
 
 	my_CPU.run(); 

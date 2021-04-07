@@ -1,5 +1,5 @@
 
-#include "CPU.h"
+#include "assembler.h"
 
 //-----------------------------------------------------------------
 
@@ -7,6 +7,9 @@ void assembling_file(const char* file_path, const char* source)
 {
 	FILE* txt_file = fopen_file_with_path(file_path, nullptr, source, "rb");
 	FILE* obj_file = fopen_file_with_path(file_path, "obj_" , source, "wb");
+
+	assert(txt_file);
+	assert(obj_file);
 
 	text_t file_info(txt_file, WORD_PARSING);
 	file_info.txtlib_text_dump();
