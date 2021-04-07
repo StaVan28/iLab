@@ -80,17 +80,21 @@ release: clean $(PROJECTS)
 	$(Q) $(BIN_ASM)
 	$(Q) $(BIN_CPU)
 
+CPU:
+	$(E) "  MAKE RECUR:" $(BIN_CPU)
+	$(Q) $(MAKE) -C $@
+
 CPU_launch: CPU
-	$(E) "  LAUNCH(---):" $(BIN_CPU)
+	$(E) "LAUNCH(ONLY):" $(BIN_CPU)
 	$(Q) valgrind $(BIN_CPU)
 
-assembler_launch: assembler
-	$(E) "  LAUNCH(---):" $(BIN_ASM)
-	$(Q) valgrind $(BIN_ASM)
-
-$(PROJECTS):
+assembler:
 	$(E) "  MAKE RECUR:" $(BIN_ASM)
-	$(Q) $(MAKE) -C $@
+	$(Q) $(MAKE) -C $@	
+
+assembler_launch: assembler
+	$(E) "LAUNCH(ONLY):" $(BIN_ASM)
+	$(Q) valgrind $(BIN_ASM)
 
 #
 ## additional features
