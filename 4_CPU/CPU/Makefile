@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------------
 
 # Makefile for CPU_modul
-# version 1.5
+# version 1.6
 #		author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
@@ -44,10 +44,10 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main_CPU.o: main_CPU.cpp CPU.h
-$(OBJ_DIR)/CPU.o:      CPU.cpp      CPU.h settings.h flags.h 
-$(OBJ_DIR)/errors.o:   errors.cpp   CPU.h errors.h
-$(OBJ_DIR)/settings.o: settings.cpp CPU.h settings.h
-$(OBJ_DIR)/flags.o:	   flags.cpp    CPU.h flags.h
+$(OBJ_DIR)/main_CPU.o: main_CPU.cpp 
+$(OBJ_DIR)/CPU.o:      CPU.cpp      
+$(OBJ_DIR)/errors.o:   errors.cpp   
+$(OBJ_DIR)/settings.o: settings.cpp 
+$(OBJ_DIR)/flags.o:	   flags.cpp    
 
 -include ${DEP_ALL} 

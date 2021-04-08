@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------------
 
 # Makefile for assembler_modul
-# version 1.5
+# version 1.6
 #		author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ OBJ := $(OBJ:%.cpp=%.o)
 DEP := $(OBJ:%.o=%.d)
 HDR := $(SRC:%.cpp=%.h)
 
-SRC_ALL = $(SRC)            main_assembler.cpp
+ыыSRC_ALL = $(SRC)          main_assembler.cpp
 OBJ_ALL = $(OBJ) $(OBJ_DIR)/main_assembler.o
 DEP_ALL = $(DEP) $(OBJ_DIR)/main_assembler.d
 HDR_ALL = $(HDR) $(HEAD_DIR)/txtlib.h 
@@ -44,11 +44,10 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-
-$(OBJ_DIR)/main_assembler.o: main_assembler.cpp assembler.h
-$(OBJ_DIR)/assembler.o:      assembler.cpp      assembler.h  txtlib.h
-$(OBJ_DIR)/labels.o:         labels.cpp         labels.h
-$(OBJ_DIR)/settings.o:       settings.cpp       CPU.h settings.h
-$(OBJ_DIR)/flags.o:	         flags.cpp          CPU.h flags.h
+$(OBJ_DIR)/main_assembler.o: main_assembler.cpp
+$(OBJ_DIR)/assembler.o:      assembler.cpp
+$(OBJ_DIR)/labels.o:         labels.cpp
+$(OBJ_DIR)/settings.o:       settings.cpp
+$(OBJ_DIR)/flags.o:	         flags.cpp
 
 -include ${DEP_ALL} 

@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------------
 
 # Makefile for CPU_project
-# version 1.5
+# version 1.6
 #		author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ assembler_launch: assembler
 
 clean:
 	$(E) "    CLEAN"
-	$(Q) rm -f $(BIN_ASM) $(BIN_CPU) tags ./obj/*.o
+	$(Q) rm -f $(BIN_ASM) $(BIN_CPU) tags ./obj/*.o ./obj/*.d
 
 tags: ${SRC}
 	$(E) "    TAGS"
