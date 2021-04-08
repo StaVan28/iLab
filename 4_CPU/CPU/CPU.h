@@ -12,10 +12,8 @@
 #include <stdbool.h>
 #include <limits.h>
 
-#include "stack.h"
 #include "txtlib.h"
-#include "labels.h"
-#include "assembler.h"
+#include "stack.h"
 #include "settings.h"
 
 //-----------------------------------------------------------------------------
@@ -67,39 +65,5 @@ class CPU {
 #include "errors.h"
 
 //-----------------------------------------------------------------------------
-
-enum CPU_CMDS {
-	PUSH_CMD  = 1,
-	OUT_CMD   = 2,
-	ADD_CMD   = 3,
-	SUB_CMD   = 4,
-	MUL_CMD   = 5,
-	DIV_CMD   = 6,
-	FSQRT_CMD = 7,
-	IN_CMD    = 8,
-	POP_CMD   = 9,
-	HLT_CMD   = 10,
-	NOP_CMD   = 11,
-	JMP_CMD   = 12,
-	END_CMD   = 13,
-	PUSHR_CMD = 14,
-	POPR_CMD  = 15,
-	CMP_CMD   = 16,
-	JNE_CMD   = 17,
-	JE_CMD    = 18,
-	JBE_CMD   = 19,
-	JB_CMD    = 20,
-	JAE_CMD   = 21,
-	JA_CMD    = 22,
-};
-
-//-----------------------------------------------------------------------------
-
-enum REGS_CMDS {
-	EAX_REG = 32,
-	EBX_REG = 33,
-	ECX_REG = 34,
-	EDX_REG = 35,
-};
 
 #endif // CPU_H_INCLUDED

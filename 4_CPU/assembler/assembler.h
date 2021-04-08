@@ -3,6 +3,20 @@
 #define ASSEMBLER_H_INCLUDED
 
 //-----------------------------------------------------------------
+	
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <assert.h>
+#include <string.h>
+#include <stdbool.h>
+#include <limits.h>
+
+#include "txtlib.h"
+#include "labels.h"
+#include "settings.h"
+
+//-----------------------------------------------------------------
 
 enum pass_of_asm {
 	FRST_PASS = 1,

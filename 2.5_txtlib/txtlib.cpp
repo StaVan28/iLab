@@ -3,8 +3,9 @@
 
 //-----------------------------------------------------------------------------
 
-text_t::text_t(char* buffer, const int mode) {
-
+text_t::text_t(char* buffer, const int mode) 
+{
+    assert(this);
     assert(buffer);
 
     num_symbols = txtlib_number_of_symbols_buff(buffer);
@@ -35,8 +36,9 @@ text_t::text_t(char* buffer, const int mode) {
 
 //-----------------------------------------------------------------------------
 
-text_t::text_t(FILE* source, const int mode) {
-
+text_t::text_t(FILE* source, const int mode) 
+{
+    assert(this);
     assert(source);
 
     num_symbols = txtlib_number_of_symbols_file(source);
@@ -67,7 +69,9 @@ text_t::text_t(FILE* source, const int mode) {
 
 //-----------------------------------------------------------------------------
 
-text_t::~text_t(void) {
+text_t::~text_t(void) 
+{
+    assert(this);
 
     free(buffer_data);
 
@@ -76,8 +80,8 @@ text_t::~text_t(void) {
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_symbols_file(FILE* source) {
-
+int text_t::txtlib_number_of_symbols_file(FILE* source) 
+{
     assert(source);
 
     int start_value = ftell(source);
@@ -91,8 +95,8 @@ int text_t::txtlib_number_of_symbols_file(FILE* source) {
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_symbols_buff(char* buffer) {
-
+int text_t::txtlib_number_of_symbols_buff(char* buffer) 
+{
     assert(buffer);
 
     char* length = nullptr;
@@ -105,8 +109,8 @@ int text_t::txtlib_number_of_symbols_buff(char* buffer) {
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_strings(char* buffer) {
-
+int text_t::txtlib_number_of_strings(char* buffer) 
+{
     assert(buffer);
 
     int tmp_num_strings = 0;
@@ -141,8 +145,8 @@ int text_t::txtlib_number_of_strings(char* buffer) {
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_words(char* buffer) {
-
+int text_t::txtlib_number_of_words(char* buffer) 
+{
     assert(buffer);
 
     int tmp_num_word = 0;
@@ -170,8 +174,8 @@ int text_t::txtlib_number_of_words(char* buffer) {
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_fill_line_t_string(void) {
-
+void text_t::txtlib_fill_line_t_string(void) 
+{
     int real_line = 0;
     int indx      = 0;
 
@@ -226,8 +230,8 @@ void text_t::txtlib_fill_line_t_string(void) {
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_fill_line_t_word(void) {
-    
+void text_t::txtlib_fill_line_t_word(void) 
+{
     int real_line = 0;
     int tmp_indx  = 0;
     int indx      = 0;
@@ -283,8 +287,8 @@ void text_t::txtlib_fill_line_t_word(void) {
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_text_dump(void) {
-
+void text_t::txtlib_text_dump(void) 
+{
     FILE* text_dump = fopen("./txt/dump_text.txt", "wb");
     assert(text_dump);
 
