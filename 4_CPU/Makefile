@@ -103,9 +103,10 @@ assembler_launch: assembler
 
 clean:
 	$(E) "    CLEAN"
-	$(Q) rm -f $(BIN_ASM) $(BIN_CPU)  tags ./obj/*.o
+	$(Q) rm -f $(BIN_ASM) $(BIN_CPU) tags ./obj/*.o
 
 tags: ${SRC}
+	$(E) "    TAGS"
 	$(Q) rm -f tags
 	$(Q) ctags -R -f .tags
 
@@ -128,7 +129,7 @@ log:
 	$(Q) git log --oneline --all --graph
 
 print_logs:
-	$(Q) cat .txt/dump_CPU.txt
-	$(Q) cat .txt/dump_stack.txt
-	$(Q) cat .txt/dump_labels.txt
-	$(Q) cat .txt/dump_text.txt
+	$(Q) cat ./txt/dump_CPU.txt
+	$(Q) cat ./txt/dump_stack.txt
+	$(Q) cat ./txt/dump_labels.txt
+	$(Q) cat ./txt/dump_text.txt

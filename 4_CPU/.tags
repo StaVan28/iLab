@@ -4,121 +4,170 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ADD_CMD	CPU.h	/^	ADD_CMD   = 3,$/;"	e	enum:CPU_CMDS
-ADD_SIZE	settings.h	/^	ADD_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-ASSEMBLER_H_INCLUDED	CPU_assembler.h	3;"	d
-BIN	Makefile	/^BIN      = $(BIN_DIR)\/CPU$/;"	m
-BIN_DIR	Makefile	/^BIN_DIR  = bin$/;"	m
-BIN_TEST	Makefile	/^BIN_TEST = $(BIN_DIR)\/unit_tests$/;"	m
-CMDS_SIZE	settings.h	/^enum CMDS_SIZE {$/;"	g
-CPU_CMDS	CPU.h	/^enum CPU_CMDS {$/;"	g
-CPU_H_INCLUDED	CPU.h	3;"	d
-CPU_accomplishment	CPU.cpp	/^void CPU_accomplishment(CPU_t* CPU) $/;"	f
-CPU_construct	CPU.cpp	/^void CPU_construct(CPU_t* CPU, const char* file_path, const char* obj_source) $/;"	f
-CPU_destruct	CPU.cpp	/^void CPU_destruct(CPU_t* CPU) $/;"	f
-CPU_t	CPU.h	/^struct CPU_t {$/;"	s
-CXX	Makefile	/^CXX      = g++ $/;"	m
-CXXFLAGS	Makefile	/^CXXFLAGS =   $/;"	m
-DEBUG_MODE	Makefile	/^DEBUG_MODE   = -g3 -O0 $/;"	m
-DIV_CMD	CPU.h	/^	DIV_CMD   = 6,$/;"	e	enum:CPU_CMDS
-DIV_SIZE	settings.h	/^	DIV_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-E	Makefile	/^E = $(Q) echo$/;"	m
-END_CMD	CPU.h	/^	END_CMD   = 13,$/;"	e	enum:CPU_CMDS
-END_SIZE	settings.h	/^	END_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-ERROR	settings.h	/^static const int ERROR        = 0;$/;"	v
-FIRST_PASS	CPU_assembler.h	/^static const int FIRST_PASS  = 0;$/;"	v
-FSQRT_CMD	CPU.h	/^	FSQRT_CMD = 7,$/;"	e	enum:CPU_CMDS
-FSQRT_SIZE	settings.h	/^	FSQRT_SIZE    = 5,$/;"	e	enum:CMDS_SIZE
-HDR	Makefile	/^HDR = $(HDR_ALL)$/;"	m
-HDR_ALL	Makefile	/^HDR_ALL = CPU.h   CPU_assembler.h   labels.h   settings.h   $(HEAD_DIR)\/stack.h $(HEAD_DIR)\/txtlib.h$/;"	m
-HDR_TEST	Makefile	/^HDR_TEST = $(HDR_ALL) unit_tests.h$/;"	m
-HEAD_DIR	Makefile	/^HEAD_DIR = ..\/include\/headers$/;"	m
-HLT_CMD	CPU.h	/^	HLT_CMD   = 10,$/;"	e	enum:CPU_CMDS
-HLT_SIZE	settings.h	/^	HLT_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-IN_CMD	CPU.h	/^	IN_CMD    = 8,$/;"	e	enum:CPU_CMDS
-IN_SIZE	settings.h	/^	IN_SIZE       = 2,$/;"	e	enum:CMDS_SIZE
-IP	CPU.h	/^	int    IP                = 0;$/;"	m	struct:CPU_t
-JMP_CMD	CPU.h	/^	JMP_CMD   = 12,$/;"	e	enum:CPU_CMDS
-JMP_SIZE	settings.h	/^	JMP_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-JUMP	labels.h	/^static const bool JUMP      = 0;$/;"	v
-LABELS_H_INCLUDED	labels.h	3;"	d
+ADD_CMD	settings/settings.h	/^	ADD_CMD   = 3,$/;"	e	enum:CPU_CMDS
+AF	flags/flags.h	20;"	d
+AF	labels/flags/flags.h	20;"	d
+ASSEMBLER_H_INCLUDED	assembler/assembler.h	3;"	d
+BIN	CPU/Makefile	/^BIN  = ..\/bin\/CPU$/;"	m
+BIN	assembler/Makefile	/^BIN  = ..\/bin\/assembler$/;"	m
+BIN_ASM	Makefile	/^BIN_ASM = .\/bin\/assembler$/;"	m
+BIN_CPU	Makefile	/^BIN_CPU = .\/bin\/CPU$/;"	m
+BIN_DIR	Makefile	/^export BIN_DIR  = ..\/bin$/;"	m
+CF	flags/flags.h	18;"	d
+CF	labels/flags/flags.h	18;"	d
+CLEAR_FLAG	flags/flags.h	35;"	d
+CLEAR_FLAG	labels/flags/flags.h	35;"	d
+CMP_CMD	settings/settings.h	/^	CMP_CMD   = 16,$/;"	e	enum:CPU_CMDS
+CPU	CPU/CPU.cpp	/^CPU::CPU(const char* file_path, const char* obj_source) :$/;"	f	class:CPU
+CPU	CPU/CPU.cpp	/^CPU::CPU(void) : $/;"	f	class:CPU
+CPU	CPU/CPU.h	/^class CPU {$/;"	c
+CPU_CMDS	settings/settings.h	/^enum CPU_CMDS {$/;"	g
+CPU_H_INCLUDED	CPU/CPU.h	3;"	d
+CPU_UNIQUE_NUMBER	settings/settings.h	/^static const long long int CPU_UNIQUE_NUMBER = 0x75E7348131; $/;"	v
+CXX	Makefile	/^export CXX      = g++ -std=c++14 $/;"	m
+CXXFLAGS	Makefile	/^export CXXFLAGS = -MMD$/;"	m
+DAR_	CPU/CPU.h	/^		double DAR_ = POISON_DOUBLE_CPU;$/;"	m	class:CPU
+DEBUG_MODE	Makefile	/^DEBUG_MODE   = -g3 -O0 	$/;"	m
+DEP	CPU/Makefile	/^DEP := $(OBJ:%.o=%.d)$/;"	m
+DEP	assembler/Makefile	/^DEP := $(OBJ:%.o=%.d)$/;"	m
+DEP_ALL	CPU/Makefile	/^DEP_ALL = $(DEP) $(OBJ_DIR)\/main_CPU.d$/;"	m
+DEP_ALL	assembler/Makefile	/^DEP_ALL = $(DEP) $(OBJ_DIR)\/main_assembler.d$/;"	m
+DIV_CMD	settings/settings.h	/^	DIV_CMD   = 6,$/;"	e	enum:CPU_CMDS
+DR_	CPU/CPU.h	/^		double DR_  = POISON_DOUBLE_CPU;$/;"	m	class:CPU
+E	Makefile	/^export E = $(Q)echo$/;"	m
+EAX_	CPU/CPU.h	/^		double EAX_ = POISON_DOUBLE_CPU;$/;"	m	class:CPU
+EAX_REG	settings/settings.h	/^	EAX_REG = 32,$/;"	e	enum:REGS_CMDS
+EBP_	CPU/CPU.h	/^		char* EBP_ = nullptr;$/;"	m	class:CPU
+EBX_	CPU/CPU.h	/^		double EBX_ = POISON_DOUBLE_CPU;$/;"	m	class:CPU
+EBX_REG	settings/settings.h	/^	EBX_REG = 33,$/;"	e	enum:REGS_CMDS
+ECX_	CPU/CPU.h	/^		double ECX_ = POISON_DOUBLE_CPU;$/;"	m	class:CPU
+ECX_REG	settings/settings.h	/^	ECX_REG = 34,$/;"	e	enum:REGS_CMDS
+EDX_	CPU/CPU.h	/^		double EDX_ = POISON_DOUBLE_CPU;$/;"	m	class:CPU
+EDX_REG	settings/settings.h	/^	EDX_REG = 35,$/;"	e	enum:REGS_CMDS
+END_CMD	settings/settings.h	/^	END_CMD   = 13,$/;"	e	enum:CPU_CMDS
+EPSILON	settings/settings.h	/^static const double EPSILON = 1e-6;$/;"	v
+ERROR	settings/settings.h	/^static const int ERROR        = 0;$/;"	v
+ERRORS_H_INCLUDED	errors/errors.h	3;"	d
+ESP_	CPU/CPU.h	/^		Stack ESP_;$/;"	m	class:CPU
+FLAGS_	CPU/CPU.h	/^		char FLAGS_ = 0;$/;"	m	class:CPU
+FLAGS_H_INCLUDED	flags/flags.h	3;"	d
+FLAGS_H_INCLUDED	labels/flags/flags.h	3;"	d
+FPRINTF_REG	errors/errors.h	13;"	d
+FROM_JMP_CMD	labels/labels.h	/^	FROM_JMP_CMD    = 0,$/;"	e	enum:func_calls
+FROM_MARK_LABEL	labels/labels.h	/^	FROM_MARK_LABEL = 1,$/;"	e	enum:func_calls
+FRST_PASS	assembler/assembler.h	/^	FRST_PASS = 1,$/;"	e	enum:pass_of_asm
+FSQRT_CMD	settings/settings.h	/^	FSQRT_CMD = 7,$/;"	e	enum:CPU_CMDS
+HDR	CPU/Makefile	/^HDR := $(SRC:%.cpp=%.h)$/;"	m
+HDR	assembler/Makefile	/^HDR := $(SRC:%.cpp=%.h)$/;"	m
+HDR_ALL	CPU/Makefile	/^HDR_ALL = $(HDR) $(HEAD_DIR)\/stack.h $(HEAD_DIR)\/txtlib.h $/;"	m
+HDR_ALL	assembler/Makefile	/^HDR_ALL = $(HDR) $(HEAD_DIR)\/txtlib.h $/;"	m
+HDR_DIR	Makefile	/^export HDR_DIR  = $(HEAD_DIR) ..\/CPU ..\/assembler ..\/errors ..\/labels ..\/settings ..\/flags $/;"	m
+HEAD_DIR	Makefile	/^export HEAD_DIR = ..\/..\/include\/headers$/;"	m
+HLT_CMD	settings/settings.h	/^	HLT_CMD   = 10,$/;"	e	enum:CPU_CMDS
+IF_STRCMP_JMP	assembler/assembler.h	35;"	d
+IF_STRCMP_MRK	assembler/assembler.h	59;"	d
+IF_STRCMP_ORD	assembler/assembler.h	28;"	d
+IF_STRCMP_REG	assembler/assembler.h	72;"	d
+IN_CMD	settings/settings.h	/^	IN_CMD    = 8,$/;"	e	enum:CPU_CMDS
+IP_	CPU/CPU.h	/^		int   IP_  = START_IP;$/;"	m	class:CPU
+IR_	CPU/CPU.h	/^		int    IR_  = POISON_INT_CPU;$/;"	m	class:CPU
+JAE_CMD	settings/settings.h	/^	JAE_CMD   = 21,$/;"	e	enum:CPU_CMDS
+JA_CMD	settings/settings.h	/^	JA_CMD    = 22,$/;"	e	enum:CPU_CMDS
+JBE_CMD	settings/settings.h	/^	JBE_CMD   = 19,$/;"	e	enum:CPU_CMDS
+JB_CMD	settings/settings.h	/^	JB_CMD    = 20,$/;"	e	enum:CPU_CMDS
+JE_CMD	settings/settings.h	/^	JE_CMD    = 18,$/;"	e	enum:CPU_CMDS
+JMP_CMD	settings/settings.h	/^	JMP_CMD   = 12,$/;"	e	enum:CPU_CMDS
+JNE_CMD	settings/settings.h	/^	JNE_CMD   = 17,$/;"	e	enum:CPU_CMDS
+LABELS_H_INCLUDED	labels/labels.h	3;"	d
 LAUNCH_MODE	Makefile	/^LAUNCH_MODE = debug$/;"	m
-LIB	Makefile	/^LIB = -lstack -ltxtlib$/;"	m
-LIB_DIR	Makefile	/^LIB_DIR  = ..\/include\/libs$/;"	m
-MARK_LABEL	labels.h	/^static const char MARK_LABEL = ':';$/;"	v
-MARK_SYMB	labels.h	/^static const bool MARK_SYMB = 1;$/;"	v
-MUL_CMD	CPU.h	/^	MUL_CMD   = 5,$/;"	e	enum:CPU_CMDS
-MUL_SIZE	settings.h	/^	MUL_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-NEXT_ELEMENT	settings.h	/^static const int NEXT_ELEMENT = 1;$/;"	v
-NOP_CMD	CPU.h	/^	NOP_CMD   = 11,$/;"	e	enum:CPU_CMDS
-NOP_SIZE	settings.h	/^	NOP_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-NUM_OF_PASS	CPU_assembler.h	/^static const int NUM_OF_PASS	 = 2;$/;"	v
-NUM_OF_REGS	settings.h	/^static const int NUM_OF_REGS = 4;$/;"	v
-OBJ	Makefile	/^OBJ = $(OBJ_ALL) main.o$/;"	m
-OBJ_ALL	Makefile	/^OBJ_ALL = CPU.o   CPU_assembler.o   labels.o   settings.o$/;"	m
-OBJ_POP_SIZE	settings.h	/^	OBJ_POP_SIZE  = 1,$/;"	e	enum:CMDS_SIZE
-OBJ_PUSH_SIZE	settings.h	/^	OBJ_PUSH_SIZE = 1,$/;"	e	enum:CMDS_SIZE
-OBJ_TEST	Makefile	/^OBJ_TEST = $(OBJ_ALL) unit_tests.o   main_tests.o$/;"	m
-OUT_CMD	CPU.h	/^	OUT_CMD   = 2,$/;"	e	enum:CPU_CMDS
-OUT_SIZE	settings.h	/^	OUT_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-PLACE_REGS	settings.h	/^enum PLACE_REGS {$/;"	g
-POINTER_ON_	settings.h	14;"	d
-POISON_DOUBLE_CPU	settings.h	/^static const double POISON_DOUBLE_CPU = NAN;$/;"	v
-POISON_INT_CPU	settings.h	/^static const int    POISON_INT_CPU    = 0x7F3428BE;$/;"	v
-POISON_POSITION	labels.h	/^static const int  POISON_POSITION = -1;$/;"	v
-POPR_CMD	CPU.h	/^	POPR_CMD  = 15,$/;"	e	enum:CPU_CMDS
-POP_CMD	CPU.h	/^	POP_CMD   = 9,$/;"	e	enum:CPU_CMDS
-POP_SIZE	settings.h	/^	POP_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-POP_TWO_VARIABLES	settings.h	8;"	d
-PROJ_LIB	Makefile	/^PROJ_LIB = libCPU.a$/;"	m
-PUSHR_CMD	CPU.h	/^	PUSHR_CMD = 14,$/;"	e	enum:CPU_CMDS
-PUSH_CMD	CPU.h	/^	PUSH_CMD  = 1,$/;"	e	enum:CPU_CMDS
-PUSH_SIZE	settings.h	/^	PUSH_SIZE     = 4,$/;"	e	enum:CMDS_SIZE
-Q	Makefile	/^Q = @  $/;"	m
-RAX_PLACE	settings.h	/^	RAX_PLACE = 0,$/;"	e	enum:PLACE_REGS
-RAX_REG	CPU.h	/^	RAX_REG = 32,$/;"	e	enum:REGS
-RBX_PLACE	settings.h	/^	RBX_PLACE = 1,$/;"	e	enum:PLACE_REGS
-RBX_REG	CPU.h	/^	RBX_REG = 33,$/;"	e	enum:REGS
-RCX_PLACE	settings.h	/^	RCX_PLACE = 2,$/;"	e	enum:PLACE_REGS
-RCX_REG	CPU.h	/^	RCX_REG = 34,$/;"	e	enum:REGS
-RDX_PLACE	settings.h	/^	RDX_PLACE = 3,$/;"	e	enum:PLACE_REGS
-RDX_REG	CPU.h	/^	RDX_REG = 35,$/;"	e	enum:REGS
-REGS	CPU.h	/^enum REGS {$/;"	g
-REG_SIZE	settings.h	/^	REG_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
+LIB_ALL	CPU/Makefile	/^LIB_ALL = -lstack -ltxtlib$/;"	m
+LIB_ALL	assembler/Makefile	/^LIB_ALL = -ltxtlib$/;"	m
+LIB_DIR	Makefile	/^export LIB_DIR  = ..\/..\/include\/libs$/;"	m
+Labels	labels/labels.cpp	/^Labels::Labels(void) $/;"	f	class:Labels
+Labels	labels/labels.h	/^class Labels {$/;"	c
+MARK_LABEL	labels/labels.h	/^static const char MARK_LABEL      = ':';$/;"	v
+MODULES	Makefile	/^MODULES  = CPU assembler errors labels settings flags $/;"	m
+MUL_CMD	settings/settings.h	/^	MUL_CMD   = 5,$/;"	e	enum:CPU_CMDS
+NEXT_ELEMENT	settings/settings.h	/^static const int NEXT_ELEMENT = 1;$/;"	v
+NOP_CMD	settings/settings.h	/^	NOP_CMD   = 11,$/;"	e	enum:CPU_CMDS
+NUM_OF_FLAGS	flags/flags.h	/^static const int NUM_OF_FLAGS = 6;$/;"	v
+NUM_OF_FLAGS	labels/flags/flags.h	/^static const int NUM_OF_FLAGS = 6;$/;"	v
+OBJ	CPU/Makefile	/^OBJ  = $(addprefix $(OBJ_DIR)\/, $(notdir $(SRC)))$/;"	m
+OBJ	CPU/Makefile	/^OBJ := $(OBJ:%.cpp=%.o)$/;"	m
+OBJ	assembler/Makefile	/^OBJ  = $(addprefix $(OBJ_DIR)\/, $(notdir $(SRC)))$/;"	m
+OBJ	assembler/Makefile	/^OBJ := $(OBJ:%.cpp=%.o)$/;"	m
+OBJ_ALL	CPU/Makefile	/^OBJ_ALL = $(OBJ) $(OBJ_DIR)\/main_CPU.o$/;"	m
+OBJ_ALL	assembler/Makefile	/^OBJ_ALL = $(OBJ) $(OBJ_DIR)\/main_assembler.o$/;"	m
+OBJ_DIR	Makefile	/^export OBJ_DIR  = ..\/obj$/;"	m
+OF	flags/flags.h	23;"	d
+OF	labels/flags/flags.h	23;"	d
+OUT_CMD	settings/settings.h	/^	OUT_CMD   = 2,$/;"	e	enum:CPU_CMDS
+PF	flags/flags.h	19;"	d
+PF	labels/flags/flags.h	19;"	d
+POINTER_ON_	settings/settings.h	20;"	d
+POISON_DOUBLE_CPU	settings/settings.h	/^static const double POISON_DOUBLE_CPU = NAN;$/;"	v
+POISON_INT_CPU	settings/settings.h	/^static const int    POISON_INT_CPU    = 0x7F3428BE;$/;"	v
+POISON_POSITION	labels/labels.h	/^static const int  POISON_POSITION = -1;$/;"	v
+POPR_CMD	settings/settings.h	/^	POPR_CMD  = 15,$/;"	e	enum:CPU_CMDS
+POP_CMD	settings/settings.h	/^	POP_CMD   = 9,$/;"	e	enum:CPU_CMDS
+POP_TWO_VARIABLES	settings/settings.h	8;"	d
+PROJECTS	Makefile	/^PROJECTS = CPU assembler$/;"	m
+PUSHR_CMD	settings/settings.h	/^	PUSHR_CMD = 14,$/;"	e	enum:CPU_CMDS
+PUSH_CMD	settings/settings.h	/^	PUSH_CMD  = 1,$/;"	e	enum:CPU_CMDS
+PUSH_TWO_VARIABLES	settings/settings.h	14;"	d
+Q	Makefile	/^export Q = @  $/;"	m
+READING_DATA	assembler/assembler.h	80;"	d
+RECREATE_DUMP_CPU_FILE	errors/errors.h	7;"	d
+REGS_CMDS	settings/settings.h	/^enum REGS_CMDS {$/;"	g
 RELEASE_MODE	Makefile	/^RELEASE_MODE = -g0 -Ofast$/;"	m
-SECOND_PASS	CPU_assembler.h	/^static const int SECOND_PASS = 1;$/;"	v
-SETTINGS_H_INCLUDED	settings.h	3;"	d
-SRC	Makefile	/^SRC = $(SRC_ALL) main.cpp$/;"	m
-SRC_ALL	Makefile	/^SRC_ALL = CPU.cpp CPU_assembler.cpp labels.cpp settings.cpp$/;"	m
-SRC_TEST	Makefile	/^SRC_TEST = $(SRC_ALL) unit_tests.cpp main_tests.cpp$/;"	m
-START_CAPACITY	settings.h	/^static const int    START_CAPACITY    = 8;$/;"	v
-SUB_CMD	CPU.h	/^	SUB_CMD   = 4,$/;"	e	enum:CPU_CMDS
-SUB_SIZE	settings.h	/^	SUB_SIZE      = 3,$/;"	e	enum:CMDS_SIZE
-TXT_DIR	Makefile	/^TXT_DIR  = txt$/;"	m
+SCND_PASS	assembler/assembler.h	/^	SCND_PASS = 2,$/;"	e	enum:pass_of_asm
+SETTINGS_H_INCLUDED	settings/settings.h	3;"	d
+SET_FLAG	flags/flags.h	32;"	d
+SET_FLAG	labels/flags/flags.h	32;"	d
+SF	flags/flags.h	22;"	d
+SF	labels/flags/flags.h	22;"	d
+SRC	CPU/Makefile	/^SRC  = CPU.cpp ..\/errors\/errors.cpp \\$/;"	m
+SRC	assembler/Makefile	/^SRC  = assembler.cpp ..\/labels\/labels.cpp \\$/;"	m
+SRC_ALL	CPU/Makefile	/^SRC_ALL = $(SRC)            main_CPU.cpp$/;"	m
+SRC_ALL	assembler/Makefile	/^SRC_ALL = $(SRC)            main_assembler.cpp$/;"	m
+START_CAPACITY	settings/settings.h	/^static const int    START_CAPACITY    = 4;$/;"	v
+START_IP	settings/settings.h	/^static const int START_IP = sizeof(long long int) + sizeof(int);$/;"	v
+SUB_CMD	settings/settings.h	/^	SUB_CMD   = 4,$/;"	e	enum:CPU_CMDS
+TXT_DIR	Makefile	/^export TXT_DIR  = ..\/txt$/;"	m
 VALGRIND_FLAGS	Makefile	/^VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v$/;"	m
-WARNINGS	Makefile	/^WARNINGS = -Wall -Wextra $/;"	m
-add_label	labels.cpp	/^void labels::add_label(char* name_of_label, int position)$/;"	f	class:labels
-array_of_labels	labels.h	/^		label_info_t* array_of_labels = nullptr;$/;"	m	class:labels
-assembling_file	CPU_assembler.cpp	/^void assembling_file(const char* file_path, const char* source)  $/;"	f
-buffer_cmd	CPU.h	/^	char*  buffer_cmd 	     = nullptr; $/;"	m	struct:CPU_t
-capacity	labels.h	/^		size_t        capacity        = 0;$/;"	m	class:labels
-check_label_jmp	labels.cpp	/^void labels::check_label_jmp(char* name_of_label, int position)$/;"	f	class:labels
-check_label_mark	labels.cpp	/^void labels::check_label_mark(char* name_of_label, int position)$/;"	f	class:labels
-concat	settings.cpp	/^char* concat(const char* file_path, const char* tag, const char* source)$/;"	f
-find_label	labels.cpp	/^int labels::find_label(char* name_of_label) $/;"	f	class:labels
-fopen_file_with_path	settings.cpp	/^FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* source, const char* mode)$/;"	f
-label_counter	labels.h	/^		size_t        label_counter   = 0;$/;"	m	class:labels
-label_info_t	labels.h	/^struct label_info_t {$/;"	s
-labels	labels.cpp	/^labels::labels(void) $/;"	f	class:labels
-labels	labels.h	/^class labels {$/;"	c
-labels_dump	labels.cpp	/^void labels::labels_dump(void)$/;"	f	class:labels
-main	main.cpp	/^int main() {$/;"	f
-main	main_tests.cpp	/^int main() {$/;"	f
-name_of_label	labels.h	/^	char* name_of_label = nullptr;$/;"	m	struct:label_info_t
-position	labels.h	/^	int   position      = POISON_POSITION;$/;"	m	struct:label_info_t
-realloc_array_of_label	labels.cpp	/^void labels::realloc_array_of_label(void)$/;"	f	class:labels
-regs	CPU.h	/^	double regs[NUM_OF_REGS] = {};$/;"	m	struct:CPU_t
-stack_CPU	CPU.h	/^	my_stack_t stack_CPU = {};$/;"	m	struct:CPU_t
-unit_test_1	unit_tests.cpp	/^void unit_test_1(const char* file_path, const char* source) {$/;"	f
-unit_test_2	unit_tests.cpp	/^void unit_test_2(const char* file_path, const char* obj_source) {$/;"	f
-~labels	labels.cpp	/^labels::~labels(void)$/;"	f	class:labels
+WARNINGS	Makefile	/^export WARNINGS = -Wall -Wextra $/;"	m
+ZF	flags/flags.h	21;"	d
+ZF	labels/flags/flags.h	21;"	d
+add_CPU_info_in_buf	assembler/assembler.cpp	/^void add_CPU_info_in_buf(char* buffer_data, int num_of_bytes)$/;"	f
+add_label	labels/labels.cpp	/^void Labels::add_label(char* name_of_label, int pos_to_jmp)$/;"	f	class:Labels
+array_of_labels	labels/labels.h	/^		label_info_t* array_of_labels = nullptr;$/;"	m	class:Labels
+assembling_file	assembler/assembler.cpp	/^void assembling_file(const char* file_path, const char* source)  $/;"	f
+capacity	labels/labels.h	/^		size_t        capacity        = 0;$/;"	m	class:Labels
+check_label	labels/labels.cpp	/^int Labels::check_label(char* name_of_label, int pos_to_jmp, int func_call)$/;"	f	class:Labels
+concat	settings/settings.cpp	/^char* concat(const char* file_path, const char* tag, const char* source)$/;"	f
+dump	errors/errors.cpp	/^void CPU::dump(void)$/;"	f	class:CPU
+find_label	labels/labels.cpp	/^int Labels::find_label(char* name_of_label) $/;"	f	class:Labels
+fopen_file_with_path	settings/settings.cpp	/^FILE* fopen_file_with_path(const char* file_path, const char* tag, const char* source, const char* mode)$/;"	f
+func_calls	labels/labels.h	/^enum func_calls {$/;"	g
+is_different	settings/settings.cpp	/^double is_different(double value_1, double value_2)$/;"	f
+label_counter	labels/labels.h	/^		size_t        label_counter   = 0;$/;"	m	class:Labels
+label_info_t	labels/labels.h	/^struct label_info_t {$/;"	s
+labels_dump	labels/labels.cpp	/^void Labels::labels_dump(void)$/;"	f	class:Labels
+main	CPU/main_CPU.cpp	/^int main() {$/;"	f
+main	assembler/main_assembler.cpp	/^int main() {$/;"	f
+main	unit_tests/main_tests.cpp	/^int main() {$/;"	f
+name_of_label	labels/labels.h	/^	char* name_of_label = nullptr;$/;"	m	struct:label_info_t
+parsing_label	labels/labels.cpp	/^void Labels::parsing_label(char* name_of_label, int func_call) $/;"	f	class:Labels
+pass_of_asm	assembler/assembler.h	/^enum pass_of_asm {$/;"	g
+pass_of_assembler	assembler/assembler.cpp	/^void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels, char** buffer_data)$/;"	f
+pos_to_jmp	labels/labels.h	/^	int   pos_to_jmp    = POISON_POSITION;$/;"	m	struct:label_info_t
+realloc_array_of_label	labels/labels.cpp	/^void Labels::realloc_array_of_label(void)$/;"	f	class:Labels
+run	CPU/CPU.cpp	/^void CPU::run(void)$/;"	f	class:CPU
+set_CF	flags/flags.cpp	/^void CPU::set_CF(void)$/;"	f	class:CPU
+set_CF	labels/flags/flags.cpp	/^void CPU::set_CF(void)$/;"	f	class:CPU
+set_ZF	flags/flags.cpp	/^void CPU::set_ZF(void)$/;"	f	class:CPU
+set_ZF	labels/flags/flags.cpp	/^void CPU::set_ZF(void)$/;"	f	class:CPU
+unit_test_1	unit_tests/unit_tests.cpp	/^void unit_test_1(const char* file_path, const char* source) {$/;"	f
+unit_test_2	unit_tests/unit_tests.cpp	/^void unit_test_2(const char* file_path, const char* obj_source) {$/;"	f
+~CPU	CPU/CPU.cpp	/^CPU::~CPU(void) $/;"	f	class:CPU
+~Labels	labels/labels.cpp	/^Labels::~Labels(void)$/;"	f	class:Labels

@@ -40,24 +40,14 @@ $(BIN): $(OBJ_ALL)
 
 #
 ## compiling
+$(OBJ_DIR)/%.o: %.cpp
+	$(E) "    C++:         " $@
+	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
+
 $(OBJ_DIR)/main_CPU.o: main_CPU.cpp CPU.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/CPU.o: CPU.cpp CPU.h settings.h flags.h 
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/errors.o: errors.cpp CPU.h errors.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
+$(OBJ_DIR)/CPU.o:      CPU.cpp      CPU.h settings.h flags.h 
+$(OBJ_DIR)/errors.o:   errors.cpp   CPU.h errors.h
 $(OBJ_DIR)/settings.o: settings.cpp CPU.h settings.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/flags.o:	flags.cpp CPU.h flags.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
+$(OBJ_DIR)/flags.o:	   flags.cpp    CPU.h flags.h
 
 -include ${DEP_ALL} 

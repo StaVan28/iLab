@@ -40,24 +40,15 @@ $(BIN): $(OBJ_ALL)
 
 #
 ## compiling
+$(OBJ_DIR)/%.o: %.cpp
+	$(E) "    C++:         " $@
+	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
+
+
 $(OBJ_DIR)/main_assembler.o: main_assembler.cpp assembler.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/assembler.o: assembler.cpp assembler.h  txtlib.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/labels.o: labels.cpp labels.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/settings.o: settings.cpp CPU.h settings.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
-
-$(OBJ_DIR)/flags.o:	flags.cpp CPU.h flags.h
-	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
+$(OBJ_DIR)/assembler.o:      assembler.cpp      assembler.h  txtlib.h
+$(OBJ_DIR)/labels.o:         labels.cpp         labels.h
+$(OBJ_DIR)/settings.o:       settings.cpp       CPU.h settings.h
+$(OBJ_DIR)/flags.o:	         flags.cpp          CPU.h flags.h
 
 -include ${DEP_ALL} 
