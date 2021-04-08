@@ -17,14 +17,15 @@ export Q = @
 export E = $(Q)echo
 
 # bins
-export BIN_ASM = ./bin/assembler
-export BIN_CPU = ./bin/CPU
+BIN_ASM = ./bin/assembler
+BIN_CPU = ./bin/CPU
 
 # path for recursive directories
-export BIN_DIR  = ../bin
-export OBJ_DIR  = ../obj
 export HEAD_DIR = ../../include/headers
 export LIB_DIR  = ../../include/libs
+
+export BIN_DIR  = ../bin
+export OBJ_DIR  = ../obj
 export TXT_DIR  = ../txt
 export HDR_DIR  = $(HEAD_DIR) ../CPU ../assembler ../errors ../labels ../settings ../flags 
 
@@ -33,9 +34,9 @@ MODULES  = CPU assembler errors labels settings flags
 PROJECTS = CPU assembler
 
 # compiler settings
-export CXX      = g++ -std=c++14
+export CXX      = g++ -std=c++14 
 export WARNINGS = -Wall -Wextra 
-export CXXFLAGS = 
+export CXXFLAGS = -MMD
 
 DEBUG_MODE   = -g3 -O0 	
 RELEASE_MODE = -g0 -Ofast
@@ -69,31 +70,31 @@ default: print_logs
 print_logs: $(LAUNCH_MODE)
 
 debug: $(PROJECTS) 
-	$(E) "  LAUNCH(DBG):" $(BIN_ASM)
-	$(E) "  LAUNCH(DBG):" $(BIN_CPU)
+	$(E) "    LAUNCH(DBG):" $(BIN_ASM)
+	$(E) "    LAUNCH(DBG):" $(BIN_CPU)
 	$(Q) valgrind $(BIN_ASM)
 	$(Q) valgrind $(BIN_CPU)
 
 release: clean $(PROJECTS)  
-	$(E) "  LAUNCH(RLS):" $(BIN_ASM)
-	$(E) "  LAUNCH(RLS):" $(BIN_CPU)
+	$(E) "    LAUNCH(RLS):" $(BIN_ASM)
+	$(E) "    LAUNCH(RLS):" $(BIN_CPU)
 	$(Q) $(BIN_ASM)
 	$(Q) $(BIN_CPU)
 
 CPU:
-	$(E) "  MAKE RECUR:" $(BIN_CPU)
+	$(E) "    MAKE RECUR(compile):" $(BIN_CPU)
 	$(Q) $(MAKE) -C $@
 
 CPU_launch: CPU
-	$(E) "LAUNCH(ONLY):" $(BIN_CPU)
+	$(E) "    LAUNCH(ONLY):" $(BIN_CPU)
 	$(Q) valgrind $(BIN_CPU)
 
 assembler:
-	$(E) "  MAKE RECUR:" $(BIN_ASM)
+	$(E) "    MAKE RECUR(compile):" $(BIN_ASM)
 	$(Q) $(MAKE) -C $@	
 
 assembler_launch: assembler
-	$(E) "LAUNCH(ONLY):" $(BIN_ASM)
+	$(E) "    LAUNCH(ONLY):" $(BIN_ASM)
 	$(Q) valgrind $(BIN_ASM)
 
 #
@@ -101,7 +102,7 @@ assembler_launch: assembler
 .PHONY: clean errors tags rebuild git no_valgrind unit_tests log full_check_valgrind print_logs
 
 clean:
-	$(E) "  CLEAN"
+	$(E) "    CLEAN"
 	$(Q) rm -f $(BIN_ASM) $(BIN_CPU)  tags ./obj/*.o
 
 tags: ${SRC}
@@ -109,17 +110,17 @@ tags: ${SRC}
 	$(Q) ctags -R -f .tags
 
 gdb_asm: $(BIN_ASM)
-	$(E) "  GDB:        " $(BIN_ASM)
+	$(E) "    GDB:        " $(BIN_ASM)
 	$(Q) gdb $(BIN_ASM) 
 
 gdb_cpu: $(BIN_CPU)
-	$(E) "  GDB:        " $(BIN_CPU)
+	$(E) "    GDB:        " $(BIN_CPU)
 	$(Q) gdb $(BIN_CPU)
 
 rebuild: clean default
 
 git:
-	$(E) "  AUTO COMMIT  "
+	$(E) "    AUTO COMMIT  "
 	$(Q) git add --all
 	$(Q) git commit -m "auto commit: 4_CPU"
 

@@ -2,7 +2,7 @@
 ******************************************************
 		CPU:
 
-CPU (OK) [0x1ffefffc40] 
+CPU (OK) [0x1ffefffc90] 
 
 IP = 67
 
@@ -18,7 +18,7 @@ FLAGS:
  CF PF AF ZF SF OF
   0  0  0  1  0  0 
 
-Pointer on stack = [0x1ffefffc88]
+Pointer on stack = [0x1ffefffcd8]
 For see stack please call stack dump
 
 
