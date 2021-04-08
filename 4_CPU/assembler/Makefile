@@ -25,6 +25,9 @@ DEP_ALL = $(DEP) $(OBJ_DIR)/main_assembler.d
 HDR_ALL = $(HDR) $(HEAD_DIR)/txtlib.h 
 LIB_ALL = -ltxtlib
 
+vpath %.cpp $(HDR_DIR)
+vpath %.h   $(HDR_DIR)
+
 #--------------------------------------------------------------------------------------
 # RULES
 #--------------------------------------------------------------------------------------
@@ -41,19 +44,19 @@ $(OBJ_DIR)/main_assembler.o: main_assembler.cpp assembler.h
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/assembler.o: assembler.cpp assembler.h  $(HEAD_DIR)/txtlib.h
+$(OBJ_DIR)/assembler.o: assembler.cpp assembler.h  txtlib.h
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/labels.o: ../labels/labels.cpp ../labels/labels.h
+$(OBJ_DIR)/labels.o: labels.cpp labels.h
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/settings.o: ../settings/settings.cpp ../CPU/CPU.h ../settings/settings.h
+$(OBJ_DIR)/settings.o: settings.cpp CPU.h settings.h
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/flags.o:	../flags/flags.cpp ../CPU/CPU.h ../flags/flags.h
+$(OBJ_DIR)/flags.o:	flags.cpp CPU.h flags.h
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
