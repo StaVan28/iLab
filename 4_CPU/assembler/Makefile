@@ -12,17 +12,14 @@
 
 # source
 BIN  = ../bin/assembler
-SRC  = assembler.cpp ../labels/labels.cpp \
-		../settings/settings.cpp ../flags/flags.cpp
+SRC  = assembler.cpp ../labels/labels.cpp ../settings/settings.cpp ../flags/flags.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
-DEP := $(OBJ:%.o=%.d)
-HDR := $(SRC:%.cpp=%.h)
 
-ыыSRC_ALL = $(SRC)          main_assembler.cpp
-OBJ_ALL = $(OBJ) $(OBJ_DIR)/main_assembler.o
-DEP_ALL = $(DEP) $(OBJ_DIR)/main_assembler.d
-HDR_ALL = $(HDR) $(HEAD_DIR)/txtlib.h 
+SRC_ALL  = $(SRC) main_assembler.cpp
+OBJ_ALL  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC_ALL)))
+OBJ_ALL := $(OBJ_ALL:%.cpp=%.o)
+DEP_ALL  = $(OBJ_ALL:%.o=%.d)
 LIB_ALL = -ltxtlib
 
 vpath %.cpp $(HDR_DIR)

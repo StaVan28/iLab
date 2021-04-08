@@ -129,6 +129,7 @@ log:
 	$(Q) git log --oneline --all --graph
 
 print_logs:
+	$(E) "    PRINT LOGS  "
 	$(Q) cat ./txt/dump_CPU.txt
 	$(Q) cat ./txt/dump_stack.txt
 	$(Q) cat ./txt/dump_labels.txt
