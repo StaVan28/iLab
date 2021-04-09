@@ -18,6 +18,52 @@
 
 //-----------------------------------------------------------------------------
 
+#define BINARY_OPERATION_CPU(operation, value1, value2, stack)	\
+	POP_TWO_VARIABLES(value1, value2, stack);					\
+																\
+	stack.push(value1 operation value2);						\
+																\
+	IP_ += sizeof(char);										\
+		break;													\
+
+//!
+
+#define UNARY_OPERATION_CPU(operation, value1, stack)	\
+	value1 = stack.pop();								\
+														\
+	stack.push(operation(value1));						\
+														\
+	IP_ += sizeof(char);								\
+	break;												\
+
+//!
+
+#define JUMPS_COMMANDS_CPU(condition)		\
+	IP_ += sizeof(char);					\
+											\
+	if (condition)							\
+		IP_  = POINTER_ON_(EBP_, IP_, int);	\
+	else 									\
+		IP_ += sizeof(int);					\
+											\
+	break;									\
+
+//!
+
+#define PUSH_REGISTERS(reg)					\
+	case reg##REG:	ESP_.push(reg);			\
+					IP_ += sizeof(char);	\
+					break;					\
+
+//!
+
+#define POP_REGISTERS(reg)					\
+	case reg##REG:	reg = DR_;				\
+					IP_ += sizeof(char);	\
+					break;					\
+
+//-----------------------------------------------------------------------------
+
 class CPU {
 
 	private:

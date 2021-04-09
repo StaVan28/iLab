@@ -20,7 +20,7 @@ SRC_ALL  = $(SRC) main_assembler.cpp
 OBJ_ALL  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC_ALL)))
 OBJ_ALL := $(OBJ_ALL:%.cpp=%.o)
 DEP_ALL  = $(OBJ_ALL:%.o=%.d)
-LIB_ALL = -ltxtlib
+LIB_ALL  = -ltxtlib
 
 vpath %.cpp $(HDR_DIR)
 vpath %.h   $(HDR_DIR)

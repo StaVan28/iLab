@@ -84,21 +84,10 @@ void CPU::run(void)
 							IR_ = POINTER_ON_(EBP_, IP_, char);
 							
 							switch(IR_) {												 
-								case EAX_REG:	ESP_.push(EAX_);
-												IP_ += sizeof(char);
-												break;
-
-								case EBX_REG:	ESP_.push(EBX_);
-												IP_ += sizeof(char);
-												break;
-
-								case ECX_REG:	ESP_.push(ECX_);
-												IP_ += sizeof(char);
-												break;
-
-								case EDX_REG:	ESP_.push(EDX_);
-												IP_ += sizeof(char);
-												break;
+								PUSH_REGISTERS(EAX_)												 
+								PUSH_REGISTERS(EBX_)												 
+								PUSH_REGISTERS(ECX_)												 
+								PUSH_REGISTERS(EDX_)
 							}
 							//проверка регистр
 
@@ -115,21 +104,10 @@ void CPU::run(void)
 							IR_ = POINTER_ON_(EBP_, IP_, char);
 
 							switch(IR_) {
-								case EAX_REG:	EAX_ = DR_;
-												IP_ += sizeof(char);
-												break;
-								
-								case EBX_REG:	EBX_ = DR_;
-												IP_ += sizeof(char);
-												break;												
-									
-								case ECX_REG:	ECX_ = DR_;
-												IP_ += sizeof(char);
-												break;
-								
-								case EDX_REG:	EDX_ = DR_;
-												IP_ += sizeof(char);
-												break;
+								POP_REGISTERS(EAX_)
+								POP_REGISTERS(EBX_)
+								POP_REGISTERS(ECX_)
+								POP_REGISTERS(EDX_)
 							}
 							//проверка на ошибки
 
@@ -150,41 +128,6 @@ void CPU::run(void)
 
 						   	IP_ += sizeof(char);
 						   	break;
- 
-			case ADD_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
-
-							ESP_.push(DR_ + DAR_);
-
-						   	IP_ += sizeof(char);
-						   	break;
-
-			case SUB_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
-
-							ESP_.push(DAR_ - DR_);
-
-						    IP_ += sizeof(char);
-						   	break;
-
-			case MUL_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
-
-							ESP_.push(DR_ * DAR_);
-
-						   	IP_ += sizeof(char);
-						   	break;
-
-			case DIV_CMD:	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
-
-							ESP_.push(DAR_ / DR_);
-
-						   	IP_ += sizeof(char);
-						   	break;
-
-			case FSQRT_CMD: DR_ = ESP_.pop();
-
-						   	ESP_.push(sqrt(DR_));
-
-						   	IP_ += sizeof(char);
-						   	break;
 
 			case CMP_CMD: 	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
 
@@ -195,65 +138,30 @@ void CPU::run(void)
 
 						   	IP_ += sizeof(char);
 						   	break;
+ 
+			case ADD_CMD:	BINARY_OPERATION_CPU(+, DR_, DAR_, ESP_)
 
-			case JMP_CMD:	IP_ += sizeof(char); 
+			case SUB_CMD:	BINARY_OPERATION_CPU(-, DR_, DAR_, ESP_)
 
-							IP_ = POINTER_ON_(EBP_, IP_, int);
-							break;
+			case MUL_CMD:	BINARY_OPERATION_CPU(*, DR_, DAR_, ESP_)
 
-			case JNE_CMD:	IP_ += sizeof(char);
+			case DIV_CMD:	BINARY_OPERATION_CPU(/, DR_, DAR_, ESP_)
 
-							if (FLAGS_ & ZF)
-								IP_ += sizeof(int);
-							else 
-								IP_  = POINTER_ON_(EBP_, IP_, int);
+			case FSQRT_CMD: UNARY_OPERATION_CPU(sqrt, DR_, ESP_)
 
-							break;
+			case JMP_CMD:	JUMPS_COMMANDS_CPU(true)
 
-			case JE_CMD:	IP_ += sizeof(char);
+			case JE_CMD:	JUMPS_COMMANDS_CPU(  FLAGS_ & ZF )	
 
-							if (FLAGS_ & ZF)
-								IP_  = POINTER_ON_(EBP_, IP_, int);
-							else 
-								IP_ += sizeof(int);
+			case JNE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & ZF))
 
-							break;
+			case JB_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF) )
 
-			case JBE_CMD:	IP_ += sizeof(char); 
+			case JBE_CMD:	JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) || (FLAGS_ & CF)))
 
-							if ((FLAGS_ & ZF) || (FLAGS_ & CF))
-								IP_  = POINTER_ON_(EBP_, IP_, int);
-							else 
-								IP_ += sizeof(int);
+			case JA_CMD:	JUMPS_COMMANDS_CPU(  FLAGS_ & CF )
 
-							break;
-
-			case JB_CMD:	IP_ += sizeof(char); 
-
-							if ((FLAGS_ & ZF) || (FLAGS_ & CF))
-								IP_ += sizeof(int);
-							else 
-								IP_  = POINTER_ON_(EBP_, IP_, int);
-
-							break;
-
-			case JAE_CMD:	IP_ += sizeof(char); 
-
-							if (FLAGS_ & CF)
-								IP_ += sizeof(int);
-							else 
-								IP_  = POINTER_ON_(EBP_, IP_, int);
-
-							break;
-
-			case JA_CMD:	IP_ += sizeof(char);
-
-							if (FLAGS_ & ZF)
-								IP_  = POINTER_ON_(EBP_, IP_, int);
-							else 
-								IP_ += sizeof(int);
-
-							break;
+			case JAE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & CF))
 
 			case NOP_CMD:	IP_ += sizeof(char);
 							break;
@@ -261,8 +169,6 @@ void CPU::run(void)
 			default:
 							// error command 
 							printf("default command? check buffer\n");
-							printf("IP_ = %d\n", IP_);
-							return;
 							break;								
 		} 
 	}
