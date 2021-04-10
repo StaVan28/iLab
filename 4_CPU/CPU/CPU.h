@@ -18,23 +18,23 @@
 
 //-----------------------------------------------------------------------------
 
-#define BINARY_OPERATION_CPU(operation, value1, value2, stack)	\
-	POP_TWO_VARIABLES(value1, value2, stack);					\
-																\
-	stack.push(value1 operation value2);						\
-																\
-	IP_ += sizeof(char);										\
-		break;													\
+#define BINARY_OPERATION_CPU(operation)	\
+	POP_TWO_VARIABLES(DR_, DAR_, ESP_);	\
+										\
+	ESP_.push(DAR_ operation DR_);		\
+										\
+	IP_ += sizeof(char);				\
+	break;								\
 
 //!
 
-#define UNARY_OPERATION_CPU(operation, value1, stack)	\
-	value1 = stack.pop();								\
-														\
-	stack.push(operation(value1));						\
-														\
-	IP_ += sizeof(char);								\
-	break;												\
+#define UNARY_OPERATION_CPU(operation)	\
+	DR_ = ESP_.pop();					\
+										\
+	ESP_.push(operation(DR_));			\
+										\
+	IP_ += sizeof(char);				\
+	break;								\
 
 //!
 

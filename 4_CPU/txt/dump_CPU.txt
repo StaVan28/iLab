@@ -4,7 +4,7 @@
 
 CPU (OK) [0x1ffefffc90] 
 
-IP = 67
+IP = 23
 
 EBP(buffer_cmd) [0x5b814e0]
 
@@ -16,7 +16,7 @@ Regs
 
 FLAGS:
  CF PF AF ZF SF OF
-  0  0  0  1  0  0 
+  0  0  0  0  0  0 
 
 Pointer on stack = [0x1ffefffcd8]
 For see stack please call stack dump

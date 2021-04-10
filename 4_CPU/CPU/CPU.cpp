@@ -139,28 +139,21 @@ void CPU::run(void)
 						   	IP_ += sizeof(char);
 						   	break;
  
-			case ADD_CMD:	BINARY_OPERATION_CPU(+, DR_, DAR_, ESP_)
+			case ADD_CMD:	BINARY_OPERATION_CPU(+)
 
-			case SUB_CMD:	BINARY_OPERATION_CPU(-, DR_, DAR_, ESP_)
+			case SUB_CMD:	BINARY_OPERATION_CPU(-)
 
-			case MUL_CMD:	BINARY_OPERATION_CPU(*, DR_, DAR_, ESP_)
+			case MUL_CMD:	BINARY_OPERATION_CPU(*)
 
-			case DIV_CMD:	BINARY_OPERATION_CPU(/, DR_, DAR_, ESP_)
+			case DIV_CMD:	BINARY_OPERATION_CPU(/)
 
-			case FSQRT_CMD: UNARY_OPERATION_CPU(sqrt, DR_, ESP_)
+			case FSQRT_CMD: UNARY_OPERATION_CPU(sqrt)
 
 			case JMP_CMD:	JUMPS_COMMANDS_CPU(true)
 
 			case JE_CMD:	JUMPS_COMMANDS_CPU(  FLAGS_ & ZF )	
 
-			case JNE_CMD:	IP_ += sizeof(char);					
-											
-							if (FLAGS_ & ZF) 						
-								IP_ += sizeof(int);					
-							else 									
-								IP_  = POINTER_ON_(EBP_, IP_, int);
-																	
-							break;									
+			case JNE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & ZF))									
 
 			case JB_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF) )
 
