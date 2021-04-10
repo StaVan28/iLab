@@ -114,6 +114,13 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 
 		else IF_STRCMP_ORD(CMP_CMD,   "cmp")
 
+		else IF_STRCMP_ORD(SIN_CMD,   "sin")
+
+		else IF_STRCMP_ORD(COS_CMD,   "cos")
+
+		else IF_STRCMP_ORD(NEG_CMD,   "neg")
+
+
 		// jmps
 		else IF_STRCMP_JMP(JMP_CMD,   "jmp")
 

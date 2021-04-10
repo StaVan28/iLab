@@ -149,6 +149,12 @@ void CPU::run(void)
 
 			case FSQRT_CMD: UNARY_OPERATION_CPU(sqrt)
 
+			case SIN_CMD: 	UNARY_OPERATION_CPU(sin)
+
+			case COS_CMD: 	UNARY_OPERATION_CPU(cos)
+
+			case NEG_CMD: 	UNARY_OPERATION_CPU(-)
+
 			case JMP_CMD:	JUMPS_COMMANDS_CPU(true)
 
 			case JE_CMD:	JUMPS_COMMANDS_CPU(  FLAGS_ & ZF )	
