@@ -7,7 +7,7 @@ Pointer line_t structs: 0x5b81340
 
 Number of strings = 21
 Number of structs = 33
-Number of symbols = 166
+Number of symbols = 165
 Number of words   = 33
 
 [Number in structs]{Real number}(Length)

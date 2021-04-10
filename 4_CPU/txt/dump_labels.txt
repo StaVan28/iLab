@@ -4,7 +4,7 @@
 
 Pointer array of labels: 0x5b82840
 
-Capacity      = 4
+capacity_       = 4
 Label counter = 1
 
 {Number in array}[position]

@@ -153,7 +153,14 @@ void CPU::run(void)
 
 			case JE_CMD:	JUMPS_COMMANDS_CPU(  FLAGS_ & ZF )	
 
-			case JNE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & ZF))
+			case JNE_CMD:	IP_ += sizeof(char);					
+											
+							if (FLAGS_ & ZF) 						
+								IP_ += sizeof(int);					
+							else 									
+								IP_  = POINTER_ON_(EBP_, IP_, int);
+																	
+							break;									
 
 			case JB_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF) )
 

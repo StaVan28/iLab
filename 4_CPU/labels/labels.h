@@ -27,9 +27,9 @@ class Labels {
 
 	private:
 
-		label_info_t* array_of_labels = nullptr;
-		size_t        capacity        = 0;
-		size_t        label_counter   = 0;
+		label_info_t* array_of_labels_ = nullptr;
+		size_t        capacity_        = 0;
+		size_t        label_counter_   = 0;
 
 		void realloc_array_of_label(void);
 		void parsing_label(char* name_of_label, int func_call);
