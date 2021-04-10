@@ -3,48 +3,28 @@
         TEXT:
 
 Pointer buffer of data: 0x5b81250
-Pointer line_t structs: 0x5b81340
+Pointer line_t structs: 0x5b812d0
 
-Number of strings = 21
-Number of structs = 33
-Number of symbols = 165
-Number of words   = 33
+Number of strings = 8
+Number of structs = 13
+Number of symbols = 60
+Number of words   = 13
 
 [Number in structs]{Real number}(length_)
 
-[  1]{  2}(  2)in
-[  2]{  3}(  3)pop
-[  3]{  4}(  3)eax
-[  4]{  6}(  4)push
-[  5]{  7}(  1)1
-[  6]{  8}(  3)pop
-[  7]{  9}(  3)ebx
-[  8]{ 11}(  5)fact:
+[  1]{  1}(  4)push
+[  2]{  2}(  1)2
+[  3]{  3}(  3)pop
+[  4]{  4}(  3)eax
+[  5]{  6}(  4)push
+[  6]{  7}(  1)1
+[  7]{  9}(  4)push
+[  8]{ 10}(  1)0
 [  9]{ 12}(  4)push
-[ 10]{ 13}(  3)eax
-[ 11]{ 14}(  4)push
-[ 12]{ 15}(  3)ebx
-[ 13]{ 16}(  3)mul
-[ 14]{ 17}(  3)pop
-[ 15]{ 18}(  3)ebx
-[ 16]{ 20}(  4)push
-[ 17]{ 21}(  3)eax
-[ 18]{ 22}(  4)push
-[ 19]{ 23}(  1)1
-[ 20]{ 24}(  3)sub
-[ 21]{ 26}(  4)push
-[ 22]{ 27}(  1)1
-[ 23]{ 28}(  3)cmp
-[ 24]{ 29}(  3)pop
-[ 25]{ 31}(  3)pop
-[ 26]{ 32}(  3)eax
-[ 27]{ 34}(  3)jne
-[ 28]{ 35}(  4)fact
-[ 29]{ 38}(  4)push
-[ 30]{ 39}(  3)ebx
-[ 31]{ 40}(  3)out
-[ 32]{ 41}(  3)hlt
-[ 33]{ 42}(  3)end
+[ 10]{ 13}(  1)3
+[ 11]{ 15}(  3)out
+[ 12]{ 16}(  3)hlt
+[ 13]{ 17}(  3)end
 
 
 Note! The actual length_ of the line_s is 1 more 
