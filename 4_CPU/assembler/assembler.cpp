@@ -16,8 +16,8 @@ void assembling_file(const char* file_path, const char* source)
 
 	Labels table_labels;
 
-	int num_of_bytes = (file_info.num_strings)                       * sizeof(char)   + \
-	                   (file_info.num_words - file_info.num_strings) * sizeof(double) + \
+	int num_of_bytes = (file_info.num_strings_)                        * sizeof(char)   + \
+	                   (file_info.num_words_ - file_info.num_strings_) * sizeof(double) + \
 	                   START_IP;
  
 	char* buffer_data = (char*) calloc(num_of_bytes, sizeof(char));
@@ -45,13 +45,13 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 {
 	int tmp_IP = START_IP;
 
-	for (int indx = 0; indx < file_info->num_words; indx++) {
+	for (int indx = 0; indx < file_info->num_words_; indx++) {
 
-		if (!strcmp(file_info->text[indx].line, "push")) {										
+		if (!strcmp(file_info->text_[indx].line_, "push")) {										
 																								
 			indx++;																				
 																							
-			double value = strtod(file_info->text[indx].line, nullptr);							
+			double value = strtod(file_info->text_[indx].line_, nullptr);							
 			/*обработка HUGE_VAL and errno*/													
 																								
 			if (!is_different(value, 0)) {		
@@ -76,7 +76,7 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 			}																					
 		}																						
 		
-		else if (!strcmp(file_info->text[indx].line, "pop")) {
+		else if (!strcmp(file_info->text_[indx].line_, "pop")) {
 
 			indx++;																							
 																								
