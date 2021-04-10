@@ -26,9 +26,9 @@ enum modes_text_t {
 //-----------------------------------------------------------------------------
 
 struct line_t { 
-    int   real_num = 0;
-    int   length   = 0;
-    char* line     = nullptr;
+    int   real_num_ = 0;
+    int   length_   = 0;
+    char* line_     = nullptr;
 };
 
 //-----------------------------------------------------------------------------
@@ -41,13 +41,13 @@ class text_t {
 
     public:
 
-        char*   buffer_data     = nullptr;
-        line_t* text            = nullptr;     
+        char*   buffer_data_    = nullptr;
+        line_t* text_           = nullptr;     
 
-        int     num_strings     = 0;
-        int     num_structs     = 0;
-        int     num_symbols     = 0;
-        int     num_words       = 0;
+        int     num_strings_    = 0;
+        int     num_structs_    = 0;
+        int     num_symbols_    = 0;
+        int     num_words_      = 0;
         
         text_t(char* buffer, const int mode);
         text_t(FILE* source, const int mode);

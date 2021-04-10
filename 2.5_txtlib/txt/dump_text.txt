@@ -10,7 +10,7 @@ Number of structs = 6
 Number of symbols = 24
 Number of words   = 6
 
-[Number in structs]{Real number}(Length)
+[Number in structs]{Real number}(length_)
 
 [  1]{  1}(  3)123
 [  2]{  3}(  1)4
@@ -20,7 +20,7 @@ Number of words   = 6
 [  6]{  9}(  2)89
 
 
-Note! The actual length of the lines is 1 more 
+Note! The actual length_ of the line_s is 1 more 
 	due to the '\n' and '\0' characters.
 
 ******************************************************
