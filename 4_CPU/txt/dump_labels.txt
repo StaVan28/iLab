@@ -2,16 +2,16 @@
 ******************************************************
 		Labels:
 
-Pointer array of labels: 0x5b82690
+Pointer array of labels: 0x5b82bb0
 
 capacity_       = 4
-Label counter = 0
+Label counter = 3
 
 {Number in array}[position]
 
-{1}[0] (null)
-{2}[0] (null)
-{3}[0] (null)
+{1}[72] D=0
+{2}[89] D>0
+{3}[70] D<0
 {4}[0] (null)
 
 ******************************************************

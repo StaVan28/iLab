@@ -65,9 +65,9 @@ endif
 
 #
 ## launch with debug valgrind(default)
-default: print_logs 
+default: prebuild print_logs 
 
-print_logs: $(LAUNCH_MODE)
+print_logs: $(LAUNCH_MODE) 	 
 
 debug: $(PROJECTS) 
 	$(E) "    LAUNCH(DBG):" $(BIN_ASM)
@@ -99,7 +99,11 @@ assembler_launch: assembler
 
 #
 ## additional features
-.PHONY: clean errors tags rebuild git no_valgrind unit_tests log full_check_valgrind print_logs
+.PHONY: clean errors tags rebuild git no_valgrind unit_tests log full_check_valgrind print_logs prebuild
+
+prebuild:
+	$(E) "    PREBUILD"
+	$(Q) mkdir -p $(BIN_DIR)
 
 clean:
 	$(E) "    CLEAN"

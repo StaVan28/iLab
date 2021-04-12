@@ -77,6 +77,7 @@ class CPU {
 		double DR_  = POISON_DOUBLE_CPU;
 		double DAR_ = POISON_DOUBLE_CPU;
 		int    IR_  = POISON_INT_CPU;
+		int    IAR_ = POISON_INT_CPU;
 
 		// data	segment
 		char* EBP_ = nullptr;

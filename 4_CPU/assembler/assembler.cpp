@@ -49,23 +49,25 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 
 		if (!strcmp(file_info->text_[indx].line_, "push")) {										
 																								
-			indx++;		
-
-			IF_STRCMP_REG(PUSHR_CMD, EAX_REG, "eax")							
-
-			else IF_STRCMP_REG(PUSHR_CMD, EBX_REG, "ebx")	
-
-			else IF_STRCMP_REG(PUSHR_CMD, ECX_REG, "ecx")	
-
-			else IF_STRCMP_REG(PUSHR_CMD, EDX_REG, "edx")																			
+			indx++;																					
 																							
 			double value = strtod(file_info->text_[indx].line_, nullptr);							
 			/*обработка HUGE_VAL and errno*/													
 																								
 			if (!is_different(value, 0)) {	
-				// error input																		
-				READING_DATA(PUSH_CMD, char)													
-				READING_DATA(0       , double)																																	
+
+				IF_STRCMP_REG(PUSHR_CMD, EAX_REG, "eax")							
+
+				else IF_STRCMP_REG(PUSHR_CMD, EBX_REG, "ebx")	
+
+				else IF_STRCMP_REG(PUSHR_CMD, ECX_REG, "ecx")	
+
+				else IF_STRCMP_REG(PUSHR_CMD, EDX_REG, "edx")
+				
+				else {																	
+					READING_DATA(PUSH_CMD, char)													
+					READING_DATA(value   , double)																																	
+				}
 			}																					
 			else {																				
 				READING_DATA(PUSH_CMD, char)														

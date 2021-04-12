@@ -4,15 +4,15 @@
 
 CPU (OK) [0x1ffefffc90] 
 
-IP = 51
+IP = 71
 
 EBP(buffer_cmd) [0x5b814e0]
 
 Regs
- {eax} : 2 (POISON)
- {ebx} : nan (POISON)
- {ecx} : nan (POISON)
- {edx} : nan (POISON)
+ {eax} : 100 (POISON)
+ {ebx} : 1 (POISON)
+ {ecx} : 1 (POISON)
+ {edx} : -399 (POISON)
 
 FLAGS:
  CF PF AF ZF SF OF

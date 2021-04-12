@@ -16,19 +16,19 @@
 	push 4
 	push eax
 	push ecx
-
 	mul
 	mul
 	sub
+
 
 	push 0
 	cmp
 	pop
 	pop edx
 
+	jb  D<0	
 	je  D=0
-	jb  D>0
-	ja  D<0	
+	ja  D>0
 
 D=0:
 	push ebx

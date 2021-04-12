@@ -3,28 +3,89 @@
         TEXT:
 
 Pointer buffer of data: 0x5b81250
-Pointer line_t structs: 0x5b812d0
+Pointer line_t structs: 0x5b81420
 
-Number of strings = 8
-Number of structs = 13
-Number of symbols = 60
-Number of words   = 13
+Number of strings = 50
+Number of structs = 74
+Number of symbols = 387
+Number of words   = 74
 
 [Number in structs]{Real number}(length_)
 
-[  1]{  1}(  4)push
-[  2]{  2}(  1)2
-[  3]{  3}(  3)pop
-[  4]{  4}(  3)eax
-[  5]{  6}(  4)push
-[  6]{  7}(  1)1
-[  7]{  9}(  4)push
-[  8]{ 10}(  1)0
-[  9]{ 12}(  4)push
-[ 10]{ 13}(  1)3
-[ 11]{ 15}(  3)out
-[ 12]{ 16}(  3)hlt
-[ 13]{ 17}(  3)end
+[  1]{  2}(  2)in
+[  2]{  3}(  3)pop
+[  3]{  4}(  3)eax
+[  4]{  6}(  2)in
+[  5]{  7}(  3)pop
+[  6]{  8}(  3)ebx
+[  7]{ 10}(  2)in
+[  8]{ 11}(  3)pop
+[  9]{ 12}(  3)ecx
+[ 10]{ 15}(  4)push
+[ 11]{ 16}(  3)ebx
+[ 12]{ 17}(  4)push
+[ 13]{ 18}(  3)ebx
+[ 14]{ 19}(  3)mul
+[ 15]{ 21}(  4)push
+[ 16]{ 22}(  1)4
+[ 17]{ 23}(  4)push
+[ 18]{ 24}(  3)eax
+[ 19]{ 25}(  4)push
+[ 20]{ 26}(  3)ecx
+[ 21]{ 28}(  3)mul
+[ 22]{ 29}(  3)mul
+[ 23]{ 30}(  3)sub
+[ 24]{ 32}(  4)push
+[ 25]{ 33}(  1)0
+[ 26]{ 34}(  3)cmp
+[ 27]{ 35}(  3)pop
+[ 28]{ 36}(  3)pop
+[ 29]{ 37}(  3)edx
+[ 30]{ 39}(  2)je
+[ 31]{ 40}(  3)D=0
+[ 32]{ 41}(  2)jb
+[ 33]{ 42}(  3)D>0
+[ 34]{ 43}(  2)ja
+[ 35]{ 44}(  3)D<0
+[ 36]{ 48}(  4)D<0:
+[ 37]{ 49}(  3)hlt
+[ 38]{ 51}(  4)D=0:
+[ 39]{ 52}(  4)push
+[ 40]{ 53}(  3)ebx
+[ 41]{ 54}(  4)push
+[ 42]{ 55}(  2)-2
+[ 43]{ 56}(  3)div
+[ 44]{ 57}(  4)push
+[ 45]{ 58}(  3)eax
+[ 46]{ 59}(  3)div
+[ 47]{ 61}(  3)hlt
+[ 48]{ 63}(  4)D>0:
+[ 49]{ 64}(  4)push
+[ 50]{ 65}(  3)ebx
+[ 51]{ 66}(  4)push
+[ 52]{ 67}(  3)edx
+[ 53]{ 68}(  5)fsqrt
+[ 54]{ 69}(  3)add
+[ 55]{ 71}(  4)push
+[ 56]{ 72}(  2)-2
+[ 57]{ 73}(  3)div
+[ 58]{ 74}(  4)push
+[ 59]{ 75}(  3)eax
+[ 60]{ 77}(  3)div
+[ 61]{ 79}(  4)push
+[ 62]{ 80}(  3)ebx
+[ 63]{ 81}(  4)push
+[ 64]{ 82}(  3)edx
+[ 65]{ 83}(  5)fsqrt
+[ 66]{ 84}(  3)sub
+[ 67]{ 86}(  4)push
+[ 68]{ 87}(  2)-2
+[ 69]{ 88}(  3)div
+[ 70]{ 89}(  4)push
+[ 71]{ 90}(  3)eax
+[ 72]{ 92}(  3)div
+[ 73]{ 95}(  3)hlt
+[ 74]{100}(  3)end
 
 
 Note! The actual length_ of the line_s is 1 more 

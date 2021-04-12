@@ -129,12 +129,15 @@ void CPU::run(void)
 						   	IP_ += sizeof(char);
 						   	break;
 
-			case CMP_CMD: 	POP_TWO_VARIABLES(DR_, DAR_, ESP_);
+			case CMP_CMD: 	POP_TWO_VARIABLES(IR_, IAR_, ESP_);
+
+							printf("IR_  = %d\n", IR_);
+							printf("IAR_ = %d\n", IAR_);
 
 							set_CF();
 							set_ZF();
 
-							PUSH_TWO_VARIABLES(DR_, DAR_, ESP_);
+							PUSH_TWO_VARIABLES(IR_, IAR_, ESP_);
 
 						   	IP_ += sizeof(char);
 						   	break;
@@ -165,9 +168,9 @@ void CPU::run(void)
 
 			case JBE_CMD:	JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) || (FLAGS_ & CF)))
 
-			case JA_CMD:	JUMPS_COMMANDS_CPU(  FLAGS_ & CF )
+			case JA_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & CF) && (FLAGS_ & CF) )
 
-			case JAE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & CF))
+			case JAE_CMD:	JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) && (FLAGS_ & CF)))
 
 			case NOP_CMD:	IP_ += sizeof(char);
 							break;
