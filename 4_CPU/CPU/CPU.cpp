@@ -164,13 +164,13 @@ void CPU::run(void)
 
 			case JNE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & ZF))									
 
-			case JB_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF) )
+			case JB_CMD:	JUMPS_COMMANDS_CPU( (FLAGS_ & CF))
 
-			case JBE_CMD:	JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) || (FLAGS_ & CF)))
+			case JAE_CMD:	JUMPS_COMMANDS_CPU(!(FLAGS_ & CF))
 
-			case JA_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & CF) && (FLAGS_ & CF) )
+			case JBE_CMD:	JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF))
 
-			case JAE_CMD:	JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) && (FLAGS_ & CF)))
+			case JA_CMD:	JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) || (FLAGS_ & CF)))
 
 			case NOP_CMD:	IP_ += sizeof(char);
 							break;
