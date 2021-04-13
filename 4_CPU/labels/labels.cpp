@@ -135,14 +135,20 @@ void Labels::labels_dump(void)
 
     fprintf(labels_dump, "Pointer array of labels: %p\n\n", array_of_labels_);
 
-    fprintf(labels_dump, "capacity_       = %ld\n", capacity_ );
-    fprintf(labels_dump, "Label counter = %ld\n", label_counter_);
+    fprintf(labels_dump, "capacity_     = %ld\n", capacity_ );
+    fprintf(labels_dump, "label counter = %ld\n", label_counter_);
 
     fprintf(labels_dump, "\n{Number in array}[position]\n\n");
 
-    for (size_t indx = 0; indx < capacity_ ; indx++) {
-        fprintf(labels_dump, "{%ld}[%d] %s\n", indx + 1, array_of_labels_[indx].pos_to_jmp, array_of_labels_[indx].name_of_label);
+    size_t indx = 0;
+    for (; indx < label_counter_ ; indx++) {
+    	printf("indx = %d\n", indx);
+        fprintf(labels_dump, "{%3.ld}[%3.d] %s\n", indx + 1, array_of_labels_[indx].pos_to_jmp,     \
+        									             array_of_labels_[indx].name_of_label);
     }
+    for (; indx < capacity_ ; indx++) { 
+    	fprintf(labels_dump, "{%3.ld}[---] (null)\n", indx + 1);
+	}
 
     fprintf(labels_dump, "\n******************************************************\n");
 

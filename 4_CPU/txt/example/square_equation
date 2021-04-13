@@ -9,6 +9,17 @@
 	pop  ecx
 
 
+
+	push eax
+	push 0
+	cmp
+
+	pop
+	pop
+
+	je a=0
+
+
 	push ebx
 	push ebx
 	mul
@@ -16,19 +27,19 @@
 	push 4
 	push eax
 	push ecx
+
 	mul
 	mul
 	sub
-
 
 	push 0
 	cmp
 	pop
 	pop edx
 
-	jb  D<0	
 	je  D=0
-	ja  D>0
+	jb  D>0
+	ja  D<0	
 
 D=0:
 	push ebx
@@ -60,7 +71,44 @@ D>0:
 
 	hlt
 
+
 D<0:
 	hlt
+
+
+a=0:
+	push ebx
+	push 0
+	cmp
+
+	pop
+	pop
+
+	je a=0_b=0
+
+	push ecx
+	neg	
+	push ebx
+	div
+
+	hlt
+
+a=0_b=0:
+	push ecx 
+	push 0
+	cmp
+
+	pop
+	pop
+
+	jne no_solutions
+
+	push ecx
+	hlt
+
+
+no_solutions:
+	hlt
+
 
 	end

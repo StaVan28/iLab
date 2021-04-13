@@ -131,9 +131,6 @@ void CPU::run(void)
 
 			case CMP_CMD: 	POP_TWO_VARIABLES(IR_, IAR_, ESP_);
 
-							printf("IR_  = %d\n", IR_);
-							printf("IAR_ = %d\n", IAR_);
-
 							set_CF();
 							set_ZF();
 
