@@ -19,15 +19,15 @@ Stack::Stack(const char* name, int capacity) {
 
         return;
     }
-/*
-*   if (this == nullptr) {
-*
-*        error_ = NULL_PTR_STACK;
-*       ERROR_INFO
-*
-*        return;
-*    }
-*/
+
+   if (this) {
+
+        error_ = NULL_PTR_STACK;
+       ERROR_INFO
+
+        return;
+    }
+
     if (capacity < 0) {
 
         error_ = UNKNOWN_NUMBER;
