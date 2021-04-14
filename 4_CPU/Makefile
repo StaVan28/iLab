@@ -103,7 +103,7 @@ assembler_launch: assembler
 
 prebuild:
 	$(E) "    PREBUILD"
-	$(Q) mkdir -p $(BIN_DIR)
+	$(Q) mkdir -p .$(BIN_DIR)
 
 clean:
 	$(E) "    CLEAN"
