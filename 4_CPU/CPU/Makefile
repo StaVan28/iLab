@@ -22,7 +22,7 @@ OBJ_ALL := $(OBJ_ALL:%.cpp=%.o)
 DEP_ALL  = $(OBJ_ALL:%.o=%.d)
 LIB_ALL  = -lstack -ltxtlib
 
-PROJ_LIB = CPU
+PROJ_LIB = libCPU.a
 
 vpath %.cpp $(HDR_DIR)
 vpath %.h   $(HDR_DIR)

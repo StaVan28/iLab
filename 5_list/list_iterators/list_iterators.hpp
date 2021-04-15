@@ -13,17 +13,20 @@ class List;
 
 //!
 
-template <typename value_type>
-class List_iterator: public std::iterator <std::input_iterator_tag, value_type>
+template <typename ValueType>
+class ListIterator: public std::iterator <std::input_iterator_tag, ValueType>
 {
 	friend class List;
 		private:
-			List_iterator(value_type* knot);
+			ListIterator(ValueType* knot);
 		public:
-			List_iterator(const List_iterator& knot);
+			ListIterator(const ListIterator& list);
+
+	bool operator == (ListIterator const& other_list) const;
+	bool operator != (ListIterator const& other_list) const;
 
 	private:
-   		value_type* knot;
+		ValueType* knot_;
 };
 
 //-----------------------------------------------------------------------------

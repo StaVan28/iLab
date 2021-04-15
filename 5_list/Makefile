@@ -17,17 +17,24 @@ Q = @
 E = $(Q) echo
 
 # path for directories
-BIN_DIR  = bin
 HEAD_DIR = ../include/headers
 LIB_DIR  = ../include/libs
+
+BIN_DIR  = bin
+OBJ_DIR  = obj
 TXT_DIR  = txt
+HDR_DIR  = $(HEAD_DIR) ./list 
 
 # source
 BIN = $(BIN_DIR)/list
 
-SRC = list.cpp main.cpp 
-OBJ = list.o   main.o
-HDR = list.hpp          list_iterators.hpp
+SRC  = list/list.cpp main.cpp
+OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
+OBJ := $(OBJ:%.cpp=%.o)
+DEP  = $(OBJ:%.o=%.d)
+
+vpath %.cpp $(HDR_DIR)
+vpath %.h   $(HDR_DIR)
 
 PROJ_LIB = liblist.a
 
@@ -74,29 +81,23 @@ debug: $(BIN)
 release: clean  $(BIN)
 	$(E) "  LAUNCH(RLS):" $(BIN)
 	$(Q) $(BIN)
-	
+
 #
 ## linking
 $(BIN): $(OBJ)
-	$(E) "  LINK:       " $@
-	$(Q) $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@  
-
-$(BIN_TEST): $(OBJ_TEST)
-	$(E) "  LINK:       " $@
-	$(Q) $(CXX) $^ -L$(LIB_DIR) $(LIB) -o $@ 
+	$(E) "    LINK:        " $@
+	$(Q) $(CXX) $(WARNINGS) $^ -L$(LIB_DIR) -o $@  
 
 #
 ## compiling
-.cpp.o:
-	$(E) "  C++         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.cpp
+$(OBJ_DIR)/%.o: %.cpp
+	$(E) "    C++:         " $@
+	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-.c.o:
-	$(E) "  C           " $@
-	$(Q) ${CXX} ${CXXFLAGS} $(WARNINGS) -I$(HEAD_DIR) -c $*.c 
+$(OBJ_DIR)/main.o:	main.cpp 
+$(OBJ_DIR)/list.o:	list.cpp  
 
-main.o:   main.cpp   $(HDR)
-list.o:   list.cpp   $(HDR)
+-include $(DEP)
 
 #
 ## additional features
@@ -104,7 +105,7 @@ list.o:   list.cpp   $(HDR)
 
 clean:
 	$(E) "  CLEAN"
-	$(Q) rm -f $(BIN) $(TXT_DIR)/log_Makefile tags *.o
+	$(Q) rm -f $(BIN)  tags $(OBJ_DIR)/*.o
 
 tags: ${SRC}
 	$(Q) rm -f tags
