@@ -19,18 +19,10 @@ List::List(const char* name) :
 
 //-----------------------------------------------------------------------------
 
-List::List(const double data, const char* name) : 
-	name_(new char[strlen(name) + 1])
-{
-	strcpy(name_, name);
-
-	push_tail(data);
-}
-
-//-----------------------------------------------------------------------------
-
 List::~List()
 {
+	dump();
+
 	clear();
 
 	delete [] name_;
@@ -61,6 +53,101 @@ void List::push_tail(const double data)
 	tail_        = tmp_node;
 	
 	size_++;
+}
+
+//-----------------------------------------------------------------------------
+
+void List::push_head(const double data)
+{
+	node* tmp_node = new node;
+	assert(tmp_node);
+
+	tmp_node->data_ = data;
+
+	if (empty()) {
+
+		head_ = tmp_node;
+		tail_ = tmp_node;
+
+		size_++;
+		return;
+	}
+
+	tmp_node->next_ = head_;
+	tmp_node->prev_ = nullptr;
+
+	head_->prev_ = tmp_node;
+	head_        = tmp_node;
+	
+	size_++;	
+}
+
+//-----------------------------------------------------------------------------
+
+double List::pop_head()
+{
+    node*  tmp_node = head_;
+    double tmp_data = NAN;
+
+    if (empty())
+        return NAN;
+ 
+    if (size_ == ONE_ELEMENT) {
+
+    	tmp_data = tmp_node->data_;
+    	delete tmp_node;
+
+    	head_ = nullptr;
+    	tail_ = nullptr;
+
+    	size_--;
+
+    	return tmp_data;
+    }
+
+    head_        = head_->next_;
+    head_->prev_ = nullptr;
+
+    tmp_data = tmp_node->data_;
+    delete tmp_node;
+ 
+    size_--;
+
+    return tmp_data;
+}
+
+//-----------------------------------------------------------------------------
+
+double List::pop_tail()
+{
+    node*  tmp_node = tail_;
+    double tmp_data = NAN;
+
+    if (empty())
+        return NAN;
+ 
+    if (size_ == ONE_ELEMENT) {
+
+    	tmp_data = tmp_node->data_;
+    	delete tmp_node;
+
+    	head_ = nullptr;
+    	tail_ = nullptr;
+
+    	size_--;
+
+    	return tmp_data;
+    }
+
+    tail_        = tail_->prev_;
+    tail_->next_ = nullptr;
+
+    tmp_data = tmp_node->data_;
+    delete tmp_node;
+ 
+    size_--;
+
+    return tmp_data;
 }
 
 //-----------------------------------------------------------------------------

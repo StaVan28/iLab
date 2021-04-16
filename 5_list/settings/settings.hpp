@@ -6,7 +6,9 @@
 
 static const char* UNKNOWN_NAME = "UNKNOWN NAME";
 
-static const int EMPTY = 0;
+static const int EMPTY       = 0;
+static const int ONE_ELEMENT = 1;
+
 
 //-----------------------------------------------------------------------------
 

@@ -31,8 +31,7 @@ class List {
 
 		// constructors
 		List();
-		List(                   const char* name);
-		List(const double data, const char* name = UNKNOWN_NAME);
+		List(const char* name);
 
 		List(const List&) = delete;
 
@@ -47,11 +46,11 @@ class List {
 		int  size()  const noexcept;
 
 		//! methods
-		void push_head(const double data);
-		void  pop_head();
+		void   push_head(const double data);
+		double pop_head();
 
-		void push_tail(const double data);
-		void  pop_tail();
+		void   push_tail(const double data);
+		double pop_tail();
 
 		void dump();
 

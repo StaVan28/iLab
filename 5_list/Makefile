@@ -23,7 +23,7 @@ LIB_DIR  = ../include/libs
 BIN_DIR  = bin
 OBJ_DIR  = obj
 TXT_DIR  = txt
-HDR_DIR  = $(HEAD_DIR) ./settings ./list
+HDR_DIR  = $(HEAD_DIR) ./list ./settings
 
 # source
 BIN = $(BIN_DIR)/list
