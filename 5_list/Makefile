@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------------
 
 # Makefile for list_project
-# version 1.0
+# version 1.1
 #		author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
@@ -23,12 +23,12 @@ LIB_DIR  = ../include/libs
 BIN_DIR  = bin
 OBJ_DIR  = obj
 TXT_DIR  = txt
-HDR_DIR  = $(HEAD_DIR) ./list 
+HDR_DIR  = $(HEAD_DIR) ./settings ./list
 
 # source
 BIN = $(BIN_DIR)/list
 
-SRC  = list/list.cpp main.cpp
+SRC  = settings/settings.cpp list/list.cpp main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
@@ -75,11 +75,11 @@ default: print_logs
 print_logs: $(LAUNCH_MODE)
 
 debug: $(BIN) 
-	$(E) "  LAUNCH(DBG):" $(BIN)
+	$(E) "    LAUNCH(DBG): " $(BIN)
 	$(Q) valgrind $(BIN)
 
 release: clean  $(BIN)
-	$(E) "  LAUNCH(RLS):" $(BIN)
+	$(E) "    LAUNCH_MODENCH(RLS): " $(BIN)
 	$(Q) $(BIN)
 
 #
@@ -94,8 +94,9 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:	main.cpp 
-$(OBJ_DIR)/list.o:	list.cpp  
+$(OBJ_DIR)/main.o:			main.cpp 
+$(OBJ_DIR)/list.o:			list.cpp  
+$(OBJ_DIR)/settings.o:	settings.cpp
 
 -include $(DEP)
 
@@ -138,11 +139,18 @@ log:
 	$(Q) git log --oneline --all --graph
 
 print_logs:
+	$(E) "    PRINT LOGS  "
 	$(Q) cat $(TXT_DIR)/dump_list.txt
+	$(E) "******************************************************"
+	$(E) "\t\t\tGraph:\n"
+	$(Q) cat $(TXT_DIR)/graph_list.dot
+	$(E) "\n******************************************************"
+	$(E) "    LAUNCH JPEG  "
+	$(Q) fim $(TXT_DIR)/graph_list.jpeg
 #
 ## generate lib and copy main header to ../include
 library: $(PROJ_LIB) $(BIN) list.h
-	$(E) "  MAKE LIBRARY"
+	$(E) "    MAKE LIBRARY"
 	$(Q) cp list.h $(HEAD_DIR)/
 	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
 

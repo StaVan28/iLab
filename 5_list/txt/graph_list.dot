@@ -1,0 +1,11 @@
+digraph List {
+
+	node [shape = "circle", style = "filled", fillcolor = "salmon1", fontcolor = "#000000", margin = "0.01"];
+	edge [style = "dashed"];
+	rankdir = "LR"
+
+	label = "List Graph";
+
+	"V0x5b7fe50"[shape = "record", fillcolor="lightcyan2", label = "    data\n4 |    me\n0x5b7fe50 | {prev\n(0) |  next\n(0)} | <f0> 1"];
+
+}

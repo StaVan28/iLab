@@ -4,18 +4,15 @@
 
 //-----------------------------------------------------------------------------
 
-#include <stdio.h>
+#include <fstream>
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
 #include <errno.h>
 #include <string.h>
+using namespace std;
 
-//-----------------------------------------------------------------------------
-
-static const char* UNKNOWN_NAME = "UNKNOWN NAME";
-
-static const int EMPTY = 0;
+#include "settings.hpp"
 
 //-----------------------------------------------------------------------------
 
@@ -33,44 +30,47 @@ class List {
 
 		// constructors
 		List();
-		List(                   const char* name = UNKNOWN_NAME);
+		List(                   const char* name);
 		List(const double data, const char* name = UNKNOWN_NAME);
 
 		List(const List&) = delete;
 
-		// distructors
+		// distructor
 	   ~List();
 
-	   	// operators
-	   	const List& operator = (const List&) = delete;
+		// operators
+		const List& operator = (const List&) = delete;
 
-	   	// capacities
-	   	bool empty() const noexcept;
-	   	int  size()  const noexcept;
+		// capacities
+		bool empty() const noexcept;
+		int  size()  const noexcept;
 
-	   	// position
-	   	const node* begin() const noexcept;
-	   	const node* end()   const noexcept;
+		// position
+		const node* begin() const noexcept;
+		const node* end()   const noexcept;
 
-	   	//! methods
+		//! methods
 
-		void push_back(const double data);
-		void  pop_back();
+		void push_head(const double data);
+		void  pop_head();
 
-		void push_front(const double data);
-		void  pop_front();
+		void push_tail(const double data);
+		void  pop_tail();
 
 		void dump()  const noexcept;
-		void print() const noexcept; 	   	
+		void print() const noexcept;
 
 		void clear();
 		void swap();
 
 	private: 
-		int   cur_size_ = 0;
-		node* head_     = nullptr;
-		node* tail_     = nullptr;
-		char* name_     = nullptr;
+		int   size_ = 0;
+		node* head_ = nullptr;
+		node* tail_ = nullptr;
+		char* name_ = nullptr;
+
+		void graph() const noexcept;
+		void log()   const noexcept;
 };
 
 
