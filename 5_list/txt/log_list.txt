@@ -425,3 +425,70 @@ List (OK) [0x1ffefffe70] "my_list" {
 	[0x5b7fcd0] data = 28 next = 0 prev = 0
 
 ******************************************************
+
+******************************************************
+		Fri Apr 16 23:53:09 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 28 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Fri Apr 16 23:53:28 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 28 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 00:31:28 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 28 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 00:32:15 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************

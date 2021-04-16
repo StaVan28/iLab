@@ -63,6 +63,8 @@ class List {
 		node* tail_ = nullptr;
 		char* name_ = nullptr;
 
+		node* search_node(int indx) const noexcept;
+
 		void graph() const noexcept;
 		void log();
 		void print_form(ofstream& my_stream);

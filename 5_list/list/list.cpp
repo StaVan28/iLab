@@ -152,6 +152,40 @@ double List::pop_tail()
 
 //-----------------------------------------------------------------------------
 
+node* List::search_node(int indx) const noexcept
+{
+	node* srch_node = nullptr;
+	int   tmp_indx  = 0;
+
+	if (indx > size_)
+		return nullptr;
+
+	if (indx < size_ / 2) {
+		
+		tmp_indx  = 0;
+		srch_node = head_;
+
+		while (srch_node && tmp_indx < indx) {
+			srch_node = srch_node->next_;
+			tmp_indx++;
+		}
+	}
+	else {
+		
+		tmp_indx  = size_ - 1;
+		srch_node = tail_;
+
+		while (srch_node && tmp_indx > indx) {
+			srch_node = srch_node->prev_;
+			tmp_indx--;
+		}
+	}
+
+	return srch_node;
+}
+
+//-----------------------------------------------------------------------------
+
 void List::clear()
 {
 	node*  tmp_node = head_;
