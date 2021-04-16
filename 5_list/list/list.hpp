@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include <fstream>
+#include <ctime>
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
@@ -45,20 +46,14 @@ class List {
 		bool empty() const noexcept;
 		int  size()  const noexcept;
 
-		// position
-		const node* begin() const noexcept;
-		const node* end()   const noexcept;
-
 		//! methods
-
 		void push_head(const double data);
 		void  pop_head();
 
 		void push_tail(const double data);
 		void  pop_tail();
 
-		void dump()  const noexcept;
-		void print() const noexcept;
+		void dump();
 
 		void clear();
 		void swap();
@@ -70,7 +65,8 @@ class List {
 		char* name_ = nullptr;
 
 		void graph() const noexcept;
-		void log()   const noexcept;
+		void log();
+		void print_form(ofstream& my_stream);
 };
 
 

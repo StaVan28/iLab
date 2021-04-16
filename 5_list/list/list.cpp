@@ -87,30 +87,12 @@ void List::clear()
 
 //-----------------------------------------------------------------------------
 
-void List::dump() const noexcept
+void List::dump()
 {
 	ofstream dump("./txt/dump_list.txt");
 	assert(dump);
 
-	dump << endl << "******************************************************" << endl;
-
-	dump << "\t\t\tList:" << endl << endl;
-
-	dump << "List (OK) [" << this << "] \"" << name_ << "\" {" << endl << endl;
-
-	dump << "\tsize = " << size_ << endl;
-	dump << "\thead = " << head_ << endl;
-	dump << "\ttail = " << tail_ << endl << endl;
-
-	for (node* tmp_node = head_; tmp_node != nullptr; tmp_node = tmp_node->next_) {
-		dump << "\t[" << tmp_node << "]" << \
-				" data = " << tmp_node->data_ << \
-				" next = " << tmp_node->next_ << \
-			 	" prev = " << tmp_node->prev_ << endl;
-	}
-
-	dump << endl << "******************************************************" << endl;
-
+	print_form(dump);
 
 	dump.close();
 
@@ -172,13 +154,41 @@ void List::graph() const noexcept
 
 //-----------------------------------------------------------------------------
 
-void List::log() const noexcept
+void List::log()
 {
-	ofstream log("./txt/log_list.txt");
+	ofstream log("./txt/log_list.txt", ios::app);
 	assert(log);
 
+	print_form(log);
 
 	log.close();		
+}
+
+//-----------------------------------------------------------------------------
+
+void List::print_form(ofstream& my_stream)
+{
+	my_stream << endl << "******************************************************" << endl;
+	
+	time_t now = time(0);
+   
+   	my_stream << "\t\t"        << ctime(&now) << endl;
+	my_stream << "\t\t\tList:" << endl     << endl;
+
+	my_stream << "List (OK) [" << this << "] \"" << name_ << "\" {" << endl << endl;
+
+	my_stream << "\tsize = " << size_ << endl;
+	my_stream << "\thead = " << head_ << endl;
+	my_stream << "\ttail = " << tail_ << endl << endl;
+
+	for (node* tmp_node = head_; tmp_node != nullptr; tmp_node = tmp_node->next_) {
+		my_stream << "\t[" << tmp_node << "]" << \
+				" data = " << tmp_node->data_ << \
+				" next = " << tmp_node->next_ << \
+				" prev = " << tmp_node->prev_ << endl;
+	}
+
+	my_stream << endl << "******************************************************" << endl;	
 }
 
 //-----------------------------------------------------------------------------
@@ -194,19 +204,3 @@ int  List::size()  const noexcept
 {
 	return size_;
 }
-
-//-----------------------------------------------------------------------------
-
-const node* List::begin() const noexcept
-{
-	return head_;
-}
-
-//-----------------------------------------------------------------------------
-
-const node* List::end() const noexcept
-{
-	return tail_;
-}
-
-//-----------------------------------------------------------------------------

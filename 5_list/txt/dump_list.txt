@@ -1,13 +1,15 @@
 
 ******************************************************
+		Fri Apr 16 22:48:24 2021
+
 			List:
 
 List (OK) [0x1ffefffe70] "UNKNOWN NAME" {
 
 	size = 1
-	head = 0x5b7fe50
-	tail = 0x5b7fe50
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
 
-	[0x5b7fe50] data = 4 next = 0 prev = 0
+	[0x5b7fcd0] data = 28 next = 0 prev = 0
 
 ******************************************************

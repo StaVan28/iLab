@@ -6,6 +6,6 @@ digraph List {
 
 	label = "List Graph";
 
-	"V0x5b7fe50"[shape = "record", fillcolor="lightcyan2", label = "    data\n4 |    me\n0x5b7fe50 | {prev\n(0) |  next\n(0)} | <f0> 1"];
+	"V0x5b7fcd0"[shape = "record", fillcolor="lightcyan2", label = "    data\n28 |    me\n0x5b7fcd0 | {prev\n(0) |  next\n(0)} | <f0> 1"];
 
 }
