@@ -32,54 +32,14 @@ List::~List()
 
 void List::push_tail(const double data)
 {
-	node* tmp_node = new node;
-	assert(tmp_node);
-
-	tmp_node->data_ = data;
-
-	if (empty()) {
-
-		head_ = tmp_node;
-		tail_ = tmp_node;
-
-		size_++;
-		return;
-	}
-
-	tmp_node->next_ = nullptr;
-	tmp_node->prev_ = tail_;
-
-	tail_->next_ = tmp_node;
-	tail_        = tmp_node;
-	
-	size_++;
+	insert(position::AFTER,  end(),  data);
 }
 
 //-----------------------------------------------------------------------------
 
 void List::push_head(const double data)
 {
-	node* tmp_node = new node;
-	assert(tmp_node);
-
-	tmp_node->data_ = data;
-
-	if (empty()) {
-
-		head_ = tmp_node;
-		tail_ = tmp_node;
-
-		size_++;
-		return;
-	}
-
-	tmp_node->next_ = head_;
-	tmp_node->prev_ = nullptr;
-
-	head_->prev_ = tmp_node;
-	head_        = tmp_node;
-	
-	size_++;	
+	insert(position::BEFORE, begin(), data);
 }
 
 //-----------------------------------------------------------------------------
@@ -87,18 +47,18 @@ void List::push_head(const double data)
 double List::pop_head()
 {
     node*  tmp_node = head_;
-    double tmp_data = NAN;
+    double tmp_data = DOUBLE_POISON;
 
     if (empty())
-        return NAN;
+        return DOUBLE_POISON;
  
     if (size_ == ONE_ELEMENT) {
 
     	tmp_data = tmp_node->data_;
     	delete tmp_node;
 
-    	head_ = nullptr;
-    	tail_ = nullptr;
+    	head_ = NODE_POISON;
+    	tail_ = NODE_POISON;
 
     	size_--;
 
@@ -106,7 +66,7 @@ double List::pop_head()
     }
 
     head_        = head_->next_;
-    head_->prev_ = nullptr;
+    head_->prev_ = NODE_POISON;
 
     tmp_data = tmp_node->data_;
     delete tmp_node;
@@ -131,8 +91,8 @@ double List::pop_tail()
     	tmp_data = tmp_node->data_;
     	delete tmp_node;
 
-    	head_ = nullptr;
-    	tail_ = nullptr;
+    	head_ = NODE_POISON;
+    	tail_ = NODE_POISON;
 
     	size_--;
 
@@ -140,7 +100,7 @@ double List::pop_tail()
     }
 
     tail_        = tail_->prev_;
-    tail_->next_ = nullptr;
+    tail_->next_ = NODE_POISON;
 
     tmp_data = tmp_node->data_;
     delete tmp_node;
@@ -152,13 +112,16 @@ double List::pop_tail()
 
 //-----------------------------------------------------------------------------
 
-node* List::search_node(int indx) const noexcept
+node* List::search_node(const int indx) const noexcept
 {
-	node* srch_node = nullptr;
+	node* srch_node = NODE_POISON;
 	int   tmp_indx  = 0;
 
 	if (indx > size_)
-		return nullptr;
+		return NODE_POISON;
+
+	if (indx < 0)
+		return NODE_POISON;
 
 	if (indx < size_ / 2) {
 		
@@ -186,12 +149,77 @@ node* List::search_node(int indx) const noexcept
 
 //-----------------------------------------------------------------------------
 
+void List::insert(position indx_pos, const int indx, const double data)
+{
+	node*  srch_node = search_node(indx);
+	node* insrt_node = NODE_POISON;
+
+	if (srch_node == NODE_POISON && indx != NO_ELEMENT)
+		return;
+
+	if (indx < 0)
+		return;
+
+	insrt_node = new node;
+	assert(insrt_node);
+
+	insrt_node->data_ = data;
+
+	if (empty()) {
+		
+		head_ = insrt_node;
+		tail_ = insrt_node;
+
+		size_++;
+		return;
+	}
+
+	if (indx_pos == position::BEFORE) {
+		if (indx == begin()) {
+			insrt_node->next_ = head_;
+			insrt_node->prev_ = NODE_POISON;
+
+			head_->prev_ = insrt_node;
+			head_        = insrt_node;
+		}
+		else {
+			insrt_node->next_ = srch_node;
+			insrt_node->prev_ = srch_node->prev_;
+
+			srch_node->prev_->next_ = insrt_node;
+			srch_node->prev_        = insrt_node;
+		}
+	}
+
+ 	if (indx_pos == position::AFTER) {
+		if (indx == end()) {
+			insrt_node->next_ = NODE_POISON;
+			insrt_node->prev_ = tail_;
+
+			tail_->next_ = insrt_node;
+			tail_        = insrt_node;
+		}
+		else {
+			insrt_node->next_ = srch_node->next_;
+			insrt_node->prev_ = srch_node;
+
+			srch_node->next_->prev_ = insrt_node;
+			srch_node->next_        = insrt_node;
+		}
+	}
+
+	size_++;
+	return;
+}
+
+//-----------------------------------------------------------------------------
+
 void List::clear()
 {
 	node*  tmp_node = head_;
-	node* next_node = nullptr;
+	node* next_node = NODE_POISON;
 
-	if (head_ == nullptr)
+	if (head_ == NODE_POISON)
 		return;
 
 	while (tmp_node) {
@@ -200,25 +228,10 @@ void List::clear()
 		tmp_node  = next_node;		
 	}
 
-	head_ = nullptr;
-	tail_ = nullptr;
+	head_ = NODE_POISON;
+	tail_ = NODE_POISON;
 
 	size_ = 0;
-}
-
-//-----------------------------------------------------------------------------
-
-void List::dump()
-{
-	ofstream dump("./txt/dump_list.txt");
-	assert(dump);
-
-	print_form(dump);
-
-	dump.close();
-
-	graph();
-	log();
 }
 
 //-----------------------------------------------------------------------------
@@ -240,7 +253,7 @@ void List::graph() const noexcept
 
 
 	size_t counter = 0;
-    for (node* tmp_node = head_; tmp_node != nullptr; tmp_node = tmp_node->next_) {
+    for (node* tmp_node = head_; tmp_node != NODE_POISON; tmp_node = tmp_node->next_) {
         counter++;
         graph << "\t\"V" << tmp_node << "\"[shape = \"record\", fillcolor=\"lightcyan2\", ";
 		graph << "label = \""   << 
@@ -253,16 +266,20 @@ void List::graph() const noexcept
 
     graph << endl;
 
-    for (node* tmp_node = tail_; tmp_node != nullptr; tmp_node = tmp_node->prev_)
+    for (node* tmp_node = tail_; tmp_node != NODE_POISON; tmp_node = tmp_node->prev_)
     {
-        if (tmp_node->next_ != nullptr)
-        	graph << "\t\"V" << tmp_node << "\"->\"V" << tmp_node->next_ << "\";" << endl;
+        if (tmp_node->next_ != NODE_POISON) {
+        	graph << "\t\"V"   << tmp_node;
+        	graph << "\"->\"V" << tmp_node->next_ << "\";" << endl;
+        }
     }
 
-    for (node* tmp_node = head_; tmp_node != nullptr; tmp_node = tmp_node->next_)
+    for (node* tmp_node = head_; tmp_node != NODE_POISON; tmp_node = tmp_node->next_)
     {
-        if (tmp_node->prev_ != nullptr)
-        	graph << "\t\"V" << tmp_node << "\"->\"V" << tmp_node->prev_ << "\";" << endl;
+        if (tmp_node->prev_ != NODE_POISON) {
+        	graph << "\t\"V"   << tmp_node;
+        	graph << "\"->\"V" << tmp_node->prev_ << "\";" << endl;
+        }
     }
 
 
@@ -271,6 +288,21 @@ void List::graph() const noexcept
 	graph.close();	
 
 	system("dot -Tjpeg -o./txt/graph_list.jpeg ./txt/graph_list.dot");
+}
+
+//-----------------------------------------------------------------------------
+
+void List::dump()
+{
+	ofstream dump("./txt/dump_list.txt");
+	assert(dump);
+
+	print_form(dump);
+
+	dump.close();
+
+	graph();
+	log();
 }
 
 //-----------------------------------------------------------------------------
@@ -302,7 +334,7 @@ void List::print_form(ofstream& my_stream)
 	my_stream << "\thead = " << head_ << endl;
 	my_stream << "\ttail = " << tail_ << endl << endl;
 
-	for (node* tmp_node = head_; tmp_node != nullptr; tmp_node = tmp_node->next_) {
+	for (node* tmp_node = head_; tmp_node != NODE_POISON; tmp_node = tmp_node->next_) {
 		my_stream << "\t[" << tmp_node << "]" << \
 				" data = " << tmp_node->data_ << \
 				" next = " << tmp_node->next_ << \
@@ -325,3 +357,19 @@ int  List::size()  const noexcept
 {
 	return size_;
 }
+
+//-----------------------------------------------------------------------------
+
+int List::begin() const noexcept
+{
+	return 0;
+}
+
+//-----------------------------------------------------------------------------
+
+int List::end() const noexcept
+{
+	return size_;
+}
+
+//-----------------------------------------------------------------------------

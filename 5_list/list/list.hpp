@@ -19,8 +19,8 @@ using namespace std;
 
 struct node {
 	double data_ = 0;
-	node*  prev_ = nullptr;
-	node*  next_ = nullptr;
+	node*  prev_ = NODE_POISON;
+	node*  next_ = NODE_POISON;
 };
 
 //-----------------------------------------------------------------------------
@@ -47,27 +47,31 @@ class List {
 
 		//! methods
 		void   push_head(const double data);
-		double pop_head();
+		double  pop_head();
 
 		void   push_tail(const double data);
-		double pop_tail();
+		double  pop_tail();
+
+		void insert(position indx_pos, const int indx, const double data); 
 
 		void dump();
 
 		void clear();
-		void swap();
 
 	private: 
 		int   size_ = 0;
-		node* head_ = nullptr;
-		node* tail_ = nullptr;
-		char* name_ = nullptr;
+		node* head_ =   NODE_POISON;
+		node* tail_ =   NODE_POISON;
+		char* name_ = STRING_POISON;
 
-		node* search_node(int indx) const noexcept;
+		node* search_node(const int indx) const noexcept;
 
 		void graph() const noexcept;
 		void log();
 		void print_form(ofstream& my_stream);
+
+		int begin() const noexcept;
+		int end()   const noexcept;
 };
 
 

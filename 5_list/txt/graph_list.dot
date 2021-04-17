@@ -6,27 +6,12 @@ digraph List {
 
 	label = "List Graph";
 
-	"V0x5b7fcd0"[shape = "record", fillcolor="lightcyan2", label = "    data\n28 |    me\n0x5b7fcd0 | {prev\n(0) |  next\n(0x5b7fd30)} | <f0> 1"];
-	"V0x5b7fd30"[shape = "record", fillcolor="lightcyan2", label = "    data\n1223 |    me\n0x5b7fd30 | {prev\n(0x5b7fcd0) |  next\n(0x5b7fd90)} | <f0> 2"];
-	"V0x5b7fd90"[shape = "record", fillcolor="lightcyan2", label = "    data\n23.12 |    me\n0x5b7fd90 | {prev\n(0x5b7fd30) |  next\n(0x5b7fdf0)} | <f0> 3"];
-	"V0x5b7fdf0"[shape = "record", fillcolor="lightcyan2", label = "    data\n9.7 |    me\n0x5b7fdf0 | {prev\n(0x5b7fd90) |  next\n(0x5b7fe50)} | <f0> 4"];
-	"V0x5b7fe50"[shape = "record", fillcolor="lightcyan2", label = "    data\n88.1 |    me\n0x5b7fe50 | {prev\n(0x5b7fdf0) |  next\n(0x5b7feb0)} | <f0> 5"];
-	"V0x5b7feb0"[shape = "record", fillcolor="lightcyan2", label = "    data\n109120 |    me\n0x5b7feb0 | {prev\n(0x5b7fe50) |  next\n(0x5b7ff10)} | <f0> 6"];
-	"V0x5b7ff10"[shape = "record", fillcolor="lightcyan2", label = "    data\n0.901111 |    me\n0x5b7ff10 | {prev\n(0x5b7feb0) |  next\n(0x5b7ff70)} | <f0> 7"];
-	"V0x5b7ff70"[shape = "record", fillcolor="lightcyan2", label = "    data\n3.2 |    me\n0x5b7ff70 | {prev\n(0x5b7ff10) |  next\n(0)} | <f0> 8"];
+	"V0x5b7fd30"[shape = "record", fillcolor="lightcyan2", label = "    data\n28 |    me\n0x5b7fd30 | {prev\n(0) |  next\n(0x5b7fcd0)} | <f0> 1"];
+	"V0x5b7fcd0"[shape = "record", fillcolor="lightcyan2", label = "    data\n33 |    me\n0x5b7fcd0 | {prev\n(0x5b7fd30) |  next\n(0x5b7fd90)} | <f0> 2"];
+	"V0x5b7fd90"[shape = "record", fillcolor="lightcyan2", label = "    data\n99 |    me\n0x5b7fd90 | {prev\n(0x5b7fcd0) |  next\n(0)} | <f0> 3"];
 
-	"V0x5b7ff10"->"V0x5b7ff70";
-	"V0x5b7feb0"->"V0x5b7ff10";
-	"V0x5b7fe50"->"V0x5b7feb0";
-	"V0x5b7fdf0"->"V0x5b7fe50";
-	"V0x5b7fd90"->"V0x5b7fdf0";
-	"V0x5b7fd30"->"V0x5b7fd90";
-	"V0x5b7fcd0"->"V0x5b7fd30";
+	"V0x5b7fcd0"->"V0x5b7fd90";
 	"V0x5b7fd30"->"V0x5b7fcd0";
-	"V0x5b7fd90"->"V0x5b7fd30";
-	"V0x5b7fdf0"->"V0x5b7fd90";
-	"V0x5b7fe50"->"V0x5b7fdf0";
-	"V0x5b7feb0"->"V0x5b7fe50";
-	"V0x5b7ff10"->"V0x5b7feb0";
-	"V0x5b7ff70"->"V0x5b7ff10";
+	"V0x5b7fcd0"->"V0x5b7fd30";
+	"V0x5b7fd90"->"V0x5b7fcd0";
 }

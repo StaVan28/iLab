@@ -492,3 +492,794 @@ List (OK) [0x1ffefffe70] "my_list" {
 	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
 
 ******************************************************
+
+******************************************************
+		Sat Apr 17 21:11:02 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 21:16:53 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 21:17:17 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 21:17:56 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 21:29:39 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 21:40:24 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 21:46:15 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 22:30:26 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 22:32:41 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 22:42:18 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 22:54:36 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:09:35 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 8
+	head = 0x5b7fcd0
+	tail = 0x5b7ff70
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 1223 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 23.12 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 9.7 next = 0x5b7fe50 prev = 0x5b7fd90
+	[0x5b7fe50] data = 88.1 next = 0x5b7feb0 prev = 0x5b7fdf0
+	[0x5b7feb0] data = 109120 next = 0x5b7ff10 prev = 0x5b7fe50
+	[0x5b7ff10] data = 0.901111 next = 0x5b7ff70 prev = 0x5b7feb0
+	[0x5b7ff70] data = 3.2 next = 0 prev = 0x5b7ff10
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:11:35 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:14:01 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:14:13 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:17:26 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fdf0 prev = 0x5b7fcd0
+	[0x5b7fdf0] data = 29 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:19:20 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:19:36 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:19:47 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:21:49 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fdf0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:23:36 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:24:21 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:26:00 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fdf0 prev = 0
+	[0x5b7fdf0] data = 29 next = 0x5b7fd30 prev = 0x5b7fcd0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fdf0
+	[0x5b7fd90] data = 31 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:26:35 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:26:51 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fdf0 prev = 0x5b7fcd0
+	[0x5b7fdf0] data = 31 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fdf0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:27:19 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fdf0
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 32 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 31 next = 0 prev = 0x5b7fd90
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:27:58 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fdf0
+	tail = 0x5b7fd90
+
+	[0x5b7fdf0] data = 31 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0x5b7fdf0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:28:45 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 4
+	head = 0x5b7fcd0
+	tail = 0x5b7fdf0
+
+	[0x5b7fcd0] data = 28 next = 0x5b7fd30 prev = 0
+	[0x5b7fd30] data = 30 next = 0x5b7fd90 prev = 0x5b7fcd0
+	[0x5b7fd90] data = 32 next = 0x5b7fdf0 prev = 0x5b7fd30
+	[0x5b7fdf0] data = 33 next = 0 prev = 0x5b7fd90
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:28:55 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:29:06 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:29:25 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:29:34 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:29:41 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:31:09 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:31:25 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:31:42 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:32:06 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:32:15 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:32:59 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:33:06 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:33:53 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:33:59 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:36:23 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:39:41 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 33 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:40:18 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 33 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 99 next = 0 prev = 0x5b7fcd0
+
+******************************************************
