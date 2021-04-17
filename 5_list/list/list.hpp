@@ -4,6 +4,7 @@
 
 //-----------------------------------------------------------------------------
 
+#include <iostream> 
 #include <fstream>
 #include <ctime>
 #include <stdlib.h>
@@ -52,8 +53,9 @@ class List {
 		void   push_tail(const double data);
 		double  pop_tail();
 
-		void insert(position indx_pos, const int indx, const double data); 
-
+		void   insert(position indx_pos, const int indx, const double data); 
+		double erase(const int indx);
+		
 		void dump();
 
 		void clear();

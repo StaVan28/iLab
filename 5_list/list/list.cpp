@@ -46,68 +46,14 @@ void List::push_head(const double data)
 
 double List::pop_head()
 {
-    node*  tmp_node = head_;
-    double tmp_data = DOUBLE_POISON;
-
-    if (empty())
-        return DOUBLE_POISON;
- 
-    if (size_ == ONE_ELEMENT) {
-
-    	tmp_data = tmp_node->data_;
-    	delete tmp_node;
-
-    	head_ = NODE_POISON;
-    	tail_ = NODE_POISON;
-
-    	size_--;
-
-    	return tmp_data;
-    }
-
-    head_        = head_->next_;
-    head_->prev_ = NODE_POISON;
-
-    tmp_data = tmp_node->data_;
-    delete tmp_node;
- 
-    size_--;
-
-    return tmp_data;
+	return erase(begin());
 }
 
 //-----------------------------------------------------------------------------
 
 double List::pop_tail()
 {
-    node*  tmp_node = tail_;
-    double tmp_data = NAN;
-
-    if (empty())
-        return NAN;
- 
-    if (size_ == ONE_ELEMENT) {
-
-    	tmp_data = tmp_node->data_;
-    	delete tmp_node;
-
-    	head_ = NODE_POISON;
-    	tail_ = NODE_POISON;
-
-    	size_--;
-
-    	return tmp_data;
-    }
-
-    tail_        = tail_->prev_;
-    tail_->next_ = NODE_POISON;
-
-    tmp_data = tmp_node->data_;
-    delete tmp_node;
- 
-    size_--;
-
-    return tmp_data;
+	return erase(end());
 }
 
 //-----------------------------------------------------------------------------
@@ -211,6 +157,51 @@ void List::insert(position indx_pos, const int indx, const double data)
 	size_++;
 	return;
 }
+
+//-----------------------------------------------------------------------------
+
+double List::erase(const int indx)
+{
+    node*  del_node = search_node(indx);
+    double del_data = DOUBLE_POISON;
+
+    if (empty())
+        return DOUBLE_POISON;
+ 
+    if (size_ == ONE_ELEMENT) {
+
+    	del_data = del_node->data_;
+    	delete del_node;
+
+    	head_ = NODE_POISON;
+    	tail_ = NODE_POISON;
+
+    	size_--;
+
+    	return del_data;
+    }
+
+    if (indx == begin()) {
+	    head_        = head_->next_;
+	    head_->prev_ = NODE_POISON;    
+	}
+	else if (indx == end()) {
+	    tail_        = tail_->prev_;
+	    tail_->next_ = NODE_POISON;
+	}
+	else {
+		del_node->next_->prev_ = del_node->prev_;
+		del_node->prev_->next_ = del_node->next_;
+	}
+
+    del_data = del_node->data_;
+    delete del_node;
+ 
+    size_--;
+
+    return del_data;
+}	
+
 
 //-----------------------------------------------------------------------------
 

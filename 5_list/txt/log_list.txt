@@ -1283,3 +1283,166 @@ List (OK) [0x1ffefffe70] "my_list" {
 	[0x5b7fd90] data = 99 next = 0 prev = 0x5b7fcd0
 
 ******************************************************
+
+******************************************************
+		Sat Apr 17 23:54:39 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 33 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 99 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:55:07 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 33 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 99 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:55:29 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:55:52 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd80
+	tail = 0x5b7fde0
+
+	[0x5b7fd80] data = 28 next = 0x5b7fd20 prev = 0
+	[0x5b7fd20] data = 30 next = 0x5b7fde0 prev = 0x5b7fd80
+	[0x5b7fde0] data = 32 next = 0 prev = 0x5b7fd20
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:55:52 2021
+
+			List:
+
+List (OK) [0x1ffefffe50] "UNKNOWN NAME" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:56:11 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:58:05 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 2
+	head = 0x5b7fd30
+	tail = 0x5b7fcd0
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0 prev = 0x5b7fd30
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:58:18 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 2
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:58:29 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 2
+	head = 0x5b7fcd0
+	tail = 0x5b7fd90
+
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sat Apr 17 23:58:36 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 2
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fd90 prev = 0
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fd30
+
+******************************************************
