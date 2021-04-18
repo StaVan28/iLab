@@ -104,6 +104,10 @@ $(OBJ_DIR)/settings.o:	settings.cpp
 ## additional features
 .PHONY: clean tags rebuild git no_valgrind unit_tests library log full_check_valgrind print_logs
 
+install:
+	$(E) " INSTALL"
+	$(Q) mkdir -p $(OBJ_DIR) $(BIN_DIR)
+
 clean:
 	$(E) "  CLEAN"
 	$(Q) rm -f $(BIN)  tags $(OBJ_DIR)/*.o
