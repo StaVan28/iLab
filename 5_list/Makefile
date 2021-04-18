@@ -23,12 +23,12 @@ LIB_DIR  = ../include/libs
 BIN_DIR  = bin
 OBJ_DIR  = obj
 TXT_DIR  = txt
-HDR_DIR  = $(HEAD_DIR) ./list ./settings
+HDR_DIR  = $(HEAD_DIR) ./settings ./list  ./errors
 
 # source
 BIN = $(BIN_DIR)/list
 
-SRC  = settings/settings.cpp list/list.cpp main.cpp
+SRC  = settings/settings.cpp list/list.cpp errors/errors.cpp main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
@@ -92,11 +92,12 @@ $(BIN): $(OBJ)
 ## compiling
 $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
-	$(Q) ${CXX}  ${CXXFLAGS} $(WARNINGS) $(addprefix -I,$(HDR_DIR)) $< -c -o $@
+	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:			main.cpp 
-$(OBJ_DIR)/list.o:			list.cpp  
+$(OBJ_DIR)/main.o:		main.cpp 
+$(OBJ_DIR)/list.o:		list.cpp  
 $(OBJ_DIR)/settings.o:	settings.cpp
+$(OBJ_DIR)/errors.o:	errors.cpp
 
 -include $(DEP)
 

@@ -5,13 +5,12 @@
 
 int main()
 {
-	List my_list("my_list");
+    List my_list("my_list");
 
+    my_list.push_head(30);
+    my_list.push_head(28);
+    my_list.push_tail(32);
 
-	my_list.push_head(30);
-	my_list.push_head(28);
-	my_list.push_tail(32);
-
-	return 0;
+    return 0;
 }
 
