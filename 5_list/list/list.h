@@ -74,6 +74,7 @@ class List {
 
         void graph() const noexcept;
         void log();
+
         void print_form(ofstream& my_stream);
 
         int begin() const noexcept;
