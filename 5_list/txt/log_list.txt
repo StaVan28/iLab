@@ -1579,3 +1579,193 @@ List (OK) [0x1ffefffe70] "my_list" {
 	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
 
 ******************************************************
+
+******************************************************
+		Sun Apr 18 22:24:09 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 22:24:24 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 22:24:37 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 22:24:51 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 22:25:09 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 22:25:55 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 3
+	head = 0x5b7fd30
+	tail = 0x5b7fd90
+
+	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
+	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
+	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 23:38:04 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 23:39:46 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 21.5 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 23:40:00 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 21 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 23:41:15 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 21.5 next = 0 prev = 0
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 23:47:44 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 0
+	head = 0
+	tail = 0
+
+
+******************************************************
+
+******************************************************
+		Sun Apr 18 23:47:57 2021
+
+			List:
+
+List (OK) [0x1ffefffe70] "my_list" {
+
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
+
+	[0x5b7fcd0] data = 21.5 next = 0 prev = 0
+
+******************************************************

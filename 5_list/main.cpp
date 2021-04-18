@@ -1,15 +1,13 @@
 
-#include "list.hpp"
+#include "list.h"
 
 //-----------------------------------------------------------------------------
 
 int main()
 {
-    List my_list("my_list");
+    List<double> my_list("my_list");
 
-    my_list.push_head(30);
-    my_list.push_head(28);
-    my_list.push_tail(32);
+    my_list.insert(position::BEFORE, 0, 21.5);
 
     return 0;
 }

@@ -1,17 +1,15 @@
 
 ******************************************************
-		Sun Apr 18 13:13:58 2021
+		Sun Apr 18 23:47:57 2021
 
 			List:
 
 List (OK) [0x1ffefffe70] "my_list" {
 
-	size = 3
-	head = 0x5b7fd30
-	tail = 0x5b7fd90
+	size = 1
+	head = 0x5b7fcd0
+	tail = 0x5b7fcd0
 
-	[0x5b7fd30] data = 28 next = 0x5b7fcd0 prev = 0
-	[0x5b7fcd0] data = 30 next = 0x5b7fd90 prev = 0x5b7fd30
-	[0x5b7fd90] data = 32 next = 0 prev = 0x5b7fcd0
+	[0x5b7fcd0] data = 21.5 next = 0 prev = 0
 
 ******************************************************
