@@ -12,6 +12,7 @@
 #include <errno.h>
 #include <string.h>
 
+// namespaces is filled with garbage
 using namespace std;
 
 #include "settings.h"

@@ -118,7 +118,6 @@ void List<Data_t>::insert(position indx_pos, const int indx, const Data_t data)
     insrt_node->data_ = data;
 
     if (empty()) {
-        
         head_ = insrt_node;
         tail_ = insrt_node;
 
@@ -143,7 +142,7 @@ void List<Data_t>::insert(position indx_pos, const int indx, const Data_t data)
         }
     }
 
-     if (indx_pos == position::AFTER) {
+    if (indx_pos == position::AFTER) {
         if (indx == end()) {
             insrt_node->next_ = nullptr;
             insrt_node->prev_ = tail_;
@@ -235,6 +234,7 @@ void List<Data_t>::clear()
 
 //-----------------------------------------------------------------------------
 
+// it is not noexcept
 template <typename Data_t>
 void List<Data_t>::graph() const noexcept
 {
@@ -291,7 +291,7 @@ void List<Data_t>::graph() const noexcept
 }
 
 //-----------------------------------------------------------------------------
-
+// output to custom dump file
 template <typename Data_t>
 void List<Data_t>::dump()
 {
@@ -376,7 +376,7 @@ int List<Data_t>::begin() const noexcept
 template <typename Data_t>
 int List<Data_t>::end() const noexcept
 {
-    return size_;
+    return size_ - 1;
 }
 
 //-----------------------------------------------------------------------------
