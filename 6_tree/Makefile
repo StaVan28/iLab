@@ -71,7 +71,7 @@ endif
 
 #
 ## launch with debug valgrind(default)
-default: $(LAUNCH_MODE)
+default: print_logs
 
 print_logs: $(LAUNCH_MODE)
 
@@ -95,11 +95,9 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:		main.cpp
-$(OBJ_DIR)/tree.o:		tree.cpp 
-$(OBJ_DIR)/settings.o:	settings.cpp
-
--include $(DEP)
+$(OBJ_DIR)/main.o:		main.cpp     settings.h tree.hpp
+$(OBJ_DIR)/tree.o:		tree.cpp     settings.h tree.hpp
+$(OBJ_DIR)/settings.o:	settings.cpp settings.h
 
 #
 ## additional features
@@ -154,10 +152,13 @@ print_logs:
 	$(Q) fim $(TXT_DIR)/graph_tree.jpeg
 #
 ## generate lib and copy main header to ../include
-library: $(PROJ_LIB) $(BIN) tree.h
+library: $(PROJ_LIB) $(BIN) tree.hpp
 	$(E) "    MAKE LIBRARY"
-	$(Q) cp tree.h $(HEAD_DIR)/
+	$(Q) cp tree.hpp $(HEAD_DIR)/
 	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
 
 $(PROJ_LIB): $(OBJ)
 	$(Q) ar cr $@ $^
+
+
+-include $(DEP)

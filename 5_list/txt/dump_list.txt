@@ -1,10 +1,10 @@
 
 ******************************************************
-		Mon Apr 19 23:48:52 2021
+		Tue Apr 20 23:06:30 2021
 
 			List:
 
-List (OK) [0x1ffefffe70] "my_list" {
+List (OK) [0x1ffefffe60] "my_list" {
 
 	size = 1
 	head = 0x5b7fcd0
