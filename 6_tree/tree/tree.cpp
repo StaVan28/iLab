@@ -75,7 +75,28 @@ void Tree::print_dump_tree(NodeTree* prnt_node, std::ofstream& output)
 
 void Tree::graph()
 {
+    std::ofstream  graph("./txt/graph_tree.dot");
+    assert(graph);
 
+
+    graph << "digraph Tree {" << std::endl << std::endl;
+
+    graph << "\tnode [shape = \"circle\", style = \"filled\", fillcolor = \"red\","
+          << "  fontcolor = \"#000000\", margin = \"0.01\"];\n"
+          << "\trankdir = \"TB\";\n\n"
+          << "\tlabel = \"Tree Graph\";\n";
+
+    graph << std::endl;
+
+    //print_graph_tree(root_, graph);
+
+    graph << "}" << std::endl;
+
+
+    graph.close();
+
+    system("dot -Tjpeg ./txt/graph_tree.dot -o./txt/graph_tree.jpeg");
 }
 
+//-----------------------------------------------------------------------------
 
