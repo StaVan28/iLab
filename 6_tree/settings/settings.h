@@ -4,14 +4,18 @@
 
 //-----------------------------------------------------------------------------
 
-#include <string>
+#include <chrono>  
+#include <ctime>  
+#include <sstream> 
+#include <iomanip> 
+#include <string>  
 
 //-----------------------------------------------------------------------------
-
-
 
 static const std::string UNKNOWN_NAME("UNKNOWN NAME");
 
 //-----------------------------------------------------------------------------
+
+std::string return_current_time_and_date();
 
 #endif // SETTINGS_HPP_INCLUDED
