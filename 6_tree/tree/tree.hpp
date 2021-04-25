@@ -35,10 +35,10 @@ class Tree
         std::string name_ = nullptr;
         NodeTree*   root_ = nullptr;
 
-        void graph();
+        void graph(Mode mode);
 
-        void print_dump_tree (NodeTree* prnt_node, std::ofstream& output);
-        void print_graph_tree(NodeTree* prnt_node, std::ofstream& output);
+        void print_dump_tree(            NodeTree* prnt_node, std::ofstream& output);
+        void print_graph_tree(Mode mode, NodeTree* prnt_node, std::ofstream& output);
 
     public:
 
@@ -47,7 +47,7 @@ class Tree
 
        ~Tree();
     
-        void dump(std::string file_path = "./txt/dump_tree.txt");
+        void dump(Mode mode, std::string file_path = "./txt/dump_tree.txt");
 };
 
 //-----------------------------------------------------------------------------

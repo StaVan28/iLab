@@ -21,14 +21,18 @@ Tree::Tree(std::string name) :
 
 Tree::~Tree()
 {
+    assert(this);
+
     // destruct root_
     root_ = nullptr;
 }
 
 //-----------------------------------------------------------------------------
 
-void Tree::dump(std::string file_path)
+void Tree::dump(Mode mode, std::string file_path)
 {
+    assert(this);
+
     std::ofstream dump(file_path);
     assert(dump);
 
@@ -49,13 +53,18 @@ void Tree::dump(std::string file_path)
 
     dump.close();
 
-    graph();
+    if (mode == Mode::DEBUG)
+        graph(Mode::DEBUG);
+    else
+        graph(Mode::RELEASE);
 }
 
 //-----------------------------------------------------------------------------
 
 void Tree::print_dump_tree(NodeTree* prnt_node, std::ofstream& output)
 {
+    assert(this);
+
     if (prnt_node == nullptr)
         return;
 
@@ -73,22 +82,33 @@ void Tree::print_dump_tree(NodeTree* prnt_node, std::ofstream& output)
 
 //-----------------------------------------------------------------------------
 
-void Tree::graph()
+void Tree::graph(Mode mode)
 {
-    std::ofstream  graph("./txt/graph_tree.dot");
-    assert(graph);
+    assert(this);
+
+    std::string file_path = "graph_tree_db.dot";
+
+    if (mode == Mode::RELEASE)
+        file_path = "graph_tree_rls.dot";
+
+    std::ofstream graph(file_path);
+    assert(graph);       
 
 
     graph << "digraph Tree {" << std::endl << std::endl;
 
     graph << "\tnode [shape = \"circle\", style = \"filled\", fillcolor = \"red\","
-          << "  fontcolor = \"#000000\", margin = \"0.01\"];\n"
+          <<   "fontcolor = \"#000000\", margin = \"0.01\"];\n"
           << "\trankdir = \"TB\";\n\n"
           << "\tlabel = \"Tree Graph\";\n";
 
     graph << std::endl;
 
-    //print_graph_tree(root_, graph);
+    if (mode == Mode::DEBUG) {
+        print_graph_tree(Mode::DEBUG,   root_, graph);
+    }
+    else 
+        print_graph_tree(Mode::RELEASE, root_, graph);
 
     graph << "}" << std::endl;
 
@@ -100,3 +120,20 @@ void Tree::graph()
 
 //-----------------------------------------------------------------------------
 
+void Tree::print_graph_tree(Mode mode, NodeTree* prnt_node, std::ofstream& output)
+{
+    assert(this);
+
+    for (size_t indx = 0; indx < 1; indx++)
+    {
+
+    }
+
+
+    for (size_t indx = 0; indx < 1; indx++)
+    {
+
+    }
+}
+
+//-----------------------------------------------------------------------------

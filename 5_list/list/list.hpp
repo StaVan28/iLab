@@ -251,7 +251,6 @@ void List<Data_t>::graph() const noexcept
     graph << "\tlabel = \"List Graph\";\n" << endl;
 
 
-
     size_t counter = 0;
     for (Node<Data_t>* tmp_node = head_; tmp_node != nullptr; tmp_node = tmp_node->next_) {
         counter++;
