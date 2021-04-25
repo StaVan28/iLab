@@ -20,7 +20,8 @@ enum class Mode : int
 
 //-----------------------------------------------------------------------------
 
-static const std::string UNKNOWN_NAME("UNKNOWN NAME");
+static const std::string UNKNOWN_NAME    = "UNKNOWN NAME";
+static const std::string COMPILE_DOT_CMD = "dot -Tjpeg ./txt/graph_tree.dot -o";
 
 //-----------------------------------------------------------------------------
 

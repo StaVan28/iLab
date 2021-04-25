@@ -146,10 +146,10 @@ print_logs:
 	$(Q) cat $(TXT_DIR)/dump_tree.txt
 	$(E) "******************************************************"
 	$(E) "\t\t\tGraph:\n"
-	$(Q) cat $(TXT_DIR)/graph_tree.dot
+	$(Q) cat $(TXT_DIR)/graph_tree_db.dot
 	$(E) "\n******************************************************"
 	$(E) "    LAUNCH JPEG  "
-	$(Q) fim $(TXT_DIR)/graph_tree.jpeg
+	$(Q) fim $(TXT_DIR)/graph_tree_db.jpeg
 #
 ## generate lib and copy main header to ../include
 library: $(PROJ_LIB) $(BIN) tree.hpp

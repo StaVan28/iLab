@@ -86,10 +86,11 @@ void Tree::graph(Mode mode)
 {
     assert(this);
 
-    std::string file_path = "graph_tree_db.dot";
+    std::string file_path = "./txt/graph_tree_db.dot";
 
     if (mode == Mode::RELEASE)
-        file_path = "graph_tree_rls.dot";
+        file_path = "./txt/graph_tree_rls.dot";
+
 
     std::ofstream graph(file_path);
     assert(graph);       
@@ -98,7 +99,7 @@ void Tree::graph(Mode mode)
     graph << "digraph Tree {" << std::endl << std::endl;
 
     graph << "\tnode [shape = \"circle\", style = \"filled\", fillcolor = \"red\","
-          <<   "fontcolor = \"#000000\", margin = \"0.01\"];\n"
+          <<     "fontcolor = \"#000000\", margin = \"0.01\"];\n"
           << "\trankdir = \"TB\";\n\n"
           << "\tlabel = \"Tree Graph\";\n";
 
@@ -112,10 +113,12 @@ void Tree::graph(Mode mode)
 
     graph << "}" << std::endl;
 
-
     graph.close();
 
-    system("dot -Tjpeg ./txt/graph_tree.dot -o./txt/graph_tree.jpeg");
+    if (mode == Mode::DEBUG)
+        system("dot -Tjpeg ./txt/graph_tree_db.dot  -o./txt/graph_tree_db.jpeg");
+    else 
+        system("dot -Tjpeg ./txt/graph_tree_rls.dot -o./txt/graph_tree_rls.jpeg");
 }
 
 //-----------------------------------------------------------------------------
@@ -124,16 +127,23 @@ void Tree::print_graph_tree(Mode mode, NodeTree* prnt_node, std::ofstream& outpu
 {
     assert(this);
 
-    for (size_t indx = 0; indx < 1; indx++)
-    {
+    if (prnt_node == nullptr)
+        return;
 
-    }
+    output << "\t\"V" << prnt_node << "\"[shape = \"record\", fillcolor=\"lightcyan2\", " <<
+              "label = \""   << 
+              "  parent\\n"  << prnt_node->parent_ <<
+              "    data\\n"  << prnt_node->data_   <<
+              " |    me\\n"  << prnt_node          << 
+              " | {prev\\n(" << prnt_node->left_   << ")"    <<
+              " |  next\\n(" << prnt_node->right_  << ")}"   <<  std::endl;
 
 
-    for (size_t indx = 0; indx < 1; indx++)
-    {
+    if (prnt_node->right_ != nullptr)
+        print_graph_tree(mode, prnt_node->right_, output);
 
-    }
+    if (prnt_node->left_  != nullptr)
+        print_graph_tree(mode, prnt_node->left_,  output);
 }
 
 //-----------------------------------------------------------------------------
