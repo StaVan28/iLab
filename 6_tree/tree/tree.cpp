@@ -11,7 +11,7 @@ Tree::Tree() :
 
 //-----------------------------------------------------------------------------
 
-Tree::Tree(std::string name) :
+Tree::Tree(const std::string name) :
     name_(name)
 {
     assert(this);
@@ -29,7 +29,22 @@ Tree::~Tree()
 
 //-----------------------------------------------------------------------------
 
-void Tree::dump(Mode mode, std::string file_path)
+void Tree::insert(const std::string data)
+{
+    insert(root_, data);
+}
+
+//!
+
+void Tree::insert(const NodeTree* const insrt_node, const std::string data)
+{
+    if ()
+}
+
+
+//-----------------------------------------------------------------------------
+
+void Tree::dump(const Mode mode, const std::string file_path)
 {
     assert(this);
 
@@ -38,8 +53,8 @@ void Tree::dump(Mode mode, std::string file_path)
 
     dump << std::endl << "******************************************************" << std::endl;
 
-    dump << "\t\t"        << return_current_time_and_date() << std::endl;
-    dump << "\t\t\tTree:" << std::endl                      << std::endl;
+    dump << "\t\t"        << current_time_and_date() << std::endl;
+    dump << "\t\t\tTree:" << std::endl               << std::endl;
 
 
     dump << "Tree (OK) [" << this << "] \"" << name_ << "\" {" << std::endl;
@@ -61,7 +76,7 @@ void Tree::dump(Mode mode, std::string file_path)
 
 //-----------------------------------------------------------------------------
 
-void Tree::print_dump_tree(NodeTree* prnt_node, std::ofstream& output)
+void Tree::print_dump_tree(const NodeTree* const prnt_node, std::ofstream& output)
 {
     assert(this);
 
@@ -82,14 +97,14 @@ void Tree::print_dump_tree(NodeTree* prnt_node, std::ofstream& output)
 
 //-----------------------------------------------------------------------------
 
-void Tree::graph(Mode mode)
+void Tree::graph(const Mode mode)
 {
     assert(this);
 
     std::string file_path = "./txt/graph_tree_db.dot";
 
     if (mode == Mode::RELEASE)
-        file_path = "./txt/graph_tree_rls.dot";
+        file_path = "./txt/ graph_tree_rls.dot";
 
 
     std::ofstream graph(file_path);
@@ -108,12 +123,14 @@ void Tree::graph(Mode mode)
     if (mode == Mode::DEBUG) {
         print_graph_tree(Mode::DEBUG,   root_, graph);
     }
-    else 
+    else {
         print_graph_tree(Mode::RELEASE, root_, graph);
+    }
 
     graph << "}" << std::endl;
 
     graph.close();
+
 
     if (mode == Mode::DEBUG)
         system("dot -Tjpeg ./txt/graph_tree_db.dot  -o./txt/graph_tree_db.jpeg");
@@ -123,7 +140,7 @@ void Tree::graph(Mode mode)
 
 //-----------------------------------------------------------------------------
 
-void Tree::print_graph_tree(Mode mode, NodeTree* prnt_node, std::ofstream& output)
+void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, std::ofstream& output)
 {
     assert(this);
 

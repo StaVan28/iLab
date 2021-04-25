@@ -37,17 +37,21 @@ class Tree
 
         void graph(Mode mode);
 
-        void print_dump_tree(            NodeTree* prnt_node, std::ofstream& output);
-        void print_graph_tree(Mode mode, NodeTree* prnt_node, std::ofstream& output);
+        void print_dump_tree (                 const NodeTree* const prnt_node, std::ofstream& output);
+        void print_graph_tree(const Mode mode, const NodeTree* const prnt_node, std::ofstream& output);
+
+        void insert(const NodeTree* const insrt_node, const std::string data);
 
     public:
 
         Tree();
-        Tree(std::string name);
+        Tree(const std::string name);
 
        ~Tree();
+
+        void insert(const std::string data);
     
-        void dump(Mode mode, std::string file_path = "./txt/dump_tree.txt");
+        void dump(const Mode mode, const std::string file_path = "./txt/dump_tree.txt");
 };
 
 //-----------------------------------------------------------------------------
