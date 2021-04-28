@@ -1,9 +1,18 @@
 
 ******************************************************
-		2021-04-26 01:13:43
+		2021-04-28 22:30:05
 			Tree:
 
-Tree (OK) [0x1ffefffe70] "UNKNOWN NAME" {
+Tree (OK) [0x1ffefffe50] "my_tree" {
+
+	size = 6
+
+data = {hi}left = {0x5b801e0}right = {0x5b7fe20}parent = {0}
+data = {прывитанне}left = {0x5b7ff00}right = {0x5b80100}parent = {0x5b7fc80}
+data = {გამარჯობა}left = {0}right = {0}parent = {0x5b7fe20}
+data = {hola}left = {0}right = {0x5b80260}parent = {0x5b7fe20}
+data = {любовь}left = {0}right = {0}parent = {0x5b7ff00}
+data = {hello}left = {0}right = {0}parent = {0x5b7fc80}
 }
 
 ******************************************************

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 
 Tree::Tree() :
-    name_(UNKNOWN_NAME)
+    name_{UNKNOWN_NAME}
 {
     assert(this);
 }
@@ -12,7 +12,7 @@ Tree::Tree() :
 //-----------------------------------------------------------------------------
 
 Tree::Tree(const std::string name) :
-    name_(name)
+    name_{name}
 {
     assert(this);
 }
@@ -29,18 +29,102 @@ Tree::~Tree()
 
 //-----------------------------------------------------------------------------
 
-void Tree::insert(const std::string data)
+bool Tree::insert(const std::string data)
 {
-    insert(root_, data);
+    bool result = insert(root_, data);
+
+    if (result)
+        size_++;
+
+    return result;
 }
 
 //!
 
-void Tree::insert(const NodeTree* const insrt_node, const std::string data)
+bool Tree::insert(NodeTree* const insrt_node, const std::string data)
 {
-    if ()
+    if (root_ == insrt_node && !root_) 
+    {
+        root_ = new NodeTree(data, nullptr);
+        return true;
+    }
+
+    if (data < insrt_node->data_) 
+    {
+        if (!insrt_node->left_) 
+        {
+            insrt_node->left_ = new NodeTree(data, insrt_node);
+            return true;
+        } 
+        else 
+            return insert(insrt_node->left_, data);
+    } 
+    else if (data > insrt_node->data_) 
+    {
+        if (!insrt_node->right_) 
+        {
+            insrt_node->right_ = new NodeTree(data, insrt_node);
+            return true;
+        } 
+        else 
+            return insert(insrt_node->right_, data);
+    } 
+    else 
+        return false;
 }
 
+
+//-----------------------------------------------------------------------------
+
+//!
+
+//-----------------------------------------------------------------------------
+
+bool Tree::find_max(std::string ret_data)
+{
+    return find_max(root_, ret_data);
+}
+
+//!
+
+bool Tree::find_max(const NodeTree* const max_node, std::string ret_data) 
+{
+    if (max_node == nullptr) 
+    {
+        return false;
+    }
+    else if (!max_node->right_) 
+    {
+        ret_data = max_node->data_;
+        return true;
+    }
+
+    return find_max(max_node->right_, ret_data);
+}
+
+//-----------------------------------------------------------------------------
+
+bool Tree::find_min(std::string ret_data)
+{
+    return find_min(root_, ret_data);
+}
+
+//!
+
+bool Tree::find_min(const NodeTree* const min_node, std::string ret_data) 
+{
+    if (min_node == nullptr) 
+    {
+        return false;
+    } 
+    else if (min_node->left_) 
+    {
+        ret_data = min_node->data_;
+        return true;
+    }
+
+    return find_min(min_node->left_, ret_data);
+}
 
 //-----------------------------------------------------------------------------
 
@@ -53,11 +137,14 @@ void Tree::dump(const Mode mode, const std::string file_path)
 
     dump << std::endl << "******************************************************" << std::endl;
 
+
     dump << "\t\t"        << current_time_and_date() << std::endl;
     dump << "\t\t\tTree:" << std::endl               << std::endl;
 
 
     dump << "Tree (OK) [" << this << "] \"" << name_ << "\" {" << std::endl;
+
+    dump << std::endl << "\tsize = " << size_ << std::endl << std::endl;
 
     print_dump_tree(root_, dump);
 
@@ -104,7 +191,7 @@ void Tree::graph(const Mode mode)
     std::string file_path = "./txt/graph_tree_db.dot";
 
     if (mode == Mode::RELEASE)
-        file_path = "./txt/ graph_tree_rls.dot";
+        file_path = "./txt/graph_tree_rls.dot";
 
 
     std::ofstream graph(file_path);
@@ -147,14 +234,41 @@ void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, st
     if (prnt_node == nullptr)
         return;
 
-    output << "\t\"V" << prnt_node << "\"[shape = \"record\", fillcolor=\"lightcyan2\", " <<
-              "label = \""   << 
-              "  parent\\n"  << prnt_node->parent_ <<
-              "    data\\n"  << prnt_node->data_   <<
-              " |    me\\n"  << prnt_node          << 
-              " | {prev\\n(" << prnt_node->left_   << ")"    <<
-              " |  next\\n(" << prnt_node->right_  << ")}"   <<  std::endl;
 
+    if (mode == Mode::DEBUG) 
+    {
+    output << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
+              "label = \""      << 
+              "{ {parent\\n ("  << prnt_node->parent_ << ") } |"     <<
+                  "{data\\n ("  << prnt_node->data_   << ") } |"     <<
+                    "{me\\n ("  << prnt_node          << ") } |"     <<
+                  "{left\\n ("  << prnt_node->left_   << ")   |"     <<
+                  "right\\n ("  << prnt_node->right_  << ") } }\"];" <<  std::endl;
+ 
+    if (prnt_node->parent_)
+        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->parent_ << "\";" << std::endl;
+   
+    if (prnt_node->left_)
+        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
+   
+    if (prnt_node->right_)
+        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;
+    }
+    else 
+    {
+    output << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
+              "label = \""  << 
+              "{"  << prnt_node->data_   << "}\" ];" << std::endl;
+  
+    if (prnt_node->left_)
+        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
+   
+    if (prnt_node->right_)
+        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;        
+    }
+
+
+    output << std::endl << std::endl;
 
     if (prnt_node->right_ != nullptr)
         print_graph_tree(mode, prnt_node->right_, output);
