@@ -6,20 +6,19 @@
 int main()
 {
 	Tree my_tree("my_tree");
+	my_tree.insert("7");
+	my_tree.insert("9");
+	my_tree.insert("2");
 
-	my_tree.insert("hi");
-	my_tree.insert("прывитанне");
-	my_tree.insert("hola");
+	my_tree.insert("1");
+	my_tree.insert("4");
 
-	my_tree.insert("გამარჯობა");
-	my_tree.insert("hello");
-	my_tree.insert("любовь");
+	my_tree.insert("3");
+	my_tree.insert("5");
 
-	std::string max;
-	if (my_tree.find_max(max))
-		std::cout << max << std::endl << std::endl;
-	else 
-		std::cout << "gggggggggggggggggggggggggggggg" << std::endl;
+	my_tree.insert("5.5");
+
+	my_tree.remove("2");
 
 	my_tree.dump(Mode::DEBUG);
 

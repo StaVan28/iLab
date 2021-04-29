@@ -31,6 +31,14 @@ class NodeTree
         right_  {},
         parent_ {parent}
     {}
+
+   ~NodeTree() 
+    {
+        left_   = nullptr;
+        right_  = nullptr;
+        parent_ = nullptr;
+    }
+
 };
     
 //!
@@ -43,16 +51,18 @@ class Tree
         NodeTree*   root_ = nullptr;
         std::size_t size_ = 0;
 
-        void graph(Mode mode);
+        void graph(const Mode mode);
 
         void print_dump_tree (                 const NodeTree* const prnt_node, std::ofstream& output);
         void print_graph_tree(const Mode mode, const NodeTree* const prnt_node, std::ofstream& output);
 
         bool insert(NodeTree* const insrt_node, const std::string data);
-        bool remove(NodeTree* const insrt_node, const std::string data);
+        bool remove(NodeTree* const srch_node,  const std::string rmv_data);
 
-        bool find_max(const NodeTree* const max_node, std::string ret_data);
-        bool find_min(const NodeTree* const min_node, std::string ret_data);
+        bool find_max(const NodeTree* const max_node, std::string ret_data) const;
+        bool find_min(const NodeTree* const min_node, std::string ret_data) const;
+
+        bool clear(NodeTree* clr_node);
 
     public:
 
@@ -64,8 +74,13 @@ class Tree
         bool insert(const std::string data);
         bool remove(const std::string data);
 
-        bool find_max(std::string ret_data);
-        bool find_min(std::string ret_data);
+        bool find_max(std::string ret_data) const;
+        bool find_min(std::string ret_data) const;
+
+        bool clear();
+
+        bool empty() const noexcept;
+        bool size()  const noexcept;
     
         void dump(const Mode mode, const std::string file_path = "./txt/dump_tree.txt");
 };
