@@ -102,26 +102,7 @@ bool Tree::remove(NodeTree* srch_node, std::string rmv_data)
     {
         if (srch_node->left_ && srch_node->right_)
         {
-            if (srch_node != root_)
-                if (srch_node->parent_->left_ == srch_node) 
-                {
-                    srch_node->parent_->left_  = srch_node->left_;
-                    srch_node->left_->parent_  = srch_node->parent_;
-                }
-                else 
-                {
-                    srch_node->right_->parent_ = srch_node->parent_;
-                    srch_node->parent_->right_ = srch_node->right_;
-                }
-
-            NodeTree* last_node = srch_node->left_;
-            while (last_node->right_ != nullptr)
-                last_node = last_node->right_;
-
-            srch_node->right_->parent_ = last_node;
-            last_node->right_          = srch_node;
-
-            //delete srch_node;
+            // don't use
             return true;
         } 
         else if (srch_node->left_ || srch_node->right_) 
