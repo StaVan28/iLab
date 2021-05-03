@@ -15,6 +15,8 @@ class Akinator
 
         AkinatorTree* akinator_tree_ = nullptr;
 
+        void call_menu() const;
+
     public:
 
         Akinator();
@@ -22,7 +24,7 @@ class Akinator
        ~Akinator();
 
         void launch() const;
-
+        void dump()   const;
 };
 
 //-----------------------------------------------------------------------------

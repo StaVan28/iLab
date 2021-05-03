@@ -20,7 +20,6 @@ class AkinatorTree : public Tree
         AkinatorTree();
         AkinatorTree(const std::string base);
        ~AkinatorTree();
-
 };
 
 //-----------------------------------------------------------------------------

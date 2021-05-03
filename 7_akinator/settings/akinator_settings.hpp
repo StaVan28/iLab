@@ -14,6 +14,13 @@
 
 //-----------------------------------------------------------------------------
 
+enum AkinatorModes
+{
+	Guesser,
+};
+
+//-----------------------------------------------------------------------------
+
 const std::string AKINATOR_TREE_NAME = "akinator_tree";
 const std::string DEFAULT_BASE       = "./txt/base_akinator.txt";
 
