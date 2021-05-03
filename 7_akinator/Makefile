@@ -4,7 +4,7 @@
 
 # Makefile for tree_project
 # version 1.2
-#		author: Starchenko Ivan
+#        author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
 # SETTINGS
@@ -23,12 +23,12 @@ LIB_DIR  = ../include/libs
 BIN_DIR  = bin
 OBJ_DIR  = obj
 TXT_DIR  = txt
-HDR_DIR  = $(HEAD_DIR) ./settings ./tree 
+HDR_DIR  = $(HEAD_DIR) ./settings ./akinator ./akinator_tree 
 
 # source
-BIN = $(BIN_DIR)/tree
+BIN = $(BIN_DIR)/akinator 
 
-SRC  = settings/settings.cpp tree/tree.cpp main.cpp
+SRC  = settings/settings.cpp akinator/akinator.cpp akinator_tree/akinator_tree.cpp main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
@@ -37,22 +37,22 @@ vpath %.cpp $(HDR_DIR)
 vpath %.hpp $(HDR_DIR)
 vpath %.h   $(HDR_DIR)
 
-PROJ_LIB = libtree.a
+PROJ_LIB = libakinator.a
 
 # compiler settings
 CXX      = g++ -std=c++14
 WARNINGS = -Wall -Wextra 
 CXXFLAGS = 
 
-DEBUG_MODE   = -g3 -O0 	
+DEBUG_MODE   = -g3 -O0     
 RELEASE_MODE = -g0 -Ofast
 
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v
 
 ifeq ($(LAUNCH_MODE),debug)
-	CXXFLAGS += $(DEBUG_MODE)
+    CXXFLAGS += $(DEBUG_MODE)
 else
-	CXXFLAGS += $(RELEASE_MODE)
+    CXXFLAGS += $(RELEASE_MODE)
 endif
 
 # defines for OS
@@ -95,9 +95,10 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:		main.cpp     settings.h tree.hpp
-$(OBJ_DIR)/tree.o:		tree.cpp     settings.h tree.hpp
-$(OBJ_DIR)/settings.o:	settings.cpp settings.h
+$(OBJ_DIR)/main.o:          main.cpp          settings.hpp akinator.hpp 
+$(OBJ_DIR)/akinator.o:      akinator.cpp      settings.hpp akinator.hpp akinator_tree.hpp
+$(OBJ_DIR)/akinator_tree.o: akinator_tree.cpp settings.hpp akinator.hpp akinator_tree.hpp 
+$(OBJ_DIR)/settings.o:      settings.cpp      settings.hpp
 
 #
 ## additional features
@@ -105,11 +106,11 @@ $(OBJ_DIR)/settings.o:	settings.cpp settings.h
 
 install:
 	$(E) " INSTALL"
-	$(Q) mkdir -p $(OBJ_DIR) $(BIN_DIR)
+	$(Q) mkdir -p $(OBJ_DIR) $(BIN_DIR) $(TXT_DIR)
 
 clean:
 	$(E) "  CLEAN"
-	$(Q) rm -f $(BIN)  tags $(OBJ_DIR)/*.o
+	$(Q) rm -f $(BIN) tags $(OBJ_DIR)/*.o $(TXT_DIR)/*.jpeg $(TXT_DIR)/*.dot
 
 tags: ${SRC}
 	$(Q) rm -f tags
@@ -143,18 +144,18 @@ log:
 
 print_logs:
 	$(E) "    PRINT LOGS  "
-	$(Q) cat $(TXT_DIR)/dump_tree.txt
+	$(Q) cat $(TXT_DIR)/dump_akinator.txt
 	$(E) "******************************************************"
 	$(E) "\t\t\tGraph:\n"
-	$(Q) cat $(TXT_DIR)/graph_tree_db.dot
+	$(Q) cat $(TXT_DIR)/graph_akinator_db.dot
 	$(E) "\n******************************************************"
 	$(E) "    LAUNCH JPEG  "
-	$(Q) fim $(TXT_DIR)/graph_tree_db.jpeg
+	$(Q) fim $(TXT_DIR)/graph_akinator_db.jpeg
 #
 ## generate lib and copy main header to ../include
-library: $(PROJ_LIB) $(BIN) tree/tree.hpp
+library: $(PROJ_LIB) $(BIN) akinator/akinator.hpp
 	$(E) "    MAKE LIBRARY"
-	$(Q) cp tree/tree.hpp $(HEAD_DIR)/
+	$(Q) cp akinator/akinator.hpp $(HEAD_DIR)/
 	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
 
 $(PROJ_LIB): $(OBJ)
