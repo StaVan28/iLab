@@ -12,7 +12,7 @@
 #include <assert.h>
 #include <errno.h>
 
-#include "settings.h"
+#include "settings_tree.h"
 
 //-----------------------------------------------------------------------------
 

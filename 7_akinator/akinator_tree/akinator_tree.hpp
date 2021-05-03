@@ -4,7 +4,24 @@
 
 //-----------------------------------------------------------------------------
 
-#include "settings.hpp"
+#include "akinator_settings.hpp"
+#include "tree.hpp"
+
+//-----------------------------------------------------------------------------
+
+class AkinatorTree : public Tree
+{
+    private:
+
+        std::string base_ = nullptr;
+
+    public:
+
+        AkinatorTree();
+        AkinatorTree(const std::string base);
+       ~AkinatorTree();
+
+};
 
 //-----------------------------------------------------------------------------
 

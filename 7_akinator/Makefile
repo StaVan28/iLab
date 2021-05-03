@@ -28,10 +28,11 @@ HDR_DIR  = $(HEAD_DIR) ./settings ./akinator ./akinator_tree
 # source
 BIN = $(BIN_DIR)/akinator 
 
-SRC  = settings/settings.cpp akinator/akinator.cpp akinator_tree/akinator_tree.cpp main.cpp
+SRC  = settings/akinator_settings.cpp akinator/akinator.cpp akinator_tree/akinator_tree.cpp main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
+LIB  = -ltree
 
 vpath %.cpp $(HDR_DIR)
 vpath %.hpp $(HDR_DIR)
@@ -87,7 +88,7 @@ release: clean  $(BIN)
 ## linking
 $(BIN): $(OBJ)
 	$(E) "    LINK:        " $@
-	$(Q) $(CXX) $(WARNINGS) $^ -L$(LIB_DIR) -o $@  
+	$(Q) $(CXX) $(WARNINGS) $^ -L$(LIB_DIR) $(LIB) -o $@  
 
 #
 ## compiling
@@ -95,10 +96,10 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:          main.cpp          settings.hpp akinator.hpp 
-$(OBJ_DIR)/akinator.o:      akinator.cpp      settings.hpp akinator.hpp akinator_tree.hpp
-$(OBJ_DIR)/akinator_tree.o: akinator_tree.cpp settings.hpp akinator.hpp akinator_tree.hpp 
-$(OBJ_DIR)/settings.o:      settings.cpp      settings.hpp
+$(OBJ_DIR)/main.o:              main.cpp              akinator_settings.hpp akinator.hpp 
+$(OBJ_DIR)/akinator.o:          akinator.cpp          akinator_settings.hpp akinator.hpp akinator_tree.hpp
+$(OBJ_DIR)/akinator_tree.o:     akinator_tree.cpp     akinator_settings.hpp akinator.hpp akinator_tree.hpp 
+$(OBJ_DIR)/akinator_settings.o: akinator_settings.cpp akinator_settings.hpp
 
 #
 ## additional features

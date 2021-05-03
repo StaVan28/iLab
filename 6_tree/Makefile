@@ -28,13 +28,13 @@ HDR_DIR  = $(HEAD_DIR) ./settings ./tree
 # source
 BIN = $(BIN_DIR)/tree
 
-SRC  = settings/settings.cpp tree/tree.cpp main.cpp
+SRC  = settings/settings_tree.cpp tree/tree.cpp main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
 
 vpath %.cpp $(HDR_DIR)
-vpath %.hpp $(HDR_DIR)
+vpath %.hpp ./settings ./tree
 vpath %.h   $(HDR_DIR)
 
 PROJ_LIB = libtree.a
@@ -95,9 +95,9 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:		main.cpp     settings.h tree.hpp
-$(OBJ_DIR)/tree.o:		tree.cpp     settings.h tree.hpp
-$(OBJ_DIR)/settings.o:	settings.cpp settings.h
+$(OBJ_DIR)/main.o:		main.cpp     settings_tree.h tree.hpp
+$(OBJ_DIR)/tree.o:		tree.cpp     settings_tree.h tree.hpp
+$(OBJ_DIR)/settings.o:	settings.cpp settings_tree.h
 
 #
 ## additional features
@@ -152,9 +152,10 @@ print_logs:
 	$(Q) fim $(TXT_DIR)/graph_tree_db.jpeg
 #
 ## generate lib and copy main header to ../include
-library: $(PROJ_LIB) $(BIN) tree/tree.hpp
+library: $(PROJ_LIB) $(BIN) tree/tree.hpp settings_tree.h
 	$(E) "    MAKE LIBRARY"
-	$(Q) cp tree/tree.hpp $(HEAD_DIR)/
+	$(Q) cp tree/tree.hpp            $(HEAD_DIR)/
+	$(Q) cp settings/settings_tree.h $(HEAD_DIR)/
 	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
 
 $(PROJ_LIB): $(OBJ)
