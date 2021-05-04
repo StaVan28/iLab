@@ -15,7 +15,8 @@ class Akinator
 
         AkinatorTree* akinator_tree_ = nullptr;
 
-        void call_menu() const;
+        void call_menu()       const;
+        void call_guess_mode() const;
 
     public:
 

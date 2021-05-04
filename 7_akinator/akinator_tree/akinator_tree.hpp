@@ -15,10 +15,13 @@ class AkinatorTree : public Tree
 
         std::string base_ = nullptr;
 
+        void fill_tree(const std::string base);
+
     public:
 
         AkinatorTree();
         AkinatorTree(const std::string base);
+
        ~AkinatorTree();
 };
 

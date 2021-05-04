@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 
 AkinatorTree::AkinatorTree() :
-	Tree  {AKINATOR_TREE_NAME},
+    Tree  {AKINATOR_TREE_NAME},
     base_ {DEFAULT_BASE}
 {
-	assert(this);
+    assert(this);
+
+    fill_tree(DEFAULT_BASE);
 }
 
 //-----------------------------------------------------------------------------
@@ -17,6 +19,8 @@ AkinatorTree::AkinatorTree(const std::string base) :
     base_ {base}
 {
     assert(this);
+
+    fill_tree(base);
 }
 
 //-----------------------------------------------------------------------------
@@ -27,3 +31,8 @@ AkinatorTree::~AkinatorTree()
 }
 
 //-----------------------------------------------------------------------------
+
+void AkinatorTree::fill_tree(const std::string base)
+{
+    
+}

@@ -16,13 +16,15 @@
 
 enum AkinatorModes
 {
-	Guesser,
+    Guess_mode = 1,
 };
 
 //-----------------------------------------------------------------------------
 
 const std::string AKINATOR_TREE_NAME = "akinator_tree";
 const std::string DEFAULT_BASE       = "./txt/base_akinator.txt";
+
+static const int ALL_BUFFER = 32767;
 
 //-----------------------------------------------------------------------------
 
