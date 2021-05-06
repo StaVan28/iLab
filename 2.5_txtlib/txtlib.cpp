@@ -54,7 +54,7 @@ void Text::choose_parsing(const TextMode mode)
 
         num_lexeme_ = num_strings_;
 
-        txtlib_fill_line_t_string();
+        parsing_text(string_comparator, num_lexeme_);
     }
 
     if (mode == WORD_PARSING) 
@@ -64,9 +64,8 @@ void Text::choose_parsing(const TextMode mode)
 
         num_lexeme_ = num_words_;
 
-        txtlib_fill_line_t_word();
+        parsing_text(word_comparator,   num_lexeme_);
     }
-
 }
 
 //-----------------------------------------------------------------------------
@@ -181,32 +180,33 @@ int Text::txtlib_number_of_words(char* buffer)
 
 //-----------------------------------------------------------------------------
 
-void Text::txtlib_fill_line_t_string() 
+void Text::parsing_text(bool (*comparator) (int indx, const char* buffer), int border)
 {
-    int real_line_ = 0;
+    int real_line = 0;
+    int tmp_indx  = 0;
     int indx      = 0;
 
-    while (num_structs_ < num_strings_) 
+    while (num_structs_ < border) 
     {
 
         while (isspace(buffer_data_[indx]) || buffer_data_[indx] == '\0') 
         {
 
             if (buffer_data_[indx] == '\n')
-                real_line_++;
+                real_line++;
 
             indx++;
         }
 
         text_[num_structs_].line_ = &(buffer_data_[indx]);
 
-        while (buffer_data_[indx] != '\n') 
+        while (comparator(indx, buffer_data_)) 
         {
 
             if (buffer_data_[indx] == '\0') 
             {
 
-                text_[num_structs_].real_num_ = real_line_;
+                text_[num_structs_].real_num_ = real_line;
 
                 int tmp_indx = indx - 1;
                 while (isspace(buffer_data_[tmp_indx]))
@@ -223,68 +223,7 @@ void Text::txtlib_fill_line_t_string()
             indx++;
         }
 
-        real_line_++;
-
-        int tmp2_indx = indx - 1;
-        while (isspace(buffer_data_[tmp2_indx]))
-            tmp2_indx--;
-
-        buffer_data_[tmp2_indx + 1] = '\0';
-
-        text_[num_structs_].length_ = &(buffer_data_[tmp2_indx]) - text_[num_structs_].line_ + 1;
-
-        text_[num_structs_].real_num_ = real_line_;
-
-        num_structs_++;
-    }
-}
-
-//-----------------------------------------------------------------------------
-
-void Text::txtlib_fill_line_t_word() 
-{
-    int real_line_ = 0;
-    int tmp_indx  = 0;
-    int indx      = 0;
-
-    while (num_structs_ < num_words_) 
-    {
-
-        while (isspace(buffer_data_[indx]) || buffer_data_[indx] == '\0') 
-        {
-
-            if (buffer_data_[indx] == '\n')
-                real_line_++;
-
-            indx++;
-        }
-
-        text_[num_structs_].line_ = &(buffer_data_[indx]);
-
-        while (!isspace(buffer_data_[indx])) 
-        {
-
-            if (buffer_data_[indx] == '\0') 
-            {
-
-                text_[num_structs_].real_num_ = real_line_;
-
-                tmp_indx = indx - 1;
-                while (isspace(buffer_data_[tmp_indx]))
-                    tmp_indx--;
-
-                text_[num_structs_].length_ = &(buffer_data_[tmp_indx]) - text_[num_structs_].line_ + 1;
-
-                if (indx == num_symbols_)
-                    num_structs_++;
-
-                return;
-            }
-
-            indx++;
-        }
-
-        real_line_++;
+        real_line++;
 
         tmp_indx = indx - 1;
         while (isspace(buffer_data_[tmp_indx]))
@@ -292,12 +231,25 @@ void Text::txtlib_fill_line_t_word()
 
         buffer_data_[tmp_indx + 1] = '\0';
 
-        text_[num_structs_].length_ = &(buffer_data_[tmp_indx]) - text_[num_structs_].line_ + 1;
-
-        text_[num_structs_].real_num_ = real_line_;
+        text_[num_structs_].length_   = &(buffer_data_[tmp_indx]) - text_[num_structs_].line_ + 1;
+        text_[num_structs_].real_num_ = real_line;
 
         num_structs_++;
     }
+}
+
+//-----------------------------------------------------------------------------
+
+bool string_comparator(int indx, const char* buffer)
+{
+    return buffer[indx] != '\n';
+}
+
+//-----------------------------------------------------------------------------
+
+bool word_comparator(int indx, const char* buffer)
+{
+    return !isspace(buffer[indx]);
 }
 
 //-----------------------------------------------------------------------------

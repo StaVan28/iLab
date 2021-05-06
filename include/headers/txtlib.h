@@ -52,6 +52,8 @@ class Text {
         void txtlib_fill_line_t_string();
         void txtlib_fill_line_t_word  ();
 
+        void parsing_text(bool (*comparator) (int indx, const char* buffer), int border);
+
         void choose_parsing(const TextMode mode);
 
     public:
@@ -76,6 +78,11 @@ class Text {
 
         void txtlib_text_dump() const noexcept;
 };
+
+//
+//// Comparators for TextMode
+bool string_comparator(int indx, const char* buffer);
+bool word_comparator  (int indx, const char* buffer);
 
 //-----------------------------------------------------------------------------
 
