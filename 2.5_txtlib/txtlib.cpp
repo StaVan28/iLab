@@ -3,7 +3,8 @@
 
 //-----------------------------------------------------------------------------
 
-text_t::text_t(char* buffer, const int mode) 
+Text::Text(char* buffer, const TextMode mode) :
+    mode_ {mode}
 {
     assert(this);
     assert(buffer);
@@ -16,27 +17,15 @@ text_t::text_t(char* buffer, const int mode)
     strncpy(buffer_data_, buffer, num_symbols_); 
 
     num_strings_ = txtlib_number_of_strings(buffer_data_);
+    num_words_   = txtlib_number_of_words  (buffer_data_);
 
-    num_words_   = txtlib_number_of_words(buffer_data_);
-
-    if     (mode == STRING_PARSING) {
-            text_ = (line_t*) calloc(num_strings_, sizeof(line_t));
-            assert(text_);
-
-            txtlib_fill_line_t_string();
-    }
-    else
-        if (mode == WORD_PARSING) {
-            text_ = (line_t*) calloc(num_words_, sizeof(line_t));
-            assert(text_);
-
-            txtlib_fill_line_t_word();
-    }
+    choose_parsing(mode);
 }
 
 //-----------------------------------------------------------------------------
 
-text_t::text_t(FILE* source, const int mode) 
+Text::Text(FILE* source, const TextMode mode) :
+    mode_ {mode} 
 {
     assert(this);
     assert(source);
@@ -49,27 +38,40 @@ text_t::text_t(FILE* source, const int mode)
     fread(buffer_data_, sizeof(char), num_symbols_, source);
 
     num_strings_ = txtlib_number_of_strings(buffer_data_);
+    num_words_   = txtlib_number_of_words  (buffer_data_);
 
-    num_words_   = txtlib_number_of_words(buffer_data_);
-
-    if     (mode == STRING_PARSING) {
-            text_ = (line_t*) calloc(num_strings_, sizeof(line_t));
-            assert(text_);
-
-            txtlib_fill_line_t_string();
-    }
-    else
-        if (mode == WORD_PARSING) {
-            text_ = (line_t*) calloc(num_words_, sizeof(line_t));
-            assert(text_);
-
-            txtlib_fill_line_t_word();
-    }
+    choose_parsing(mode);
 }
 
 //-----------------------------------------------------------------------------
 
-text_t::~text_t(void) 
+void Text::choose_parsing(const TextMode mode)
+{
+    if (mode == STRING_PARSING) 
+    {
+        text_ = (line_t*) calloc(num_strings_, sizeof(line_t));
+        assert(text_);
+
+        num_lexeme_ = num_strings_;
+
+        txtlib_fill_line_t_string();
+    }
+
+    if (mode == WORD_PARSING) 
+    {
+        text_ = (line_t*) calloc(num_words_, sizeof(line_t));
+        assert(text_);
+
+        num_lexeme_ = num_words_;
+
+        txtlib_fill_line_t_word();
+    }
+
+}
+
+//-----------------------------------------------------------------------------
+
+Text::~Text() 
 {
     assert(this);
 
@@ -80,7 +82,7 @@ text_t::~text_t(void)
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_symbols_file(FILE* source) 
+int Text::txtlib_number_of_symbols_file(FILE* source) 
 {
     assert(source);
 
@@ -95,7 +97,7 @@ int text_t::txtlib_number_of_symbols_file(FILE* source)
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_symbols_buff(char* buffer) 
+int Text::txtlib_number_of_symbols_buff(char* buffer) 
 {
     assert(buffer);
 
@@ -109,15 +111,17 @@ int text_t::txtlib_number_of_symbols_buff(char* buffer)
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_strings(char* buffer) 
+int Text::txtlib_number_of_strings(char* buffer) 
 {
     assert(buffer);
 
     int tmp_num_strings_ = 0;
 
-    for (int tmp_indx = 0; buffer[tmp_indx] != '\0'; tmp_indx++) {
+    for (int tmp_indx = 0; buffer[tmp_indx] != '\0'; tmp_indx++) 
+    {
 
-        while (isspace(buffer[tmp_indx])) {
+        while (isspace(buffer[tmp_indx])) 
+        {
 
             if (buffer[tmp_indx] == '\0')
                 break;
@@ -128,7 +132,8 @@ int text_t::txtlib_number_of_strings(char* buffer)
         if (buffer[tmp_indx] != '\0')
             tmp_num_strings_++;
 
-        while (buffer[tmp_indx] != '\n') {
+        while (buffer[tmp_indx] != '\n') 
+        {
             
             if (buffer[tmp_indx] == '\0')
                 break;
@@ -145,14 +150,15 @@ int text_t::txtlib_number_of_strings(char* buffer)
 
 //-----------------------------------------------------------------------------
 
-int text_t::txtlib_number_of_words(char* buffer) 
+int Text::txtlib_number_of_words(char* buffer) 
 {
     assert(buffer);
 
     int tmp_num_word = 0;
     int tmp_indx     = 0;
 
-    while (buffer[tmp_indx] != '\0') {
+    while (buffer[tmp_indx] != '\0') 
+    {
 
         while (isspace(buffer[tmp_indx]))
             tmp_indx++;
@@ -160,7 +166,8 @@ int text_t::txtlib_number_of_words(char* buffer)
         if (buffer[tmp_indx] != '\0')
             tmp_num_word++;
 
-        while (!isspace(buffer[tmp_indx])) {
+        while (!isspace(buffer[tmp_indx])) 
+        {
 
             if (buffer[tmp_indx] == '\0')
                 break;
@@ -174,14 +181,16 @@ int text_t::txtlib_number_of_words(char* buffer)
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_fill_line_t_string(void) 
+void Text::txtlib_fill_line_t_string() 
 {
     int real_line_ = 0;
     int indx      = 0;
 
-    while (num_structs_ < num_strings_) {
+    while (num_structs_ < num_strings_) 
+    {
 
-        while (isspace(buffer_data_[indx]) || buffer_data_[indx] == '\0') {
+        while (isspace(buffer_data_[indx]) || buffer_data_[indx] == '\0') 
+        {
 
             if (buffer_data_[indx] == '\n')
                 real_line_++;
@@ -191,9 +200,11 @@ void text_t::txtlib_fill_line_t_string(void)
 
         text_[num_structs_].line_ = &(buffer_data_[indx]);
 
-        while (buffer_data_[indx] != '\n') {
+        while (buffer_data_[indx] != '\n') 
+        {
 
-            if (buffer_data_[indx] == '\0') {
+            if (buffer_data_[indx] == '\0') 
+            {
 
                 text_[num_structs_].real_num_ = real_line_;
 
@@ -230,15 +241,17 @@ void text_t::txtlib_fill_line_t_string(void)
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_fill_line_t_word(void) 
+void Text::txtlib_fill_line_t_word() 
 {
     int real_line_ = 0;
     int tmp_indx  = 0;
     int indx      = 0;
 
-    while (num_structs_ < num_words_) {
+    while (num_structs_ < num_words_) 
+    {
 
-        while (isspace(buffer_data_[indx]) || buffer_data_[indx] == '\0') {
+        while (isspace(buffer_data_[indx]) || buffer_data_[indx] == '\0') 
+        {
 
             if (buffer_data_[indx] == '\n')
                 real_line_++;
@@ -248,9 +261,11 @@ void text_t::txtlib_fill_line_t_word(void)
 
         text_[num_structs_].line_ = &(buffer_data_[indx]);
 
-        while (!isspace(buffer_data_[indx])) {
+        while (!isspace(buffer_data_[indx])) 
+        {
 
-            if (buffer_data_[indx] == '\0') {
+            if (buffer_data_[indx] == '\0') 
+            {
 
                 text_[num_structs_].real_num_ = real_line_;
 
@@ -287,14 +302,15 @@ void text_t::txtlib_fill_line_t_word(void)
 
 //-----------------------------------------------------------------------------
 
-void text_t::txtlib_text_dump(void) 
+void Text::txtlib_text_dump() const noexcept 
 {
     FILE* text_dump = fopen("./txt/dump_text.txt", "wb");
     assert(text_dump);
 
     PRINT_DIVIDING_DUMP_TEXT_STRIP
 
-    fprintf(text_dump, "        TEXT:\n\n");
+    fprintf(text_dump, "            TEXT:\n");
+    fprintf(text_dump, "    Current mode: %s\n\n"  , cur_mode());
 
     fprintf(text_dump, "Pointer buffer of data: %p\n"  , buffer_data_);
     fprintf(text_dump, "Pointer line_t structs: %p\n\n", text_);
@@ -303,6 +319,7 @@ void text_t::txtlib_text_dump(void)
     fprintf(text_dump, "Number of structs = %d\n", num_structs_);
     fprintf(text_dump, "Number of symbols = %d\n", num_symbols_);
     fprintf(text_dump, "Number of words   = %d\n", num_words_);
+    fprintf(text_dump, "Number of lexemes = %d\n", num_lexeme_);
 
     fprintf(text_dump, "\n[Number in structs]{Real number}(length_)\n\n");
 
@@ -320,6 +337,40 @@ void text_t::txtlib_text_dump(void)
     PRINT_DIVIDING_DUMP_TEXT_STRIP
 
     fclose(text_dump);
+}
+
+//-----------------------------------------------------------------------------
+
+const char* Text::cur_mode() const noexcept
+{
+    switch(mode_)
+    {
+        case   STRING_PARSING: return   "string mode";
+        case     WORD_PARSING: return     "word mode";
+        case AKINATOR_PARSING: return "akinator mode";
+        default:               return   "!!!ERROR!!!";
+    }
+}
+
+//!
+
+int Text::num_strings() const noexcept
+{
+    return num_strings_;
+}
+
+//!
+
+int Text::num_symbols() const noexcept
+{
+    return num_symbols_;
+}
+
+//!
+
+int Text::num_words() const noexcept
+{
+    return num_words_;
 }
 
 //-----------------------------------------------------------------------------

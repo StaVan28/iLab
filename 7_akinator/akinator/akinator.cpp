@@ -74,7 +74,7 @@ void Akinator::call_menu() const
 
 void Akinator::call_guess_mode() const
 {
-    if (akinator_tree_.empty())
+    if (akinator_tree_->empty())
     {
         // rewrite
         return;

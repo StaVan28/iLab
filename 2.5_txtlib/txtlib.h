@@ -18,9 +18,10 @@
 
 //-----------------------------------------------------------------------------
 
-enum modes_text_t {
-    STRING_PARSING = 1,
-    WORD_PARSING   = 2,
+enum TextMode {
+    STRING_PARSING   = 1,
+    WORD_PARSING     = 2,
+    AKINATOR_PARSING = 3,
 };
 
 //-----------------------------------------------------------------------------
@@ -33,13 +34,11 @@ struct line_t {
 
 //-----------------------------------------------------------------------------
 
-class text_t {
+class Text {
 
     private:
 
-        int mode = 0;
-
-    public:
+        int mode_ = 0;
 
         char*   buffer_data_ = nullptr;
         line_t* text_        = nullptr;     
@@ -48,26 +47,34 @@ class text_t {
         int num_structs_ = 0;
         int num_symbols_ = 0;
         int num_words_   = 0;
+        int num_lexeme_  = 0;
+
+        void txtlib_fill_line_t_string();
+        void txtlib_fill_line_t_word  ();
+
+        void choose_parsing(const TextMode mode);
+
+    public:
         
-        text_t(char* buffer, const int mode);
-        text_t(FILE* source, const int mode);
+        Text(char* buffer, const TextMode mode);
+        Text(FILE* source, const TextMode mode);
 
-       ~text_t();
+       ~Text();
 
-        text_t(const text_t&)              = delete;
-        text_t& operator = (const text_t&) = delete; 
+        Text(const Text&)              = delete;
+        Text& operator = (const Text&) = delete; 
 
         static int txtlib_number_of_symbols_file(FILE* source);
         static int txtlib_number_of_symbols_buff(char* buffer);
         static int txtlib_number_of_strings     (char* buffer);
         static int txtlib_number_of_words       (char* buffer);
 
-        void txtlib_fill_line_t_string(void);
-        void txtlib_fill_line_t_word  (void);
+        const char* cur_mode   () const noexcept;
+              int   num_strings() const noexcept;
+              int   num_symbols() const noexcept;
+              int   num_words  () const noexcept; 
 
-        void txtlib_text_dump(void);
-
-
+        void txtlib_text_dump() const noexcept;
 };
 
 //-----------------------------------------------------------------------------
