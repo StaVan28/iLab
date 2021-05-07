@@ -4,8 +4,8 @@
 
 //-----------------------------------------------------------------------------
 
-#include "akinator_tree.hpp"
-#include "akinator_settings.hpp"
+#include "akinator_tree.h"
+#include "akinator_settings.h"
 
 //-----------------------------------------------------------------------------
 

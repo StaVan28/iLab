@@ -1,4 +1,4 @@
-   
+
 #ifndef TXTLIB_H_INCLUDED
 #define TXTLIB_H_INCLUDED
 
@@ -21,7 +21,6 @@
 enum TextMode {
     STRING_PARSING   = 1,
     WORD_PARSING     = 2,
-    AKINATOR_PARSING = 3,
 };
 
 //-----------------------------------------------------------------------------

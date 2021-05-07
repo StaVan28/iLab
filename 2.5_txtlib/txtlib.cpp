@@ -49,22 +49,22 @@ void Text::choose_parsing(const TextMode mode)
 {
     if (mode == STRING_PARSING) 
     {
-        text_ = (line_t*) calloc(num_strings_, sizeof(line_t));
-        assert(text_);
-
         num_lexeme_ = num_strings_;
+
+        text_ = (line_t*) calloc(num_lexeme_, sizeof(line_t));
+        assert(text_);
 
         parsing_text(string_comparator, num_lexeme_);
     }
 
     if (mode == WORD_PARSING) 
     {
-        text_ = (line_t*) calloc(num_words_, sizeof(line_t));
-        assert(text_);
-
         num_lexeme_ = num_words_;
 
-        parsing_text(word_comparator,   num_lexeme_);
+        text_ = (line_t*) calloc(num_lexeme_, sizeof(line_t));
+        assert(text_);
+
+        parsing_text(word_comparator, num_lexeme_);
     }
 }
 
@@ -299,7 +299,6 @@ const char* Text::cur_mode() const noexcept
     {
         case   STRING_PARSING: return   "string mode";
         case     WORD_PARSING: return     "word mode";
-        case AKINATOR_PARSING: return "akinator mode";
         default:               return   "!!!ERROR!!!";
     }
 }

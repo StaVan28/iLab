@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------------
 
 # Makefile for tree_project
-# version 1.2
+# version 1.4
 #        author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
@@ -23,12 +23,13 @@ LIB_DIR  = ../include/libs
 BIN_DIR  = bin
 OBJ_DIR  = obj
 TXT_DIR  = txt
-HDR_DIR  = $(HEAD_DIR) ./settings ./akinator ./akinator_tree 
+HDR_DIR  = $(HEAD_DIR) ./settings ./akinator ./akinator_tree ./parsing_text
 
 # source
 BIN = $(BIN_DIR)/akinator 
 
-SRC  = settings/akinator_settings.cpp akinator/akinator.cpp akinator_tree/akinator_tree.cpp main.cpp
+SRC  =      settings/akinator_settings.cpp akinator/akinator.cpp \
+       akinator_tree/akinator_tree.cpp         text/text.cpp      main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
@@ -100,10 +101,11 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:              main.cpp              akinator_settings.hpp akinator.hpp 
-$(OBJ_DIR)/akinator.o:          akinator.cpp          akinator_settings.hpp akinator.hpp akinator_tree.hpp
-$(OBJ_DIR)/akinator_tree.o:     akinator_tree.cpp     akinator_settings.hpp akinator.hpp akinator_tree.hpp 
-$(OBJ_DIR)/akinator_settings.o: akinator_settings.cpp akinator_settings.hpp
+$(OBJ_DIR)/main.o:              main.cpp              akinator_settings.h akinator.h 
+$(OBJ_DIR)/akinator.o:          akinator.cpp          akinator_settings.h akinator.h akinator_tree.h
+$(OBJ_DIR)/akinator_tree.o:     akinator_tree.cpp     akinator_settings.h akinator.h akinator_tree.h text.h
+$(OBJ_DIR)/akinator_settings.o: akinator_settings.cpp akinator_settings.h
+$(OBJ_DIR)/text.o:              text.cpp 
 
 #
 ## additional features

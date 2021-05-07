@@ -1,5 +1,5 @@
 
-#include "akinator_tree.hpp"
+#include "akinator_tree.h"
 
 //-----------------------------------------------------------------------------
 
@@ -34,14 +34,12 @@ AkinatorTree::~AkinatorTree()
 
 void AkinatorTree::fill_tree(const std::string base)
 {
-    std::ifstream read_file;
-    read_file.open(base, std::ios::in | std::ios::binary);
+    FILE* read_file = fopen(base.c_str(), "rb");
+    assert(read_file);
 
-    char* read_buffer = new char(read_file.length())
+    
 
-
-    delete read_buffer;
-    read_file.close();
+    fclose(read_file);
 }
 
 //-----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 
-#include "akinator.hpp"
+#include "akinator.h"
 
 //-----------------------------------------------------------------------------
 
@@ -41,6 +41,7 @@ void Akinator::call_menu() const
               << "Hello, I'm Akinator, I know everything in the world!" << std::endl
               << "Choose a operating mode!" << std::endl 
               << std::endl 
+              << "0) Exit"         << std::endl
               << "1) Object guess" << std::endl;
 
     while (true) 
@@ -60,7 +61,9 @@ void Akinator::call_menu() const
             
             switch(human_input)
             {
-                case Guess_mode: call_guess_mode();
+                case EXIT:       return;
+                
+                case GUESS_MODE: call_guess_mode();
                                  return;
 
                 default:         std::cout << "Incorect input. Plz repeat!" << std::endl;
