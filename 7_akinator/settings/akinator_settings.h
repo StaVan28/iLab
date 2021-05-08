@@ -20,12 +20,26 @@ enum AkinatorModes
     GUESS_MODE = 1,
 };
 
+//!
+
+enum class PositionNode : int
+{
+    LEFT,
+    RIGHT,
+    ROOT,
+};
+
 //-----------------------------------------------------------------------------
 
 const std::string AKINATOR_TREE_NAME = "akinator_tree";
 const std::string DEFAULT_BASE       = "./txt/base_akinator.txt";
 
 const int ALL_BUFFER = 32767;
+
+const char   QUESTION_SIGN = '?';
+const char     ANSWER_SIGN = '$';
+const char BEGIN_NODE_SIGN = '?'; 
+const char   END_NODE_SIGN = '$';
 
 //-----------------------------------------------------------------------------
 

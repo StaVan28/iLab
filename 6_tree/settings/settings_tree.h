@@ -18,13 +18,6 @@ enum class Mode : int
 	RELEASE,
 };
 
-//!
-enum class Position : int
-{
-	RIGHT,
-	LEFT,
-};
-
 //-----------------------------------------------------------------------------
 
 static const std::string UNKNOWN_NAME = "UNKNOWN NAME";

@@ -25,12 +25,26 @@ class NodeTree
         NodeTree*   right_  = nullptr;
         NodeTree*   parent_ = nullptr;
 
-    explicit NodeTree(const std::string data, NodeTree* parent) :
+    NodeTree(const std::string data, NodeTree* parent, 
+             NodeTree* left, NodeTree* right) :
         data_   {data},
-        left_   {},
-        right_  {},
+        left_   {left},
+        right_  {right},
         parent_ {parent}
     {}
+
+    NodeTree(const std::string data) :
+        data_   {data}
+    {}
+
+    //!
+
+    NodeTree(const std::string data, NodeTree* parent) :
+        data_   {data},
+        parent_ {parent}
+    {}
+
+    //!
 
    ~NodeTree() 
     {
