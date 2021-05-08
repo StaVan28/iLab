@@ -103,3 +103,8 @@ NodeTree* AkinatorTree::add_node(const PositionNode pos, char* buffer, std::size
     }
 }
 //-----------------------------------------------------------------------------
+
+const std::string AkinatorTree::base() const noexcept
+{
+    return base_;
+}

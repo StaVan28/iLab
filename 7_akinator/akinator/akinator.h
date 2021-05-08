@@ -18,6 +18,8 @@ class Akinator
         void call_menu()       const;
         void call_guess_mode() const;
 
+        void add_root() const;
+
     public:
 
         Akinator();

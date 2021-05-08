@@ -28,6 +28,8 @@ class AkinatorTree : public Tree
         AkinatorTree(const std::string base);
 
        ~AkinatorTree();
+
+       const std::string base() const noexcept;
 };
 
 //-----------------------------------------------------------------------------

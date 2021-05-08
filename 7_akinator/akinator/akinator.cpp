@@ -79,9 +79,21 @@ void Akinator::call_guess_mode() const
 {
     if (akinator_tree_->empty())
     {
-        // rewrite
-        return;
+        std::cout << "Ou, akinator tree uses this base -- " << 
+                     akinator_tree_->base()                 << 
+                     ", but base empty. Let's fill it! "    << std::endl <<
+                     "Plz, come up with 2 items and "       << 
+                     "a feature that distinguishes them."   << std::endl << std::endl;
+
+        add_root();
     }
+}
+
+//-----------------------------------------------------------------------------
+
+void Akinator::add_root() const
+{
+    std::cout << "Please, print definition beetween two objects" << std::endl;
 }
 
 //-----------------------------------------------------------------------------
