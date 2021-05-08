@@ -19,9 +19,12 @@ int main()
 	my_tree.insert("5.5");
 
 	my_tree.remove("2");
+	my_tree.remove("2");
+	my_tree.remove("2");
 
 	my_tree.dump(Mode::DEBUG);
-
+	my_tree.dump(Mode::DEBUG);
+	my_tree.dump(Mode::DEBUG);
     return 0;
 }
 
