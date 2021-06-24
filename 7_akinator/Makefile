@@ -28,8 +28,8 @@ HDR_DIR  = $(HEAD_DIR) ./settings ./akinator ./akinator_tree ./parsing_text
 # source
 BIN = $(BIN_DIR)/akinator 
 
-SRC  =      settings/akinator_settings.cpp akinator/akinator.cpp \
-       akinator_tree/akinator_tree.cpp         text/text.cpp      main.cpp
+SRC  = settings/akinator_settings.cpp akinator/akinator.cpp \
+       akinator_tree/akinator_tree.cpp text/text.cpp  main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)
@@ -50,7 +50,7 @@ WARNINGS = -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled
 		   -Wswitch-default -Wundef -Werror -Wno-unused  -pedantic
 CXXFLAGS =     
 
-DEBUG_MODE   = -g3 -O0     
+DEBUG_MODE   = -g3 -O0
 RELEASE_MODE = -g0 -Ofast
 
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v
@@ -101,7 +101,7 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX}  ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -c -o $@
 
-$(OBJ_DIR)/main.o:              main.cpp              akinator_settings.h akinator.h 
+$(OBJ_DIR)/main.o:              main.cpp              akinator_settings.h akinator.h
 $(OBJ_DIR)/akinator.o:          akinator.cpp          akinator_settings.h akinator.h akinator_tree.h
 $(OBJ_DIR)/akinator_tree.o:     akinator_tree.cpp     akinator_settings.h akinator.h akinator_tree.h text.h
 $(OBJ_DIR)/akinator_settings.o: akinator_settings.cpp akinator_settings.h
@@ -119,7 +119,7 @@ clean:
 	$(E) "  CLEAN"
 	$(Q) rm -f $(BIN) tags $(OBJ_DIR)/*.o $(TXT_DIR)/*.jpeg $(TXT_DIR)/*.dot
 
-tags: ${SRC}
+tags: $(SRC)
 	$(Q) rm -f tags
 	$(Q) ctags -R -f .tags
 
