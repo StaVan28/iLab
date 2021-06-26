@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------------
 
 # Makefile for tree_project
-# version 1.4
+# version 1.5
 #        author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
@@ -17,8 +17,8 @@ Q = @
 E = $(Q) echo
 
 # path for directories
-HEAD_DIR = ../include/headers
-LIB_DIR  = ../include/libs
+HEAD_DIR = include/headers
+LIBS_DIR  = include/libs
 
 BIN_DIR  = bin
 OBJ_DIR  = obj
@@ -27,7 +27,6 @@ HDR_DIR  = $(HEAD_DIR) ./settings ./akinator ./akinator_tree ./parsing_text
 
 # source
 BIN = $(BIN_DIR)/akinator 
-
 SRC  = settings/akinator_settings.cpp akinator/akinator.cpp \
        akinator_tree/akinator_tree.cpp text/text.cpp  main.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
@@ -93,7 +92,7 @@ release: clean  $(BIN)
 ## linking
 $(BIN): $(OBJ)
 	$(E) "    LINK:        " $@
-	$(Q) $(CXX) $(WARNINGS) $^ -L$(LIB_DIR) $(LIB) -o $@  
+	$(Q) $(CXX) $(WARNINGS) $^ -L$(LIBS_DIR) $(LIB) -o $@  
 
 #
 ## compiling
@@ -113,6 +112,7 @@ $(OBJ_DIR)/text.o:              text.cpp
 
 install:
 	$(E) " INSTALL"
+	$(E) "   - CREATE NESSESARY DIRS"
 	$(Q) mkdir -p $(OBJ_DIR) $(BIN_DIR) $(TXT_DIR)
 
 clean:
@@ -141,11 +141,6 @@ unit_tests: $(BIN_TEST)
 	$(E) "  UNIT_TESTS:" $(BIN)
 	$(Q) $(BIN_TEST)
 
-git:
-	$(E) "  AUTO COMMIT  "
-	$(Q) git add --all
-	$(Q) git commit -m "auto commit: 4_CPU"
-
 log:
 	$(Q) git log --oneline --all --graph
 
@@ -158,12 +153,21 @@ print_logs:
 	$(E) "\n******************************************************"
 	$(E) "    LAUNCH JPEG  "
 	$(Q) fim $(TXT_DIR)/graph_akinator_db.jpeg
+
+update_include:
+	$(E) "    UPDATE INCLUDE:"
+	$(E) "      -- TREE .h/.hpp"
+	$(Q) cp ../$(HEAD_DIR)/settings_tree.h ../$(HEAD_DIR)/tree.hpp $(HEAD_DIR) 
+	$(E) "      -- TREE .a"
+	$(Q) cp ../$(LIBS_DIR)/libtree.a                               $(LIBS_DIR)
+	$(E) "    COMPLETE update_include"
+	
 #
 ## generate lib and copy main header to ../include
 library: $(PROJ_LIB) $(BIN) akinator/akinator.hpp
 	$(E) "    MAKE LIBRARY"
 	$(Q) cp akinator/akinator.hpp $(HEAD_DIR)/
-	$(Q) mv $(PROJ_LIB) $(LIB_DIR)/
+	$(Q) mv $(PROJ_LIB) $(LIBS_DIR)/
 
 $(PROJ_LIB): $(OBJ)
 	$(Q) ar cr $@ $^
