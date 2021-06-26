@@ -4,6 +4,26 @@
 
 //-----------------------------------------------------------------------------
 
+#include "akinator_settings.h"
+#include "tree.hpp"
+
+//-----------------------------------------------------------------------------
+
+class AkinatorTree : public Tree
+{
+    private:
+
+        std::string base_ = nullptr;
+
+        void fill_tree();
+
+    public:
+
+        AkinatorTree();
+        AkinatorTree(const std::string base);
+       ~AkinatorTree();
+
+};
 
 //-----------------------------------------------------------------------------
 

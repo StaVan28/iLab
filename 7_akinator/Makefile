@@ -155,7 +155,7 @@ print_logs:
 	$(Q) fim $(TXT_DIR)/graph_akinator_db.jpeg
 
 update_include:
-	$(E) "    UPDATE INCLUDE:"
+	$(E) "    UPDATES INCLUDE:"
 	$(E) "      -- TREE .h/.hpp"
 	$(Q) cp ../$(HEAD_DIR)/settings_tree.h ../$(HEAD_DIR)/tree.hpp $(HEAD_DIR) 
 	$(E) "      -- TREE .a"
