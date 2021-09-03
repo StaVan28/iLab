@@ -1,9 +1,9 @@
-#ifndef TREE
-#define TREE
+#ifndef PARSING_TEXT
+#define PARSING_TEXT
 
 //--------------------------------------------------
 
 
 //--------------------------------------------------
 
-#endif //TREE
+#endif //PARSING_TEXT
