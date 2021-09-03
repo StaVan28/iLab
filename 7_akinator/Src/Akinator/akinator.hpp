@@ -3,9 +3,24 @@
 
 //--------------------------------------------------
 
+#include "settings.hpp"
+
+//--------------------------------------------------
+
+enum class akinator_mode : int
+{ //&&&&&&&&&&&&&&&&&&
+    defined;
+}
+
+//--------------------------------------------------
+
 class Akinator
 {
     private:
+
+        akinator_mode mode_;
+
+        void select_akinator_mode();
 
     public:
        
@@ -13,7 +28,6 @@ class Akinator
        ~Akinator();
 
 };
-
 
 //--------------------------------------------------
 

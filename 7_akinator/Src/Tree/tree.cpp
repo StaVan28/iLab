@@ -3,3 +3,15 @@
 #include "tree.hpp"
 
 //--------------------------------------------------
+
+Tree::Tree()
+{
+    assert(this);
+
+}
+
+Tree::~Tree()
+{
+    assert(this);
+
+}
