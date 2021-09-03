@@ -3,3 +3,13 @@
 #include "akinator.hpp"
 
 //--------------------------------------------------
+
+Akinator::Akinator()
+{
+
+}
+
+Akinator::~Akinator()
+{
+    
+}
