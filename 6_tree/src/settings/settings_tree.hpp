@@ -21,8 +21,7 @@ enum class Mode : int
 //-----------------------------------------------------------------------------
 
 static const std::string UNKNOWN_NAME = "UNKNOWN NAME";
-
-static const int EMPTY = 0; 
+static const int         EMPTY        = 0; 
 
 //-----------------------------------------------------------------------------
 

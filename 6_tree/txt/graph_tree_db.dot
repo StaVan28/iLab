@@ -5,42 +5,42 @@ digraph Tree {
 
 	label = "Tree Graph";
 
-	"0x5b7fc80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (7) } |{me\n (0x5b7fc80) } |{left\n (0x5b7fd80)   |right\n (0x5b7fd00) } }"];
-	"0x5b7fc80"->"0x5b7fd80";
-	"0x5b7fc80"->"0x5b7fd00";
+	"0x4dcbc80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (7) } |{me\n (0x4dcbc80) } |{left\n (0x4dcbd80)   |right\n (0x4dcbd00) } }"];
+	"0x4dcbc80"->"0x4dcbd80";
+	"0x4dcbc80"->"0x4dcbd00";
 
 
-	"0x5b7fd00" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7fc80) } |{data\n (9) } |{me\n (0x5b7fd00) } |{left\n (0)   |right\n (0) } }"];
-	"0x5b7fd00"->"0x5b7fc80";
+	"0x4dcbd00" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbc80) } |{data\n (9) } |{me\n (0x4dcbd00) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcbd00"->"0x4dcbc80";
 
 
-	"0x5b7fd80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7fc80) } |{data\n (2) } |{me\n (0x5b7fd80) } |{left\n (0x5b7fe00)   |right\n (0x5b7fe80) } }"];
-	"0x5b7fd80"->"0x5b7fc80";
-	"0x5b7fd80"->"0x5b7fe00";
-	"0x5b7fd80"->"0x5b7fe80";
+	"0x4dcbd80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbc80) } |{data\n (2) } |{me\n (0x4dcbd80) } |{left\n (0x4dcbe00)   |right\n (0x4dcbe80) } }"];
+	"0x4dcbd80"->"0x4dcbc80";
+	"0x4dcbd80"->"0x4dcbe00";
+	"0x4dcbd80"->"0x4dcbe80";
 
 
-	"0x5b7fe80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7fd80) } |{data\n (4) } |{me\n (0x5b7fe80) } |{left\n (0x5b7ff00)   |right\n (0x5b7ff80) } }"];
-	"0x5b7fe80"->"0x5b7fd80";
-	"0x5b7fe80"->"0x5b7ff00";
-	"0x5b7fe80"->"0x5b7ff80";
+	"0x4dcbe80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbd80) } |{data\n (4) } |{me\n (0x4dcbe80) } |{left\n (0x4dcbf00)   |right\n (0x4dcbf80) } }"];
+	"0x4dcbe80"->"0x4dcbd80";
+	"0x4dcbe80"->"0x4dcbf00";
+	"0x4dcbe80"->"0x4dcbf80";
 
 
-	"0x5b7ff80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7fe80) } |{data\n (5) } |{me\n (0x5b7ff80) } |{left\n (0)   |right\n (0x5b80000) } }"];
-	"0x5b7ff80"->"0x5b7fe80";
-	"0x5b7ff80"->"0x5b80000";
+	"0x4dcbf80" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbe80) } |{data\n (5) } |{me\n (0x4dcbf80) } |{left\n (0)   |right\n (0x4dcc000) } }"];
+	"0x4dcbf80"->"0x4dcbe80";
+	"0x4dcbf80"->"0x4dcc000";
 
 
-	"0x5b80000" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7ff80) } |{data\n (5.5) } |{me\n (0x5b80000) } |{left\n (0)   |right\n (0) } }"];
-	"0x5b80000"->"0x5b7ff80";
+	"0x4dcc000" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbf80) } |{data\n (5.5) } |{me\n (0x4dcc000) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcc000"->"0x4dcbf80";
 
 
-	"0x5b7ff00" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7fe80) } |{data\n (3) } |{me\n (0x5b7ff00) } |{left\n (0)   |right\n (0) } }"];
-	"0x5b7ff00"->"0x5b7fe80";
+	"0x4dcbf00" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbe80) } |{data\n (3) } |{me\n (0x4dcbf00) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcbf00"->"0x4dcbe80";
 
 
-	"0x5b7fe00" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x5b7fd80) } |{data\n (1) } |{me\n (0x5b7fe00) } |{left\n (0)   |right\n (0) } }"];
-	"0x5b7fe00"->"0x5b7fd80";
+	"0x4dcbe00" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcbd80) } |{data\n (1) } |{me\n (0x4dcbe00) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcbe00"->"0x4dcbd80";
 
 
 }

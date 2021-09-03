@@ -1,20 +1,20 @@
 
 ******************************************************
-		2021-05-08 13:34:24
+		2021-09-03 11:36:05
 			Tree:
 
-Tree (OK) [0x1ffefffe60] "my_tree" {
+Tree (OK) [0x1ffefffd60] "my_tree" {
 
 	size = 7
 
-data = {7}left = {0x5b7fd80}right = {0x5b7fd00}parent = {0}
-data = {9}left = {0}right = {0}parent = {0x5b7fc80}
-data = {2}left = {0x5b7fe00}right = {0x5b7fe80}parent = {0x5b7fc80}
-data = {4}left = {0x5b7ff00}right = {0x5b7ff80}parent = {0x5b7fd80}
-data = {5}left = {0}right = {0x5b80000}parent = {0x5b7fe80}
-data = {5.5}left = {0}right = {0}parent = {0x5b7ff80}
-data = {3}left = {0}right = {0}parent = {0x5b7fe80}
-data = {1}left = {0}right = {0}parent = {0x5b7fd80}
+data = {7}left = {0x4dcbd80}right = {0x4dcbd00}parent = {0}
+data = {9}left = {0}right = {0}parent = {0x4dcbc80}
+data = {2}left = {0x4dcbe00}right = {0x4dcbe80}parent = {0x4dcbc80}
+data = {4}left = {0x4dcbf00}right = {0x4dcbf80}parent = {0x4dcbd80}
+data = {5}left = {0}right = {0x4dcc000}parent = {0x4dcbe80}
+data = {5.5}left = {0}right = {0}parent = {0x4dcbf80}
+data = {3}left = {0}right = {0}parent = {0x4dcbe80}
+data = {1}left = {0}right = {0}parent = {0x4dcbd80}
 }
 
 ******************************************************
