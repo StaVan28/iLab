@@ -268,23 +268,23 @@ void Tree::dump(const Mode mode, const std::string file_path)
 
 //-----------------------------------------------------------------------------
 
-void Tree::print_dump_tree(const NodeTree* const prnt_node, std::ofstream& output)
+void Tree::print_dump_tree(const NodeTree* const prnt_node, std::ofstream& output_file)
 {
     assert(this);
 
     if (prnt_node == nullptr)
         return;
 
-    output <<   "data = {" << prnt_node->data_   << "}"
-           <<   "left = {" << prnt_node->left_   << "}"
-           <<  "right = {" << prnt_node->right_  << "}"
-           << "parent = {" << prnt_node->parent_ << "}" << std::endl;
+    output_file <<   "data = {" << prnt_node->data_   << "}"
+                <<   "left = {" << prnt_node->left_   << "}"
+                <<  "right = {" << prnt_node->right_  << "}"
+                << "parent = {" << prnt_node->parent_ << "}" << std::endl;
 
     if (prnt_node->right_ != nullptr)
-        print_dump_tree(prnt_node->right_, output);
+        print_dump_tree(prnt_node->right_, output_file);
 
     if (prnt_node->left_  != nullptr)
-        print_dump_tree(prnt_node->left_,  output);
+        print_dump_tree(prnt_node->left_,  output_file);
 }
 
 //-----------------------------------------------------------------------------
@@ -332,7 +332,7 @@ void Tree::graph(const Mode mode)
 
 //-----------------------------------------------------------------------------
 
-void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, std::ofstream& output)
+void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, std::ofstream& output_file)
 {
     assert(this);
 
@@ -342,7 +342,7 @@ void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, st
 
     if (mode == Mode::DEBUG) 
     {
-    output << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
+    output_file << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
               "label = \""      << 
               "{ {parent\\n ("  << prnt_node->parent_ << ") } |"     <<
                   "{data\\n ("  << prnt_node->data_   << ") } |"     <<
@@ -351,35 +351,35 @@ void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, st
                   "right\\n ("  << prnt_node->right_  << ") } }\"];" <<  std::endl;
  
     if (prnt_node->parent_)
-        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->parent_ << "\";" << std::endl;
+        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->parent_ << "\";" << std::endl;
    
     if (prnt_node->left_)
-        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
+        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
    
     if (prnt_node->right_)
-        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;
+        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;
     }
     else 
     {
-    output << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
+    output_file << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
               "label = \""  << 
               "{"  << prnt_node->data_   << "}\" ];" << std::endl;
   
     if (prnt_node->left_)
-        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
+        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
    
     if (prnt_node->right_)
-        output << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;        
+        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;        
     }
 
 
-    output << std::endl << std::endl;
+    output_file << std::endl << std::endl;
 
     if (prnt_node->right_ != nullptr)
-        print_graph_tree(mode, prnt_node->right_, output);
+        print_graph_tree(mode, prnt_node->right_, output_file);
 
     if (prnt_node->left_  != nullptr)
-        print_graph_tree(mode, prnt_node->left_,  output);
+        print_graph_tree(mode, prnt_node->left_,  output_file);
 }
 
 //-----------------------------------------------------------------------------
