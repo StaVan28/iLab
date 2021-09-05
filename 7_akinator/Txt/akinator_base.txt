@@ -1,0 +1,13 @@
+?cat
+<
+    @poltorashka
+V
+>
+    ?dog
+    <
+        @sharik
+    V
+    >
+        @sub-zero
+    V
+V

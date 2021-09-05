@@ -4,13 +4,15 @@
 //--------------------------------------------------
 
 #include "settings.hpp"
+#include "tree.hpp"
 
 //--------------------------------------------------
 
-enum class akinator_mode : int
-{ //&&&&&&&&&&&&&&&&&&
-    defined;
-}
+enum class Mode : int
+{ 
+    finding_mode,
+    defining_mode,
+};
 
 //--------------------------------------------------
 
@@ -18,15 +20,16 @@ class Akinator
 {
     private:
 
-        akinator_mode mode_;
+        Mode          mode_;
+        AkinatorTree* tree_;
 
         void select_akinator_mode();
 
     public:
        
         Akinator();
+        Akinator(const std::string path_base);
        ~Akinator();
-
 };
 
 //--------------------------------------------------

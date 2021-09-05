@@ -18,14 +18,15 @@ E = $(Q) echo
 
 # dirs path
 BIN_DIR  = Bin
-HDR_DIR  = Src/Settings Src/Tree Src/Akinator
+HDR_DIR  = Src/Settings Src/Tree Src/Akinator Src/Parsing_text
 SRC_DIR  = $(HDR_DIR) Src/Main
 OBJ_DIR  = Obj
 TXT_DIR  = Txt
 
 # source
 BIN = $(BIN_DIR)/akinator
-SRC  = Src/Settings/settings.cpp Src/Tree/tree.cpp Src/Akinator/akinator.cpp Src/Main/main.cpp
+SRC  = Src/Settings/settings.cpp Src/Tree/tree.cpp Src/Akinator/akinator.cpp \
+       Src/Main/main.cpp Src/Parsing_text/parsing_text.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 DEP  = $(OBJ:%.o=%.d)

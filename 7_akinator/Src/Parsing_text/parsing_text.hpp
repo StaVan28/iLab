@@ -11,9 +11,16 @@ class Text
 {
     private:
 
+        char*  buffer_data_ = nullptr;
+        size_t num_symbols_ = 0;
+
+        void num_symbols_in_file(FILE* akin_base);
+        void create_buffer(const std::string path_base);
+
     public:
 
-        Text();
+        Text() = delete;
+        Text(const std::string path_base);
        ~Text();
 };
 
