@@ -86,8 +86,8 @@ $(OBJ_DIR)/%.o: %.cpp
 
 $(OBJ_DIR)/main.o:          main.cpp                            settings.hpp
 $(OBJ_DIR)/akinator.o:      akinator.cpp      akinator.hpp      settings.hpp 
-$(OBJ_DIR)/tree.o:          tree.cpp          tree.hpp          settings.hpp
-$(OBJ_DIR)/pasrsing_text.o: pasrsing_text.cpp pasrsing_text.hpp settings.hpp 
+$(OBJ_DIR)/tree.o:          tree.cpp          tree.hpp          settings.hpp parsing_text.hpp
+$(OBJ_DIR)/parsing_text.o:  parsing_text.cpp  parsing_text.hpp settings.hpp 
 $(OBJ_DIR)/settings.o:      settings.cpp                        settings.hpp
 
 #

@@ -10,7 +10,8 @@
 
 //--------------------------------------------------
 
-const std::string DEFAULT_PATH_BASE = "../../Txt/akinator_base.txt";
+const std::string DEFAULT_PATH_BASE = "./Txt/akinator_base.txt";
+const int         EMPTY             = 0;
 
 //--------------------------------------------------
 

@@ -11,8 +11,8 @@ class Text
 {
     private:
 
-        char*  buffer_data_ = nullptr;
-        size_t num_symbols_ = 0;
+        char*       buffer_data_ = nullptr;
+        std::size_t num_symbols_ = 0;
 
         void num_symbols_in_file(FILE* akin_base);
         void create_buffer(const std::string path_base);
@@ -22,6 +22,9 @@ class Text
         Text() = delete;
         Text(const std::string path_base);
        ~Text();
+
+       const char* get_buffer_data() const;
+       std::size_t get_num_symbols() const;
 };
 
 //--------------------------------------------------

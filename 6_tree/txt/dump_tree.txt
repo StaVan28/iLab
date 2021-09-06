@@ -1,20 +1,12 @@
 
 ******************************************************
-		2021-09-03 11:54:31
+		2021-09-05 20:26:02
 			Tree:
 
-Tree (OK) [0x1ffefffd50] "my_tree" {
+Tree (OK) [0x1ffefffd40] "my_tree" {
 
-	size = 7
+	size = 0
 
-data = {7}left = {0x4dcbd80}right = {0x4dcbd00}parent = {0}
-data = {9}left = {0}right = {0}parent = {0x4dcbc80}
-data = {2}left = {0x4dcbe00}right = {0x4dcbe80}parent = {0x4dcbc80}
-data = {4}left = {0x4dcbf00}right = {0x4dcbf80}parent = {0x4dcbd80}
-data = {5}left = {0}right = {0x4dcc000}parent = {0x4dcbe80}
-data = {5.5}left = {0}right = {0}parent = {0x4dcbf80}
-data = {3}left = {0}right = {0}parent = {0x4dcbe80}
-data = {1}left = {0}right = {0}parent = {0x4dcbd80}
 }
 
 ******************************************************
