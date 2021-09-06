@@ -107,7 +107,7 @@ tags: ${SRC}
 	$(Q) ctags -R -f .tags
 
 gdb: $(BIN)
-	$(E) "  GDB:        " $(BIN)
+	$(E) "    GDB:        " $(BIN)
 	$(Q) gdb $(BIN) 
 
 rebuild: clean default
