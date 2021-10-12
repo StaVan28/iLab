@@ -20,10 +20,10 @@ Stack::Stack(const char* name, int capacity) {
         return;
     }
 
-   if (this) {
-
+    if (this) 
+    {
         error_ = NULL_PTR_STACK;
-       ERROR_INFO
+        ERROR_INFO
 
         return;
     }
@@ -36,8 +36,6 @@ Stack::Stack(const char* name, int capacity) {
         return;
     }
 
-    // Stack *temp_stck = this;       ?????? как переаллочить стек
-
     #ifdef DEFENCE_STACK
         data_ = (char*) calloc(capacity * sizeof(double) + TWO_CANARIES * sizeof(int), sizeof(char));
     #else
@@ -45,7 +43,6 @@ Stack::Stack(const char* name, int capacity) {
     #endif
 
     if (data_ == nullptr) {
-        //this = temp_stck;           ?????? как переаллочить стек
         error_ = CALLOC_ERROR;
         ERROR_INFO
         return;

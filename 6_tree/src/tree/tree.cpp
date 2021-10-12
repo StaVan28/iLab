@@ -342,34 +342,34 @@ void Tree::print_graph_tree(const Mode mode, const NodeTree* const prnt_node, st
 
     if (mode == Mode::DEBUG) 
     {
-    output_file << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
-              "label = \""      << 
-              "{ {parent\\n ("  << prnt_node->parent_ << ") } |"     <<
-                  "{data\\n ("  << prnt_node->data_   << ") } |"     <<
-                    "{me\\n ("  << prnt_node          << ") } |"     <<
-                  "{left\\n ("  << prnt_node->left_   << ")   |"     <<
-                  "right\\n ("  << prnt_node->right_  << ") } }\"];" <<  std::endl;
- 
-    if (prnt_node->parent_)
-        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->parent_ << "\";" << std::endl;
-   
-    if (prnt_node->left_)
-        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
-   
-    if (prnt_node->right_)
-        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;
+        output_file << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
+                  "label = \""      << 
+                  "{ {parent\\n ("  << prnt_node->parent_ << ") } |"     <<
+                      "{data\\n ("  << prnt_node->data_   << ") } |"     <<
+                        "{me\\n ("  << prnt_node          << ") } |"     <<
+                      "{left\\n ("  << prnt_node->left_   << ")   |"     <<
+                      "right\\n ("  << prnt_node->right_  << ") } }\"];" <<  std::endl;
+     
+        if (prnt_node->parent_)
+            output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->parent_ << "\";" << std::endl;
+       
+        if (prnt_node->left_)
+            output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
+       
+        if (prnt_node->right_)
+            output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;
     }
     else 
     {
-    output_file << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
-              "label = \""  << 
-              "{"  << prnt_node->data_   << "}\" ];" << std::endl;
-  
-    if (prnt_node->left_)
-        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
-   
-    if (prnt_node->right_)
-        output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;        
+        output_file << "\t\"" << prnt_node << "\" [shape = \"record\", fillcolor=\"lightcyan2\", " <<
+                  "label = \""  << 
+                  "{"  << prnt_node->data_   << "}\" ];" << std::endl;
+      
+        if (prnt_node->left_)
+            output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->left_ << "\";" << std::endl;
+       
+        if (prnt_node->right_)
+            output_file << "\t\"" << prnt_node << "\"->\"" << prnt_node->right_ << "\";" << std::endl;        
     }
 
 

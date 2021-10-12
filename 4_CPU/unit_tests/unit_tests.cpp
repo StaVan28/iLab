@@ -30,7 +30,7 @@ void unit_test_1(const char* file_path, const char* source) {
    	    printf("\nUnit_test_1: (OK) Func \"void assembling_file(...)\" work correctly\n");
 	  else {
    	  	printf("\nUnit_test_1: (ERROR) Func \"void assembling_file(char* txt_file_path)\" doesn't work correctly. It's broke on %d line\n", line);
-    	  printf("Check upgrade number commands\n");
+    	printf("Check upgrade number commands\n");
   	}
 
   	fclose(f1);

@@ -103,6 +103,10 @@ errors.o: errors.cpp $(HDR)
 ## additional features
 .PHONY: clean errors tags rebuild git no_valgrind unit_tests library log full_check_valgrind print_logs
 
+install:
+	$(E) "  INSTALL"
+	$(Q) mkdir bin	
+
 clean:
 	$(E) "  CLEAN"
 	$(Q) rm -f $(BIN) $(TXT_DIR)/log_Makefile tags *.o

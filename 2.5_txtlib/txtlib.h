@@ -37,6 +37,17 @@ class Text {
 
     private:
 
+        void txtlib_fill_line_t_string();
+        void txtlib_fill_line_t_word  ();
+
+        void parsing_text(bool (*comparator) (int indx, const char* buffer), int border);
+
+        void choose_parsing(const TextMode mode);
+
+        const char* cur_mode() const noexcept;
+
+    public:
+        
         int mode_ = 0;
 
         char*   buffer_data_ = nullptr;
@@ -48,15 +59,6 @@ class Text {
         int num_words_   = 0;
         int num_lexeme_  = 0;
 
-        void txtlib_fill_line_t_string();
-        void txtlib_fill_line_t_word  ();
-
-        void parsing_text(bool (*comparator) (int indx, const char* buffer), int border);
-
-        void choose_parsing(const TextMode mode);
-
-    public:
-        
         Text(char* buffer, const TextMode mode);
         Text(FILE* source, const TextMode mode);
 
@@ -69,11 +71,6 @@ class Text {
         static int txtlib_number_of_symbols_buff(char* buffer);
         static int txtlib_number_of_strings     (char* buffer);
         static int txtlib_number_of_words       (char* buffer);
-
-        const char* cur_mode   () const noexcept;
-              int   num_strings() const noexcept;
-              int   num_symbols() const noexcept;
-              int   num_words  () const noexcept; 
 
         void txtlib_text_dump() const noexcept;
 };

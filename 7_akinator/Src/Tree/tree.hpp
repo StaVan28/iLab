@@ -7,6 +7,14 @@
 
 //--------------------------------------------------
 
+enum class TreeDumpMode : int 
+{
+	DEBUG,
+	RELEASE,
+};
+
+//--------------------------------------------------
+
 class NodeTree
 {
     public:
@@ -46,17 +54,22 @@ class AkinatorTree
         void fill_akinator_base();
 
         void create_tree_from_buf(const char* buffer_data);
-        void create_root_node(NodeTree* tmp_new_node, NodeTree* tmp_prmt_node, const char* buffer_data, std::size_t indx_buf);
-        void skip_delimiters(const char* buf_data, std::size_t indx_buf);
             
         bool tree_empty() const;
         bool clear(NodeTree* clr_node);
+
+        void graph(const TreeDumpMode mode);
+
+        void print_dump_tree (                         const NodeTree* const prnt_node, std::ofstream& output);
+        void print_graph_tree(const TreeDumpMode mode, const NodeTree* const prnt_node, std::ofstream& output);
 
     public:
 
         AkinatorTree() = delete;
         AkinatorTree(const std::string path_base);
        ~AkinatorTree();
+
+        void dump(const TreeDumpMode mode, const std::string file_path = "./txt/dump_tree.txt");
 
 };
 

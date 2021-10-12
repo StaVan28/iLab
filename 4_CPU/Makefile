@@ -14,15 +14,15 @@
 LAUNCH_MODE = debug
 
 export Q = @  
-export E = $(Q)echo
+export E = $(Q) echo
 
 # bins
 BIN_ASM = ./bin/assembler
 BIN_CPU = ./bin/CPU
 
 # path for recursive directories
-export HEAD_DIR = ../../include/headers
-export LIB_DIR  = ../../include/libs
+export HEAD_DIR = ../include/headers
+export LIB_DIR  = ../include/libs
 
 export BIN_DIR  = ../bin
 export OBJ_DIR  = ../obj
@@ -103,7 +103,7 @@ assembler_launch: assembler
 
 prebuild:
 	$(E) "    PREBUILD"
-	$(Q) mkdir -p .$(BIN_DIR)
+	$(Q) mkdir -p bin obj
 
 clean:
 	$(E) "    CLEAN"

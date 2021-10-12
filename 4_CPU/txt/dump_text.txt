@@ -1,14 +1,16 @@
 
 ******************************************************
-        TEXT:
+            TEXT:
+    Current mode: word mode
 
-Pointer buffer of data: 0x5b81250
-Pointer line_t structs: 0x5b81510
+Pointer buffer of data: 0x4dce1b0
+Pointer line_t structs: 0x4dce470
 
 Number of strings = 79
 Number of structs = 115
 Number of symbols = 624
 Number of words   = 115
+Number of lexemes = 115
 
 [Number in structs]{Real number}(length_)
 

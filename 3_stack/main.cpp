@@ -9,7 +9,7 @@ int main() {
 
     test_stck.push(1);
 
-    test_stck.pop();
+
 
     return 0;
 }

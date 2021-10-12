@@ -11,7 +11,7 @@ void assembling_file(const char* file_path, const char* source)
 	assert(txt_file);
 	assert(obj_file);
 
-	text_t file_info(txt_file, WORD_PARSING);
+	Text file_info(txt_file, WORD_PARSING);
 	file_info.txtlib_text_dump();
 
 	Labels table_labels;
@@ -41,7 +41,7 @@ void assembling_file(const char* file_path, const char* source)
 
 //-----------------------------------------------------------------
 
-void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels, char** buffer_data)
+void pass_of_assembler(int pass_of_asm, Text* file_info, Labels* table_labels, char** buffer_data)
 {
 	int tmp_IP = START_IP;
 
@@ -141,10 +141,6 @@ void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels,
 		else IF_STRCMP_ORD(HLT_CMD,   "hlt")
 
 		else IF_STRCMP_ORD(END_CMD,   "end")
-
-		else if (pass_of_asm == FRST_PASS){
-			// else неправильная команда
-		}
 
 		else if (pass_of_asm == SCND_PASS){
 			tmp_IP += sizeof(char);

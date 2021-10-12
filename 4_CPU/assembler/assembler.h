@@ -25,10 +25,10 @@ enum pass_of_asm {
 
 //-----------------------------------------------------------------
 
-#define IF_STRCMP_ORD(cmd, cmd_str)							\
+#define IF_STRCMP_ORD(cmd, cmd_str)						    	\
 		if (!strcmp(file_info->text_[indx].line_, cmd_str)) {	\
-			READING_DATA(cmd, char)							\
-		}													\
+			READING_DATA(cmd, char)							    \
+		}													    \
 
 //-
 
@@ -92,9 +92,9 @@ enum pass_of_asm {
 
 void assembling_file(const char* file_path = "./txt/", const char* source = "source");
 
-void pass_of_assembler(int pass_of_asm, text_t* file_info, Labels* table_labels, char** buffer_data);
+void pass_of_assembler(int pass_of_asm, Text* file_info, Labels* table_labels, char** buffer_data);
 
-void scnd_pass_of_assembler(text_t* file_info, Labels* table_labels, char** buffer_data);
+void scnd_pass_of_assembler(Text* file_info, Labels* table_labels, char** buffer_data);
 
 void add_CPU_info_in_buf(char* buffer_data, int num_of_bytes);
 

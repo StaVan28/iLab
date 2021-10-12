@@ -3,8 +3,8 @@
             TEXT:
     Current mode: word mode
 
-Pointer buffer of data: 0x4db4ee0
-Pointer line_t structs: 0x4db4f40
+Pointer buffer of data: 0x4dcdee0
+Pointer line_t structs: 0x4dcdf40
 
 Number of strings = 4
 Number of structs = 6

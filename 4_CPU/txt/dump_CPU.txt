@@ -2,23 +2,23 @@
 ******************************************************
 		CPU:
 
-CPU (OK) [0x1ffefffc90] 
+CPU (OK) [0x1ffefffab0] 
 
-IP = 147
+IP = 145
 
-EBP(buffer_cmd) [0x5b814e0]
+EBP(buffer_cmd) [0x4dce3f0]
 
 Regs
- {eax} : 3 (POISON)
- {ebx} : 3 (POISON)
- {ecx} : 3 (POISON)
- {edx} : -27 (POISON)
+ {eax} : 1 (POISON)
+ {ebx} : -2 (POISON)
+ {ecx} : -3 (POISON)
+ {edx} : 16 (POISON)
 
 FLAGS:
  CF PF AF ZF SF OF
   0  0  0  0  0  0 
 
-Pointer on stack = [0x1ffefffcd8]
+Pointer on stack = [0x1ffefffaf8]
 For see stack please call stack dump
 
 

@@ -303,25 +303,4 @@ const char* Text::cur_mode() const noexcept
     }
 }
 
-//!
-
-int Text::num_strings() const noexcept
-{
-    return num_strings_;
-}
-
-//!
-
-int Text::num_symbols() const noexcept
-{
-    return num_symbols_;
-}
-
-//!
-
-int Text::num_words() const noexcept
-{
-    return num_words_;
-}
-
 //-----------------------------------------------------------------------------

@@ -2,21 +2,14 @@
 ******************************************************
        Stack:
 
-Stack (OK) [0x1fff000560] "stck3" {
+Stack (ERROR 5 : NULL_PTR_DATA) [0x1ffefffc80] "" {
+In File : stack.cpp, LINE : 144
+In Function : ~Stack
 
-Canary left  = 595371386  [0x1fff000560]
+Canary left  = 0  [0x1ffefffc80]
 Current size = 0
-Capacity     = 2
-Hash         = 483910411
-Canary right = 752293992  [0x1fff00059c]
+Capacity     = 0
+Hash         = 0
+Canary right = 0  [0x1ffefffcbc]
 
-Data [0x5b801d4]
- {canary_left} : 874895203  [0x5b801d0]
-
- { 1} : nan (POISON)
- { 2} : nan (POISON)
-
- {canary_right} : 934719742  [0x5b801e4]
-}
-
-******************************************************
+Data [(nil)]

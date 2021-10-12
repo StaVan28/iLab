@@ -18,14 +18,6 @@ void CPU::dump(void)
 
     fprintf(dump_CPU, "\nEBP(buffer_cmd) [%p]\n", EBP_);
 
-/*  rewrite
-    int indx = 0;
-    for ( ; indx < stck->cur_size; indx++)
-        fprintf(dump_stack, "*{%2d} : %lg\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-    for ( ; indx < stck->capacity; indx++)
-        fprintf(dump_stack, " {%2d} : %lg (POISON)\n", indx + 1, *(double*)(stck->data + indx * sizeof(double)));
-*/
-
     fprintf(dump_CPU, "\nRegs\n");
 
     FPRINTF_REG(EAX_, "eax");
