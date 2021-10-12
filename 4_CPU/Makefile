@@ -27,10 +27,10 @@ export LIB_DIR  = ../include/libs
 export BIN_DIR  = ../bin
 export OBJ_DIR  = ../obj
 export TXT_DIR  = ../txt
-export HDR_DIR  = $(HEAD_DIR) ../CPU ../assembler ../errors ../labels ../settings ../flags 
+export HDR_DIR  = $(HEAD_DIR) ../CPU ../assembler ../errors ../labels ../settings ../flags ../ram
 
 # modules
-MODULES  = CPU assembler errors labels settings flags 
+MODULES  = CPU assembler errors labels settings flags ram
 PROJECTS = CPU assembler
 
 # compiler settings

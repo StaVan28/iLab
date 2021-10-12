@@ -5,13 +5,13 @@
 
 //-----------------------------------------------------------------------------
 
-#define POP_TWO_VARIABLES(value_1, value_2, stack)    \
-        value_1  = stack.pop();                        \
-        value_2  = stack.pop();                        \
+#define POP_TWO_VARIABLES(value_1, value_2, stack)  \
+        value_1  = stack.pop();                     \
+        value_2  = stack.pop();                     \
 
 //-
 
-#define PUSH_TWO_VARIABLES(value_1, value_2, stack)    \
+#define PUSH_TWO_VARIABLES(value_1, value_2, stack) \
         stack.push(value_2);                        \
         stack.push(value_1);                        \
 
@@ -38,40 +38,46 @@ static const int ERROR        = 0;
 //-----------------------------------------------------------------------------
 
 enum CPU_CMDS {
-    PUSH_CMD  = 1,
-    OUT_CMD   = 2,
-    ADD_CMD   = 3,
-    SUB_CMD   = 4,
-    MUL_CMD   = 5,
-    DIV_CMD   = 6,
-    FSQRT_CMD = 7,
-    IN_CMD    = 8,
-    POP_CMD   = 9,
-    HLT_CMD   = 10,
-    NOP_CMD   = 11,
-    JMP_CMD   = 12,
-    END_CMD   = 13,
-    PUSHR_CMD = 14,
-    POPR_CMD  = 15,
-    CMP_CMD   = 16,
-    JNE_CMD   = 17,
-    JE_CMD    = 18,
-    JBE_CMD   = 19,
-    JB_CMD    = 20,
-    JAE_CMD   = 21,
-    JA_CMD    = 22,
-    SIN_CMD   = 23,
-    COS_CMD   = 24,
-    NEG_CMD   = 25,
+    PUSHC_CMD   = 0b00100001,
+    PUSHR_CMD   = 0b01000001,
+    PUSHOC_CMD  = 0b10100001,
+    PUSHOR_CMD  = 0b11000001,
+    PUSHORC_CMD = 0b11100001,
+    POP_CMD     = 0b00000010,
+    POPR_CMD    = 0b01000010,
+    POPOC_CMD   = 0b10100010,
+    POPOR_CMD   = 0b11000010,
+    POPORC_CMD  = 0b11100010,
+    OUT_CMD     = 1,
+    ADD_CMD     = 3,
+    SUB_CMD     = 4,
+    MUL_CMD     = 5,
+    DIV_CMD     = 6,
+    FSQRT_CMD   = 7,
+    IN_CMD      = 8,
+    HLT_CMD     = 9,
+    NOP_CMD     = 10,
+    JMP_CMD     = 11,
+    END_CMD     = 12,
+    CMP_CMD     = 13,
+    JNE_CMD     = 14,
+    JE_CMD      = 15,
+    JBE_CMD     = 16,
+    JB_CMD      = 20,
+    JAE_CMD     = 21,
+    JA_CMD      = 22,
+    SIN_CMD     = 23,
+    COS_CMD     = 24,
+    NEG_CMD     = 25,
 };
 
 //-----------------------------------------------------------------------------
 
 enum REGS_CMDS {
-    EAX_REG = 32,
-    EBX_REG = 33,
-    ECX_REG = 34,
-    EDX_REG = 35,
+    EAX_REG = 26,
+    EBX_REG = 27,
+    ECX_REG = 28,
+    EDX_REG = 29,
 };
 
 //-----------------------------------------------------------------------------

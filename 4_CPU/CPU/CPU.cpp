@@ -31,8 +31,6 @@ CPU::CPU(const char* file_path, const char* obj_source) :
 
     int num_symbols = Text::txtlib_number_of_symbols_file(obj_file);
 
-    Stack ESP_("CPU_stack", START_CAPACITY);
-
     EBP_ = (char*) calloc(num_symbols, sizeof(char));
     assert(EBP_);
 
@@ -61,109 +59,159 @@ void CPU::run(void)
             break;
 
         switch(IR_) {
-            case PUSH_CMD:  IP_ += sizeof(char); 
+            case PUSHC_CMD:   IP_ += sizeof(char); 
 
-                            DR_ = POINTER_ON_(EBP_, IP_, double);
-                            ESP_.push(DR_);
+                              DR_ = POINTER_ON_(EBP_, IP_, double);
+                              ESP_.push(DR_);
 
-                            IP_ += sizeof(double);
-                            break;
+                              IP_ += sizeof(double);
+                              break;
 
-            case PUSHR_CMD: IP_ += sizeof(char);
+            case PUSHR_CMD:   IP_ += sizeof(char);
 
-                            IR_ = POINTER_ON_(EBP_, IP_, char);
+                              IR_ = POINTER_ON_(EBP_, IP_, char);
                             
-                            switch(IR_) 
-                            {                                                 
-                                PUSH_REGISTERS(EAX_)                                                 
-                                PUSH_REGISTERS(EBX_)                                                 
-                                PUSH_REGISTERS(ECX_)                                                 
-                                PUSH_REGISTERS(EDX_)
-                            }
+                              switch(IR_) 
+                              {                                                 
+                                  PUSH_REGISTERS(EAX_)                                                 
+                                  PUSH_REGISTERS(EBX_)                                                 
+                                  PUSH_REGISTERS(ECX_)                                                 
+                                  PUSH_REGISTERS(EDX_)
+                              }
 
-                            break;
+                              break;
 
-            case POP_CMD:   ESP_.pop();
+            case PUSHOC_CMD:  IP_ += sizeof(char);
 
-                            IP_ += sizeof(char);
-                            break;
+                              IR_ = POINTER_ON_(EBP_, IP_, int);
 
-            case POPR_CMD:  IP_ += sizeof(char);
+                              IP_ += sizeof(int);
+                              break;
 
-                            DR_ = ESP_.pop();
-                            IR_ = POINTER_ON_(EBP_, IP_, char);
+            case PUSHOR_CMD:  IP_ += sizeof(char);
 
-                            switch(IR_) 
-                            {
-                                POP_REGISTERS(EAX_)
-                                POP_REGISTERS(EBX_)
-                                POP_REGISTERS(ECX_)
-                                POP_REGISTERS(EDX_)
-                            }
+                              IR_ = POINTER_ON_(EBP_, IP_, char);
 
-                            break;
+                              IP_ += sizeof(char);
+                              break;
 
-            case IN_CMD:    printf("IN enter: ");
-                            scanf("%lg", &(DR_));
+            case PUSHORC_CMD: IP_ += sizeof(char);
 
-                            ESP_.push(DR_);
+                              IR_  = POINTER_ON_(EBP_, IP_, int);
+                              IP_ += sizeof(int);
 
-                            IP_ += sizeof(char);
-                            break;
+                              IR_  = POINTER_ON_(EBP_, IP_, int);
+                              IP_ += sizeof(int);
 
-            case OUT_CMD:   DR_ = ESP_.pop();
-                            printf("%lg\n", DR_);
+                              break;
 
-                            ESP_.push(DR_);
+            case POP_CMD:     IP_ += sizeof(char);
 
-                            IP_ += sizeof(char);
-                            break;
+                              ESP_.pop();
+                              break;
 
-            case CMP_CMD:   POP_TWO_VARIABLES(IR_, IAR_, ESP_);
+            case POPR_CMD:    IP_ += sizeof(char);
 
-                            set_CF();
-                            set_ZF();
+                              DR_ = ESP_.pop();
+                              IR_ = POINTER_ON_(EBP_, IP_, char);
 
-                            PUSH_TWO_VARIABLES(IR_, IAR_, ESP_);
+                              switch(IR_) 
+                              {
+                                  POP_REGISTERS(EAX_)
+                                  POP_REGISTERS(EBX_)
+                                  POP_REGISTERS(ECX_)
+                                  POP_REGISTERS(EDX_)
+                              }
 
-                            IP_ += sizeof(char);
-                            break;
+                              break;
+
+            case POPOC_CMD:   IP_ += sizeof(char);
+
+                              IR_ = POINTER_ON_(EBP_, IP_, int);
+
+                              IP_ += sizeof(int);
+                              break;
+
+            case POPOR_CMD:   IP_ += sizeof(char);
+
+                              IR_ = POINTER_ON_(EBP_, IP_, char);
+
+                              IP_ += sizeof(char);
+                              break;
+
+            case POPORC_CMD:  IP_ += sizeof(char);
+
+                              IR_  = POINTER_ON_(EBP_, IP_, int);
+                              IP_ += sizeof(int);
+
+                              IR_  = POINTER_ON_(EBP_, IP_, int);
+                              IP_ += sizeof(int);
+
+                              break;
+
+            case IN_CMD:      IP_ += sizeof(char);
+
+                              printf("IN enter: ");
+                              scanf("%lg", &(DR_));
+
+                              ESP_.push(DR_);
+
+                              break;
+
+            case OUT_CMD:     IP_ += sizeof(char);
+
+                              DR_ = ESP_.pop();
+                              printf("%lg\n", DR_);
+
+                              ESP_.push(DR_);
+
+                              break;
+
+            case CMP_CMD:     IP_ += sizeof(char);
+
+                              POP_TWO_VARIABLES(IR_, IAR_, ESP_);
+
+                              set_CF();
+                              set_ZF();
+
+                              PUSH_TWO_VARIABLES(IR_, IAR_, ESP_);
+
+                              break;
  
-            case ADD_CMD:    BINARY_OPERATION_CPU(+)
+            case ADD_CMD:     BINARY_OPERATION_CPU(+)
 
-            case SUB_CMD:    BINARY_OPERATION_CPU(-)
+            case SUB_CMD:     BINARY_OPERATION_CPU(-)
 
-            case MUL_CMD:    BINARY_OPERATION_CPU(*)
+            case MUL_CMD:     BINARY_OPERATION_CPU(*)
 
-            case DIV_CMD:    BINARY_OPERATION_CPU(/)
+            case DIV_CMD:     BINARY_OPERATION_CPU(/)
 
-            case FSQRT_CMD:  UNARY_OPERATION_CPU(sqrt)
+            case FSQRT_CMD:   UNARY_OPERATION_CPU(sqrt)
 
-            case SIN_CMD:    UNARY_OPERATION_CPU(sin)
+            case SIN_CMD:     UNARY_OPERATION_CPU(sin)
 
-            case COS_CMD:    UNARY_OPERATION_CPU(cos)
+            case COS_CMD:     UNARY_OPERATION_CPU(cos)
 
-            case NEG_CMD:    UNARY_OPERATION_CPU(-)
+            case NEG_CMD:     UNARY_OPERATION_CPU(-)
 
-            case JMP_CMD:    JUMPS_COMMANDS_CPU(true)
+            case JMP_CMD:     JUMPS_COMMANDS_CPU(true)
 
-            case JE_CMD:     JUMPS_COMMANDS_CPU(  FLAGS_ & ZF )    
+            case JE_CMD:      JUMPS_COMMANDS_CPU(  FLAGS_ & ZF )    
 
-            case JNE_CMD:    JUMPS_COMMANDS_CPU(!(FLAGS_ & ZF))                                    
+            case JNE_CMD:     JUMPS_COMMANDS_CPU(!(FLAGS_ & ZF))                                    
 
-            case JB_CMD:     JUMPS_COMMANDS_CPU( (FLAGS_ & CF))
+            case JB_CMD:      JUMPS_COMMANDS_CPU( (FLAGS_ & CF))
 
-            case JAE_CMD:    JUMPS_COMMANDS_CPU(!(FLAGS_ & CF))
+            case JAE_CMD:     JUMPS_COMMANDS_CPU(!(FLAGS_ & CF))
 
-            case JBE_CMD:    JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF))
+            case JBE_CMD:     JUMPS_COMMANDS_CPU(  (FLAGS_ & ZF) || (FLAGS_ & CF))
 
-            case JA_CMD:     JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) || (FLAGS_ & CF)))
+            case JA_CMD:      JUMPS_COMMANDS_CPU(!((FLAGS_ & ZF) || (FLAGS_ & CF)))
 
-            case NOP_CMD:    IP_ += sizeof(char);
-                             break;
+            case NOP_CMD:     IP_ += sizeof(char);
+                              break;
 
-            default:
-                             printf("default command? check buffer\n");
+            default:          printf("default command? check buffer\n");
                              break;                                
         } 
     }

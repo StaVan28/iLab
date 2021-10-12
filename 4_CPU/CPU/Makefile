@@ -12,7 +12,7 @@
 
 # source
 BIN  = ../bin/CPU
-SRC  = CPU.cpp ../errors/errors.cpp ../settings/settings.cpp ../flags/flags.cpp
+SRC  = CPU.cpp ../errors/errors.cpp ../settings/settings.cpp ../flags/flags.cpp ../ram/ram.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 
@@ -49,6 +49,7 @@ $(OBJ_DIR)/main_CPU.o: main_CPU.cpp
 $(OBJ_DIR)/CPU.o:      CPU.cpp      
 $(OBJ_DIR)/errors.o:   errors.cpp   
 $(OBJ_DIR)/settings.o: settings.cpp 
-$(OBJ_DIR)/flags.o:	   flags.cpp    
+$(OBJ_DIR)/flags.o:	   flags.cpp
+$(OBJ_DIR)/ram.o:      ram.cpp 
 
 -include ${DEP_ALL} 

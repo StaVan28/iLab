@@ -12,7 +12,7 @@
 
 # source
 BIN  = ../bin/assembler
-SRC  = assembler.cpp ../labels/labels.cpp ../settings/settings.cpp ../flags/flags.cpp
+SRC  = assembler.cpp ../labels/labels.cpp ../settings/settings.cpp ../flags/flags.cpp ../ram/ram.cpp
 OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ := $(OBJ:%.cpp=%.o)
 
@@ -46,5 +46,6 @@ $(OBJ_DIR)/assembler.o:      assembler.cpp
 $(OBJ_DIR)/labels.o:         labels.cpp
 $(OBJ_DIR)/settings.o:       settings.cpp
 $(OBJ_DIR)/flags.o:	         flags.cpp
+$(OBJ_DIR)/ram.o:            ram.cpp
 
 -include ${DEP_ALL} 

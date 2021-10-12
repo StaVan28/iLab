@@ -16,8 +16,8 @@ void assembling_file(const char* file_path, const char* source)
 
 	Labels table_labels;
 
-	int num_of_bytes = (file_info.num_strings_)                        * sizeof(char)   + \
-	                   (file_info.num_words_ - file_info.num_strings_) * sizeof(double) + \
+	int num_of_bytes = (file_info.num_strings_)                            * sizeof(char)   + \
+	                   (file_info.num_words_ - file_info.num_strings_) * 2 * sizeof(double) + \
 	                   START_IP;
  
 	char* buffer_data = (char*) calloc(num_of_bytes, sizeof(char));
@@ -65,13 +65,13 @@ void pass_of_assembler(int pass_of_asm, Text* file_info, Labels* table_labels, c
 				else IF_STRCMP_REG(PUSHR_CMD, EDX_REG, "edx")
 				
 				else {																	
-					READING_DATA(PUSH_CMD, char)													
-					READING_DATA(value   , double)																																	
+					READING_DATA(PUSHC_CMD, char)													
+					READING_DATA(value    , double)																																	
 				}
 			}																					
 			else {																				
-				READING_DATA(PUSH_CMD, char)														
-				READING_DATA(value   , double)																										
+				READING_DATA(PUSHC_CMD, char)														
+				READING_DATA(value    , double)																										
 			}																					
 		}																						
 		
