@@ -128,6 +128,20 @@ void AkinatorTree::print_recursive_base (FILE* base_tree, NodeTree* cur_node, st
 
 //---------
 
+NodeTree* AkinatorTree::walk (const NodeTree* cur_node, TreeDirection direct) const
+{
+    if      (direct == TreeDirection::LEFT)
+    {
+        return cur_node->left_;
+    }
+    else if (direct == TreeDirection::RIGHT)
+    {
+        return cur_node->right_;
+    }
+}
+
+//---------
+
 bool AkinatorTree::tree_empty () const
 {
     return size_ == EMPTY;

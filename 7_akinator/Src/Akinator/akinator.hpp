@@ -8,10 +8,18 @@
 
 //--------------------------------------------------
 
-enum class Mode : int
+enum class AkinatorMode : int
 { 
-    finding_mode,
-    defining_mode,
+     FINDING_MODE,
+    DEFINING_MODE,
+};
+
+//!
+
+enum class AkinatorAnswer : int
+{
+    YES,
+    NO,
 };
 
 //--------------------------------------------------
@@ -20,16 +28,20 @@ class Akinator
 {
     private:
 
-        Mode          mode_;
+        AkinatorMode  mode_;
         AkinatorTree* tree_;
 
-        void select_akinator_mode();
+        void select_akinator_mode ();
+        
+        AkinatorAnswer get_answer () const;
+
+        void finding_mode ();
 
     public:
        
-        Akinator();
-        Akinator(const std::string& path_base);
-       ~Akinator();
+        Akinator ();
+        Akinator (const std::string& path_base);
+       ~Akinator ();
 };
 
 //--------------------------------------------------
