@@ -9,3 +9,4 @@ int main()
 }
 
 // void ==> std::size_t num_symbols
+// добавить обраотку нескольких файлов

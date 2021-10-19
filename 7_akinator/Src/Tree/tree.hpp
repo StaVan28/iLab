@@ -62,7 +62,8 @@ class AkinatorTree
 
         void      create_tree_from_buf (const char* buffer_data);
         NodeTree* fill_recurce_tree    (Token* buf_lexems, std::size_t* num_lexem);
-            
+        void      print_recursive_base (FILE* base_tree, NodeTree* cur_node, std::size_t num_tabs);
+
         bool tree_empty() const;
         bool clear (NodeTree* clr_node);
 

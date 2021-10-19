@@ -10,6 +10,7 @@ AkinatorTree::AkinatorTree (const std::string& path_base) :
     assert (this);
 
     fill_akinator_tree();
+    fill_akinator_base();
 }
 
 //---------
@@ -35,14 +36,12 @@ void AkinatorTree::fill_akinator_tree()
     
     root_ = fill_recurce_tree (buf_lexems, &num_lexem);
 
-    printf("END recurse\n");
-
     dump (TreeDumpMode::DEBUG);
 
     delete [] buf_lexems;
 }
 
-//
+//!
 
 NodeTree* AkinatorTree::fill_recurce_tree (Token* buf_lexems, std::size_t* num_lexem)
 {
@@ -88,14 +87,48 @@ NodeTree* AkinatorTree::fill_recurce_tree (Token* buf_lexems, std::size_t* num_l
 
 //---------
 
-void AkinatorTree::fill_akinator_base()
+void AkinatorTree::fill_akinator_base ()
 {
+    FILE* base_tree = fopen ("./Txt/dump_tree_test.txt", "wb");
 
+    std:size_t num_spaces = 0;
+    print_recursive_base (base_tree, root_, num_spaces);
+
+    fclose (base_tree);
+    base_tree = nullptr;
+}
+
+//!
+
+void AkinatorTree::print_recursive_base (FILE* base_tree, NodeTree* cur_node, std::size_t num_spaces)
+{
+    if (cur_node->left_  != nullptr && 
+        cur_node->right_ != nullptr)
+    {
+        fprintf(base_tree, "%*s?%s\n", num_spaces * 4, "", cur_node->data_.c_str());
+        
+        fprintf(base_tree, "%*s<\n", num_spaces * 4, "");
+
+        print_recursive_base (base_tree, cur_node->left_ , num_spaces + 1);
+        
+        fprintf(base_tree, "%*s>\n", num_spaces * 4, "");
+        print_recursive_base (base_tree, cur_node->right_, num_spaces + 1);
+
+        return;
+    }
+
+    if (cur_node->left_  == nullptr || 
+        cur_node->right_ == nullptr)
+    {
+        fprintf(base_tree, "%*s@%s\n", num_spaces * 4, "", cur_node->data_.c_str());
+
+        return;
+    }
 }
 
 //---------
 
-bool AkinatorTree::tree_empty() const
+bool AkinatorTree::tree_empty () const
 {
     return size_ == EMPTY;
 }
@@ -120,7 +153,7 @@ bool AkinatorTree::clear (NodeTree* clr_node)
 //---------
 
 
-void AkinatorTree::dump(const TreeDumpMode mode, const std::string& file_path)
+void AkinatorTree::dump (const TreeDumpMode mode, const std::string& file_path)
 {
     assert(this);
 
@@ -144,7 +177,7 @@ void AkinatorTree::dump(const TreeDumpMode mode, const std::string& file_path)
 
     dump << std::endl << "******************************************************" << std::endl;
 
-    dump.close();
+    dump.close ();
 
     if (mode == TreeDumpMode::DEBUG)
         graph (TreeDumpMode::DEBUG);
