@@ -4,6 +4,7 @@
 //--------------------------------------------------
 
 #include "settings.hpp"
+#include "parsing_text.hpp"
 
 //--------------------------------------------------
 
@@ -19,12 +20,13 @@ class NodeTree
 {
     public:
 
-        std::string data_   = nullptr;
+        std::string data_;
         NodeTree*   parent_ = nullptr;
         NodeTree*   left_   = nullptr;
         NodeTree*   right_  = nullptr;
  
-        NodeTree() = delete;
+        NodeTree()
+        {}
 
         //!
 
@@ -32,7 +34,13 @@ class NodeTree
             data_   {data},
             parent_ {parent}
         {}
-       
+
+        //!
+
+        explicit NodeTree(NodeTree* parent) :
+            parent_ {parent}
+        {}
+
         //!
 
        ~NodeTree()
@@ -52,7 +60,8 @@ class AkinatorTree
         void fill_akinator_tree();
         void fill_akinator_base();
 
-        void create_tree_from_buf (const char* buffer_data);
+        void      create_tree_from_buf (const char* buffer_data);
+        NodeTree* fill_recurce_tree    (Token* buf_lexems, std::size_t* num_lexem);
             
         bool tree_empty() const;
         bool clear (NodeTree* clr_node);
@@ -68,7 +77,7 @@ class AkinatorTree
         AkinatorTree (const std::string& path_base);
        ~AkinatorTree ();
 
-        void dump (const TreeDumpMode mode, const std::string& file_path = "./txt/dump_tree.txt");
+        void dump (const TreeDumpMode mode, const std::string& file_path = "./Txt/dump_tree.txt");
 
 };
 

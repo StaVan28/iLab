@@ -1,4 +1,5 @@
 #include "akinator.hpp"
+#include "tree.hpp"
 
 int main()
 {

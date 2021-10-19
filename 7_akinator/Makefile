@@ -125,5 +125,6 @@ log:
 
 print_logs:
 	$(E) "    PRINT LOGS  "
+	fim ./$(TXT_DIR)/graph_tree_db.jpeg
 
 -include $(DEP)

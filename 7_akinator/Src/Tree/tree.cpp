@@ -1,6 +1,5 @@
 //--------------------------------------------------
 
-#include "parsing_text.hpp"
 #include "tree.hpp"
 
 //--------------------------------------------------
@@ -30,20 +29,66 @@ AkinatorTree::~AkinatorTree()
 void AkinatorTree::fill_akinator_tree()
 {
     Text parser_base (path_base_);
+
+    Token*      buf_lexems = parser_base.create_buffer_lexems ();
+    std::size_t num_lexem  = 0;
     
-    create_tree_from_buf (parser_base.get_buffer_data());
+    root_ = fill_recurce_tree (buf_lexems, &num_lexem);
+
+    printf("END recurse\n");
+
+    dump (TreeDumpMode::DEBUG);
+
+    delete [] buf_lexems;
+}
+
+//
+
+NodeTree* AkinatorTree::fill_recurce_tree (Token* buf_lexems, std::size_t* num_lexem)
+{
+    if (buf_lexems[*num_lexem].type == TokenType::QUESTION)
+    {
+        NodeTree* cur_node = new NodeTree;
+        cur_node->data_    = buf_lexems[*num_lexem].value_str;
+        (*num_lexem)++;
+
+        assert (buf_lexems[*num_lexem].value_oper == '<');
+        (*num_lexem)++;
+
+        cur_node->left_  = fill_recurce_tree (buf_lexems, num_lexem);
+        cur_node->left_->parent_ = cur_node;
+
+        assert (buf_lexems[*num_lexem].value_oper == '>');
+        (*num_lexem)++;
+
+        cur_node->right_ = fill_recurce_tree (buf_lexems, num_lexem);
+        cur_node->right_->parent_ = cur_node;
+
+        return cur_node;
+    }
+    else if (buf_lexems[*num_lexem].type == TokenType::ANSWER)
+    {
+        NodeTree* cur_node = new NodeTree;
+        cur_node->data_    = buf_lexems[*num_lexem].value_str;
+        (*num_lexem)++;
+
+        return cur_node;
+    }
+    else if (buf_lexems[*num_lexem].type == TokenType::STOP)
+    {
+        printf ("STOP\n");
+        return nullptr;
+    }
+    else 
+    {
+        printf("rec, UNKNOWN = {%s}[%d]\n", buf_lexems[*num_lexem].value_str.c_str(), *num_lexem);
+        return nullptr;
+    }
 }
 
 //---------
 
 void AkinatorTree::fill_akinator_base()
-{
-
-}
-
-//---------
-
-void AkinatorTree::create_tree_from_buf (const char* buf_data)
 {
 
 }
@@ -134,10 +179,10 @@ void AkinatorTree::graph (const TreeDumpMode mode)
 {
     assert (this);
 
-    std::string file_path = "./txt/graph_tree_db.dot";
+    std::string file_path = "./Txt/graph_tree_db.dot";
 
     if (mode == TreeDumpMode::RELEASE)
-        file_path = "./txt/graph_tree_rls.dot";
+        file_path = "./Txt/graph_tree_rls.dot";
 
 
     std::ofstream graph (file_path);     
@@ -165,9 +210,9 @@ void AkinatorTree::graph (const TreeDumpMode mode)
 
 
     if (mode == TreeDumpMode::DEBUG)
-        system ("dot -Tjpeg ./txt/graph_tree_db.dot  -o./txt/graph_tree_db.jpeg");
+        system ("dot -Tjpeg ./Txt/graph_tree_db.dot  -o./Txt/graph_tree_db.jpeg");
     else 
-        system ("dot -Tjpeg ./txt/graph_tree_rls.dot -o./txt/graph_tree_rls.jpeg");
+        system ("dot -Tjpeg ./Txt/graph_tree_rls.dot -o./Txt/graph_tree_rls.jpeg");
 }
 
 //-----------------------------------------------------------------------------

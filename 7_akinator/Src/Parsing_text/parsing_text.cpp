@@ -8,8 +8,7 @@ Text::Text (const std::string& path_base)
 {
     assert (this);
 
-    create_buffer_data   (path_base);
-    create_buffer_lexems ();
+    create_buffer_data (path_base);
 }
 
 //----------
@@ -19,7 +18,6 @@ Text::~Text()
     assert (this);
 
     delete [] buf_data_;
-    delete [] buf_lexems_;
 }
 
 //----------
@@ -61,8 +59,7 @@ std::size_t Text::num_lexems_in_buf()
         if (buf_data_[indx] == '?' ||
             buf_data_[indx] == '@' ||
             buf_data_[indx] == '<' ||
-            buf_data_[indx] == '>' ||
-            buf_data_[indx] == 'V'   )
+            buf_data_[indx] == '>'   )
         {
             num_lexems++;
         }
@@ -76,10 +73,12 @@ std::size_t Text::num_lexems_in_buf()
 
 //----------
 
-void Text::create_buffer_lexems()
+Token* Text::create_buffer_lexems()
 {
-    num_lexems_ = num_lexems_in_buf();
-    buf_lexems_ = new Token[num_lexems_] {};
+    std::size_t num_lexems = num_lexems_in_buf();
+    Token*      buf_lexems = new Token[num_lexems + 1] {};
+    std::size_t cur_lex    = 0;
+
 
     for (int i = 0; i < num_symbols_; i++)
     {
@@ -93,29 +92,31 @@ void Text::create_buffer_lexems()
 
         int end        = i;
         buf_data_[end] = '\0';
-
+/*
         printf("FOUND:\n");
         printf("begin = %d, end = %d, end - begin = %d, ", begin, end, end - begin);
         printf("buf_data_ + begin = {%s}\n\n", buf_data_ + begin);
-
+*/
         if      (buf_data_[begin] == '?' ||
                  buf_data_[begin] == '@'   )
         {
-            buf_lexems_->type       = TokenType::STRING;
-            buf_lexems_->value_str  = buf_data_ + begin + 1;
 
+            buf_lexems[cur_lex].type = (buf_data_[begin] == '?') ? (TokenType::QUESTION) : (TokenType::ANSWER);
+            buf_lexems[cur_lex].value_str  = buf_data_ + begin + 1;
+            cur_lex++;
+/*
             printf("TOKEN: STRING, "
-                   "buf_lexems_->value_str  = {%s}\n", buf_lexems_->value_str.c_str());
-        }
+                   "buf_lexems_->value_str  = {%s}\n", buf_lexems->value_str.c_str());
+*/      }
         else if (buf_data_[begin] == '>' ||
-                 buf_data_[begin] == '<' ||
-                 buf_data_[begin] == 'V'   )
+                 buf_data_[begin] == '<'   )
         {
-            buf_lexems_->type       = TokenType::OPER;
-            buf_lexems_->value_oper = *(buf_data_ + begin);
+            buf_lexems[cur_lex].type       = TokenType::OPER;
+            buf_lexems[cur_lex].value_oper = *(buf_data_ + begin);
+            cur_lex++;
 
-            printf("TOKEN: OPER, "
-                   "buf_lexems_->value_oper = {%c}\n", buf_lexems_->value_oper);
+//          printf("TOKEN: OPER, "
+//                 "buf_lexems_->value_oper = {%c}\n", buf_lexems->value_oper);
         }
         else
         {
@@ -123,6 +124,8 @@ void Text::create_buffer_lexems()
             printf("symb = %c[%d]\n", *(buf_data_ + i), *(buf_data_ + i));
         }
     }
+
+    return buf_lexems;
 }
 
 //----------

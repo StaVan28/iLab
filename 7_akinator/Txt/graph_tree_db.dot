@@ -1,0 +1,31 @@
+digraph Tree {
+
+	node [shape = "circle", style = "filled", fillcolor = "red",fontcolor = "#000000", margin = "0.01"];
+	rankdir = "TB";
+
+	label = "Tree Graph";
+
+	"0x4dce8a0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (cat) } |{me\n (0x4dce8a0) } |{left\n (0x4dce920)   |right\n (0x4dce9a0) } }"];
+	"0x4dce8a0"->"0x4dce920";
+	"0x4dce8a0"->"0x4dce9a0";
+
+
+	"0x4dce9a0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce8a0) } |{data\n (dog) } |{me\n (0x4dce9a0) } |{left\n (0x4dcea20)   |right\n (0x4dceaa0) } }"];
+	"0x4dce9a0"->"0x4dce8a0";
+	"0x4dce9a0"->"0x4dcea20";
+	"0x4dce9a0"->"0x4dceaa0";
+
+
+	"0x4dceaa0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce9a0) } |{data\n (sub-zero) } |{me\n (0x4dceaa0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dceaa0"->"0x4dce9a0";
+
+
+	"0x4dcea20" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce9a0) } |{data\n (sharik) } |{me\n (0x4dcea20) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcea20"->"0x4dce9a0";
+
+
+	"0x4dce920" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce8a0) } |{data\n (poltorashka) } |{me\n (0x4dce920) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dce920"->"0x4dce8a0";
+
+
+}
