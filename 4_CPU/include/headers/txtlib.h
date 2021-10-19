@@ -19,8 +19,8 @@
 //-----------------------------------------------------------------------------
 
 enum TextMode {
-    STRING_PARSING   = 1,
-    WORD_PARSING     = 2,
+    STRING_PARSING = 1,
+      WORD_PARSING = 2,
 };
 
 //-----------------------------------------------------------------------------
@@ -79,6 +79,7 @@ class Text {
 //// Comparators for TextMode
 bool string_comparator(int indx, const char* buffer);
 bool word_comparator  (int indx, const char* buffer);
+bool cpu_comparator   (int indx, const char* buffer);
 
 //-----------------------------------------------------------------------------
 

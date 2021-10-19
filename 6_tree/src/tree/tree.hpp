@@ -14,6 +14,12 @@
 
 #include "settings_tree.hpp"
 
+#ifdef DEBUG
+    #define ON_DEBUG(...)  __VA_ARGS__
+#else
+    #define ON_DEBUG(...)
+#endif
+
 //-----------------------------------------------------------------------------
 
 class NodeTree
@@ -48,13 +54,13 @@ class NodeTree
 
    ~NodeTree() 
     {
-        left_   = nullptr;
-        right_  = nullptr;
-        parent_ = nullptr;
+        ON_DEBUG (left_   = nullptr;
+                  right_  = nullptr;
+                  parent_ = nullptr;)
     }
 
 };
-    
+   
 //!
 
 class Tree
@@ -70,8 +76,8 @@ class Tree
         void print_dump_tree (                 const NodeTree* const prnt_node, std::ofstream& output);
         void print_graph_tree(const Mode mode, const NodeTree* const prnt_node, std::ofstream& output);
 
-        bool insert(NodeTree* const insrt_node, const std::string data);
-        bool remove(NodeTree* const srch_node,  const std::string rmv_data);
+        bool insert(NodeTree* const insrt_node, const std::string& data);
+        bool remove(NodeTree* const  srch_node, const std::string& rmv_data);
 
         bool find_max(const NodeTree* const max_node, std::string ret_data) const;
         bool find_min(const NodeTree* const min_node, std::string ret_data) const;
@@ -85,16 +91,16 @@ class Tree
 
        ~Tree();
 
-        bool insert(const std::string data);
-        bool remove(const std::string data);
+        bool insert(const std::string& data);
+        bool remove(const std::string& data);
 
         bool find_max(std::string ret_data) const;
         bool find_min(std::string ret_data) const;
 
         bool clear();
 
-        bool empty() const noexcept;
-        bool size()  const noexcept;
+        bool        empty() const noexcept;
+        std::size_t size()  const noexcept;
     
         void dump(const Mode mode, const std::string file_path = "./txt/dump_tree.txt");
 };

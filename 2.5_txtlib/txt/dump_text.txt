@@ -4,22 +4,28 @@
     Current mode: word mode
 
 Pointer buffer of data: 0x4dcdee0
-Pointer line_t structs: 0x4dcdf40
+Pointer line_t structs: 0x4dcdf50
 
 Number of strings = 4
-Number of structs = 6
-Number of symbols = 24
-Number of words   = 6
-Number of lexemes = 6
+Number of structs = 12
+Number of symbols = 42
+Number of words   = 12
+Number of lexemes = 12
 
 [Number in structs]{Real number}(length_)
 
-[  1]{  1}(  3)123
-[  2]{  3}(  1)4
-[  3]{  4}(  1)5
-[  4]{  5}(  1)6
-[  5]{  7}(  1)7
-[  6]{  9}(  2)89
+[  1]{  1}(  1)1
+[  2]{  2}(  1)[
+[  3]{  3}(  1)]
+[  4]{  5}(  1)3
+[  5]{  6}(  1)[
+[  6]{  7}(  1)]
+[  7]{  8}(  1)4
+[  8]{  9}(  1)5
+[  9]{ 10}(  1)6
+[ 10]{ 11}(  1)7
+[ 11]{ 12}(  1)8
+[ 12]{ 12}(  1)]
 
 
 Note! The actual length_ of the line_s is 1 more 

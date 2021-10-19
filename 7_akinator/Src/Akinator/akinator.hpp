@@ -28,7 +28,7 @@ class Akinator
     public:
        
         Akinator();
-        Akinator(const std::string path_base);
+        Akinator(const std::string& path_base);
        ~Akinator();
 };
 

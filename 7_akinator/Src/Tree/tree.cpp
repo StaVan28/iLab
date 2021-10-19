@@ -5,10 +5,10 @@
 
 //--------------------------------------------------
 
-AkinatorTree::AkinatorTree(const std::string path_base) :
+AkinatorTree::AkinatorTree (const std::string& path_base) :
     path_base_ {path_base}
 {
-    assert(this);
+    assert (this);
 
     fill_akinator_tree();
 }
@@ -17,9 +17,9 @@ AkinatorTree::AkinatorTree(const std::string path_base) :
 
 AkinatorTree::~AkinatorTree()
 {
-    assert(this);
+    assert (this);
     
-    clear(root_);
+    clear (root_);
 
     root_ = 0;
     size_ = 0;
@@ -29,9 +29,9 @@ AkinatorTree::~AkinatorTree()
 
 void AkinatorTree::fill_akinator_tree()
 {
-    Text parser_base(path_base_);
+    Text parser_base (path_base_);
     
-    create_tree_from_buf(parser_base.get_buffer_data());
+    create_tree_from_buf (parser_base.get_buffer_data());
 }
 
 //---------
@@ -43,77 +43,9 @@ void AkinatorTree::fill_akinator_base()
 
 //---------
 
-void AkinatorTree::create_tree_from_buf(const char* buf_data)
+void AkinatorTree::create_tree_from_buf (const char* buf_data)
 {
-    NodeTree*   tmp_new_node  = nullptr;
-    NodeTree*   tmp_prnt_node = nullptr;
-    std::size_t indx_buf      = 0;
 
-    indx_buf++;
-
-    tmp_new_node = new NodeTree(buf_data, nullptr);
-    size_++;
-
-    root_         = tmp_new_node;
-    tmp_prnt_node = tmp_new_node;
-
-    while (!isspace(buf_data[indx_buf]))
-        indx_buf++;
-
-    while (buf_data[indx_buf] != '\0')
-    {
-        while (isspace(buf_data[indx_buf]))
-            indx_buf++;
-
-        if (buf_data[indx_buf] == '<')
-        {
-            indx_buf++;
-
-            while (isspace(buf_data[indx_buf]))
-                indx_buf++;
-
-            indx_buf++;
-
-            tmp_new_node = new NodeTree(buf_data, nullptr);
-            size_++;
-
-            while (!isspace(buf_data[indx_buf]))
-                indx_buf++;
-
-            tmp_new_node->parent_ = tmp_prnt_node;
-            tmp_prnt_node->left_  = tmp_new_node;
-
-            tmp_prnt_node = tmp_new_node;
-        }
-
-        if (buf_data[indx_buf] == '>')
-        {
-            indx_buf++;
-
-            while (isspace(buf_data[indx_buf]))
-                indx_buf++;
-
-            indx_buf++;
-
-            tmp_new_node = new NodeTree(buf_data, nullptr);
-            size_++;
-
-            while (!isspace(buf_data[indx_buf]))
-                indx_buf++;
-
-            tmp_new_node->parent_ = tmp_prnt_node;
-            tmp_prnt_node->right_ = tmp_new_node;
-
-            tmp_prnt_node = tmp_new_node;
-        }
-
-        if (buf_data[indx_buf] == 'V')
-        {
-            indx_buf++;
-
-            tmp_prnt_node = tmp_prnt_node->parent_;
-        }
-    }
 }
 
 //---------
@@ -125,16 +57,16 @@ bool AkinatorTree::tree_empty() const
 
 //---------
 
-bool AkinatorTree::clear(NodeTree* clr_node)
+bool AkinatorTree::clear (NodeTree* clr_node)
 {
     if (tree_empty())
         return false;
 
     if (clr_node->left_ != nullptr)
-        clear(clr_node->left_);
+        clear (clr_node->left_);
 
     if (clr_node->right_ != nullptr)
-        clear(clr_node->right_);
+        clear (clr_node->right_);
 
     delete clr_node;
     return true;
@@ -143,12 +75,11 @@ bool AkinatorTree::clear(NodeTree* clr_node)
 //---------
 
 
-void AkinatorTree::dump(const TreeDumpMode mode, const std::string file_path)
+void AkinatorTree::dump(const TreeDumpMode mode, const std::string& file_path)
 {
     assert(this);
 
-    std::ofstream dump(file_path);
-    assert(dump);
+    std::ofstream dump (file_path);
 
     dump << std::endl << "******************************************************" << std::endl;
 
@@ -161,7 +92,7 @@ void AkinatorTree::dump(const TreeDumpMode mode, const std::string file_path)
 
     dump << std::endl << "\tsize = " << size_ << std::endl << std::endl;
 
-    print_dump_tree(root_, dump);
+    print_dump_tree (root_, dump);
 
     dump << "}" << std::endl;
 
@@ -171,16 +102,16 @@ void AkinatorTree::dump(const TreeDumpMode mode, const std::string file_path)
     dump.close();
 
     if (mode == TreeDumpMode::DEBUG)
-        graph(TreeDumpMode::DEBUG);
+        graph (TreeDumpMode::DEBUG);
     else
-        graph(TreeDumpMode::RELEASE);
+        graph (TreeDumpMode::RELEASE);
 }
 
 //-----------------------------------------------------------------------------
 
-void AkinatorTree::print_dump_tree(const NodeTree* const prnt_node, std::ofstream& output_file)
+void AkinatorTree::print_dump_tree (const NodeTree* const prnt_node, std::ofstream& output_file)
 {
-    assert(this);
+    assert (this);
 
     if (prnt_node == nullptr)
         return;
@@ -191,17 +122,17 @@ void AkinatorTree::print_dump_tree(const NodeTree* const prnt_node, std::ofstrea
                 << "parent = {" << prnt_node->parent_ << "}" << std::endl;
 
     if (prnt_node->right_ != nullptr)
-        print_dump_tree(prnt_node->right_, output_file);
+        print_dump_tree (prnt_node->right_, output_file);
 
     if (prnt_node->left_  != nullptr)
-        print_dump_tree(prnt_node->left_,  output_file);
+        print_dump_tree (prnt_node->left_,  output_file);
 }
 
 //-----------------------------------------------------------------------------
 
-void AkinatorTree::graph(const TreeDumpMode mode)
+void AkinatorTree::graph (const TreeDumpMode mode)
 {
-    assert(this);
+    assert (this);
 
     std::string file_path = "./txt/graph_tree_db.dot";
 
@@ -209,8 +140,7 @@ void AkinatorTree::graph(const TreeDumpMode mode)
         file_path = "./txt/graph_tree_rls.dot";
 
 
-    std::ofstream graph(file_path);
-    assert(graph);       
+    std::ofstream graph (file_path);     
 
 
     graph << "digraph Tree {" << std::endl << std::endl;
@@ -223,10 +153,10 @@ void AkinatorTree::graph(const TreeDumpMode mode)
     graph << std::endl;
 
     if (mode == TreeDumpMode::DEBUG) {
-        print_graph_tree(TreeDumpMode::DEBUG,   root_, graph);
+        print_graph_tree (TreeDumpMode::DEBUG,   root_, graph);
     }
     else {
-        print_graph_tree(TreeDumpMode::RELEASE, root_, graph);
+        print_graph_tree (TreeDumpMode::RELEASE, root_, graph);
     }
 
     graph << "}" << std::endl;
@@ -235,16 +165,16 @@ void AkinatorTree::graph(const TreeDumpMode mode)
 
 
     if (mode == TreeDumpMode::DEBUG)
-        system("dot -Tjpeg ./txt/graph_tree_db.dot  -o./txt/graph_tree_db.jpeg");
+        system ("dot -Tjpeg ./txt/graph_tree_db.dot  -o./txt/graph_tree_db.jpeg");
     else 
-        system("dot -Tjpeg ./txt/graph_tree_rls.dot -o./txt/graph_tree_rls.jpeg");
+        system ("dot -Tjpeg ./txt/graph_tree_rls.dot -o./txt/graph_tree_rls.jpeg");
 }
 
 //-----------------------------------------------------------------------------
 
-void AkinatorTree::print_graph_tree(const TreeDumpMode mode, const NodeTree* const prnt_node, std::ofstream& output_file)
+void AkinatorTree::print_graph_tree (const TreeDumpMode mode, const NodeTree* const prnt_node, std::ofstream& output_file)
 {
-    assert(this);
+    assert (this);
 
     if (prnt_node == nullptr)
         return;
@@ -286,10 +216,10 @@ void AkinatorTree::print_graph_tree(const TreeDumpMode mode, const NodeTree* con
     output_file << std::endl << std::endl;
 
     if (prnt_node->right_ != nullptr)
-        print_graph_tree(mode, prnt_node->right_, output_file);
+        print_graph_tree (mode, prnt_node->right_, output_file);
 
     if (prnt_node->left_  != nullptr)
-        print_graph_tree(mode, prnt_node->left_,  output_file);
+        print_graph_tree (mode, prnt_node->left_,  output_file);
 }
 
 //--------------------------------------------------

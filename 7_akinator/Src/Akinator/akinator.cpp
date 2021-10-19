@@ -14,10 +14,9 @@ Akinator::Akinator()
 
 //-------
 
-Akinator::Akinator(const std::string path_base)
+Akinator::Akinator(const std::string& path_base)
 {
     assert(this);
-    assert(path_base.c_str());
 
     tree_ = new AkinatorTree(path_base);
     select_akinator_mode();

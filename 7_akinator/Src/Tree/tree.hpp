@@ -24,12 +24,11 @@ class NodeTree
         NodeTree*   left_   = nullptr;
         NodeTree*   right_  = nullptr;
  
-        NodeTree()
-        {}
+        NodeTree() = delete;
 
         //!
 
-        NodeTree(std::string data, NodeTree* parent) :
+        NodeTree(const std::string& data, NodeTree* parent) :
             data_   {data},
             parent_ {parent}
         {}
@@ -53,23 +52,23 @@ class AkinatorTree
         void fill_akinator_tree();
         void fill_akinator_base();
 
-        void create_tree_from_buf(const char* buffer_data);
+        void create_tree_from_buf (const char* buffer_data);
             
         bool tree_empty() const;
-        bool clear(NodeTree* clr_node);
+        bool clear (NodeTree* clr_node);
 
-        void graph(const TreeDumpMode mode);
+        void graph (const TreeDumpMode mode);
 
-        void print_dump_tree (                         const NodeTree* const prnt_node, std::ofstream& output);
-        void print_graph_tree(const TreeDumpMode mode, const NodeTree* const prnt_node, std::ofstream& output);
+        void print_dump_tree  (                         const NodeTree* const prnt_node, std::ofstream& output);
+        void print_graph_tree (const TreeDumpMode mode, const NodeTree* const prnt_node, std::ofstream& output);
 
     public:
 
-        AkinatorTree() = delete;
-        AkinatorTree(const std::string path_base);
-       ~AkinatorTree();
+        AkinatorTree () = delete;
+        AkinatorTree (const std::string& path_base);
+       ~AkinatorTree ();
 
-        void dump(const TreeDumpMode mode, const std::string file_path = "./txt/dump_tree.txt");
+        void dump (const TreeDumpMode mode, const std::string& file_path = "./txt/dump_tree.txt");
 
 };
 

@@ -3,12 +3,12 @@
 
 //-----------------------------------------------------------------
 
-int main() {
-
+int main() 
+{
 	CPU my_CPU;
 
-	my_CPU.run(); 
-	my_CPU.dump();
+	//my_CPU.run(); 
+	//my_CPU.dump();
 
 }
 /* TODO

@@ -58,7 +58,8 @@ void CPU::run(void)
         if (IR_ == HLT_CMD || IR_ == END_CMD)
             break;
 
-        switch(IR_) {
+        switch(IR_) 
+        {
             case PUSHC_CMD:   IP_ += sizeof(char); 
 
                               DR_ = POINTER_ON_(EBP_, IP_, double);
@@ -90,7 +91,7 @@ void CPU::run(void)
 
             case PUSHOR_CMD:  IP_ += sizeof(char);
 
-                              IR_ = POINTER_ON_(EBP_, IP_, char);
+                              IR_  = POINTER_ON_(EBP_, IP_, char);
 
                               IP_ += sizeof(char);
                               break;
@@ -212,7 +213,7 @@ void CPU::run(void)
                               break;
 
             default:          printf("default command? check buffer\n");
-                             break;                                
+                              break;                                
         } 
     }
 }

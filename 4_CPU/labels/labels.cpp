@@ -33,9 +33,12 @@ int Labels::check_label(char* name_of_label, int pos_to_jmp, int func_call)
 
     parsing_label(name_of_label, func_call);
 
-    for (size_t indx = 0; indx < label_counter_; indx++) {
-        if (!strcmp(array_of_labels_[indx].name_of_label, name_of_label)) {
-            if (pos_to_jmp != POISON_POSITION)  {
+    for (size_t indx = 0; indx < label_counter_; indx++) 
+    {
+        if (!strcmp(array_of_labels_[indx].name_of_label, name_of_label)) 
+        {
+            if (pos_to_jmp != POISON_POSITION)  
+            {
                 array_of_labels_[indx].pos_to_jmp = pos_to_jmp;
                 return POISON_POSITION;
             }
@@ -55,8 +58,8 @@ void Labels::parsing_label(char* name_of_label, int func_call)
 {
     assert(name_of_label);
 
-    switch(func_call) {
-
+    switch(func_call) 
+    {
         case FROM_JMP_CMD:        return;
 
         case FROM_MARK_LABEL:    const char* ptr_on_MARK_LABEL = strchr(name_of_label, MARK_LABEL);
@@ -69,7 +72,8 @@ void Labels::parsing_label(char* name_of_label, int func_call)
 
 int Labels::find_label(char* name_of_label) 
 {
-    for(size_t indx = 0; indx < label_counter_; indx++) {
+    for(size_t indx = 0; indx < label_counter_; indx++) 
+    {
         if (!strcmp(name_of_label, array_of_labels_[indx].name_of_label))    
             return array_of_labels_[indx].pos_to_jmp;    
     }
@@ -86,10 +90,8 @@ void Labels::realloc_array_of_label(void)
 
     array_of_labels_ = (label_info_t*) realloc(array_of_labels_, capacity_  * sizeof(label_info_t));
 
-    if (array_of_labels_ == nullptr) {
+    if (array_of_labels_ == nullptr) 
         array_of_labels_ = tmp_array_of_labels_;
-        // error
-    }
 
 }
 
@@ -130,11 +132,13 @@ void Labels::labels_dump(void)
     fprintf(labels_dump, "\n{Number in array}[position]\n\n");
 
     size_t indx = 0;
-    for (; indx < label_counter_ ; indx++) {
+    for (; indx < label_counter_ ; indx++) 
+    {
         fprintf(labels_dump, "{%3.ld}[%3.d] %s\n", indx + 1, array_of_labels_[indx].pos_to_jmp,     
                                                              array_of_labels_[indx].name_of_label);
     }
-    for (; indx < capacity_ ; indx++) { 
+    for (; indx < capacity_ ; indx++) 
+    { 
         fprintf(labels_dump, "{%3.ld}[---] (null)\n", indx + 1);
     }
 

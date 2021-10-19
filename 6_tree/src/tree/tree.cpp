@@ -31,7 +31,7 @@ Tree::~Tree()
 
 //-----------------------------------------------------------------------------
 
-bool Tree::insert(const std::string data)
+bool Tree::insert(const std::string& data)
 {
     bool result = insert(root_, data);
 
@@ -43,7 +43,7 @@ bool Tree::insert(const std::string data)
 
 //!
 
-bool Tree::insert(NodeTree* const insrt_node, const std::string data)
+bool Tree::insert(NodeTree* const insrt_node, const std::string& data)
 {
     if (root_ == insrt_node && empty()) 
     {
@@ -78,7 +78,7 @@ bool Tree::insert(NodeTree* const insrt_node, const std::string data)
 
 //-----------------------------------------------------------------------------
 
-bool Tree::remove(const std::string rmv_value) 
+bool Tree::remove(const std::string& rmv_value) 
 {   
     if (empty()) 
         return false;
@@ -93,7 +93,7 @@ bool Tree::remove(const std::string rmv_value)
 
 //!
 
-bool Tree::remove(NodeTree* srch_node, std::string rmv_data)
+bool Tree::remove(NodeTree* srch_node, const std::string& rmv_data)
 {
     if (!srch_node) 
         return false;
@@ -390,8 +390,7 @@ bool Tree::empty() const noexcept
 }
 
 //!
-
-bool Tree::size() const noexcept
+std::size_t Tree::size() const noexcept
 {
     return size_;
 }

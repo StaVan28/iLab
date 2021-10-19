@@ -6,3 +6,5 @@ int main()
 
     return 0;
 }
+
+// void ==> std::size_t num_symbols

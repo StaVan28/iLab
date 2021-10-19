@@ -2,20 +2,16 @@
 ******************************************************
         Labels:
 
-Pointer array of labels: 0x4dd01a0
+Pointer array of labels: 0x4dcf580
 
-capacity_     = 8
-label counter = 6
+capacity_     = 4
+label counter = 0
 
 {Number in array}[position]
 
-{  1}[148] a=0
-{  2}[ 89] D=0
-{  3}[106] D>0
-{  4}[146] D<0
-{  5}[175] a=0_b=0
-{  6}[198] no_solutions
-{  7}[---] (null)
-{  8}[---] (null)
+{  1}[---] (null)
+{  2}[---] (null)
+{  3}[---] (null)
+{  4}[---] (null)
 
 ******************************************************

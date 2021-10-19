@@ -1,2 +1,2 @@
 ../obj/assembler.o: assembler.cpp assembler.h ../include/headers/txtlib.h \
- ../labels/labels.h ../settings/settings.h
+ ../labels/labels.h ../settings/settings.h ../ram/ram.h
