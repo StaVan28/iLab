@@ -1,0 +1,43 @@
+digraph Tree {
+
+	node [shape = "circle", style = "filled", fillcolor = "red",fontcolor = "#000000", margin = "0.01"];
+	rankdir = "TB";
+
+	label = "Tree Graph";
+
+	"0x4dce640" [shape = "record", fillcolor="lightcyan2", label = "{cat}" ];
+	"0x4dce640"->"0x4dce6c0";
+	"0x4dce640"->"0x4dce840";
+
+
+	"0x4dce840" [shape = "record", fillcolor="lightcyan2", label = "{dog}" ];
+	"0x4dce840"->"0x4dce8c0";
+	"0x4dce840"->"0x4dce940";
+
+
+	"0x4dce940" [shape = "record", fillcolor="lightcyan2", label = "{kat_morda}" ];
+	"0x4dce940"->"0x4dce9c0";
+	"0x4dce940"->"0x4dcea40";
+
+
+	"0x4dcea40" [shape = "record", fillcolor="lightcyan2", label = "{sub-zero}" ];
+
+
+	"0x4dce9c0" [shape = "record", fillcolor="lightcyan2", label = "{vanya}" ];
+
+
+	"0x4dce8c0" [shape = "record", fillcolor="lightcyan2", label = "{sharik}" ];
+
+
+	"0x4dce6c0" [shape = "record", fillcolor="lightcyan2", label = "{black}" ];
+	"0x4dce6c0"->"0x4dce740";
+	"0x4dce6c0"->"0x4dce7c0";
+
+
+	"0x4dce7c0" [shape = "record", fillcolor="lightcyan2", label = "{poltorashka}" ];
+
+
+	"0x4dce740" [shape = "record", fillcolor="lightcyan2", label = "{drackosha}" ];
+
+
+}

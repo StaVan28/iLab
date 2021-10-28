@@ -1,17 +1,23 @@
 
 ******************************************************
-		2021-10-19 08:03:57
+		2021-10-28 06:31:08
 			Tree:
 
 Tree (OK) [0x4dcce60] {
 
 	size = 0
 
-data = {cat}left = {0x4dce920}right = {0x4dce9a0}parent = {0}
-data = {dog}left = {0x4dcea20}right = {0x4dceaa0}parent = {0x4dce8a0}
-data = {sub-zero}left = {0}right = {0}parent = {0x4dce9a0}
-data = {sharik}left = {0}right = {0}parent = {0x4dce9a0}
-data = {poltorashka}left = {0}right = {0}parent = {0x4dce8a0}
+data = {cat}left = {0x4dce6c0}right = {0x4dce840}parent = {0}
+data = {dog}left = {0x4dce8c0}right = {0x4dce940}parent = {0x4dce640}
+data = {kat_morda}left = {0x4dce9c0}right = {0x4dcea40}parent = {0x4dce840}
+data = {sub-zero}left = {0}right = {0}parent = {0x4dce940}
+data = {hitraya_morda}left = {0x4dd5740}right = {0x4dd56c0}parent = {0x4dce940}
+data = {vanya}left = {0}right = {0}parent = {0x4dce9c0}
+data = {danya}left = {0}right = {0}parent = {0x4dce9c0}
+data = {sharik}left = {0}right = {0}parent = {0x4dce840}
+data = {black}left = {0x4dce740}right = {0x4dce7c0}parent = {0x4dce640}
+data = {poltorashka}left = {0}right = {0}parent = {0x4dce6c0}
+data = {drackosha}left = {0}right = {0}parent = {0x4dce6c0}
 }
 
 ******************************************************

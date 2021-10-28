@@ -33,7 +33,7 @@ class NodeTree
         NodeTree*   left_   = nullptr;
         NodeTree*   right_  = nullptr;
  
-        NodeTree()
+        NodeTree ()
         {}
 
         //!
@@ -51,7 +51,7 @@ class NodeTree
 
         //!
 
-       ~NodeTree()
+       ~NodeTree ()
        {}
 };
 
@@ -65,9 +65,6 @@ class AkinatorTree
         std::string path_base_ = nullptr;
         std::size_t size_      = 0;
 
-        void fill_akinator_tree ();
-        void fill_akinator_base ();
-
         void      create_tree_from_buf (const char* buffer_data);
         NodeTree* fill_recurce_tree    (Token* buf_lexems, std::size_t* num_lexem);
         void      print_recursive_base (FILE* base_tree, NodeTree* cur_node, std::size_t num_tabs);
@@ -80,8 +77,6 @@ class AkinatorTree
         void print_dump_tree  (                         const NodeTree* const prnt_node, std::ofstream& output);
         void print_graph_tree (const TreeDumpMode mode, const NodeTree* const prnt_node, std::ofstream& output);
 
-        NodeTree* walk (const NodeTree* cur_node, TreeDirection direct) const;
-
     public:
 
         AkinatorTree () = delete;
@@ -89,6 +84,13 @@ class AkinatorTree
        ~AkinatorTree ();
 
         void dump (const TreeDumpMode mode, const std::string& file_path = "./Txt/dump_tree.txt");
+
+        void add_new_answer (NodeTree* prnt_node, const std::string& answer_data, const std::string& question_data);
+
+        void fill_akinator_tree ();
+        void fill_akinator_base ();
+
+        NodeTree* get_root ();
 
 };
 

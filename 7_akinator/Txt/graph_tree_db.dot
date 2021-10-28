@@ -5,27 +5,57 @@ digraph Tree {
 
 	label = "Tree Graph";
 
-	"0x4dce8a0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (cat) } |{me\n (0x4dce8a0) } |{left\n (0x4dce920)   |right\n (0x4dce9a0) } }"];
-	"0x4dce8a0"->"0x4dce920";
-	"0x4dce8a0"->"0x4dce9a0";
+	"0x4dce640" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (cat) } |{me\n (0x4dce640) } |{left\n (0x4dce6c0)   |right\n (0x4dce840) } }"];
+	"0x4dce640"->"0x4dce6c0";
+	"0x4dce640"->"0x4dce840";
 
 
-	"0x4dce9a0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce8a0) } |{data\n (dog) } |{me\n (0x4dce9a0) } |{left\n (0x4dcea20)   |right\n (0x4dceaa0) } }"];
-	"0x4dce9a0"->"0x4dce8a0";
-	"0x4dce9a0"->"0x4dcea20";
-	"0x4dce9a0"->"0x4dceaa0";
+	"0x4dce840" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce640) } |{data\n (dog) } |{me\n (0x4dce840) } |{left\n (0x4dce8c0)   |right\n (0x4dce940) } }"];
+	"0x4dce840"->"0x4dce640";
+	"0x4dce840"->"0x4dce8c0";
+	"0x4dce840"->"0x4dce940";
 
 
-	"0x4dceaa0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce9a0) } |{data\n (sub-zero) } |{me\n (0x4dceaa0) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dceaa0"->"0x4dce9a0";
+	"0x4dce940" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce840) } |{data\n (kat_morda) } |{me\n (0x4dce940) } |{left\n (0x4dce9c0)   |right\n (0x4dcea40) } }"];
+	"0x4dce940"->"0x4dce840";
+	"0x4dce940"->"0x4dce9c0";
+	"0x4dce940"->"0x4dcea40";
 
 
-	"0x4dcea20" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce9a0) } |{data\n (sharik) } |{me\n (0x4dcea20) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcea20"->"0x4dce9a0";
+	"0x4dcea40" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce940) } |{data\n (sub-zero) } |{me\n (0x4dcea40) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcea40"->"0x4dce940";
 
 
-	"0x4dce920" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce8a0) } |{data\n (poltorashka) } |{me\n (0x4dce920) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dce920"->"0x4dce8a0";
+	"0x4dce9c0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce940) } |{data\n (hitraya_morda) } |{me\n (0x4dce9c0) } |{left\n (0x4dd5740)   |right\n (0x4dd56c0) } }"];
+	"0x4dce9c0"->"0x4dce940";
+	"0x4dce9c0"->"0x4dd5740";
+	"0x4dce9c0"->"0x4dd56c0";
+
+
+	"0x4dd56c0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce9c0) } |{data\n (vanya) } |{me\n (0x4dd56c0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dd56c0"->"0x4dce9c0";
+
+
+	"0x4dd5740" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce9c0) } |{data\n (danya) } |{me\n (0x4dd5740) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dd5740"->"0x4dce9c0";
+
+
+	"0x4dce8c0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce840) } |{data\n (sharik) } |{me\n (0x4dce8c0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dce8c0"->"0x4dce840";
+
+
+	"0x4dce6c0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce640) } |{data\n (black) } |{me\n (0x4dce6c0) } |{left\n (0x4dce740)   |right\n (0x4dce7c0) } }"];
+	"0x4dce6c0"->"0x4dce640";
+	"0x4dce6c0"->"0x4dce740";
+	"0x4dce6c0"->"0x4dce7c0";
+
+
+	"0x4dce7c0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce6c0) } |{data\n (poltorashka) } |{me\n (0x4dce7c0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dce7c0"->"0x4dce6c0";
+
+
+	"0x4dce740" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dce6c0) } |{data\n (drackosha) } |{me\n (0x4dce740) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dce740"->"0x4dce6c0";
 
 
 }

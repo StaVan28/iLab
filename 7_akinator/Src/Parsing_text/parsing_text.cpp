@@ -40,7 +40,6 @@ void Text::create_buffer_data (const std::string& path_base)
 
     num_symbols_in_file (akin_base);
 
-    printf ("num_symbols_ = %zu\n", num_symbols_);
     buf_data_ = new char[num_symbols_ + 1] {};
 
     fread (buf_data_, sizeof(char), num_symbols_, akin_base);
@@ -92,11 +91,11 @@ Token* Text::create_buffer_lexems()
 
         int end        = i;
         buf_data_[end] = '\0';
-/*
-        printf("FOUND:\n");
-        printf("begin = %d, end = %d, end - begin = %d, ", begin, end, end - begin);
-        printf("buf_data_ + begin = {%s}\n\n", buf_data_ + begin);
-*/
+
+//        printf("FOUND:\n");
+//        printf("begin = %d, end = %d, end - begin = %d, ", begin, end, end - begin);
+//        printf("buf_data_ + begin = {%s}\n\n", buf_data_ + begin);
+
         if      (buf_data_[begin] == '?' ||
                  buf_data_[begin] == '@'   )
         {
@@ -104,10 +103,10 @@ Token* Text::create_buffer_lexems()
             buf_lexems[cur_lex].type = (buf_data_[begin] == '?') ? (TokenType::QUESTION) : (TokenType::ANSWER);
             buf_lexems[cur_lex].value_str  = buf_data_ + begin + 1;
             cur_lex++;
-/*
-            printf("TOKEN: STRING, "
-                   "buf_lexems_->value_str  = {%s}\n", buf_lexems->value_str.c_str());
-*/      }
+
+//            printf("TOKEN: STRING, "
+//                   "buf_lexems_->value_str  = {%s}\n", buf_lexems->value_str.c_str());
+      }
         else if (buf_data_[begin] == '>' ||
                  buf_data_[begin] == '<'   )
         {
@@ -115,13 +114,13 @@ Token* Text::create_buffer_lexems()
             buf_lexems[cur_lex].value_oper = *(buf_data_ + begin);
             cur_lex++;
 
-//          printf("TOKEN: OPER, "
-//                 "buf_lexems_->value_oper = {%c}\n", buf_lexems->value_oper);
+//        printf("TOKEN: OPER, "
+//               "buf_lexems_->value_oper = {%c}\n", buf_lexems->value_oper);
         }
         else
         {
             printf("OLO, REBYAT U VAS KAKBE SYNTX ERROR! AT POSITION [%d]\n", i);
-            printf("symb = %c[%d]\n", *(buf_data_ + i), *(buf_data_ + i));
+//            printf("symb = %c[%d]\n", *(buf_data_ + i), *(buf_data_ + i));
         }
     }
 

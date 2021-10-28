@@ -9,6 +9,7 @@ Akinator::Akinator ()
     assert (this);
 
     tree_ = new AkinatorTree (DEFAULT_PATH_BASE);
+
     select_akinator_mode ();
 }
 
@@ -39,9 +40,9 @@ void Akinator::select_akinator_mode ()
     printf ("Hello, guys!\n"
             "Plz, select mode!\n"
             "1 -- finding items\n"
-            "0 -- exit");
+            "0 -- exit\n");
 
-    finding_mode ();
+    finding_mode (tree_->get_root());
 
     // приветственные слова
     // выбор режима, анализируя ввод человека(выставление режима Mode)
@@ -49,37 +50,98 @@ void Akinator::select_akinator_mode ()
 
 //--------
 
-void Akinator::finding_mode ()
+void Akinator::finding_mode (NodeTree* cur_node)
 {
-    AkinatorAnswer answer = get_answer ();
+    printf ("Welcome to the finding mode, buddy!\n"
+            "Please guess a word.\n");
 
-    if (answer == AkinatorAnswer::YES)
+    while (cur_node != nullptr)
     {
-        if (cur_node == nullptr)
+        printf ("You guess a word \"%s\"?\n", cur_node->data_.c_str());
+
+        if (get_yes_no () == AkinatorAnswer::YES)
         {
+            if (cur_node->left_ == nullptr)
+            {
+                printf ("Oue, I know word \"%s\"\n", cur_node->data_.c_str());
+                break;
+            }
 
+            cur_node = cur_node->left_;
         }
-
-        tree_->walk (cur_node, TreeDirection::LEFT)
-    }
-
-    if (answer == AkinatorAnswer::NO)
-    {
-        if (cur_node == nullptr)
+        else
         {
+            if (cur_node->right_ == nullptr)
+            {
+                printf ("Please write a new answer: ");
+                std::string   answer_data = get_string ();
 
+                printf ("Please write diff between %s and %s: It is... ", answer_data.c_str(), cur_node->data_.c_str());                
+                std::string question_data = get_string ();
+
+                tree_->add_new_answer     (cur_node, answer_data, question_data);
+                tree_->fill_akinator_base ();
+                break;
+            }
+
+            cur_node = cur_node->right_;
         }
-
-        tree_->walk (cur_node, TreeDirection::RIGHT)
     }
-
 }
 
 //--------------------------------------------------
 
-AkinatorAnswer Akinator::get_answer () const
+std::string Akinator::get_string () const
 {
+    char*  buf  = nullptr;
+    size_t size = 0;
 
+    getline (&buf, &size, stdin);
+
+
+    char* ptr_symb = strchr (buf, '\n');
+    if   (ptr_symb != nullptr)
+    {
+        *ptr_symb = '\0';
+    }
+
+    std::string answer_data (buf);
+
+    return answer_data;
 }
 
 //--------------------------------------------------
+
+AkinatorAnswer Akinator::get_yes_no () const
+{
+    char human_input[MAX_BUF] = {};
+
+    while (true)
+    {
+        scanf ("%1s", human_input);
+
+        clear_stdin();
+
+        if      (!strcmp(human_input, "y"))
+            return AkinatorAnswer::YES;
+
+        else if (!strcmp(human_input, "n"))
+            return AkinatorAnswer::NO;
+        
+        else 
+            printf("Plz, write \"y\" or \"n\"\n");
+    }
+}
+
+//--------------------------------------------------
+
+void Akinator::clear_stdin () const
+{
+    int symb = 0;
+
+    do
+    {
+        symb = getchar ();
+    }
+    while (symb != '\n' && symb != EOF);
+}

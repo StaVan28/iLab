@@ -33,9 +33,11 @@ class Akinator
 
         void select_akinator_mode ();
         
-        AkinatorAnswer get_answer () const;
+        AkinatorAnswer get_yes_no  () const;
+        std::string    get_string  () const;
+        void           clear_stdin () const;
 
-        void finding_mode ();
+        void finding_mode (NodeTree* root_);
 
     public:
        

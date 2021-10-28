@@ -10,7 +10,6 @@ AkinatorTree::AkinatorTree (const std::string& path_base) :
     assert (this);
 
     fill_akinator_tree();
-    fill_akinator_base();
 }
 
 //---------
@@ -18,6 +17,8 @@ AkinatorTree::AkinatorTree (const std::string& path_base) :
 AkinatorTree::~AkinatorTree()
 {
     assert (this);
+
+    dump (TreeDumpMode::DEBUG);
     
     clear (root_);
 
@@ -89,9 +90,9 @@ NodeTree* AkinatorTree::fill_recurce_tree (Token* buf_lexems, std::size_t* num_l
 
 void AkinatorTree::fill_akinator_base ()
 {
-    FILE* base_tree = fopen ("./Txt/dump_tree_test.txt", "wb");
+    FILE* base_tree = fopen (DEFAULT_PATH_BASE.c_str(), "wb");
 
-    std:size_t num_spaces = 0;
+    std::size_t num_spaces = 0;
     print_recursive_base (base_tree, root_, num_spaces);
 
     fclose (base_tree);
@@ -128,20 +129,6 @@ void AkinatorTree::print_recursive_base (FILE* base_tree, NodeTree* cur_node, st
 
 //---------
 
-NodeTree* AkinatorTree::walk (const NodeTree* cur_node, TreeDirection direct) const
-{
-    if      (direct == TreeDirection::LEFT)
-    {
-        return cur_node->left_;
-    }
-    else if (direct == TreeDirection::RIGHT)
-    {
-        return cur_node->right_;
-    }
-}
-
-//---------
-
 bool AkinatorTree::tree_empty () const
 {
     return size_ == EMPTY;
@@ -151,7 +138,7 @@ bool AkinatorTree::tree_empty () const
 
 bool AkinatorTree::clear (NodeTree* clr_node)
 {
-    if (tree_empty())
+    if (!tree_empty())
         return false;
 
     if (clr_node->left_ != nullptr)
@@ -166,6 +153,26 @@ bool AkinatorTree::clear (NodeTree* clr_node)
 
 //---------
 
+void AkinatorTree::add_new_answer (NodeTree* prnt_node, const std::string& answer_data, const std::string& question_data)
+{
+    assert(this);
+
+    NodeTree* new_rght_node = new NodeTree(prnt_node->data_, prnt_node);
+    NodeTree* new_left_node = new NodeTree(answer_data     , prnt_node);
+
+    prnt_node->data_  = question_data;
+    prnt_node->left_  = new_left_node;
+    prnt_node->right_ = new_rght_node;
+}
+
+//---------
+
+NodeTree* AkinatorTree::get_root ()
+{
+    return root_;
+}
+
+//---------
 
 void AkinatorTree::dump (const TreeDumpMode mode, const std::string& file_path)
 {

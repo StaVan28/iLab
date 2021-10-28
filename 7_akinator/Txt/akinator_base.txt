@@ -1,9 +1,21 @@
 ?cat
 <
-    @poltorashka
+    ?black
+    <
+        @drackosha
+    >
+        @poltorashka
 >
     ?dog
     <
         @sharik
     >
-        @sub-zero
+        ?kat_morda
+        <
+            ?hitraya_morda
+            <
+                @danya
+            >
+                @vanya
+        >
+            @sub-zero
