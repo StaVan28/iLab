@@ -37,7 +37,7 @@ class Akinator
         std::string    get_string  () const;
         void           clear_stdin () const;
 
-        void finding_mode (NodeTree* root_);
+        void finding_mode (NodeTree* root);
 
     public:
        

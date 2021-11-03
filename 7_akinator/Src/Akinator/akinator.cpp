@@ -40,12 +40,34 @@ void Akinator::select_akinator_mode ()
     printf ("Hello, guys!\n"
             "Plz, select mode!\n"
             "1 -- finding items\n"
+            "2 -- definition mode\n"
             "0 -- exit\n");
 
-    finding_mode (tree_->get_root());
+    char human_input[MAX_BUF] = {};
 
-    // приветственные слова
-    // выбор режима, анализируя ввод человека(выставление режима Mode)
+    while (true)
+    {
+        scanf ("%1s", human_input);
+
+        clear_stdin();
+
+        if (!strcmp (human_input, "1"))
+        {
+            finding_mode (tree_->get_root());
+            return;
+        }
+        else if (!strcmp (human_input, "2"))
+        {
+            definition_mode (tree_->get_root());
+            return;
+        }
+        else if (!strcmp (human_input, "0"))
+        {
+            return;
+        }
+        else 
+            printf ("Plz, write \"1\" or \"0\"\n");
+    }
 }
 
 //--------
@@ -98,7 +120,6 @@ std::string Akinator::get_string () const
 
     getline (&buf, &size, stdin);
 
-
     char* ptr_symb = strchr (buf, '\n');
     if   (ptr_symb != nullptr)
     {
@@ -106,6 +127,8 @@ std::string Akinator::get_string () const
     }
 
     std::string answer_data (buf);
+
+    free (buf);
 
     return answer_data;
 }
@@ -145,3 +168,5 @@ void Akinator::clear_stdin () const
     }
     while (symb != '\n' && symb != EOF);
 }
+
+//--------------------------------------------------

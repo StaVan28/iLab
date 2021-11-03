@@ -19,6 +19,7 @@ AkinatorTree::~AkinatorTree()
     assert (this);
 
     dump (TreeDumpMode::DEBUG);
+    dump (TreeDumpMode::RELEASE);
     
     clear (root_);
 
