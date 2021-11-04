@@ -5,87 +5,87 @@ digraph Tree {
 
 	label = "Tree Graph";
 
-	"0x4dceab0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (cat) } |{me\n (0x4dceab0) } |{left\n (0x4dceb30)   |right\n (0x4dcecb0) } }"];
-	"0x4dceab0"->"0x4dceb30";
-	"0x4dceab0"->"0x4dcecb0";
+	"0x4dced70" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0) } |{data\n (cat) } |{me\n (0x4dced70) } |{left\n (0x4dcedf0)   |right\n (0x4dcef70) } }"];
+	"0x4dced70"->"0x4dcedf0";
+	"0x4dced70"->"0x4dcef70";
 
 
-	"0x4dcecb0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dceab0) } |{data\n (dog) } |{me\n (0x4dcecb0) } |{left\n (0x4dced30)   |right\n (0x4dcedb0) } }"];
-	"0x4dcecb0"->"0x4dceab0";
-	"0x4dcecb0"->"0x4dced30";
-	"0x4dcecb0"->"0x4dcedb0";
+	"0x4dcef70" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dced70) } |{data\n (dog) } |{me\n (0x4dcef70) } |{left\n (0x4dceff0)   |right\n (0x4dcf070) } }"];
+	"0x4dcef70"->"0x4dced70";
+	"0x4dcef70"->"0x4dceff0";
+	"0x4dcef70"->"0x4dcf070";
 
 
-	"0x4dcedb0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcecb0) } |{data\n (kat_morda) } |{me\n (0x4dcedb0) } |{left\n (0x4dcee30)   |right\n (0x4dcefb0) } }"];
-	"0x4dcedb0"->"0x4dcecb0";
-	"0x4dcedb0"->"0x4dcee30";
-	"0x4dcedb0"->"0x4dcefb0";
+	"0x4dcf070" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcef70) } |{data\n (kat_morda) } |{me\n (0x4dcf070) } |{left\n (0x4dcf0f0)   |right\n (0x4dcf270) } }"];
+	"0x4dcf070"->"0x4dcef70";
+	"0x4dcf070"->"0x4dcf0f0";
+	"0x4dcf070"->"0x4dcf270";
 
 
-	"0x4dcefb0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcedb0) } |{data\n (liquid) } |{me\n (0x4dcefb0) } |{left\n (0x4dcf030)   |right\n (0x4dcf0b0) } }"];
-	"0x4dcefb0"->"0x4dcedb0";
-	"0x4dcefb0"->"0x4dcf030";
-	"0x4dcefb0"->"0x4dcf0b0";
+	"0x4dcf270" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf070) } |{data\n (liquid) } |{me\n (0x4dcf270) } |{left\n (0x4dcf2f0)   |right\n (0x4dcf370) } }"];
+	"0x4dcf270"->"0x4dcf070";
+	"0x4dcf270"->"0x4dcf2f0";
+	"0x4dcf270"->"0x4dcf370";
 
 
-	"0x4dcf0b0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcefb0) } |{data\n (electronics) } |{me\n (0x4dcf0b0) } |{left\n (0x4dcf130)   |right\n (0x4dcf1b0) } }"];
-	"0x4dcf0b0"->"0x4dcefb0";
-	"0x4dcf0b0"->"0x4dcf130";
-	"0x4dcf0b0"->"0x4dcf1b0";
+	"0x4dcf370" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf270) } |{data\n (electronics) } |{me\n (0x4dcf370) } |{left\n (0x4dcf3f0)   |right\n (0x4dcf470) } }"];
+	"0x4dcf370"->"0x4dcf270";
+	"0x4dcf370"->"0x4dcf3f0";
+	"0x4dcf370"->"0x4dcf470";
 
 
-	"0x4dcf1b0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf0b0) } |{data\n (vanya) } |{me\n (0x4dcf1b0) } |{left\n (0x4dcf230)   |right\n (0x4dcf2b0) } }"];
-	"0x4dcf1b0"->"0x4dcf0b0";
-	"0x4dcf1b0"->"0x4dcf230";
-	"0x4dcf1b0"->"0x4dcf2b0";
+	"0x4dcf470" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf370) } |{data\n (vanya) } |{me\n (0x4dcf470) } |{left\n (0x4dcf4f0)   |right\n (0x4dcf570) } }"];
+	"0x4dcf470"->"0x4dcf370";
+	"0x4dcf470"->"0x4dcf4f0";
+	"0x4dcf470"->"0x4dcf570";
 
 
-	"0x4dcf2b0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf1b0) } |{data\n (sub-zero) } |{me\n (0x4dcf2b0) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcf2b0"->"0x4dcf1b0";
+	"0x4dcf570" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf470) } |{data\n (sub-zero) } |{me\n (0x4dcf570) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcf570"->"0x4dcf470";
 
 
-	"0x4dcf230" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf1b0) } |{data\n (crocodile) } |{me\n (0x4dcf230) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcf230"->"0x4dcf1b0";
+	"0x4dcf4f0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf470) } |{data\n (crocodile) } |{me\n (0x4dcf4f0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcf4f0"->"0x4dcf470";
 
 
-	"0x4dcf130" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf0b0) } |{data\n (headphones) } |{me\n (0x4dcf130) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcf130"->"0x4dcf0b0";
+	"0x4dcf3f0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf370) } |{data\n (headphones) } |{me\n (0x4dcf3f0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcf3f0"->"0x4dcf370";
 
 
-	"0x4dcf030" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcefb0) } |{data\n (limonad) } |{me\n (0x4dcf030) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcf030"->"0x4dcefb0";
+	"0x4dcf2f0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf270) } |{data\n (limonad) } |{me\n (0x4dcf2f0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcf2f0"->"0x4dcf270";
 
 
-	"0x4dcee30" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcedb0) } |{data\n (hitraya_morda) } |{me\n (0x4dcee30) } |{left\n (0x4dceeb0)   |right\n (0x4dcef30) } }"];
-	"0x4dcee30"->"0x4dcedb0";
-	"0x4dcee30"->"0x4dceeb0";
-	"0x4dcee30"->"0x4dcef30";
+	"0x4dcf0f0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf070) } |{data\n (hitraya_morda) } |{me\n (0x4dcf0f0) } |{left\n (0x4dcf170)   |right\n (0x4dcf1f0) } }"];
+	"0x4dcf0f0"->"0x4dcf070";
+	"0x4dcf0f0"->"0x4dcf170";
+	"0x4dcf0f0"->"0x4dcf1f0";
 
 
-	"0x4dcef30" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcee30) } |{data\n (vanya) } |{me\n (0x4dcef30) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcef30"->"0x4dcee30";
+	"0x4dcf1f0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf0f0) } |{data\n (vanya) } |{me\n (0x4dcf1f0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcf1f0"->"0x4dcf0f0";
 
 
-	"0x4dceeb0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcee30) } |{data\n (danya) } |{me\n (0x4dceeb0) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dceeb0"->"0x4dcee30";
+	"0x4dcf170" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcf0f0) } |{data\n (danya) } |{me\n (0x4dcf170) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcf170"->"0x4dcf0f0";
 
 
-	"0x4dced30" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcecb0) } |{data\n (sharik) } |{me\n (0x4dced30) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dced30"->"0x4dcecb0";
+	"0x4dceff0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcef70) } |{data\n (sharik) } |{me\n (0x4dceff0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dceff0"->"0x4dcef70";
 
 
-	"0x4dceb30" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dceab0) } |{data\n (black) } |{me\n (0x4dceb30) } |{left\n (0x4dcebb0)   |right\n (0x4dcec30) } }"];
-	"0x4dceb30"->"0x4dceab0";
-	"0x4dceb30"->"0x4dcebb0";
-	"0x4dceb30"->"0x4dcec30";
+	"0x4dcedf0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dced70) } |{data\n (black) } |{me\n (0x4dcedf0) } |{left\n (0x4dcee70)   |right\n (0x4dceef0) } }"];
+	"0x4dcedf0"->"0x4dced70";
+	"0x4dcedf0"->"0x4dcee70";
+	"0x4dcedf0"->"0x4dceef0";
 
 
-	"0x4dcec30" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dceb30) } |{data\n (poltorashka) } |{me\n (0x4dcec30) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcec30"->"0x4dceb30";
+	"0x4dceef0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcedf0) } |{data\n (poltorashka) } |{me\n (0x4dceef0) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dceef0"->"0x4dcedf0";
 
 
-	"0x4dcebb0" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dceb30) } |{data\n (drackosha) } |{me\n (0x4dcebb0) } |{left\n (0)   |right\n (0) } }"];
-	"0x4dcebb0"->"0x4dceb30";
+	"0x4dcee70" [shape = "record", fillcolor="lightcyan2", label = "{ {parent\n (0x4dcedf0) } |{data\n (drackosha) } |{me\n (0x4dcee70) } |{left\n (0)   |right\n (0) } }"];
+	"0x4dcee70"->"0x4dcedf0";
 
 
 }

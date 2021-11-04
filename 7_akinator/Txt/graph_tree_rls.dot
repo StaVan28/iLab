@@ -5,71 +5,71 @@ digraph Tree {
 
 	label = "Tree Graph";
 
-	"0x4dceab0" [shape = "record", fillcolor="lightcyan2", label = "{cat}" ];
-	"0x4dceab0"->"0x4dceb30";
-	"0x4dceab0"->"0x4dcecb0";
+	"0x4dced70" [shape = "record", fillcolor="lightcyan2", label = "{cat}" ];
+	"0x4dced70"->"0x4dcedf0";
+	"0x4dced70"->"0x4dcef70";
 
 
-	"0x4dcecb0" [shape = "record", fillcolor="lightcyan2", label = "{dog}" ];
-	"0x4dcecb0"->"0x4dced30";
-	"0x4dcecb0"->"0x4dcedb0";
+	"0x4dcef70" [shape = "record", fillcolor="lightcyan2", label = "{dog}" ];
+	"0x4dcef70"->"0x4dceff0";
+	"0x4dcef70"->"0x4dcf070";
 
 
-	"0x4dcedb0" [shape = "record", fillcolor="lightcyan2", label = "{kat_morda}" ];
-	"0x4dcedb0"->"0x4dcee30";
-	"0x4dcedb0"->"0x4dcefb0";
+	"0x4dcf070" [shape = "record", fillcolor="lightcyan2", label = "{kat_morda}" ];
+	"0x4dcf070"->"0x4dcf0f0";
+	"0x4dcf070"->"0x4dcf270";
 
 
-	"0x4dcefb0" [shape = "record", fillcolor="lightcyan2", label = "{liquid}" ];
-	"0x4dcefb0"->"0x4dcf030";
-	"0x4dcefb0"->"0x4dcf0b0";
+	"0x4dcf270" [shape = "record", fillcolor="lightcyan2", label = "{liquid}" ];
+	"0x4dcf270"->"0x4dcf2f0";
+	"0x4dcf270"->"0x4dcf370";
 
 
-	"0x4dcf0b0" [shape = "record", fillcolor="lightcyan2", label = "{electronics}" ];
-	"0x4dcf0b0"->"0x4dcf130";
-	"0x4dcf0b0"->"0x4dcf1b0";
+	"0x4dcf370" [shape = "record", fillcolor="lightcyan2", label = "{electronics}" ];
+	"0x4dcf370"->"0x4dcf3f0";
+	"0x4dcf370"->"0x4dcf470";
 
 
-	"0x4dcf1b0" [shape = "record", fillcolor="lightcyan2", label = "{vanya}" ];
-	"0x4dcf1b0"->"0x4dcf230";
-	"0x4dcf1b0"->"0x4dcf2b0";
+	"0x4dcf470" [shape = "record", fillcolor="lightcyan2", label = "{vanya}" ];
+	"0x4dcf470"->"0x4dcf4f0";
+	"0x4dcf470"->"0x4dcf570";
 
 
-	"0x4dcf2b0" [shape = "record", fillcolor="lightcyan2", label = "{sub-zero}" ];
+	"0x4dcf570" [shape = "record", fillcolor="lightcyan2", label = "{sub-zero}" ];
 
 
-	"0x4dcf230" [shape = "record", fillcolor="lightcyan2", label = "{crocodile}" ];
+	"0x4dcf4f0" [shape = "record", fillcolor="lightcyan2", label = "{crocodile}" ];
 
 
-	"0x4dcf130" [shape = "record", fillcolor="lightcyan2", label = "{headphones}" ];
+	"0x4dcf3f0" [shape = "record", fillcolor="lightcyan2", label = "{headphones}" ];
 
 
-	"0x4dcf030" [shape = "record", fillcolor="lightcyan2", label = "{limonad}" ];
+	"0x4dcf2f0" [shape = "record", fillcolor="lightcyan2", label = "{limonad}" ];
 
 
-	"0x4dcee30" [shape = "record", fillcolor="lightcyan2", label = "{hitraya_morda}" ];
-	"0x4dcee30"->"0x4dceeb0";
-	"0x4dcee30"->"0x4dcef30";
+	"0x4dcf0f0" [shape = "record", fillcolor="lightcyan2", label = "{hitraya_morda}" ];
+	"0x4dcf0f0"->"0x4dcf170";
+	"0x4dcf0f0"->"0x4dcf1f0";
 
 
-	"0x4dcef30" [shape = "record", fillcolor="lightcyan2", label = "{vanya}" ];
+	"0x4dcf1f0" [shape = "record", fillcolor="lightcyan2", label = "{vanya}" ];
 
 
-	"0x4dceeb0" [shape = "record", fillcolor="lightcyan2", label = "{danya}" ];
+	"0x4dcf170" [shape = "record", fillcolor="lightcyan2", label = "{danya}" ];
 
 
-	"0x4dced30" [shape = "record", fillcolor="lightcyan2", label = "{sharik}" ];
+	"0x4dceff0" [shape = "record", fillcolor="lightcyan2", label = "{sharik}" ];
 
 
-	"0x4dceb30" [shape = "record", fillcolor="lightcyan2", label = "{black}" ];
-	"0x4dceb30"->"0x4dcebb0";
-	"0x4dceb30"->"0x4dcec30";
+	"0x4dcedf0" [shape = "record", fillcolor="lightcyan2", label = "{black}" ];
+	"0x4dcedf0"->"0x4dcee70";
+	"0x4dcedf0"->"0x4dceef0";
 
 
-	"0x4dcec30" [shape = "record", fillcolor="lightcyan2", label = "{poltorashka}" ];
+	"0x4dceef0" [shape = "record", fillcolor="lightcyan2", label = "{poltorashka}" ];
 
 
-	"0x4dcebb0" [shape = "record", fillcolor="lightcyan2", label = "{drackosha}" ];
+	"0x4dcee70" [shape = "record", fillcolor="lightcyan2", label = "{drackosha}" ];
 
 
 }

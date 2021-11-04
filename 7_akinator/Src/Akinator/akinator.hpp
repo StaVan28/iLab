@@ -5,6 +5,7 @@
 
 #include "settings.hpp"
 #include "tree.hpp"
+#include "stack.h"
 
 //--------------------------------------------------
 
@@ -27,9 +28,9 @@ enum class AkinatorAnswer : int
 class Akinator
 {
     private:
-
-        AkinatorMode  mode_;
-        AkinatorTree* tree_;
+        
+        AkinatorTree*    tree_;
+        Stack<NodeTree*> stack_; 
 
         void select_akinator_mode ();
         
@@ -37,7 +38,10 @@ class Akinator
         std::string    get_string  () const;
         void           clear_stdin () const;
 
-        void finding_mode (NodeTree* root);
+        void    finding_mode (NodeTree* root);
+
+        void definition_mode ();
+        void definition_mode (const char* finder, const NodeTree* root);
 
     public:
        
@@ -45,6 +49,12 @@ class Akinator
         Akinator (const std::string& path_base);
        ~Akinator ();
 };
+
+//!
+
+void      print_elem (FILE* dump_stack, NodeTree* value);
+
+NodeTree* get_poison (NodeTree**);
 
 //--------------------------------------------------
 

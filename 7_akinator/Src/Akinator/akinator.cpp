@@ -4,7 +4,8 @@
 
 //--------------------------------------------------
 
-Akinator::Akinator ()
+Akinator::Akinator () :
+    stack_ {"Akinator stack", DFLT_CAPACITY}
 {
     assert (this);
 
@@ -15,7 +16,8 @@ Akinator::Akinator ()
 
 //-------
 
-Akinator::Akinator (const std::string& path_base)
+Akinator::Akinator (const std::string& path_base) :
+    stack_ {"Akinator stack", DFLT_CAPACITY}
 {
     assert (this);
 
@@ -58,7 +60,7 @@ void Akinator::select_akinator_mode ()
         }
         else if (!strcmp (human_input, "2"))
         {
-            definition_mode (tree_->get_root());
+            definition_mode ();
             return;
         }
         else if (!strcmp (human_input, "0"))
@@ -108,6 +110,49 @@ void Akinator::finding_mode (NodeTree* cur_node)
 
             cur_node = cur_node->right_;
         }
+    }
+}
+
+//--------------------------------------------------
+
+void Akinator::definition_mode ()
+{
+    printf ("Welcome to the definition mode, buddy!\n"
+            "Please guess a word.\n");
+
+    char human_input[MAX_BUF] = {};
+    scanf ("%s", human_input);
+
+    definition_mode (human_input, root_->get_root ());
+
+
+}
+
+void Akinator::definition_mode (const char* finder, const NodeTree* cur_node)
+{
+    assert (cur_node);
+
+    if (!cur_node->left_ && !cur_node->right_ && !strcmp (finder, cur_node))
+    {
+        printf ("I found it \"%s\"", cur_node->data_.c_str ());
+    }
+
+    if (cur_node->left_)
+    {
+        stack_.push (cur_node);
+
+        definition_mode (cur_node->left_);
+
+        stack_.pop  ();
+    }
+
+    if (cur_node->right_)
+    {
+        stack_.push (cur_node);
+
+        definition_mode (cur_node->right_);
+
+        stack_.pop  ();
     }
 }
 
@@ -167,6 +212,23 @@ void Akinator::clear_stdin () const
         symb = getchar ();
     }
     while (symb != '\n' && symb != EOF);
+}
+
+//--------------------------------------------------
+
+void print_elem (FILE* dump_stack, NodeTree* value)
+{
+    if (value)
+        fprintf (dump_stack, "\"%s\"", value->data_.c_str());
+    else
+        fprintf (dump_stack, "\"(nullptr)\"");
+}
+
+//!
+
+NodeTree* get_poison (NodeTree**)
+{
+    return nullptr;
 }
 
 //--------------------------------------------------

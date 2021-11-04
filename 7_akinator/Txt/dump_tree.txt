@@ -1,29 +1,29 @@
 
 ******************************************************
-		2021-11-04 02:54:21
+		2021-11-04 06:01:16
 			Tree:
 
-Tree (OK) [0x4dcce60] {
+Tree (OK) [0x4dcd120] {
 
 	size = 0
 
-data = {cat}left = {0x4dceb30}right = {0x4dcecb0}parent = {0}
-data = {dog}left = {0x4dced30}right = {0x4dcedb0}parent = {0x4dceab0}
-data = {kat_morda}left = {0x4dcee30}right = {0x4dcefb0}parent = {0x4dcecb0}
-data = {liquid}left = {0x4dcf030}right = {0x4dcf0b0}parent = {0x4dcedb0}
-data = {electronics}left = {0x4dcf130}right = {0x4dcf1b0}parent = {0x4dcefb0}
-data = {vanya}left = {0x4dcf230}right = {0x4dcf2b0}parent = {0x4dcf0b0}
-data = {sub-zero}left = {0}right = {0}parent = {0x4dcf1b0}
-data = {crocodile}left = {0}right = {0}parent = {0x4dcf1b0}
-data = {headphones}left = {0}right = {0}parent = {0x4dcf0b0}
-data = {limonad}left = {0}right = {0}parent = {0x4dcefb0}
-data = {hitraya_morda}left = {0x4dceeb0}right = {0x4dcef30}parent = {0x4dcedb0}
-data = {vanya}left = {0}right = {0}parent = {0x4dcee30}
-data = {danya}left = {0}right = {0}parent = {0x4dcee30}
-data = {sharik}left = {0}right = {0}parent = {0x4dcecb0}
-data = {black}left = {0x4dcebb0}right = {0x4dcec30}parent = {0x4dceab0}
-data = {poltorashka}left = {0}right = {0}parent = {0x4dceb30}
-data = {drackosha}left = {0}right = {0}parent = {0x4dceb30}
+data = {cat}left = {0x4dcedf0}right = {0x4dcef70}parent = {0}
+data = {dog}left = {0x4dceff0}right = {0x4dcf070}parent = {0x4dced70}
+data = {kat_morda}left = {0x4dcf0f0}right = {0x4dcf270}parent = {0x4dcef70}
+data = {liquid}left = {0x4dcf2f0}right = {0x4dcf370}parent = {0x4dcf070}
+data = {electronics}left = {0x4dcf3f0}right = {0x4dcf470}parent = {0x4dcf270}
+data = {vanya}left = {0x4dcf4f0}right = {0x4dcf570}parent = {0x4dcf370}
+data = {sub-zero}left = {0}right = {0}parent = {0x4dcf470}
+data = {crocodile}left = {0}right = {0}parent = {0x4dcf470}
+data = {headphones}left = {0}right = {0}parent = {0x4dcf370}
+data = {limonad}left = {0}right = {0}parent = {0x4dcf270}
+data = {hitraya_morda}left = {0x4dcf170}right = {0x4dcf1f0}parent = {0x4dcf070}
+data = {vanya}left = {0}right = {0}parent = {0x4dcf0f0}
+data = {danya}left = {0}right = {0}parent = {0x4dcf0f0}
+data = {sharik}left = {0}right = {0}parent = {0x4dcef70}
+data = {black}left = {0x4dcee70}right = {0x4dceef0}parent = {0x4dced70}
+data = {poltorashka}left = {0}right = {0}parent = {0x4dcedf0}
+data = {drackosha}left = {0}right = {0}parent = {0x4dcedf0}
 }
 
 ******************************************************

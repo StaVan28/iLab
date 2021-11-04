@@ -18,23 +18,28 @@ E = $(Q) echo
 
 # dirs path
 BIN_DIR  = Bin
-HDR_DIR  = Src/Settings Src/Tree Src/Akinator Src/Parsing_text
+HDR_DIR  = Src/Settings Src/Tree Src/Akinator Src/Parsing_text Src/Stack
 SRC_DIR  = $(HDR_DIR) Src/Main
 OBJ_DIR  = Obj
 TXT_DIR  = Txt
 
 # source
 BIN = $(BIN_DIR)/akinator
-SRC  = Src/Settings/settings.cpp Src/Tree/tree.cpp Src/Akinator/akinator.cpp \
-       Src/Main/main.cpp Src/Parsing_text/parsing_text.cpp
-OBJ  = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
-OBJ := $(OBJ:%.cpp=%.o)
-DEP  = $(OBJ:%.o=%.d)
-LIB  = libakinator.a
+
+SRC  = Src/Settings/settings.cpp Src/Tree/tree.cpp                 Src/Akinator/akinator.cpp \
+       Src/Main/main.cpp         Src/Parsing_text/parsing_text.cpp                           \
+       
+ALL_SRC = $(SRC) Src/Stack/stack_impl.hpp  Src/Stack/errors_stack_impl.hpp 
+
+OBJ     = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
+OBJ    := $(OBJ:%.cpp=%.o)
+DEP     = $(OBJ:%.o=%.d)
+LIB     = libakinator.a
 
 # find a *.hpp files 
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(HDR_DIR)
+vpath %.h   $(HDR_DIR)
 
 # compiler settings
 CXX      = g++ -std=c++14
@@ -84,11 +89,18 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(E) "    C++:         " $@
 	$(Q) ${CXX} -c ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -o $@
 
+$(OBJ_DIR)/%.o: %.hpp
+	$(E) "    C++:         " $@
+	$(Q) ${CXX} -c ${CXXFLAGS} $(addprefix -I,$(HDR_DIR)) $< -o $@
+
 $(OBJ_DIR)/main.o:          main.cpp                            settings.hpp
-$(OBJ_DIR)/akinator.o:      akinator.cpp      akinator.hpp      settings.hpp 
+$(OBJ_DIR)/akinator.o:      akinator.cpp      akinator.hpp      settings.hpp stack.h
 $(OBJ_DIR)/tree.o:          tree.cpp          tree.hpp          settings.hpp parsing_text.hpp
 $(OBJ_DIR)/parsing_text.o:  parsing_text.cpp  parsing_text.hpp  settings.hpp 
 $(OBJ_DIR)/settings.o:      settings.cpp                        settings.hpp
+$(OBJ_DIR)/stack.o:         stack.h
+$(OBJ_DIR)/errors_stack.o:	stack.h
+stack.h:                    stack_impl.hpp errors_stack_impl.hpp
 
 #
 ## additional features
@@ -125,6 +137,7 @@ log:
 
 print_logs:
 	$(E) "    PRINT LOGS  "
+	cat ./$(TXT_DIR)/dump_stack.txt
 	fim ./$(TXT_DIR)/graph_tree_db.jpeg
 
 -include $(DEP)
