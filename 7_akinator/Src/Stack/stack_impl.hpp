@@ -135,8 +135,6 @@ Stack<data_t>::~Stack(void) {
 
     ASSERT_STACK_OK()
 
-    dump();
-
     #ifdef DEFENCE_STACK
         data_ -= sizeof(int);
     #endif
@@ -221,6 +219,27 @@ int Stack<data_t>::hash(void) {
     }
 
     return hash_;
+}
+
+//-----------------------------------------------------------------------------
+
+template <typename data_t>
+int Stack<data_t>::get_cur_size() const
+{
+    return cur_size_;
+}
+
+//-----------------------------------------------------------------------------
+
+template <typename data_t>
+const data_t& Stack<data_t>::operator [] (int indx) const
+{
+    if (indx < 0)
+    {
+        throw ("Negative indx");
+    }
+
+    return *(data_t*)(data_ + indx * sizeof(data_t));
 }
 
 //-----------------------------------------------------------------------------

@@ -30,7 +30,7 @@ digraph Tree {
 	"0x4dcf370"->"0x4dcf470";
 
 
-	"0x4dcf470" [shape = "record", fillcolor="lightcyan2", label = "{vanya}" ];
+	"0x4dcf470" [shape = "record", fillcolor="lightcyan2", label = "{live}" ];
 	"0x4dcf470"->"0x4dcf4f0";
 	"0x4dcf470"->"0x4dcf570";
 

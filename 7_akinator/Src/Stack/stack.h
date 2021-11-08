@@ -93,6 +93,10 @@ class Stack
         void   push(data_t data);
         data_t pop (void);
         void   dump(void);
+
+        int get_cur_size() const;
+
+        const data_t& operator [] (int indx) const;
 };
 
 inline void print_elem(FILE* dump_stack,       int    value);

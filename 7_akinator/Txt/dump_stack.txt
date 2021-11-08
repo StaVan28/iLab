@@ -5,231 +5,24 @@
 Stack (OK) [0x1ffefffc68] "Akinator stack" {
 
 Canary left  = 595371386  [0x1ffefffc68]
-Current size = 2
-Capacity     = 10
-Hash         = 2117565505
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4dcd084]
- {canary_left} : 874895203  [0x4dcd080]
-
-*{ 1} : "cat"
-*{ 2} : "black"
- { 3} : "(nullptr)"(POISON)
- { 4} : "(nullptr)"(POISON)
- { 5} : "(nullptr)"(POISON)
- { 6} : "(nullptr)"(POISON)
- { 7} : "(nullptr)"(POISON)
- { 8} : "(nullptr)"(POISON)
- { 9} : "(nullptr)"(POISON)
- {10} : "(nullptr)"(POISON)
-
- {canary_right} : 934719742  [0x4dcd0d4]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 2
-Capacity     = 5
-Hash         = 1811004897
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4dd72d4]
- {canary_left} : 874895203  [0x4dd72d0]
-
-*{ 1} : "cat"
-*{ 2} : "black"
- { 3} : "(nullptr)"(POISON)
- { 4} : "(nullptr)"(POISON)
- { 5} : "(nullptr)"(POISON)
-
- {canary_right} : 934719742  [0x4dd72fc]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 2
-Capacity     = 4
-Hash         = 905504497
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4dd8604]
- {canary_left} : 874895203  [0x4dd8600]
-
-*{ 1} : "cat"
-*{ 2} : "dog"
- { 3} : "(nullptr)"(POISON)
- { 4} : "(nullptr)"(POISON)
-
- {canary_right} : 934719742  [0x4dd8624]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 4
-Capacity     = 4
-Hash         = -477707183
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4dd8604]
- {canary_left} : 874895203  [0x4dd8600]
-
-*{ 1} : "cat"
-*{ 2} : "dog"
-*{ 3} : "kat_morda"
-*{ 4} : "hitraya_morda"
-
- {canary_right} : 934719742  [0x4dd8624]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 4
-Capacity     = 4
-Hash         = -477707183
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4dd8604]
- {canary_left} : 874895203  [0x4dd8600]
-
-*{ 1} : "cat"
-*{ 2} : "dog"
-*{ 3} : "kat_morda"
-*{ 4} : "hitraya_morda"
-
- {canary_right} : 934719742  [0x4dd8624]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 4
-Capacity     = 4
-Hash         = -477705135
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4dd8604]
- {canary_left} : 874895203  [0x4dd8600]
-
-*{ 1} : "cat"
-*{ 2} : "dog"
-*{ 3} : "kat_morda"
-*{ 4} : "liquid"
-
- {canary_right} : 934719742  [0x4dd8624]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
 Current size = 5
 Capacity     = 8
-Hash         = 1459271521
+Hash         = 1458222945
 Canary right = 752293992  [0x1ffefffca4]
 
-Data [0x4ddcff4]
- {canary_left} : 874895203  [0x4ddcff0]
+Data [0x4dd61b4]
+ {canary_left} : 874895203  [0x4dd61b0]
 
 *{ 1} : "cat"
 *{ 2} : "dog"
 *{ 3} : "kat_morda"
-*{ 4} : "liquid"
-*{ 5} : "electronics"
+*{ 4} : "hitraya_morda"
+*{ 5} : "danya"
  { 6} : "(nullptr)"(POISON)
  { 7} : "(nullptr)"(POISON)
  { 8} : "(nullptr)"(POISON)
 
- {canary_right} : 934719742  [0x4ddd034]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 6
-Capacity     = 8
-Hash         = -1376864447
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4ddcff4]
- {canary_left} : 874895203  [0x4ddcff0]
-
-*{ 1} : "cat"
-*{ 2} : "dog"
-*{ 3} : "kat_morda"
-*{ 4} : "liquid"
-*{ 5} : "electronics"
-*{ 6} : "vanya"
- { 7} : "(nullptr)"(POISON)
- { 8} : "(nullptr)"(POISON)
-
- {canary_right} : 934719742  [0x4ddd034]
-}
-
-******************************************************
-
-******************************************************
-       Stack:
-
-Stack (OK) [0x1ffefffc68] "Akinator stack" {
-
-Canary left  = 595371386  [0x1ffefffc68]
-Current size = 6
-Capacity     = 8
-Hash         = -1376864447
-Canary right = 752293992  [0x1ffefffca4]
-
-Data [0x4ddcff4]
- {canary_left} : 874895203  [0x4ddcff0]
-
-*{ 1} : "cat"
-*{ 2} : "dog"
-*{ 3} : "kat_morda"
-*{ 4} : "liquid"
-*{ 5} : "electronics"
-*{ 6} : "vanya"
- { 7} : "(nullptr)"(POISON)
- { 8} : "(nullptr)"(POISON)
-
- {canary_right} : 934719742  [0x4ddd034]
+ {canary_right} : 934719742  [0x4dd61f4]
 }
 
 ******************************************************

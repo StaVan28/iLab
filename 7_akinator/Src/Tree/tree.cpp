@@ -92,6 +92,7 @@ NodeTree* AkinatorTree::fill_recurce_tree (Token* buf_lexems, std::size_t* num_l
 void AkinatorTree::fill_akinator_base ()
 {
     FILE* base_tree = fopen (DEFAULT_PATH_BASE.c_str(), "wb");
+    assert (base_tree);
 
     std::size_t num_spaces = 0;
     print_recursive_base (base_tree, root_, num_spaces);

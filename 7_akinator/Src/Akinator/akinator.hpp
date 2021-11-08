@@ -29,32 +29,32 @@ class Akinator
 {
     private:
         
-        AkinatorTree*    tree_;
-        Stack<NodeTree*> stack_; 
+        AkinatorTree*          tree_;
+        Stack<const NodeTree*> stack_; 
 
-        void select_akinator_mode ();
-        
         AkinatorAnswer get_yes_no  () const;
         std::string    get_string  () const;
         void           clear_stdin () const;
 
         void    finding_mode (NodeTree* root);
 
-        void definition_mode ();
-        void definition_mode (const char* finder, const NodeTree* root);
+        void definition_mode     ();
+        bool find_definition     (const char* finder, const NodeTree* root);
+        void printf_defin_result (const char* finder);
 
     public:
        
-        Akinator ();
-        Akinator (const std::string& path_base);
+        Akinator (const std::string& path_base = DEFAULT_PATH_BASE);
        ~Akinator ();
+
+        void select_akinator_mode ();
 };
 
 //!
 
-void      print_elem (FILE* dump_stack, NodeTree* value);
+void      print_elem (FILE* dump_stack, const NodeTree* value);
 
-NodeTree* get_poison (NodeTree**);
+NodeTree* get_poison (const NodeTree**);
 
 //--------------------------------------------------
 

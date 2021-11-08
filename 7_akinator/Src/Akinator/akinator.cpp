@@ -4,26 +4,12 @@
 
 //--------------------------------------------------
 
-Akinator::Akinator () :
-    stack_ {"Akinator stack", DFLT_CAPACITY}
-{
-    assert (this);
-
-    tree_ = new AkinatorTree (DEFAULT_PATH_BASE);
-
-    select_akinator_mode ();
-}
-
-//-------
-
 Akinator::Akinator (const std::string& path_base) :
     stack_ {"Akinator stack", DFLT_CAPACITY}
 {
     assert (this);
 
     tree_ = new AkinatorTree (path_base);
-    
-    select_akinator_mode ();
 }
 
 //-------
@@ -31,6 +17,8 @@ Akinator::Akinator (const std::string& path_base) :
 Akinator::~Akinator ()
 {
     assert (this);
+
+    stack_.dump ();
 
     delete tree_;
 }
@@ -68,7 +56,7 @@ void Akinator::select_akinator_mode ()
             return;
         }
         else 
-            printf ("Plz, write \"1\" or \"0\"\n");
+            printf ("Plz, write \"2\", \"1\" or \"0\"\n");
     }
 }
 
@@ -123,25 +111,46 @@ void Akinator::definition_mode ()
     char human_input[MAX_BUF] = {};
     scanf ("%s", human_input);
 
-    definition_mode (human_input, root_->get_root ());
+    bool res_defin = find_definition (human_input, tree_->get_root ());
+
+    if (res_defin)
+    {
+        printf ("I've found it!\n", human_input);
+    
+        printf_defin_result (human_input);
+    }
+    else
+    {
+        printf ("I don't know word \"%s\"\n", human_input);
+    }
 
 
 }
 
-void Akinator::definition_mode (const char* finder, const NodeTree* cur_node)
+bool Akinator::find_definition (const char* finder, const NodeTree* cur_node)
 {
     assert (cur_node);
 
-    if (!cur_node->left_ && !cur_node->right_ && !strcmp (finder, cur_node))
+    if (!cur_node->left_ && !cur_node->right_)
     {
-        printf ("I found it \"%s\"", cur_node->data_.c_str ());
+        if (!strcmp (finder, cur_node->data_.c_str()))
+        {
+            stack_.push (cur_node);
+
+            return true;
+        }
+        else
+        { 
+            return false;
+        }
     }
 
     if (cur_node->left_)
     {
         stack_.push (cur_node);
 
-        definition_mode (cur_node->left_);
+        if (find_definition (finder, cur_node->left_))
+            return true;
 
         stack_.pop  ();
     }
@@ -150,10 +159,38 @@ void Akinator::definition_mode (const char* finder, const NodeTree* cur_node)
     {
         stack_.push (cur_node);
 
-        definition_mode (cur_node->right_);
+        if (find_definition (finder, cur_node->right_))
+            return true;
 
         stack_.pop  ();
     }
+
+    return false;
+}
+
+//--------------------------------------------------
+
+void Akinator::printf_defin_result (const char* finder)
+{ 
+    printf ("\"%s\" is ", finder);
+
+    int stack_cur_size = stack_.get_cur_size();
+
+    if (!stack_cur_size)
+    {
+        printf ("%s!!!\n\n", finder);
+        return;
+    }
+
+    for (int i = 0; i < stack_cur_size - 1; i++)
+    {
+        if (stack_[i]->left_ == stack_[i + 1])
+            printf (    "%s, ", stack_[i]->data_.c_str());
+        else
+            printf ("not %s, ", stack_[i]->data_.c_str());
+    }
+
+    printf ("that's all!!!\n\n");
 }
 
 //--------------------------------------------------
@@ -216,7 +253,7 @@ void Akinator::clear_stdin () const
 
 //--------------------------------------------------
 
-void print_elem (FILE* dump_stack, NodeTree* value)
+void print_elem (FILE* dump_stack, const NodeTree* value)
 {
     if (value)
         fprintf (dump_stack, "\"%s\"", value->data_.c_str());
@@ -226,7 +263,7 @@ void print_elem (FILE* dump_stack, NodeTree* value)
 
 //!
 
-NodeTree* get_poison (NodeTree**)
+NodeTree* get_poison (const NodeTree**)
 {
     return nullptr;
 }

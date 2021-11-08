@@ -1,8 +1,21 @@
 #include "akinator.hpp"
 
-int main()
+int main ()
 {
     Akinator my_akinator;
+
+    try
+    {
+        my_akinator.select_akinator_mode ();
+    }
+    catch (const char* err_msg)
+    {
+        printf ("ERROR! %s\n", err_msg);
+    }
+    catch (...)
+    {
+        printf ("UNKNOWN ERROR!");        
+    }
 
     return 0;
 }
