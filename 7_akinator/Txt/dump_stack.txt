@@ -5,24 +5,26 @@
 Stack (OK) [0x1ffefffc68] "Akinator stack" {
 
 Canary left  = 595371386  [0x1ffefffc68]
-Current size = 5
-Capacity     = 8
-Hash         = 1458222945
+Current size = 0
+Capacity     = 10
+Hash         = 483910411
 Canary right = 752293992  [0x1ffefffca4]
 
-Data [0x4dd61b4]
- {canary_left} : 874895203  [0x4dd61b0]
+Data [0x4dcd084]
+ {canary_left} : 874895203  [0x4dcd080]
 
-*{ 1} : "cat"
-*{ 2} : "dog"
-*{ 3} : "kat_morda"
-*{ 4} : "hitraya_morda"
-*{ 5} : "danya"
+ { 1} : "(nullptr)"(POISON)
+ { 2} : "(nullptr)"(POISON)
+ { 3} : "(nullptr)"(POISON)
+ { 4} : "(nullptr)"(POISON)
+ { 5} : "(nullptr)"(POISON)
  { 6} : "(nullptr)"(POISON)
  { 7} : "(nullptr)"(POISON)
  { 8} : "(nullptr)"(POISON)
+ { 9} : "(nullptr)"(POISON)
+ {10} : "(nullptr)"(POISON)
 
- {canary_right} : 934719742  [0x4dd61f4]
+ {canary_right} : 934719742  [0x4dcd0d4]
 }
 
 ******************************************************

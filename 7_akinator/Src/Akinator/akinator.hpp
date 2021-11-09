@@ -9,14 +9,6 @@
 
 //--------------------------------------------------
 
-enum class AkinatorMode : int
-{ 
-     FINDING_MODE,
-    DEFINING_MODE,
-};
-
-//!
-
 enum class AkinatorAnswer : int
 {
     YES,
