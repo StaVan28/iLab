@@ -78,10 +78,10 @@ void Tree::graph(const Mode mode)
 {
     assert(this);
 
-    std::string file_path = "./txt/graph_tree_db.dot";
+    std::string file_path = "./graph_tree_db.dot";
 
     if (mode == Mode::RELEASE)
-        file_path = "./txt/graph_tree_rls.dot";
+        file_path = "./graph_tree_rls.dot";
 
 
     std::ofstream graph(file_path);
@@ -91,7 +91,7 @@ void Tree::graph(const Mode mode)
     graph << "digraph Tree {" << std::endl << std::endl;
 
     graph << "\tnode [shape = \"circle\", style = \"filled\", fillcolor = \"red\","
-          <<     "fontcolor = \"#000000\", margin = \"0.01\"];\n"
+          << "fontcolor = \"#000000\", margin = \"0.01\"];\n"
           << "\trankdir = \"TB\";\n\n"
           << "\tlabel = \"Tree Graph\";\n";
 
@@ -110,9 +110,11 @@ void Tree::graph(const Mode mode)
 
 
     if (mode == Mode::DEBUG)
-        system("dot -Tjpeg ./txt/graph_tree_db.dot  -o./txt/graph_tree_db.jpeg");
+        system("dot -Tjpeg ./graph_tree_db.dot  -o./graph_tree_db.jpeg");
     else 
-        system("dot -Tjpeg ./txt/graph_tree_rls.dot -o./txt/graph_tree_rls.jpeg");
+        system("dot -Tjpeg ./graph_tree_rls.dot -o./graph_tree_rls.jpeg");
+
+    getchar();
 }
 
 //-----------------------------------------------------------------------------

@@ -2,14 +2,14 @@
 ******************************************************
        Stack:
 
-Stack (ERROR 5 : NULL_PTR_DATA) [0x1ffefffc80] "" {
+Stack (ERROR 5 : NULL_PTR_DATA) [0x1ffefffc70] "" {
 In File : stack.cpp, LINE : 144
 In Function : ~Stack
 
-Canary left  = 0  [0x1ffefffc80]
+Canary left  = 0  [0x1ffefffc70]
 Current size = 0
 Capacity     = 0
 Hash         = 0
-Canary right = 0  [0x1ffefffcbc]
+Canary right = 0  [0x1ffefffcac]
 
 Data [(nil)]

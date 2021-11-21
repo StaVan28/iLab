@@ -1,0 +1,14 @@
+
+******************************************************
+			Tree:
+
+Tree (OK) [0x7ffd2ea6f280] "name" {
+
+	size = 0
+
+data = {*}left = {0x7ffd2ea6f330}right = {0x7ffd2ea6f380}parent = {0}
+data = {28}left = {0}right = {0}parent = {0}
+data = {x}left = {0}right = {0}parent = {0}
+}
+
+******************************************************
