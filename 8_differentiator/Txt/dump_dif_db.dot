@@ -1,0 +1,108 @@
+digraph Tree {
+
+    node [shape = "circle", style = "filled", fillcolor = "red",fontcolor = "#000000", margin = "0.01"];
+    rankdir = "TB";
+    label   = "Tree Graph";
+
+    "_0x56511c975090" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (+)}| {me\n (0x56511c975090)} | {left\n (0x56511c9750d0) | right\n (0x56511c975110)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975090"->"_0x56511c9750d0";
+    "_0x56511c975090"->"_0x56511c975110";
+
+
+    "_0x56511c9750d0" [label = "{ {parent\n (0x56511c975090)} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c9750d0)} | {left\n (0x56511c975150) | right\n (0x56511c975210)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c9750d0"->"_0x56511c975090";
+    "_0x56511c9750d0"->"_0x56511c975150";
+    "_0x56511c9750d0"->"_0x56511c975210";
+
+
+    "_0x56511c975150" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975150)} | {left\n (0x56511c975190) | right\n (0x56511c9751d0)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975150"->"_0x56511c975190";
+    "_0x56511c975150"->"_0x56511c9751d0";
+
+
+    "_0x56511c975190" [label = "{ {parent\n (0x56511c975150)} | {type \n (VARB) | value\n (x)}| {me\n (0x56511c975190)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "lightpink", shape = "record"];
+    "_0x56511c975190"->"_0x56511c975150";
+
+
+    "_0x56511c9751d0" [label = "{ {parent\n (0x56511c975150)} | {type \n (NUMB) | value\n (28)}| {me\n (0x56511c9751d0)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+    "_0x56511c9751d0"->"_0x56511c975150";
+
+
+    "_0x56511c975210" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (+)}| {me\n (0x56511c975210)} | {left\n (0x56511c975250) | right\n (0x56511c975290)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975210"->"_0x56511c975250";
+    "_0x56511c975210"->"_0x56511c975290";
+
+
+    "_0x56511c975250" [label = "{ {parent\n (0x56511c975210)} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975250)} | {left\n (0x56511c9752d0) | right\n (0x56511c975310)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975250"->"_0x56511c975210";
+    "_0x56511c975250"->"_0x56511c9752d0";
+    "_0x56511c975250"->"_0x56511c975310";
+
+
+    "_0x56511c9752d0" [label = "{ {parent\n ((nil))} | {type \n (VARB) | value\n (x)}| {me\n (0x56511c9752d0)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "lightpink", shape = "record"];
+
+
+    "_0x56511c975310" [label = "{ {parent\n ((nil))} | {type \n (NUMB) | value\n (0)}| {me\n (0x56511c975310)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x56511c975290" [label = "{ {parent\n (0x56511c975210)} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975290)} | {left\n (0x56511c975350) | right\n (0x56511c975390)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975290"->"_0x56511c975210";
+    "_0x56511c975290"->"_0x56511c975350";
+    "_0x56511c975290"->"_0x56511c975390";
+
+
+    "_0x56511c975350" [label = "{ {parent\n ((nil))} | {type \n (NUMB) | value\n (1)}| {me\n (0x56511c975350)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x56511c975390" [label = "{ {parent\n ((nil))} | {type \n (NUMB) | value\n (28)}| {me\n (0x56511c975390)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x56511c975110" [label = "{ {parent\n (0x56511c975090)} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975110)} | {left\n (0x56511c9753d0) | right\n (0x56511c975590)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975110"->"_0x56511c975090";
+    "_0x56511c975110"->"_0x56511c9753d0";
+    "_0x56511c975110"->"_0x56511c975590";
+
+
+    "_0x56511c9753d0" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (+)}| {me\n (0x56511c9753d0)} | {left\n (0x56511c975410) | right\n (0x56511c975450)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c9753d0"->"_0x56511c975410";
+    "_0x56511c9753d0"->"_0x56511c975450";
+
+
+    "_0x56511c975410" [label = "{ {parent\n (0x56511c9753d0)} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975410)} | {left\n (0x56511c975490) | right\n (0x56511c9754d0)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975410"->"_0x56511c9753d0";
+    "_0x56511c975410"->"_0x56511c975490";
+    "_0x56511c975410"->"_0x56511c9754d0";
+
+
+    "_0x56511c975490" [label = "{ {parent\n ((nil))} | {type \n (VARB) | value\n (x)}| {me\n (0x56511c975490)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "lightpink", shape = "record"];
+
+
+    "_0x56511c9754d0" [label = "{ {parent\n ((nil))} | {type \n (NUMB) | value\n (0)}| {me\n (0x56511c9754d0)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x56511c975450" [label = "{ {parent\n (0x56511c9753d0)} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975450)} | {left\n (0x56511c975510) | right\n (0x56511c975550)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975450"->"_0x56511c9753d0";
+    "_0x56511c975450"->"_0x56511c975510";
+    "_0x56511c975450"->"_0x56511c975550";
+
+
+    "_0x56511c975510" [label = "{ {parent\n ((nil))} | {type \n (NUMB) | value\n (1)}| {me\n (0x56511c975510)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x56511c975550" [label = "{ {parent\n ((nil))} | {type \n (NUMB) | value\n (28)}| {me\n (0x56511c975550)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x56511c975590" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (*)}| {me\n (0x56511c975590)} | {left\n (0x56511c9755d0) | right\n (0x56511c975610)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x56511c975590"->"_0x56511c9755d0";
+    "_0x56511c975590"->"_0x56511c975610";
+
+
+    "_0x56511c9755d0" [label = "{ {parent\n (0x56511c975590)} | {type \n (VARB) | value\n (x)}| {me\n (0x56511c9755d0)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "lightpink", shape = "record"];
+    "_0x56511c9755d0"->"_0x56511c975590";
+
+
+    "_0x56511c975610" [label = "{ {parent\n (0x56511c975590)} | {type \n (NUMB) | value\n (28)}| {me\n (0x56511c975610)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+    "_0x56511c975610"->"_0x56511c975590";
+
+
+}

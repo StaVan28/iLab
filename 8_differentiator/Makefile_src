@@ -1,0 +1,31 @@
+#--------------------------------------------------------------------------------------
+# ANNOTATION
+#--------------------------------------------------------------------------------------
+
+# Makefile for source_include
+# version 1.0
+#             author: Starchenko Ivan
+
+#--------------------------------------------------------------------------------------
+# SETTINGS
+#--------------------------------------------------------------------------------------
+
+# dirs path
+export BIN_DIR  = Bin
+export SRC_DIR  = Src/Settings Src/Tree Src/Differenciator Src/Parsing_text 
+export HDR_DIR  = $(SRC_DIR)
+export OBJ_DIR  = Obj
+export TXT_DIR  = Txt
+
+# source
+BIN = $(BIN_DIR)/diff
+
+SRC  = Src/Settings/settings.cpp   Src/Tree/tree.cpp                 Src/Differenciator/diff.cpp \
+       Src/Differenciator/main.cpp Src/Parsing_text/parsing_text.cpp                             \
+       
+ALL_SRC = $(SRC)
+
+OBJ     = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
+OBJ    := $(OBJ:%.cpp=%.o)
+DEP     = $(OBJ:%.o=%.d)
+LIB     = libdiff.a

@@ -1,0 +1,20 @@
+        >-- BufToken dump --<  
+    | num_tokens_ = 64,
+    | length_     = 15 
+
+(1  )  OPER -- {(}
+(2  )  VARB -- {x}
+(3  )  OPER -- {+}
+(4  )  NUMB -- {1}
+(5  )  VARB -- {h}
+(6  )  NUMB -- {1}
+(7  )  OPER -- {)}
+(8  )  OPER -- {^}
+(9  )  NUMB -- {3}
+(10 )  OPER -- {/}
+(11 )  OPER -- {(}
+(12 )  NUMB -- {4}
+(13 )  OPER -- {/}
+(14 )  NUMB -- {28}
+(15 )  OPER -- {)}
+

@@ -1,0 +1,19 @@
+#! /bin/bash
+
+clear
+echo "----------------------------------------------------------------------------------------------"
+
+echo " -- START MAKE -- "
+make
+
+echo " ----  CATS  ---- "
+cat calc.txt
+echo ""
+
+echo " ---  LAUNCH  --- "
+date +"%T"
+./Bin/diff $@
+date +"%T"
+
+echo " ----  DUMP  ---- "
+cat Txt/dump_BufTokens.txt

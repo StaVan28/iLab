@@ -1,0 +1,18 @@
+#--------------------------------------------------------------------------------------
+# ANNOTATION
+#--------------------------------------------------------------------------------------
+
+# Makefile for dependens_include
+# version 1.0
+#		author: Starchenko Ivan
+
+#--------------------------------------------------------------------------------------
+# SETTINGS
+#--------------------------------------------------------------------------------------
+
+$(OBJ_DIR)/main.o:                  main.cpp                   settings.h
+$(OBJ_DIR)/diff.o:					diff.cpp          diff.h
+$(OBJ_DIR)/tree.o:                  tree.cpp          tree.hpp settings.h parsing_text.h
+$(OBJ_DIR)/parsing_text.o:  parsing_text.cpp  parsing_text.h   settings.h 
+$(OBJ_DIR)/settings.o:          settings.cpp                   settings.h
+
