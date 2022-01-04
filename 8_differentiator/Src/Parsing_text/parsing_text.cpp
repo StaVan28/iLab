@@ -38,14 +38,14 @@ void TextDiff::num_symbols_in_file (FILE* diff_base)
 
 void TextDiff::create_buffer_data (const std::string& path_base)
 {
-    FILE* diff_base = fopen (path_base.c_str(), "rb");
+    FILE*   diff_base = fopen (path_base.c_str(), "rb");
     assert (diff_base);
 
     num_symbols_in_file (diff_base);
 
     buf_data_ = new char [num_symbols_ + 1] {};
 
-    fread (buf_data_, sizeof (char), num_symbols_, diff_base);
+    fread (buf_data_, sizeof (char), num_symbols_, diff_base);  
 
     fclose (diff_base);
 }
@@ -55,49 +55,42 @@ void TextDiff::create_buffer_data (const std::string& path_base)
 void TextDiff::create_buffer_tokens()
 {
     std::size_t i_data = 0;
-    std::size_t begin  = 0;
-    std::size_t end    = 0;
+    const char* symb   = buf_data_;
 
-    while (buf_data_[i_data] != '\0')
+    while (*symb != '\0')
     {
-        if (buf_data_[i_data] == '+' ||
-            buf_data_[i_data] == '-' ||
-            buf_data_[i_data] == '*' ||
-            buf_data_[i_data] == '/' ||
-            buf_data_[i_data] == '^' ||
-            buf_data_[i_data] == '(' ||
-            buf_data_[i_data] == ')'   )
-        {                    
+        if (strchr ("+-*/^()", *symb))
+        {
             //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
 
-            buf_tokens_.push (buf_data_, i_data, TokenType::OPER);
-            i_data++;
+            buf_tokens_.push (symb, TokenType::OPER);
+            symb++;
         }
-        else if (isdigit (buf_data_[i_data]))
+        else if (isdigit (*symb))
         {
             //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
             
-            buf_tokens_.push (buf_data_, i_data, TokenType::NUMB);
+            buf_tokens_.push (symb, TokenType::NUMB);
 
-            i_data++;
-            while (i_data < num_symbols_ && isdigit (buf_data_[i_data]))
-                i_data++;
+            symb++;
+            while (symb - buf_data_ < num_symbols_ && isdigit (*symb))
+                symb++;
 
         }
-        else if (isalpha (buf_data_[i_data]))
+        else if (isalpha (*symb))
         {
             //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
 
-            buf_tokens_.push (buf_data_, i_data, TokenType::VARB);
+            buf_tokens_.push (symb, TokenType::VARB);
 
-            i_data++;
-            while (i_data < num_symbols_ && isalpha (buf_data_[i_data]))
-                i_data++;
+            symb++;
+            while (symb - buf_data_ < num_symbols_ && isalpha (*symb))
+                symb++;
 
         }
         else
         {
-            i_data++;
+            symb++;
         }
     }
 
@@ -121,7 +114,7 @@ std::size_t TextDiff::get_num_symbols() const
 
 //----------
 
-BufTokens::BufTokens (std::size_t num_tokens = START_NUM_TOKENS) :
+BufTokens::BufTokens (std::size_t num_tokens) :
     num_tokens_ {num_tokens}
 {
     buf_tokens_ = new TokenDiff [num_tokens_] {};
@@ -139,7 +132,7 @@ BufTokens::~BufTokens ()
 
 //----------
 
-bool BufTokens::push (char* buf_data_, std::size_t i_data, TokenType type)
+bool BufTokens::push (const char* symb, TokenType type)
 {
     if (length_ == num_tokens_)
         resize ();
@@ -148,13 +141,13 @@ bool BufTokens::push (char* buf_data_, std::size_t i_data, TokenType type)
 
     switch (buf_tokens_[length_].type_)
     {
-        case TokenType::NUMB: buf_tokens_[length_].value_numb_ = strtol (buf_data_ + i_data, NULL, 10);
+        case TokenType::NUMB: buf_tokens_[length_].value_numb_ = strtol (symb, NULL, 10);
                               break;
 
-        case TokenType::VARB: buf_tokens_[length_].value_varb_ = buf_data_[i_data];
+        case TokenType::VARB: buf_tokens_[length_].value_varb_ = *symb;
                               break;
 
-        case TokenType::OPER: buf_tokens_[length_].value_oper_ = buf_data_[i_data];
+        case TokenType::OPER: buf_tokens_[length_].value_oper_ = *symb;
                               break;
 
         default:             printf("ERROR! Type: %d\n", buf_tokens_[length_].type_);
@@ -170,12 +163,13 @@ bool BufTokens::push (char* buf_data_, std::size_t i_data, TokenType type)
 
 bool BufTokens::resize ()
 {
-    num_tokens_ *= 2;
-    TokenDiff* new_buf_tokens = new TokenDiff [num_tokens_];
+    std::size_t new_num_tokens = 2 * num_tokens_;
+    TokenDiff*  new_buf_tokens = new TokenDiff [new_num_tokens];
     
-    std::copy_n (buf_tokens_, num_tokens_, new_buf_tokens);
+    std::copy_n (buf_tokens_, new_num_tokens, new_buf_tokens);
 
     delete [] buf_tokens_;
+    num_tokens_ = new_num_tokens;
     buf_tokens_ = new_buf_tokens;
 
     return true; 
@@ -197,7 +191,7 @@ const TokenDiff& BufTokens::operator[] (const int indx) const
 
 //----------
 
-void BufTokens::dump (const char* path_dump = PATH_BUF_TOKENS_DUMP) const
+void BufTokens::dump (const char* path_dump) const
 {
     FILE*   dump_BufTokens = fopen (path_dump, "wb");
     assert (dump_BufTokens);

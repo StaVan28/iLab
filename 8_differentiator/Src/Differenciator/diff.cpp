@@ -55,36 +55,12 @@ NodeTree* Diff::diff (const NodeTree* input)
 
 //-----------------------------------------------------------------------------
 
-NodeTree* Diff::copy (const NodeTree* copy_node)
+NodeTree* Diff::copy (const NodeTree* node)
 {
-    NodeTree* new_node = nullptr;
+    NodeTree* new_node = new NodeTree (*node);
 
-    switch (copy_node->type_)
-    {
-        case TokenType::NUMB: new_node = new NodeTree (copy_node->type_, copy_node->value_numb_);
-                             break;
-
-        case TokenType::VARB: new_node = new NodeTree (copy_node->type_, copy_node->value_varb_);
-                             break;
-
-        case TokenType::OPER: new_node = new NodeTree (copy_node->type_, copy_node->value_oper_);
-                             break;
-
-        default:             printf("ERROR! Type:\n");
-                             break;
-    }
-
-    if (copy_node->left_  != nullptr)
-    {
-        new_node->left_          = copy (copy_node->left_);
-        new_node->left_->parent_ = new_node;
-    }
-
-    if (copy_node->right_ != nullptr)
-    {
-        new_node->right_          = copy (copy_node->right_);
-        new_node->right_->parent_ = new_node;
-    }
+    if (node->left_)  new_node->left_  = copy (node->left_);
+    if (node->right_) new_node->right_ = copy (node->right_);
 
     return new_node;
 }

@@ -11,10 +11,6 @@
 namespace Differenciator
 {
 
-const std::size_t START_NUM_TOKENS = 64;
-
-//!
-
 class BufTokens
 {
     private:
@@ -27,15 +23,14 @@ class BufTokens
 
     public:
 
-        BufTokens (std::size_t num_tokens);
+        BufTokens (std::size_t num_tokens  = START_NUM_TOKENS);
        ~BufTokens ();
 
         TokenDiff&       operator[] (const int indx);
         const TokenDiff& operator[] (const int indx) const;
 
-        bool push (char* buf_data_, std::size_t i_data, TokenType type);
-
-        void dump (const char* path_dump) const;
+        bool push (const char* symb, TokenType type);
+        void dump (const char* path_dump = PATH_BUF_TOKENS_DUMP) const;
 
 }; // class BufTokens
 

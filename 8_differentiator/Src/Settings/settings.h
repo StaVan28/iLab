@@ -14,13 +14,15 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <algorithm>
+#include <string.h>
 
 //!
 
 namespace Differenciator
 {
 
-static const char* PATH_BUF_TOKENS_DUMP = "Txt/dump_BufTokens.txt";
+static const char*       PATH_BUF_TOKENS_DUMP = "Txt/dump_BufTokens.txt";
+static const std::size_t START_NUM_TOKENS     = 64;
 
 enum class TokenType : int
 {   //   = _digit_ for debug  //

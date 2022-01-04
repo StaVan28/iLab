@@ -1,5 +1,7 @@
 #include "akinator.hpp"
 
+// hpp
+//
 int main ()
 {
     Akinator my_akinator;
