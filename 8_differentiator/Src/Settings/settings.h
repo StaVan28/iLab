@@ -21,37 +21,8 @@
 namespace Differenciator
 {
 
-static const char*       PATH_BUF_TOKENS_DUMP = "Txt/dump_BufTokens.txt";
-static const std::size_t START_NUM_TOKENS     = 64;
-
-enum class TokenType : int
-{   //   = _digit_ for debug  //
-    ERROR = -1,
-    NONE  = 0, 
-    OPER  = 1,
-    NUMB  = 2,
-    VARB  = 3,
-};
-
-//!
-
-struct TokenDiff
-{
-    TokenType type_;
-
-    char value_oper_;
-    long value_numb_;
-    char value_varb_;
-
-    TokenDiff ()
-    {}
-
-   ~TokenDiff ()
-    {}
-
-    void print_data (FILE* dump) const;
-
-};
+static const char*        PATH_BUF_NODES_DUMP = "Txt/dump_BufNodes.txt";
+static const std::size_t START_MAX_NODES      = 64;
 
 };
 

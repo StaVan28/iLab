@@ -152,15 +152,15 @@ void NodeTree::print_data (const NodeTree* const prnt_node, FILE* dump) const
 
     switch (type_)
     {
-        case TokenType::NUMB: fprintf (dump, " {type \\n (NUMB) | "
+        case NodeType::NUMB: fprintf (dump, " {type \\n (NUMB) | "
                                               "value\\n (%ld)}" , value_numb_);
                               break;
 
-        case TokenType::VARB: fprintf (dump, " {type \\n (VARB) | "
+        case NodeType::VARB: fprintf (dump, " {type \\n (VARB) | "
                                               "value\\n (%c)}"  , value_varb_);
                               break;
 
-        case TokenType::OPER: fprintf (dump, " {type \\n (OPER) | "
+        case NodeType::OPER: fprintf (dump, " {type \\n (OPER) | "
                                               "value\\n (%c)}"  , value_oper_);
                               break;
 
@@ -179,15 +179,15 @@ void NodeTree::choose_param (const NodeTree* const prnt_node, FILE* dump) const
 
     switch (type_)
     {
-        case TokenType::NUMB: fprintf (dump, "fillcolor = \"palegreen\", "
+        case NodeType::NUMB: fprintf (dump, "fillcolor = \"palegreen\", "
                                             "shape"  " = \"record\"];\n");
                               break;
 
-        case TokenType::VARB: fprintf (dump, "fillcolor = \"lightpink\", "
+        case NodeType::VARB: fprintf (dump, "fillcolor = \"lightpink\", "
                                             "shape"  " = \"record\"];\n");
                               break;
 
-        case TokenType::OPER: fprintf (dump, "fillcolor = \"lightcyan2\", "
+        case NodeType::OPER: fprintf (dump, "fillcolor = \"lightcyan2\", "
                                             "shape"  " = \"record\"];\n");
                               break;
 

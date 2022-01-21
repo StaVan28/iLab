@@ -1,6 +1,6 @@
-        >-- BufToken dump --<  
-    | max_tokens_ = 64,
-    | length_     = 15 
+        >-- BufNode dump --<  
+    | max_nodes_ = 64,
+    | length_    = 15 
 
 (1  )  OPER -- {(}
 (2  )  VARB -- {x}

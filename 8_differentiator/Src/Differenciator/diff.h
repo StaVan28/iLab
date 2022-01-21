@@ -6,6 +6,7 @@
 
 #include "settings.h"
 #include "tree.hpp"
+#include "node_diff.h"
 
 //-----------------------------------------------------------------------------
 
@@ -28,9 +29,7 @@ class Diff
 		NodeTree* copy (const NodeTree*  copy_node);
 };
 
-};
-
-//!
+}; // namespace Differenciator
 
 //-----------------------------------------------------------------------------
 

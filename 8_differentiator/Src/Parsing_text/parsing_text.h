@@ -5,34 +5,35 @@
 //-----------------------------------------------------------------------------
 
 #include "settings.h"
+#include "node_diff.h"
 
 //-----------------------------------------------------------------------------
 
 namespace Differenciator
 {
 
-class BufTokens
+class BufNodes
 {
     private:
 
-        TokenDiff*  buf_tokens_ = nullptr;
-        std::size_t num_tokens_ = 0;
-        std::size_t length_     = 0;
+        NodeDiff*   buf_nodes_ = nullptr;
+        std::size_t max_nodes_ = 0;
+        std::size_t length_    = 0;
 
         bool resize ();
 
     public:
 
-        BufTokens (std::size_t num_tokens  = START_NUM_TOKENS);
-       ~BufTokens ();
+        BufNodes (std::size_t max_nodes = START_MAX_NODES);
+       ~BufNodes ();
 
-        TokenDiff&       operator[] (const int indx);
-        const TokenDiff& operator[] (const int indx) const;
+        NodeDiff&       operator[] (const int indx);
+        const NodeDiff& operator[] (const int indx) const;
 
-        bool push (const char* symb, TokenType type);
-        void dump (const char* path_dump = PATH_BUF_TOKENS_DUMP) const;
+        bool push (const char* symb, NodeType type);
+        void dump (const char* path_dump = PATH_BUF_NODES_DUMP) const;
 
-}; // class BufTokens
+}; // class BufNodes
 
 //!
 
@@ -43,12 +44,13 @@ class TextDiff
         std::size_t num_symbols_ = 0;
         char*       buf_data_    = nullptr;
 
-        void num_symbols_in_file (FILE* diff_base);
-        void create_buffer_data  (const std::string& path_base);
+        std::size_t num_symbols_in_file (const std::string& path_base);
+        void        create_buffer_data  (const std::string& path_base);
 
 
     public:
-        BufTokens buf_tokens_;
+
+        BufNodes buf_nodes_;
 
         TextDiff () = delete;
         TextDiff (const std::string& path_base);
@@ -57,7 +59,7 @@ class TextDiff
         const char* get_buffer_data () const;
         std::size_t get_num_symbols () const;
        
-        void create_buffer_tokens ();
+        void create_buffer_nodes ();
 }; // class TextDiff
 
 }; // namespace Differenciator

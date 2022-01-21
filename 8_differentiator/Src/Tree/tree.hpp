@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "settings.h"
+#include "node_diff.h"
 
 //-----------------------------------------------------------------------------
 
@@ -23,10 +24,10 @@ class NodeTree
 {
     public:
 
-        TokenType type_;
-        char      value_oper_;
-        long      value_numb_;
-        char      value_varb_;
+        NodeType type_;
+        char     value_oper_;
+        long     value_numb_;
+        char     value_varb_;
 
         NodeTree* parent_ = nullptr;
         NodeTree* left_   = nullptr;
@@ -38,8 +39,8 @@ class NodeTree
         //!
 
         template <typename T>
-        NodeTree (TokenType type, T value, NodeTree* parent = nullptr, 
-                                           NodeTree* left   = nullptr, NodeTree* right = nullptr) :
+        NodeTree (NodeType type, T value, NodeTree* parent = nullptr, 
+                                          NodeTree* left   = nullptr, NodeTree* right = nullptr) :
             type_   {type},
             parent_ {parent},
             left_   {left},
@@ -47,13 +48,13 @@ class NodeTree
         {
             switch (type)
             {
-                case TokenType::NUMB: value_numb_ = value;
+                case NodeType::NUMB: value_numb_ = value;
                                       break;
 
-                case TokenType::VARB: value_varb_ = value;
+                case NodeType::VARB: value_varb_ = value;
                                       break;
 
-                case TokenType::OPER: value_oper_ = value;
+                case NodeType::OPER: value_oper_ = value;
                                       break;
 
                 default:             printf("ERROR! Type:\n");

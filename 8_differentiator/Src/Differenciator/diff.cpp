@@ -7,23 +7,23 @@ namespace Differenciator
 
 NodeTree* Diff::diff (const NodeTree* input)
 {
-    if (input->type_ == TokenType::NUMB)
+    if (input->type_ == NodeType::NUMB)
     {
-        NodeTree* ret = new NodeTree (TokenType::NUMB, 0);
+        NodeTree* ret = new NodeTree (NodeType::NUMB, 0);
         return    ret;
     }
 
-    if (input->type_ == TokenType::VARB)
+    if (input->type_ == NodeType::VARB)
     {
-        NodeTree* ret = new NodeTree (TokenType::NUMB, 1);
+        NodeTree* ret = new NodeTree (NodeType::NUMB, 1);
         return    ret;
     }
 
-    if (input->type_ == TokenType::OPER)
+    if (input->type_ == NodeType::OPER)
     {
         if (input->value_oper_ == '+' || input->value_oper_ == '-')
         {
-            NodeTree* ret = new NodeTree (TokenType::OPER, input->value_varb_);
+            NodeTree* ret = new NodeTree (NodeType::OPER, input->value_varb_);
 
             ret->left_  = diff (input->left_);
             ret->right_ = diff (input->right_);
@@ -33,9 +33,9 @@ NodeTree* Diff::diff (const NodeTree* input)
 
         if (input->value_oper_ == '*')
         {
-            NodeTree* ret   = new NodeTree (TokenType::OPER, '+');
-            NodeTree* ret_l = new NodeTree (TokenType::OPER, '*', ret, nullptr, nullptr);
-            NodeTree* ret_r = new NodeTree (TokenType::OPER, '*', ret, nullptr, nullptr);
+            NodeTree* ret   = new NodeTree (NodeType::OPER, '+');
+            NodeTree* ret_l = new NodeTree (NodeType::OPER, '*', ret, nullptr, nullptr);
+            NodeTree* ret_r = new NodeTree (NodeType::OPER, '*', ret, nullptr, nullptr);
 
             ret->left_  = ret_l;
             ret->right_ = ret_r;
@@ -65,6 +65,29 @@ NodeTree* Diff::copy (const NodeTree* node)
     return new_node;
 }
 
-};
+//-----------------------------------------------------------------------------
+
+void NodeDiff::print_data (FILE* dump) const
+{
+    assert (dump);
+
+    switch (type_)
+    {
+        case NodeType::NUMB: fprintf (dump, " NUMB -- {%ld}\n" , value_numb_);
+                              break;
+
+        case NodeType::VARB: fprintf (dump, " VARB -- {%c}\n"  , value_varb_);
+                              break;
+
+        case NodeType::OPER: fprintf (dump, " OPER -- {%c}\n"  , value_oper_);
+                              break;
+
+        default:              printf  ("ERROR! Type: %d\n", type_);
+                              break;
+    }
+
+}
 
 //-----------------------------------------------------------------------------
+
+}; // namespace Differenciator
