@@ -15,18 +15,24 @@ namespace Differenciator
 
 class Diff
 {
-	private:
+    private:
 
-	public:
+    public:
 
-		Diff()
-		{}
+        Diff()
+        {}
+
+        Diff             (const Diff& other) = delete;
+        Diff& operator = (const Diff& other) = delete;
+
+        Diff             (Diff&& that) = delete;
+        Diff& operator = (Diff&& that) = delete;
 
        ~Diff()
-       	{}
+           {}
 
-		NodeTree* diff (const NodeTree* input_node);
-		NodeTree* copy (const NodeTree*  copy_node);
+        NodeTree* diff (const NodeTree* input_node);
+        NodeTree* copy (const NodeTree*  copy_node);
 };
 
 }; // namespace Differenciator

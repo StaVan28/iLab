@@ -27,6 +27,12 @@ class BufNodes
         BufNodes (std::size_t max_nodes = START_MAX_NODES);
        ~BufNodes ();
 
+        BufNodes             (const BufNodes& other) = delete;
+        BufNodes& operator = (const BufNodes& other) = delete;
+
+        BufNodes             (BufNodes&& that) = delete;
+        BufNodes& operator = (BufNodes&& that) = delete;
+
         NodeDiff&       operator[] (const int indx);
         const NodeDiff& operator[] (const int indx) const;
 
@@ -55,6 +61,12 @@ class TextDiff
         TextDiff () = delete;
         TextDiff (const std::string& path_base);
        ~TextDiff ();
+
+        TextDiff             (const TextDiff& other) = delete;
+        TextDiff& operator = (const TextDiff& other) = delete;
+
+        TextDiff             (TextDiff&& that) = delete;
+        TextDiff& operator = (TextDiff&& that) = delete;
 
         const char* get_buffer_data () const;
         std::size_t get_num_symbols () const;

@@ -10,10 +10,10 @@ namespace Differenciator
 enum class NodeType : int
 {   //    = _digit_ for debug  //
     ERROR = -1,
-    NONE  = 0, 
-    OPER  = 1,
-    NUMB  = 2,
-    VARB  = 3,
+    NONE  =  0, 
+    OPER  =  1,
+    NUMB  =  2,
+    VARB  =  3,
 };
 
 //!----

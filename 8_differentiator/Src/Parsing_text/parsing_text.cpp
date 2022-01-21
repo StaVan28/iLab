@@ -151,15 +151,15 @@ bool BufNodes::push (const char* symb, NodeType type)
     switch (buf_nodes_[length_].type_)
     {
         case NodeType::NUMB: buf_nodes_[length_].value_numb_ = strtol (symb, NULL, 10);
-                              break;
+                             break;
 
         case NodeType::VARB: buf_nodes_[length_].value_varb_ = *symb;
-                              break;
+                             break;
 
         case NodeType::OPER: buf_nodes_[length_].value_oper_ = *symb;
-                              break;
+                             break;
 
-        default:             printf("ERROR! Type: %d\n", buf_nodes_[length_].type_);
+        default:             printf("ERROR! Type: %d\n", (int) buf_nodes_[length_].type_);
                              break;
     }
 
@@ -206,13 +206,13 @@ void BufNodes::dump (const char* path_dump) const
     assert (dump_BufNodes);
 
     fprintf (dump_BufNodes, "        >-- BufNode dump --<  \n"
-                            "    | max_nodes_ = %d,\n"
-                            "    | length_    = %d \n"
-                                                  "\n", max_nodes_, length_);
+                            "    | max_nodes_ = %ld,\n"
+                            "    | length_    = %ld \n"
+                                                   "\n", max_nodes_, length_);
 
     for (std::size_t i = 0; i < length_; i++)
     {
-        fprintf (dump_BufNodes, "(%-3d) ", i + 1);
+        fprintf (dump_BufNodes, "(%-3ld) ", i + 1);
         buf_nodes_[i].print_data (dump_BufNodes);
     }
 
