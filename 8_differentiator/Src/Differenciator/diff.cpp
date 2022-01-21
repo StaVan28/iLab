@@ -5,6 +5,22 @@
 namespace Differenciator
 {
 
+//!
+
+Diff::Diff (const char* source_text)
+{
+
+}
+
+//-----------------------------------------------------------------------------
+
+Diff::~Diff ()
+{
+
+}
+
+//-----------------------------------------------------------------------------
+
 NodeTree* Diff::diff (const NodeTree* input)
 {
     if (input->type_ == NodeType::NUMB)
@@ -82,7 +98,7 @@ void NodeDiff::print_data (FILE* dump) const
         case NodeType::OPER: fprintf (dump, " OPER -- {%c}\n"  , value_oper_);
                               break;
 
-        default:              printf  ("ERROR! Type: %d\n", type_);
+        default:              printf  ("ERROR! Type: %d\n", (int) type_);
                               break;
     }
 

@@ -63,7 +63,6 @@ void Tree::dump (Mode mode, const char* path_name_without_end)
 
 }
 
-
 //---------
 
 int vssystem (const char* command, ...) 

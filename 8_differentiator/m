@@ -6,14 +6,14 @@ echo "--------------------------------------------------------------------------
 echo " -- START MAKE -- "
 make
 
-echo " ----  CALC  ---- "
+echo $'\n ----  CALC  ---- '
 cat calc.txt
-echo ""
+echo ''
 
-echo " ---  LAUNCH  --- "
-date +"%T"
-./Bin/diff $@
-date +"%T"
+echo $'\n ---  LAUNCH  --- '
+echo "    START: " && date +"%T"
+valgrind ./Bin/diff $@
+echo "    END: "   && date +"%T"
 
-echo " ----  DUMP  ---- "
-cat Txt/dump_BufTokens.txt
+echo $'\n ----  DUMP  ---- '
+cat Txt/dump_BufNodes.txt

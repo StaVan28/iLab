@@ -1,4 +1,4 @@
-        >-- BufNode dump --<  
+        >-- BufNodes dump --<  
     | max_nodes_ = 64,
     | length_    = 15 
 

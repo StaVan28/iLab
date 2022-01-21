@@ -13,7 +13,7 @@
 # dirs path
 export BIN_DIR  = Bin
 export SRC_DIR  = Src/Settings Src/Tree Src/Differenciator Src/Parsing_text 
-export HDR_DIR  = $(SRC_DIR)   Src/Node_Differenciator
+export HDR_DIR  = $(SRC_DIR)   Src/Node_differenciator
 export OBJ_DIR  = Obj
 export TXT_DIR  = Txt
 

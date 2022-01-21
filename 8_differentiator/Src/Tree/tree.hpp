@@ -49,13 +49,13 @@ class NodeTree
             switch (type)
             {
                 case NodeType::NUMB: value_numb_ = value;
-                                      break;
+                                     break;
 
                 case NodeType::VARB: value_varb_ = value;
-                                      break;
+                                     break;
 
                 case NodeType::OPER: value_oper_ = value;
-                                      break;
+                                     break;
 
                 default:             printf("ERROR! Type:\n");
                                      break;

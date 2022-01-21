@@ -19,8 +19,8 @@ class Diff
 
     public:
 
-        Diff()
-        {}
+        Diff (const char* source_text = DEFAULT_SOURCE_TEXT);
+       ~Diff ();
 
         Diff             (const Diff& other) = delete;
         Diff& operator = (const Diff& other) = delete;
@@ -28,12 +28,10 @@ class Diff
         Diff             (Diff&& that) = delete;
         Diff& operator = (Diff&& that) = delete;
 
-       ~Diff()
-           {}
-
         NodeTree* diff (const NodeTree* input_node);
         NodeTree* copy (const NodeTree*  copy_node);
-};
+
+}; // class Diff
 
 }; // namespace Differenciator
 
