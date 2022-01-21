@@ -46,7 +46,7 @@ class TextDiff
 
         std::size_t num_symbols_in_file (const std::string& path_base);
         void        create_buffer_data  (const std::string& path_base);
-
+        void        create_buffer_nodes ();
 
     public:
 
@@ -59,7 +59,6 @@ class TextDiff
         const char* get_buffer_data () const;
         std::size_t get_num_symbols () const;
        
-        void create_buffer_nodes ();
 }; // class TextDiff
 
 }; // namespace Differenciator
