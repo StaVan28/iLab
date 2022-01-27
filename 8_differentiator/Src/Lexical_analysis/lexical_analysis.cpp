@@ -123,6 +123,20 @@ std::size_t TextDiff::get_num_symbols() const
 
 //----------
 
+NodeDiff& TextDiff::operator[] (const int indx)
+{
+    return buf_nodes_[indx];
+}
+
+//----------
+
+const NodeDiff& TextDiff::operator[] (const int indx) const
+{
+    return buf_nodes_[indx];
+}
+
+//----------
+
 BufNodes::BufNodes (std::size_t max_lexems) :
     max_lexems_ {max_lexems}
 {
