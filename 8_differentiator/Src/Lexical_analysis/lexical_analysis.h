@@ -1,6 +1,6 @@
 
-#ifndef PARSING_TREE_H_INCLUDED
-#define PARSING_TREE_H_INCLUDED
+#ifndef LEXICAL_ANALYSIS_H_INCLUDED
+#define LEXICAL_ANALYSIS_H_INCLUDED
 
 //-----------------------------------------------------------------------------
 
@@ -80,5 +80,5 @@ class TextDiff
 
 //-----------------------------------------------------------------------------
 
-#endif // PARSING_TREE_H_INCLUDED
+#endif // LEXICAL_ANALYSIS_H_INCLUDED
 

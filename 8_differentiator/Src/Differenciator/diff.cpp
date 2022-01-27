@@ -26,7 +26,7 @@ NodeDiff* Diff::diff (const NodeDiff* input)
     if (input->type_ == NodeType::NUMB)
     {
         NodeDiff* ret = new NodeDiff (NodeType::NUMB, 0);
-        return    ret;
+        return    ret;  
     }
 
     if (input->type_ == NodeType::VARB)

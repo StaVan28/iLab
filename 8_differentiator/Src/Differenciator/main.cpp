@@ -1,5 +1,5 @@
 #include "diff.h"
-#include "parsing_text.h"
+#include "syntactic_analysis.h"
 using namespace Differenciator;
 
 //-----------------------------------------------------------------------------
