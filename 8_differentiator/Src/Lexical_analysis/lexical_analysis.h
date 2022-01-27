@@ -67,8 +67,8 @@ class TextDiff
         TextDiff             (TextDiff&& that) = delete;
         TextDiff& operator = (TextDiff&& that) = delete;
 
-        NodeDiff&       operator[] (const int indx);           //няма
-        const NodeDiff& operator[] (const int indx) const;     //няма
+        NodeDiff&       operator[] (const int indx);
+        const NodeDiff& operator[] (const int indx) const;
 
         const char* get_buffer_data () const;
         std::size_t get_num_symbols () const;
