@@ -5,8 +5,7 @@
 namespace Differenciator
 {
 
-TextDiff::TextDiff (const std::string& path_base) :
-    buf_nodes_ {START_MAX_NODES}
+TextDiff::TextDiff (const std::string& path_base)
 {
     assert (this);
 
@@ -14,7 +13,6 @@ TextDiff::TextDiff (const std::string& path_base) :
     buf_data_    = new char [num_symbols_ + 1] {};
 
     create_buffer_data  (path_base);
-    create_buffer_nodes ();
 }
 
 //----------
@@ -61,54 +59,6 @@ void TextDiff::create_buffer_data (const std::string& path_base)
 
 //----------
 
-void TextDiff::create_buffer_nodes()
-{
-    std::size_t i_data = 0;
-    const char* symb   = buf_data_;
-
-    while (*symb != '\0')
-    {
-        if (strchr ("+-*/^()", *symb))
-        {
-            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
-
-            buf_nodes_.push (symb, NodeType::OPER);
-            symb++;
-        }
-        else if (isdigit (*symb))
-        {
-            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
-            
-            buf_nodes_.push (symb, NodeType::NUMB);
-
-            symb++;
-            while (symb - buf_data_ < num_symbols_ && isdigit (*symb))
-                symb++;
-
-        }
-        else if (isalpha (*symb))
-        {
-            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
-
-            buf_nodes_.push (symb, NodeType::VARB);
-
-            symb++;
-            while (symb - buf_data_ < num_symbols_ && isalpha (*symb))
-                symb++;
-
-        }
-        else
-        {
-            symb++;
-        }
-    }
-
-
-    return;
-}
-
-//----------
-
 const char* TextDiff::get_buffer_data() const
 {
     return buf_data_;
@@ -123,24 +73,61 @@ std::size_t TextDiff::get_num_symbols() const
 
 //----------
 
-NodeDiff& TextDiff::operator[] (const int indx)
+void BufNodes::create_buffer_nodes()
 {
-    return buf_nodes_[indx];
+    std::size_t i_data      = 0;
+    std::size_t num_symbols = source_text_.get_num_symbols ();
+
+    const char* symb        = source_text_.get_buffer_data ();
+    const char* start_symb  = symb;
+
+    while (*symb != '\0')
+    {
+        if (strchr ("+-*/^()", *symb))
+        {
+            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
+
+            push (symb, NodeType::OPER);
+            symb++;
+        }
+        else if (isdigit (*symb))
+        {
+            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
+            
+            push (symb, NodeType::NUMB);
+
+            symb++;
+            while (symb - start_symb < num_symbols && isdigit (*symb))
+                symb++;
+
+        }
+        else if (isalpha (*symb))
+        {
+            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
+
+            push (symb, NodeType::VARB);
+
+            symb++;
+            while (symb - start_symb < num_symbols && isalpha (*symb))
+                symb++;
+
+        }
+        else
+        {
+            symb++;
+        }
+    }
+
+    return;
 }
 
 //----------
 
-const NodeDiff& TextDiff::operator[] (const int indx) const
+BufNodes::BufNodes (const std::string& path_base, std::size_t max_nodes) :
+    source_text_ {path_base},
+    max_nodes_  {max_nodes}
 {
-    return buf_nodes_[indx];
-}
-
-//----------
-
-BufNodes::BufNodes (std::size_t max_lexems) :
-    max_lexems_ {max_lexems}
-{
-    buf_lexems_ = new NodeDiff [max_lexems_] {};
+    buf_nodes_ = new NodeDiff [max_nodes_] {};
 }
 
 //----------
@@ -149,31 +136,31 @@ BufNodes::~BufNodes ()
 {
     dump (PATH_BUF_NODES_DUMP);
 
-    delete [] buf_lexems_;
-    buf_lexems_ = nullptr;
+    delete [] buf_nodes_;
+    buf_nodes_ = nullptr;
 }
 
 //----------
 
 bool BufNodes::push (const char* symb, NodeType type)
 {
-    if (length_ == max_lexems_)
+    if (length_ == max_nodes_)
         resize ();
 
-    buf_lexems_[length_].type_ = type;
+    buf_nodes_[length_].type_ = type;
 
-    switch (buf_lexems_[length_].type_)
+    switch (buf_nodes_[length_].type_)
     {
-        case NodeType::NUMB: buf_lexems_[length_].value_numb_ = strtol (symb, NULL, 10);
+        case NodeType::NUMB: buf_nodes_[length_].value_numb_ = strtol (symb, NULL, 10);
                              break;
 
-        case NodeType::VARB: buf_lexems_[length_].value_varb_ = *symb;
+        case NodeType::VARB: buf_nodes_[length_].value_varb_ = *symb;
                              break;
 
-        case NodeType::OPER: buf_lexems_[length_].value_oper_ = *symb;
+        case NodeType::OPER: buf_nodes_[length_].value_oper_ = *symb;
                              break;
 
-        default:             printf("ERROR! Type: %d\n", (int) buf_lexems_[length_].type_);
+        default:             printf("ERROR! Type: %d\n", (int) buf_nodes_[length_].type_);
                              break;
     }
 
@@ -186,14 +173,14 @@ bool BufNodes::push (const char* symb, NodeType type)
 
 bool BufNodes::resize ()
 {
-    std::size_t new_max_lexems = 2 * max_lexems_;
-    NodeDiff*   new_buf_lexems = new NodeDiff [new_max_lexems];
+    std::size_t new_max_nodes = 2 * max_nodes_;
+    NodeDiff*   new_buf_nodes = new NodeDiff [new_max_nodes];
     
-    std::copy_n (buf_lexems_, new_max_lexems, new_buf_lexems);
+    std::copy_n (buf_nodes_, new_max_nodes, new_buf_nodes);
 
-    delete [] buf_lexems_;
-    max_lexems_ = new_max_lexems;
-    buf_lexems_ = new_buf_lexems;
+    delete [] buf_nodes_;
+    max_nodes_ = new_max_nodes;
+    buf_nodes_ = new_buf_nodes;
 
     return true; 
 }
@@ -202,14 +189,14 @@ bool BufNodes::resize ()
 
 NodeDiff& BufNodes::operator[] (const int indx)
 {
-    return buf_lexems_[indx];
+    return buf_nodes_[indx];
 }
 
 //----------
 
 const NodeDiff& BufNodes::operator[] (const int indx) const
 {
-    return buf_lexems_[indx];
+    return buf_nodes_[indx];
 }
 
 //----------
@@ -222,12 +209,12 @@ void BufNodes::dump (const char* path_dump) const
     fprintf (dump_BufNodes, "        >-- BufNodes dump --<  \n"
                             "    | max_nodes_ = %ld,\n"
                             "    | length_    = %ld \n"
-                                                   "\n", max_lexems_, length_);
+                                                   "\n", max_nodes_, length_);
 
     for (std::size_t i = 0; i < length_; i++)
     {
         fprintf (dump_BufNodes, "(%-3ld) ", i + 1);
-        buf_lexems_[i].print_data (dump_BufNodes);
+        buf_nodes_[i].print_data (dump_BufNodes);
     }
 
     fprintf (dump_BufNodes, "\n");
