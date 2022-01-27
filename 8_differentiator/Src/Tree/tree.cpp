@@ -81,7 +81,7 @@ int vssystem (const char* command, ...)
 
 //----------
 
-const NodeTree* const Tree::print_graph_tree (const Mode mode, const NodeTree* const prnt_node, FILE* dump)
+const NodeDiff* const Tree::print_graph_tree (const Mode mode, const NodeDiff* const prnt_node, FILE* dump)
 {
     assert(this);
 
@@ -144,7 +144,7 @@ const NodeTree* const Tree::print_graph_tree (const Mode mode, const NodeTree* c
 
 //-----------
 
-void NodeTree::print_data (const NodeTree* const prnt_node, FILE* dump) const
+void NodeDiff::print_data (const NodeDiff* const prnt_node, FILE* dump) const
 {
     assert (prnt_node);
     assert (dump);
@@ -171,7 +171,7 @@ void NodeTree::print_data (const NodeTree* const prnt_node, FILE* dump) const
 
 //------------
 
-void NodeTree::choose_param (const NodeTree* const prnt_node, FILE* dump) const
+void NodeDiff::choose_param (const NodeDiff* const prnt_node, FILE* dump) const
 {
     assert (prnt_node);
     assert (dump);

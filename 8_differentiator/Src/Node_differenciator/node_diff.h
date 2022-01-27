@@ -26,9 +26,45 @@ struct NodeDiff
     long value_numb_;
     char value_varb_;
 
-    //!-----
+    NodeDiff* parent_ = nullptr;
+    NodeDiff* left_   = nullptr;
+    NodeDiff* right_  = nullptr;
+
+    //!
 
     NodeDiff ()
+    {}
+
+    //!
+
+    template <typename T>
+    NodeDiff (NodeType type, T value, NodeDiff* parent = nullptr, 
+                                      NodeDiff* left   = nullptr, NodeDiff* right = nullptr) :
+        type_   {type},
+        parent_ {parent},
+        left_   {left},
+        right_  {right}
+    {
+        switch (type)
+        {
+            case NodeType::NUMB: value_numb_ = value;
+                                 break;
+
+            case NodeType::VARB: value_varb_ = value;
+                                 break;
+
+            case NodeType::OPER: value_oper_ = value;
+                                 break;
+
+            default:             printf("ERROR! Type:\n");
+                                 break;
+        }
+    }
+
+    //!
+
+    explicit NodeDiff (NodeDiff* parent) :
+        parent_ {parent}
     {}
 
     //!
@@ -77,7 +113,10 @@ struct NodeDiff
 
     //!
 
-    void print_data (FILE* dump) const;
+    void print_data   (                                 FILE* dump) const;
+    void print_data   (const NodeDiff* const prnt_node, FILE* dump) const;
+
+    void choose_param (const NodeDiff* const prnt_node, FILE* dump) const;
 
     friend void swap (NodeDiff& lhs, NodeDiff& rhs) noexcept
     {

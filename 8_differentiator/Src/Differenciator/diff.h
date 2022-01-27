@@ -28,8 +28,8 @@ class Diff
         Diff             (Diff&& that) = delete;
         Diff& operator = (Diff&& that) = delete;
 
-        NodeTree* diff (const NodeTree* input_node);
-        NodeTree* copy (const NodeTree*  copy_node);
+        NodeDiff* diff (const NodeDiff* input_node);
+        NodeDiff* copy (const NodeDiff*  copy_node);
 
 }; // class Diff
 

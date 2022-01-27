@@ -21,17 +21,17 @@ Diff::~Diff ()
 
 //-----------------------------------------------------------------------------
 
-NodeTree* Diff::diff (const NodeTree* input)
+NodeDiff* Diff::diff (const NodeDiff* input)
 {
     if (input->type_ == NodeType::NUMB)
     {
-        NodeTree* ret = new NodeTree (NodeType::NUMB, 0);
+        NodeDiff* ret = new NodeDiff (NodeType::NUMB, 0);
         return    ret;
     }
 
     if (input->type_ == NodeType::VARB)
     {
-        NodeTree* ret = new NodeTree (NodeType::NUMB, 1);
+        NodeDiff* ret = new NodeDiff (NodeType::NUMB, 1);
         return    ret;
     }
 
@@ -39,7 +39,7 @@ NodeTree* Diff::diff (const NodeTree* input)
     {
         if (input->value_oper_ == '+' || input->value_oper_ == '-')
         {
-            NodeTree* ret = new NodeTree (NodeType::OPER, input->value_varb_);
+            NodeDiff* ret = new NodeDiff (NodeType::OPER, input->value_varb_);
 
             ret->left_  = diff (input->left_);
             ret->right_ = diff (input->right_);
@@ -49,9 +49,9 @@ NodeTree* Diff::diff (const NodeTree* input)
 
         if (input->value_oper_ == '*')
         {
-            NodeTree* ret   = new NodeTree (NodeType::OPER, '+');
-            NodeTree* ret_l = new NodeTree (NodeType::OPER, '*', ret, nullptr, nullptr);
-            NodeTree* ret_r = new NodeTree (NodeType::OPER, '*', ret, nullptr, nullptr);
+            NodeDiff* ret   = new NodeDiff (NodeType::OPER, '+');
+            NodeDiff* ret_l = new NodeDiff (NodeType::OPER, '*', ret, nullptr, nullptr);
+            NodeDiff* ret_r = new NodeDiff (NodeType::OPER, '*', ret, nullptr, nullptr);
 
             ret->left_  = ret_l;
             ret->right_ = ret_r;
@@ -71,9 +71,9 @@ NodeTree* Diff::diff (const NodeTree* input)
 
 //-----------------------------------------------------------------------------
 
-NodeTree* Diff::copy (const NodeTree* node)
+NodeDiff* Diff::copy (const NodeDiff* node)
 {
-    NodeTree* new_node = new NodeTree (*node);
+    NodeDiff* new_node = new NodeDiff (*node);
 
     if (node->left_)  new_node->left_  = copy (node->left_);
     if (node->right_) new_node->right_ = copy (node->right_);
