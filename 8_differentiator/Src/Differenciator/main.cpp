@@ -44,7 +44,7 @@ int main ()
     test_tree_dif.dump(Mode::DEBUG, "Txt/dump_dif");
 */
 
-    Parser heh;
+    BufNodes test_buf_nodes (DEFAULT_SOURCE_TEXT, START_MAX_NODES);
 
     return 0;
 }

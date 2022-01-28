@@ -45,16 +45,16 @@ class BufNodes
     private:
 
         TextDiff    source_text_;
-        NodeDiff*   buf_nodes_   = nullptr;
-        std::size_t max_nodes_   = 0;
-        std::size_t length_      = 0;
+        NodeDiff*   buf_nodes_;
+        std::size_t max_nodes_;
+        std::size_t length_;
 
         bool resize ();
 
     public:
 
-        BufNodes (const std::string& path_base = DEFAULT_SOURCE_TEXT, \
-                  std::size_t        max_nodes = START_MAX_NODES);
+        BufNodes () = delete;
+        BufNodes (const std::string& path_base, std::size_t max_nodes);
        ~BufNodes ();
 
         BufNodes             (const BufNodes& other) = delete;

@@ -59,77 +59,28 @@ void TextDiff::create_buffer_data (const std::string& path_base)
 
 //----------
 
-const char* TextDiff::get_buffer_data() const
+const char* TextDiff::get_buffer_data () const
 {
     return buf_data_;
 }
 
 //----------
 
-std::size_t TextDiff::get_num_symbols() const
+std::size_t TextDiff::get_num_symbols () const
 {
     return num_symbols_;
-}
 
 //----------
 
-void BufNodes::create_buffer_nodes()
-{
-    std::size_t i_data      = 0;
-    std::size_t num_symbols = source_text_.get_num_symbols ();
-
-    const char* symb        = source_text_.get_buffer_data ();
-    const char* start_symb  = symb;
-
-    while (*symb != '\0')
-    {
-        if (strchr ("+-*/^()", *symb))
-        {
-            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
-
-            push (symb, NodeType::OPER);
-            symb++;
-        }
-        else if (isdigit (*symb))
-        {
-            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
-            
-            push (symb, NodeType::NUMB);
-
-            symb++;
-            while (symb - start_symb < num_symbols && isdigit (*symb))
-                symb++;
-
-        }
-        else if (isalpha (*symb))
-        {
-            //printf ("buf_data_[indx] = %c\n", buf_data_[i_data]);
-
-            push (symb, NodeType::VARB);
-
-            symb++;
-            while (symb - start_symb < num_symbols && isalpha (*symb))
-                symb++;
-
-        }
-        else
-        {
-            symb++;
-        }
-    }
-
-    push (symb, NodeType::NONE);
-
-    return;
-}
-
-//----------
-
-BufNodes::BufNodes (const std::string& path_base, std::size_t max_nodes) :
-    source_text_ {path_base},
-    max_nodes_   {max_nodes}
+BufNodes::BufNodes (const std::string& source_text, std::size_t max_nodes) :
+    source_text_ {source_text},
+    buf_nodes_   {nullptr},
+    max_nodes_   {max_nodes},
+    length_      {0}
 {
     buf_nodes_ = new NodeDiff [max_nodes_] {};
+
+    create_buffer_nodes ();
 }
 
 //----------
@@ -171,6 +122,49 @@ bool BufNodes::push (const char* symb, NodeType type)
     length_++;
 
     return true;
+}
+
+//----------
+
+void BufNodes::create_buffer_nodes ()
+{
+    std::size_t num_symbols = source_text_.get_num_symbols ();
+    const char* start_symb  = source_text_.get_buffer_data ();
+    const char* symb        = start_symb;
+
+    while (*symb != '\0')
+    {
+        if (strchr ("+-*/^()", *symb))
+        {
+            push (symb, NodeType::OPER);
+            symb++;
+        }
+        else if (isdigit (*symb))
+        {
+            push (symb, NodeType::NUMB);
+
+            symb++;
+            while (symb - start_symb < num_symbols && isdigit (*symb))
+                symb++;
+
+        }
+        else if (isalpha (*symb))
+        {
+            push (symb, NodeType::VARB);
+
+            symb++;
+            while (symb - start_symb < num_symbols && isalpha (*symb))
+                symb++;
+        }
+        else
+        {
+            symb++;
+        }
+    }
+
+    push (symb, NodeType::NONE);
+
+    return;
 }
 
 //----------

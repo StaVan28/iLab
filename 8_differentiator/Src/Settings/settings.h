@@ -8,7 +8,7 @@
 #include <cstdarg> 
 #include <fstream>
 #include <ctime>
-#include <string>
+#include <cstring>
 #include <cstdlib>
 #include <cassert>
 #include <cerrno>
