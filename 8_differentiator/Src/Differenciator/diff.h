@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "settings.h"
-#include "tree.hpp"
+#include "syntactic_analysis.h"
 #include "node_diff.h"
 
 //-----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ class Diff
 
     public:
 
-        Diff (const char* source_text = DEFAULT_SOURCE_TEXT);
+        Diff (const std::string& source_text = DEFAULT_SOURCE_TEXT);
        ~Diff ();
 
         Diff             (const Diff& other) = delete;

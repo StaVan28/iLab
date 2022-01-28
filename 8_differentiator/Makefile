@@ -25,12 +25,12 @@ vpath %.hpp $(HDR_DIR)
 vpath %.h   $(HDR_DIR)
 
 # compiler settings
-CXX      = g++ -std=c++14
+CXX      = g++ -std=c++17
 WARNINGS = -Wall -Wextra 
 CXXFLAGS = 
 
-DEBUG_MODE   = -g3 -O0
-RELEASE_MODE = -g0 -O2
+DEBUG_MODE   = -g3 -O0 
+RELEASE_MODE = -g0 -O2 
 
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all -v
 

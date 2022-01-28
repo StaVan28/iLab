@@ -4,17 +4,16 @@
 
 //-----------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdarg.h> 
+#include <cstdio>
+#include <cstdarg> 
 #include <fstream>
 #include <ctime>
 #include <string>
-#include <stdlib.h>
-#include <assert.h>
-#include <errno.h>
-#include <stdbool.h>
+#include <cstdlib>
+#include <cassert>
+#include <cerrno>
+#include <cstdbool>
 #include <algorithm>
-#include <string.h>
 #include <utility> 
 
 //!
@@ -22,9 +21,9 @@
 namespace Differenciator
 {
 
-static const char* PATH_BUF_NODES_DUMP = "Txt/dump_BufNodes.txt";
-static const char* DEFAULT_SOURCE_TEXT = "./calc.txt";
-static const char* DEFAULT_TREE_NAME   = "syntax_tree_diff";
+static const std::string& PATH_BUF_NODES_DUMP = "Txt/dump_BufNodes.txt";
+static const std::string& DEFAULT_SOURCE_TEXT = "./calc.txt";
+static const std::string& DEFAULT_TREE_NAME   = "syntax_tree_diff";
 
 static const std::size_t START_MAX_NODES      = 64;
 

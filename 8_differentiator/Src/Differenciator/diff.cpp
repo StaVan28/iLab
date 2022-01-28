@@ -7,7 +7,7 @@ namespace Differenciator
 
 //!
 
-Diff::Diff (const char* source_text)
+Diff::Diff (const std::string& source_text)
 {
 
 }
@@ -79,29 +79,6 @@ NodeDiff* Diff::copy (const NodeDiff* node)
     if (node->right_) new_node->right_ = copy (node->right_);
 
     return new_node;
-}
-
-//-----------------------------------------------------------------------------
-
-void NodeDiff::print_data (FILE* dump) const
-{
-    assert (dump);
-
-    switch (type_)
-    {
-        case NodeType::NUMB: fprintf (dump, " NUMB -- {%ld}\n" , value_numb_);
-                              break;
-
-        case NodeType::VARB: fprintf (dump, " VARB -- {%c}\n"  , value_varb_);
-                              break;
-
-        case NodeType::OPER: fprintf (dump, " OPER -- {%c}\n"  , value_oper_);
-                              break;
-
-        default:              printf  ("ERROR! Type: %d\n", (int) type_);
-                              break;
-    }
-
 }
 
 //-----------------------------------------------------------------------------

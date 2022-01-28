@@ -29,15 +29,15 @@ class Tree
     public:
 
         std::string name_;
-        NodeDiff*   root_;
-        std::size_t size_;
+        NodeDiff*   root_ = nullptr;
+        std::size_t size_ = 0;
 
         Tree();
         Tree(const std::string& name);
 
        ~Tree();
     
-        void dump (Mode mode, const char* path_name_without_end = "./Txt/dump_tree");
+        void dump (Mode mode = Mode::DEBUG, const char* path_name_without_end = "./Txt/dump_tree");
 
 }; // class Tree
 

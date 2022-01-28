@@ -10,6 +10,14 @@ static const int MAX_BUFF = 4096;
 
 //---------
 
+Tree::Tree () :
+    name_ {nullptr},
+    root_ {nullptr},
+    size_ {0}
+{}
+
+//---------
+
 Tree::Tree (const std::string& name) :
     name_ {name},
     root_ {nullptr},
@@ -192,6 +200,32 @@ void NodeDiff::choose_param (const NodeDiff* const prnt_node, FILE* dump) const
         default:              printf  ("ERROR! Type:\n");
                               break;
     }    
+
+}
+
+//------------
+
+void NodeDiff::print_data (FILE* dump) const
+{
+    assert (dump);
+
+    switch (type_)
+    {
+        case NodeType::NUMB: fprintf (dump, " NUMB -- {%ld}\n" , value_numb_);
+                              break;
+
+        case NodeType::VARB: fprintf (dump, " VARB -- {%c}\n"  , value_varb_);
+                              break;
+
+        case NodeType::OPER: fprintf (dump, " OPER -- {%c}\n"  , value_oper_);
+                              break;
+
+        case NodeType::NONE: fprintf (dump, " NONE -- {END}\n");
+                              break;
+
+        default:              printf  ("ERROR! Type: %d\n", (int) type_);
+                              break;
+    }
 
 }
 

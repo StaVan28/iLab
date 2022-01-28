@@ -1,4 +1,6 @@
+Bin/
 bin/
 *.o
+Obj/
 obj/
 token.txt

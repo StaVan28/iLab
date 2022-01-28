@@ -24,7 +24,6 @@ class TextDiff
 
     public:
 
-        TextDiff () = delete;
         TextDiff (const std::string& path_base);
        ~TextDiff ();
 
@@ -45,16 +44,16 @@ class BufNodes
 {
     private:
 
+        TextDiff    source_text_;
         NodeDiff*   buf_nodes_   = nullptr;
         std::size_t max_nodes_   = 0;
         std::size_t length_      = 0;
-        TextDiff    source_text_;
 
         bool resize ();
 
     public:
 
-        BufNodes (const std::string& path_base = DEFAULT_SOURCE_TEXT, 
+        BufNodes (const std::string& path_base = DEFAULT_SOURCE_TEXT, \
                   std::size_t        max_nodes = START_MAX_NODES);
        ~BufNodes ();
 
@@ -70,7 +69,7 @@ class BufNodes
         void create_buffer_nodes ();
 
         bool push (const char* symb, NodeType type);
-        void dump (const char* path_dump = PATH_BUF_NODES_DUMP) const;
+        void dump (const std::string& path_dump = PATH_BUF_NODES_DUMP) const;
 
 }; // class BufNodes
 

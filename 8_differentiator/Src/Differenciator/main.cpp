@@ -1,4 +1,3 @@
-#include "diff.h"
 #include "syntactic_analysis.h"
 using namespace Differenciator;
 
@@ -44,7 +43,8 @@ int main ()
     test_tree_dif.root_ = dif_node;
     test_tree_dif.dump(Mode::DEBUG, "Txt/dump_dif");
 */
-    TextDiff test_text ("calc.txt");
+
+    Parser heh;
 
     return 0;
 }

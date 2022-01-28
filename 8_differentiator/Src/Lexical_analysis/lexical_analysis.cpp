@@ -118,6 +118,8 @@ void BufNodes::create_buffer_nodes()
         }
     }
 
+    push (symb, NodeType::NONE);
+
     return;
 }
 
@@ -125,7 +127,7 @@ void BufNodes::create_buffer_nodes()
 
 BufNodes::BufNodes (const std::string& path_base, std::size_t max_nodes) :
     source_text_ {path_base},
-    max_nodes_  {max_nodes}
+    max_nodes_   {max_nodes}
 {
     buf_nodes_ = new NodeDiff [max_nodes_] {};
 }
@@ -159,6 +161,8 @@ bool BufNodes::push (const char* symb, NodeType type)
 
         case NodeType::OPER: buf_nodes_[length_].value_oper_ = *symb;
                              break;
+
+        case NodeType::NONE: break;
 
         default:             printf("ERROR! Type: %d\n", (int) buf_nodes_[length_].type_);
                              break;
@@ -201,9 +205,9 @@ const NodeDiff& BufNodes::operator[] (const int indx) const
 
 //----------
 
-void BufNodes::dump (const char* path_dump) const
+void BufNodes::dump (const std::string& path_dump) const
 {
-    FILE*   dump_BufNodes = fopen (path_dump, "wb");
+    FILE*   dump_BufNodes = fopen (path_dump.c_str(), "wb");
     assert (dump_BufNodes);
 
     fprintf (dump_BufNodes, "        >-- BufNodes dump --<  \n"

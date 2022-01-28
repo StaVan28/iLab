@@ -6,19 +6,33 @@
 
 #include "settings.h"
 #include "node_diff.h"
-#include "tree.hpp"
 #include "lexical_analysis.h"
+#include "tree.hpp"
 
 //-----------------------------------------------------------------------------
 
 namespace Differenciator
 {
 
+enum class Signs : char
+{
+    PLUS  = '+',
+    MINUS = '-',
+    MUL   = '*',
+    DIV   = '/',
+    LP    = '(',
+    RP    = ')',
+};
+
+//!
+
 class Parser
 {
     private:
 
-        TextDiff buf_nodes_;
+        std::size_t i_node_;
+
+        BufNodes buf_nodes_;
         Tree     syntax_tree_;
 
     public:
@@ -32,10 +46,10 @@ class Parser
         Parser             (Parser&& that) = delete;
         Parser& operator = (Parser&& that) = delete;
 
-        NodeDiff get_expr ();
-        NodeDiff get_term ();
-        NodeDiff get_brck ();
-        NodeDiff get_numb ();
+        NodeDiff* get_expr ();
+        NodeDiff* get_term ();
+        NodeDiff* get_prnt ();
+        NodeDiff* get_numb ();
 
 }; // class Parser
 
