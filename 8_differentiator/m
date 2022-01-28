@@ -17,3 +17,4 @@ echo "    END: "   && date +"%T"
 
 echo $'\n ----  DUMP  ---- '
 cat Txt/dump_BufNodes.txt
+fim Txt/dump_tree_rls.jpeg

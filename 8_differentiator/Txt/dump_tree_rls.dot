@@ -1,0 +1,18 @@
+digraph Tree {
+
+    node [shape = "circle", style = "filled", fillcolor = "red",fontcolor = "#000000", margin = "0.01"];
+    rankdir = "TB";
+    label   = "Tree Graph";
+
+    "_0x4dbc858" [  label = "{ {type \n (OPER) | value\n (+)}}"fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc858"->"_0x4dbc828";
+    "_0x4dbc858"->"_0x4dbc888";
+
+
+    "_0x4dbc828" [  label = "{ {type \n (NUMB) | value\n (28)}}"fillcolor = "palegreen", shape = "record"];
+
+
+    "_0x4dbc888" [  label = "{ {type \n (NUMB) | value\n (3)}}"fillcolor = "palegreen", shape = "record"];
+
+
+}

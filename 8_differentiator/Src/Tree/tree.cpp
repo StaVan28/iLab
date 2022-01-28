@@ -168,6 +168,10 @@ void NodeDiff::print_data (const NodeDiff* const prnt_node, FILE* dump) const
                                               "value\\n (%c)}"  , value_oper_);
                               break;
 
+        case NodeType::NONE: fprintf (dump, " {type \\n (NONE) | "
+                                              "value\\n (---)}");
+                              break;
+
         default:              printf  ("ERROR! Type:\n");
                               break;
     }

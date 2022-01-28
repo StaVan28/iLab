@@ -134,6 +134,8 @@ bool BufNodes::push (const char* symb, NodeType type)
         case NodeType::OPER: buf_lexems_[length_].value_oper_ = *symb;
                              break;
 
+        case NodeType::NONE: break;
+
         default:             printf("ERROR! Type: %d\n", (int) buf_lexems_[length_].type_);
                              break;
     }
@@ -181,6 +183,8 @@ void BufNodes::create_buffer_nodes ()
             symb++;
         }
     }
+
+    push (symb, NodeType::NONE);
 
     return;
 }
@@ -237,6 +241,31 @@ void BufNodes::dump (const std::string& path_dump) const
 
     fclose (dump_BufNodes);
     dump_BufNodes = nullptr;
+}
+
+//----------
+
+void NodeDiff::print_data (FILE* dump) const
+{
+    assert (dump);
+
+    switch (type_)
+    {
+        case NodeType::NUMB:    fprintf (dump, " NUMB -- {%ld}\n" , value_numb_);
+                                break;
+
+        case NodeType::VARB:    fprintf (dump, " VARB -- {%c}\n"  , value_varb_);
+                                break;
+
+        case NodeType::OPER:    fprintf (dump, " OPER -- {%c}\n"  , value_oper_);
+                                break;
+
+        case NodeType::NONE:    fprintf (dump, " NONE\n");
+                                break;
+
+        default:                printf  ("ERROR! Type: %d\n", (int) type_);
+                                break;
+    }
 }
 
 //----------
