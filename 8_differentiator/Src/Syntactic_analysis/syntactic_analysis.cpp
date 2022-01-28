@@ -35,12 +35,12 @@ NodeDiff* Parser::get_expr ()
 
     if (buf_nodes_[i_node_].type_ == NodeType::OPER)
     {
-        if (buf_nodes_[i_node_].value_oper_ = '+')
+        if (buf_nodes_[i_node_].value_oper_ == '+')
         {
             i_node_++;
             sign_flag += 0;
         }
-        else if (buf_nodes_[i_node_].value_oper_ = '-')
+        else if (buf_nodes_[i_node_].value_oper_ == '-')
         {
             i_node_++;
             sign_flag += 1;
@@ -50,7 +50,8 @@ NodeDiff* Parser::get_expr ()
             // error
         }
     }
-    else if (buf_nodes_[i_node_].type_ == NodeType::OPER)
+    
+    if (buf_nodes_[i_node_].type_ == NodeType::NONE)
     {
         return nullptr;
     }
@@ -79,7 +80,7 @@ NodeDiff* Parser::get_expr ()
         }
     }
 
-    rt_node = get_numb (sign_flag);
+    rt_node = get_expr ();
 
     if (rt_node == nullptr)
     {
