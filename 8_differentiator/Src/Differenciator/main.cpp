@@ -44,7 +44,8 @@ int main ()
     test_tree_dif.root_ = dif_node;
     test_tree_dif.dump(Mode::DEBUG, "Txt/dump_dif");
 */
-    TextDiff test_text ("calc.txt");
+
+    BufNodes test_buf_nodes (DEFAULT_SOURCE_TEXT, START_MAX_NODES);
 
     return 0;
 }

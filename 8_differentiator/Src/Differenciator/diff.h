@@ -19,7 +19,7 @@ class Diff
 
     public:
 
-        Diff (const char* source_text = DEFAULT_SOURCE_TEXT);
+        Diff (const std::string& source_text = DEFAULT_SOURCE_TEXT);
        ~Diff ();
 
         Diff             (const Diff& other) = delete;

@@ -7,7 +7,7 @@ namespace Differenciator
 
 //!
 
-Diff::Diff (const char* source_text)
+Diff::Diff (const std::string& source_text)
 {
 
 }

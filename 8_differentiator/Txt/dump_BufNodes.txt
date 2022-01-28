@@ -1,20 +1,19 @@
         >-- BufNodes dump --<  
     | max_nodes_ = 64,
-    | length_    = 15 
+    | length_    = 14 
 
-(1  )  OPER -- {(}
-(2  )  VARB -- {x}
+(1  )  OPER -- {+}
+(2  )  NUMB -- {8}
 (3  )  OPER -- {+}
-(4  )  NUMB -- {1}
-(5  )  VARB -- {h}
-(6  )  NUMB -- {1}
-(7  )  OPER -- {)}
-(8  )  OPER -- {^}
-(9  )  NUMB -- {3}
-(10 )  OPER -- {/}
-(11 )  OPER -- {(}
-(12 )  NUMB -- {4}
-(13 )  OPER -- {/}
-(14 )  NUMB -- {28}
-(15 )  OPER -- {)}
+(4  )  NUMB -- {394}
+(5  )  OPER -- {-}
+(6  )  NUMB -- {234910}
+(7  )  NUMB -- {0}
+(8  )  NUMB -- {0}
+(9  )  OPER -- {-}
+(10 )  OPER -- {-}
+(11 )  OPER -- {-}
+(12 )  OPER -- {-}
+(13 )  NUMB -- {2}
+(14 )  NUMB -- {3}
 
