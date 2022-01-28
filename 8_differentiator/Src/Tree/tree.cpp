@@ -1,6 +1,5 @@
 
 #include "tree.hpp"
-#include "parsing_text.h"
 
 //-----------------------------------------------------------------------------
 
@@ -8,6 +7,14 @@ namespace Differenciator
 {
 
 static const int MAX_BUFF = 4096; 
+
+//---------
+
+Tree::Tree () :
+    name_ {nullptr},
+    root_ {nullptr},
+    size_ {0}
+{}
 
 //---------
 
@@ -24,16 +31,14 @@ Tree::~Tree ()
 
 //----------
 
-void Tree::dump (Mode mode, const char* path_name_without_end)
+void Tree::dump (Mode mode, const std::string& path_name_without_end)
 {
-    assert (path_name_without_end);
-
     char path_name [MAX_BUFF] = {};
 
     if (mode == Mode::DEBUG)
-        sprintf (path_name, "%s_db.dot",  path_name_without_end);
+        sprintf (path_name, "%s_db.dot",  path_name_without_end.c_str ());
     else
-        sprintf (path_name, "%s_rls.dot", path_name_without_end);
+        sprintf (path_name, "%s_rls.dot", path_name_without_end.c_str ());
 
     FILE*   dump = fopen (path_name, "wb");
     assert (dump);
@@ -57,9 +62,9 @@ void Tree::dump (Mode mode, const char* path_name_without_end)
     fclose  (dump);
 
     if (mode == Mode::DEBUG)
-        vssystem ("dot -Tjpeg %s -o %s_db.jpeg",  path_name, path_name_without_end);
+        vssystem ("dot -Tjpeg %s -o %s_db.jpeg",  path_name, path_name_without_end.c_str ());
     else 
-        vssystem ("dot -Tjpeg %s -o %s_rls.jpeg", path_name, path_name_without_end);
+        vssystem ("dot -Tjpeg %s -o %s_rls.jpeg", path_name, path_name_without_end.c_str ());
 
 }
 

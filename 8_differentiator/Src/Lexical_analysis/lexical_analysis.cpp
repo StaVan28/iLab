@@ -1,9 +1,16 @@
-#include "parsing_text.h"
+#include "lexical_analysis.h"
 
 //-----------
 
 namespace Differenciator
 {
+
+//-----------
+
+TextDiff::TextDiff ()
+{}
+
+//-----------
 
 TextDiff::TextDiff (const std::string& path_base)
 {
@@ -69,6 +76,19 @@ const char* TextDiff::get_buffer_data() const
 std::size_t TextDiff::get_num_symbols() const
 {
     return num_symbols_;
+}
+
+//----------
+
+BufNodes::BufNodes () :
+    source_text_ {DEFAULT_SOURCE_TEXT},
+    buf_lexems_  {nullptr}, 
+    max_lexems_  {START_MAX_NODES},
+    length_      {0}
+{
+    buf_lexems_ = new NodeDiff [max_lexems_] {};
+
+    create_buffer_nodes ();
 }
 
 //----------
@@ -197,9 +217,9 @@ const NodeDiff& BufNodes::operator[] (const int indx) const
 
 //----------
 
-void BufNodes::dump (const char* path_dump) const
+void BufNodes::dump (const std::string& path_dump) const
 {
-    FILE*   dump_BufNodes = fopen (path_dump, "wb");
+    FILE*   dump_BufNodes = fopen (path_dump.c_str (), "wb");
     assert (dump_BufNodes);
 
     fprintf (dump_BufNodes, "        >-- BufNodes dump --<  \n"

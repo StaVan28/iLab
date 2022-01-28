@@ -1,6 +1,6 @@
 
-#ifndef PARSING_TREE_H_INCLUDED
-#define PARSING_TREE_H_INCLUDED
+#ifndef LEXICAL_ANALYSIS_H_INCLUDED
+#define LEXICAL_ANALYSIS_H_INCLUDED
 
 //-----------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ class TextDiff
 
     public:
 
-        TextDiff () = delete;
+        TextDiff ();
         TextDiff (const std::string& path_base);
        ~TextDiff ();
 
@@ -54,8 +54,8 @@ class BufNodes
 
     public:
 
-        BufNodes (const std::string& source_text, \
-                  std::size_t        max_lexems);
+        BufNodes ();
+        BufNodes (const std::string& source_text, std::size_t max_lexems);
        ~BufNodes ();
 
         BufNodes             (const BufNodes& other) = delete;
@@ -70,7 +70,7 @@ class BufNodes
         void create_buffer_nodes ();
 
         bool push (const char* symb, NodeType type);
-        void dump (const char* path_dump = PATH_BUF_NODES_DUMP) const;
+        void dump (const std::string& path_dump = PATH_BUF_NODES_DUMP) const;
 
 }; // class BufNodes
 
@@ -79,5 +79,5 @@ class BufNodes
 
 //-----------------------------------------------------------------------------
 
-#endif // PARSING_TREE_H_INCLUDED
+#endif // LEXICAL_ANALYSIS_H_INCLUDED
 

@@ -1,19 +1,17 @@
         >-- BufNodes dump --<  
     | max_nodes_ = 64,
-    | length_    = 14 
+    | length_    = 12 
 
-(1  )  OPER -- {+}
-(2  )  NUMB -- {8}
-(3  )  OPER -- {+}
-(4  )  NUMB -- {394}
-(5  )  OPER -- {-}
-(6  )  NUMB -- {234910}
-(7  )  NUMB -- {0}
-(8  )  NUMB -- {0}
+(1  )  NUMB -- {1}
+(2  )  NUMB -- {23}
+(3  )  NUMB -- {1}
+(4  )  OPER -- {-}
+(5  )  NUMB -- {31}
+(6  )  NUMB -- {3}
+(7  )  NUMB -- {1}
+(8  )  NUMB -- {3}
 (9  )  OPER -- {-}
 (10 )  OPER -- {-}
 (11 )  OPER -- {-}
 (12 )  OPER -- {-}
-(13 )  NUMB -- {2}
-(14 )  NUMB -- {3}
 

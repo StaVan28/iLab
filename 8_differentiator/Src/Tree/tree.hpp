@@ -37,7 +37,7 @@ class Tree
 
        ~Tree();
     
-        void dump (Mode mode, const char* path_name_without_end = "./Txt/dump_tree");
+        void dump (Mode mode, const std::string& path_name_without_end);
 };
 
 int vssystem (const char* command, ...) __attribute__((format(printf, 1, 2)));

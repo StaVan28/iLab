@@ -12,7 +12,7 @@
 
 # dirs path
 export BIN_DIR  = Bin
-export SRC_DIR  = Src/Settings Src/Tree Src/Differenciator Src/Parsing_text 
+export SRC_DIR  = Src/Settings Src/Tree Src/Differenciator Src/Lexical_analysis Src/Syntactic_analysis
 export HDR_DIR  = $(SRC_DIR)   Src/Node_differenciator
 export OBJ_DIR  = Obj
 export TXT_DIR  = Txt
@@ -20,8 +20,9 @@ export TXT_DIR  = Txt
 # source
 BIN = $(BIN_DIR)/diff
 
-SRC  = Src/Settings/settings.cpp   Src/Tree/tree.cpp                 Src/Differenciator/diff.cpp \
-       Src/Differenciator/main.cpp Src/Parsing_text/parsing_text.cpp                             \
+SRC  = Src/Settings/settings.cpp   Src/Tree/tree.cpp                         Src/Differenciator/diff.cpp \
+       Src/Differenciator/main.cpp                                                                       \
+       Src/Lexical_analysis/lexical_analysis.cpp Src/Syntactic_analysis/syntactic_analysis.cpp
        
 ALL_SRC = $(SRC)
 

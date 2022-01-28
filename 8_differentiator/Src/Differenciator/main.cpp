@@ -1,5 +1,5 @@
 #include "diff.h"
-#include "parsing_text.h"
+#include "syntactic_analysis.h"
 using namespace Differenciator;
 
 //-----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ int main ()
     test_tree_dif.dump(Mode::DEBUG, "Txt/dump_dif");
 */
 
-    BufNodes test_buf_nodes (DEFAULT_SOURCE_TEXT, START_MAX_NODES);
+    Parser parser_test;
 
     return 0;
 }
