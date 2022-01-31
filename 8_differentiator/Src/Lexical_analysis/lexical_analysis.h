@@ -72,6 +72,8 @@ class BufNodes
         bool push (const char* symb, NodeType type);
         void dump (const std::string& path_dump = PATH_BUF_NODES_DUMP) const;
 
+        const std::size_t get_length () const;
+
 }; // class BufNodes
 
 bool is_odd (int numb);

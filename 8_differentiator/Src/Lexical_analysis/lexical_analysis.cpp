@@ -318,6 +318,13 @@ void NodeDiff::print_data (FILE* dump) const
 
 //----------
 
+const std::size_t BufNodes::get_length () const
+{
+    return length_;
+}
+
+//----------
+
 bool is_odd (int numb)
 {
     return numb % 2;

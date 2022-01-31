@@ -79,7 +79,7 @@ install:
 
 clean:
 	$(E) "  CLEAN"
-	$(Q) rm -f $(BIN)  tags $(OBJ_DIR)/*.o
+	$(Q) rm -f $(BIN) tags $(OBJ_DIR)/*.o $(TXT_DIR)
 
 tags: ${SRC}
 	$(Q) rm -f tags

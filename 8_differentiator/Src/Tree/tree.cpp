@@ -138,10 +138,10 @@ const NodeDiff* const Tree::print_graph_tree (const Mode mode, const NodeDiff* c
 
     fprintf(dump, "\n\n");
 
-    if (prnt_node->right_ != nullptr)
+    if (prnt_node->left_  != nullptr)
         print_graph_tree(mode, prnt_node->left_,  dump);
 
-    if (prnt_node->left_  != nullptr)
+    if (prnt_node->right_ != nullptr)
         print_graph_tree(mode, prnt_node->right_, dump);
 
     return prnt_node;

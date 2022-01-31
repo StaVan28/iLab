@@ -28,41 +28,34 @@ Parser::~Parser ()
 
 NodeDiff* Parser::get_expr ()
 {
-        if (buf_nodes_[i_node_].type_ == NodeType::OPER)
+    NodeDiff* lt_node = nullptr;
+    NodeDiff* op_node = get_term ();
+    NodeDiff* rt_node = nullptr;
+
+    while (buf_nodes_[i_node_].type_ != NodeType::NONE)
     {
-        if (buf_nodes_[i_node_].value_oper_ == '+' ||
-            buf_nodes_[i_node_].value_oper_ == '-')
+        lt_node = op_node;
+        op_node = &(buf_nodes_[i_node_]);
+
+        if (op_node->value_oper_ == '+' ||
+            op_node->value_oper_ == '-')
         {
             i_node_++;
         }
-    }
-    
-    if (buf_nodes_[i_node_].type_ == NodeType::NONE)
-        return nullptr;
-
-    NodeDiff* lt_node = get_numb ();
-    NodeDiff* op_node = nullptr;
-
-    if (buf_nodes_[i_node_].type_ == NodeType::OPER)
-    {
-        if (buf_nodes_[i_node_].value_oper_ == '+' ||
-            buf_nodes_[i_node_].value_oper_ == '-')
+        else
         {
-            op_node = &(buf_nodes_[i_node_]);
-            i_node_++;
+            op_node = lt_node;
+            break;
         }
+
+        rt_node = get_term ();
+
+        rt_node->parent_ = op_node;
+        lt_node->parent_ = op_node;
+
+        op_node->left_   = lt_node;
+        op_node->right_  = rt_node;
     }
-
-    NodeDiff* rt_node = get_expr ();
-
-    if (rt_node == nullptr)
-        return lt_node;
-
-    op_node->left_  = lt_node;
-    op_node->right_ = rt_node;
-
-    lt_node->parent_ = op_node;
-    rt_node->parent_ = op_node;
 
     return op_node;
 }
@@ -71,14 +64,67 @@ NodeDiff* Parser::get_expr ()
 
 NodeDiff* Parser::get_term ()
 {
-    return nullptr;
+    NodeDiff* lt_node = nullptr;
+    NodeDiff* op_node = get_prnt ();
+    NodeDiff* rt_node = nullptr;
+
+    while (buf_nodes_[i_node_].type_ != NodeType::NONE)
+    {
+        lt_node = op_node;
+        op_node = &(buf_nodes_[i_node_]);
+
+        if (op_node->value_oper_ == '*' ||
+            op_node->value_oper_ == '/')
+        {
+            i_node_++;
+        }
+        else
+        {
+            op_node = lt_node;
+            break;
+        }
+
+        rt_node = get_prnt ();
+
+        rt_node->parent_ = op_node;
+        lt_node->parent_ = op_node;
+
+        op_node->left_   = lt_node;
+        op_node->right_  = rt_node;
+    }
+
+    return op_node;
 }
 
 //------
 
 NodeDiff* Parser::get_prnt ()
 {
-    return nullptr;
+    NodeDiff* prnt_node = nullptr;
+
+    if (buf_nodes_[i_node_].type_ == NodeType::OPER)
+    {
+        if (buf_nodes_[i_node_].value_oper_ == '(')
+            i_node_++;
+        else
+        {
+            // error
+        }
+
+        prnt_node = get_expr ();
+
+        if (buf_nodes_[i_node_].value_oper_ == ')')
+            i_node_++;
+        else
+        {
+            // error
+        }       
+
+    }
+    else
+        prnt_node = get_numb ();
+
+    return prnt_node;
 }
 //------
 

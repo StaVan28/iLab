@@ -12,7 +12,7 @@ echo ''
 
 echo $'\n ---  LAUNCH  --- '
 echo "    START: " && date +"%T"
-valgrind ./Bin/diff $@
+valgrind ./Bin/diff $@ 
 echo "    END: "   && date +"%T"
 
 echo $'\n ----  DUMP  ---- '
