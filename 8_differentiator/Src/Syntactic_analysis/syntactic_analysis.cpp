@@ -11,7 +11,8 @@ Parser::Parser () :
     buf_nodes_   {DEFAULT_SOURCE_TEXT, START_MAX_NODES},
     syntax_tree_ {DEFAULT_TREE_NAME},
     i_node_      {0}
-{   
+{
+    buf_nodes_.dump (PATH_BUF_NODES_DUMP);
     syntax_tree_.root_ = get_expr ();
 }
 

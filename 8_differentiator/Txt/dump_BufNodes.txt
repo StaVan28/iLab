@@ -2,10 +2,10 @@
     | max_nodes_ = 64,
     | length_    = 6 
 
-(1  )  NUMB -- {28}
-(2  )  OPER -- {+}
+(1  )  NUMB -- {-28}
+(2  )  OPER -- {-}
 (3  )  NUMB -- {3}
-(4  )  OPER -- {-}
+(4  )  OPER -- {+}
 (5  )  NUMB -- {8}
 (6  )  NONE
 

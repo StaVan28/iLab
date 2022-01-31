@@ -74,6 +74,10 @@ class BufNodes
 
 }; // class BufNodes
 
+bool is_odd (int numb);
+
+int  minus_counter (const char** symb, const char* start_symb, std::size_t num_symbols);
+
 }; // namespace Differenciator
 
 

@@ -108,8 +108,6 @@ BufNodes::BufNodes (const std::string& source_text, std::size_t max_lexems) :
 
 BufNodes::~BufNodes ()
 {
-    dump (PATH_BUF_NODES_DUMP);
-
     delete [] buf_lexems_;
     buf_lexems_ = nullptr;
 }
@@ -153,35 +151,31 @@ void BufNodes::create_buffer_nodes ()
     const char* start_symb  = source_text_.get_buffer_data ();
     const char* symb        = start_symb;
 
-    //const char* tmp_symb        = nullptr; 
-    //bool        minus_indicator = 0;
+    int minus_cntr = 0;
 
     while (isspace (*symb))
         symb++;
 
-    if (*symb == '-')
+    while (*symb == '-' || *symb == '+')
     {
+        if (*symb == '-')
+            minus_cntr++;
+
         symb++;
-        while (isspace (*symb))
+        while (symb - start_symb < num_symbols && isspace (*symb))
             symb++;
-
-        push (symb, NodeType::NUMB);
-
-        while (symb - start_symb < num_symbols && isdigit (*symb))
-            symb++;
-
-        length_--;
-        buf_lexems_[length_].value_numb_ = -buf_lexems_[length_].value_numb_;
-        length_++;
     }
 
-    if (*symb == '+')
+    if (isdigit (*symb))
     {
-        symb++;
-        while (isspace (*symb))
-            symb++;
-
         push (symb, NodeType::NUMB);
+
+        if (is_odd (minus_cntr))
+        {
+            length_--;
+            buf_lexems_[length_].value_numb_ = -buf_lexems_[length_].value_numb_;
+            length_++;
+        }
 
         while (symb - start_symb < num_symbols && isdigit (*symb))
             symb++;
@@ -189,7 +183,29 @@ void BufNodes::create_buffer_nodes ()
 
     while (*symb != '\0')
     {
-        if (strchr ("+-*/^()", *symb))
+        if (strchr ("+-", *symb))
+        {
+            int minus_cntr = 0;
+
+            while (isspace (*symb))
+                symb++;
+
+            while (*symb == '-' || *symb == '+')
+            {
+                if (*symb == '-')
+                    minus_cntr++;
+
+                symb++;
+                while (symb - start_symb < num_symbols && isspace (*symb))
+                    symb++;
+            }
+
+            if (is_odd (minus_cntr))
+                push ("-", NodeType::OPER);
+            else
+                push ("+", NodeType::OPER);
+        }
+        else if (strchr ("*/^()", *symb))
         {
             push (symb, NodeType::OPER);
             symb++;
@@ -301,6 +317,33 @@ void NodeDiff::print_data (FILE* dump) const
 }
 
 //----------
+
+bool is_odd (int numb)
+{
+    return numb % 2;
+}
+
+//----------
+
+int minus_counter (const char** symb, const char* start_symb, std::size_t num_symbols)
+{
+    int tmp_minus_counter = 0;
+
+    while (isspace (**symb))
+        *symb++;
+
+    while (**symb == '-' || **symb == '+')
+    {
+        if (**symb == '-')
+            tmp_minus_counter++;
+
+        *symb++;
+        while (*symb - start_symb < num_symbols && isspace (**symb))
+            *symb++;
+    }
+
+    return tmp_minus_counter;
+}
 
 }; // namespace Differenciator
 

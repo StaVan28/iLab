@@ -4,23 +4,23 @@ digraph Tree {
     rankdir = "TB";
     label   = "Tree Graph";
 
-    "_0x4dbc858" [  label = "{ {type \n (OPER) | value\n (+)}}"fillcolor = "lightcyan2", shape = "record"];
-    "_0x4dbc858"->"_0x4dbc828";
-    "_0x4dbc858"->"_0x4dbc8b8";
+    "_0x4dbc868" [  label = "{ {type \n (OPER) | value\n (-)}}"fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc868"->"_0x4dbc838";
+    "_0x4dbc868"->"_0x4dbc8c8";
 
 
-    "_0x4dbc828" [  label = "{ {type \n (NUMB) | value\n (28)}}"fillcolor = "palegreen", shape = "record"];
+    "_0x4dbc838" [  label = "{ {type \n (NUMB) | value\n (-28)}}"fillcolor = "palegreen", shape = "record"];
 
 
-    "_0x4dbc8b8" [  label = "{ {type \n (OPER) | value\n (-)}}"fillcolor = "lightcyan2", shape = "record"];
-    "_0x4dbc8b8"->"_0x4dbc888";
-    "_0x4dbc8b8"->"_0x4dbc8e8";
+    "_0x4dbc8c8" [  label = "{ {type \n (OPER) | value\n (+)}}"fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc8c8"->"_0x4dbc898";
+    "_0x4dbc8c8"->"_0x4dbc8f8";
 
 
-    "_0x4dbc888" [  label = "{ {type \n (NUMB) | value\n (3)}}"fillcolor = "palegreen", shape = "record"];
+    "_0x4dbc898" [  label = "{ {type \n (NUMB) | value\n (3)}}"fillcolor = "palegreen", shape = "record"];
 
 
-    "_0x4dbc8e8" [  label = "{ {type \n (NUMB) | value\n (8)}}"fillcolor = "palegreen", shape = "record"];
+    "_0x4dbc8f8" [  label = "{ {type \n (NUMB) | value\n (8)}}"fillcolor = "palegreen", shape = "record"];
 
 
 }

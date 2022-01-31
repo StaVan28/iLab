@@ -4,27 +4,27 @@ digraph Tree {
     rankdir = "TB";
     label   = "Tree Graph";
 
-    "_0x4dbc858" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (+)}| {me\n (0x4dbc858)} | {left\n (0x4dbc828) | right\n (0x4dbc8b8)} }",fillcolor = "lightcyan2", shape = "record"];
-    "_0x4dbc858"->"_0x4dbc828";
-    "_0x4dbc858"->"_0x4dbc8b8";
+    "_0x4dbc868" [label = "{ {parent\n ((nil))} | {type \n (OPER) | value\n (-)}| {me\n (0x4dbc868)} | {left\n (0x4dbc838) | right\n (0x4dbc8c8)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc868"->"_0x4dbc838";
+    "_0x4dbc868"->"_0x4dbc8c8";
 
 
-    "_0x4dbc828" [label = "{ {parent\n (0x4dbc858)} | {type \n (NUMB) | value\n (28)}| {me\n (0x4dbc828)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
-    "_0x4dbc828"->"_0x4dbc858";
+    "_0x4dbc838" [label = "{ {parent\n (0x4dbc868)} | {type \n (NUMB) | value\n (-28)}| {me\n (0x4dbc838)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+    "_0x4dbc838"->"_0x4dbc868";
 
 
-    "_0x4dbc8b8" [label = "{ {parent\n (0x4dbc858)} | {type \n (OPER) | value\n (-)}| {me\n (0x4dbc8b8)} | {left\n (0x4dbc888) | right\n (0x4dbc8e8)} }",fillcolor = "lightcyan2", shape = "record"];
-    "_0x4dbc8b8"->"_0x4dbc858";
-    "_0x4dbc8b8"->"_0x4dbc888";
-    "_0x4dbc8b8"->"_0x4dbc8e8";
+    "_0x4dbc8c8" [label = "{ {parent\n (0x4dbc868)} | {type \n (OPER) | value\n (+)}| {me\n (0x4dbc8c8)} | {left\n (0x4dbc898) | right\n (0x4dbc8f8)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc8c8"->"_0x4dbc868";
+    "_0x4dbc8c8"->"_0x4dbc898";
+    "_0x4dbc8c8"->"_0x4dbc8f8";
 
 
-    "_0x4dbc888" [label = "{ {parent\n (0x4dbc8b8)} | {type \n (NUMB) | value\n (3)}| {me\n (0x4dbc888)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
-    "_0x4dbc888"->"_0x4dbc8b8";
+    "_0x4dbc898" [label = "{ {parent\n (0x4dbc8c8)} | {type \n (NUMB) | value\n (3)}| {me\n (0x4dbc898)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+    "_0x4dbc898"->"_0x4dbc8c8";
 
 
-    "_0x4dbc8e8" [label = "{ {parent\n (0x4dbc8b8)} | {type \n (NUMB) | value\n (8)}| {me\n (0x4dbc8e8)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
-    "_0x4dbc8e8"->"_0x4dbc8b8";
+    "_0x4dbc8f8" [label = "{ {parent\n (0x4dbc8c8)} | {type \n (NUMB) | value\n (8)}| {me\n (0x4dbc8f8)} | {left\n ((nil)) | right\n ((nil))} }",fillcolor = "palegreen", shape = "record"];
+    "_0x4dbc8f8"->"_0x4dbc8c8";
 
 
 }
