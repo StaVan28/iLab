@@ -13,7 +13,7 @@ digraph Tree {
     "_0x4dbc828"->"_0x4dbc858";
 
 
-    "_0x4dbc8b8" [label = "{ {parent\n (0x4dbc858)} | {type \n (OPER) | value\n (+)}| {me\n (0x4dbc8b8)} | {left\n (0x4dbc888) | right\n (0x4dbc8e8)} }",fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc8b8" [label = "{ {parent\n (0x4dbc858)} | {type \n (OPER) | value\n (-)}| {me\n (0x4dbc8b8)} | {left\n (0x4dbc888) | right\n (0x4dbc8e8)} }",fillcolor = "lightcyan2", shape = "record"];
     "_0x4dbc8b8"->"_0x4dbc858";
     "_0x4dbc8b8"->"_0x4dbc888";
     "_0x4dbc8b8"->"_0x4dbc8e8";

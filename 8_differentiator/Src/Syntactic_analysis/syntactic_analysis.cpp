@@ -27,65 +27,35 @@ Parser::~Parser ()
 
 NodeDiff* Parser::get_expr ()
 {
-    NodeDiff* op_node = nullptr;
-    NodeDiff* lt_node = nullptr;
-    NodeDiff* rt_node = nullptr;
-
-    bool sign_flag = 0; 
-
-    if (buf_nodes_[i_node_].type_ == NodeType::OPER)
+        if (buf_nodes_[i_node_].type_ == NodeType::OPER)
     {
-        if (buf_nodes_[i_node_].value_oper_ == '+')
+        if (buf_nodes_[i_node_].value_oper_ == '+' ||
+            buf_nodes_[i_node_].value_oper_ == '-')
         {
             i_node_++;
-            sign_flag += 0;
-        }
-        else if (buf_nodes_[i_node_].value_oper_ == '-')
-        {
-            i_node_++;
-            sign_flag += 1;
-        }
-        else
-        {
-            // error
         }
     }
     
     if (buf_nodes_[i_node_].type_ == NodeType::NONE)
-    {
         return nullptr;
-    }
-    else
-    {
-        //error
-    }
 
-    lt_node = get_numb (sign_flag);
+    NodeDiff* lt_node = get_numb ();
+    NodeDiff* op_node = nullptr;
 
     if (buf_nodes_[i_node_].type_ == NodeType::OPER)
     {
-        if (buf_nodes_[i_node_].value_oper_ = '+')
+        if (buf_nodes_[i_node_].value_oper_ == '+' ||
+            buf_nodes_[i_node_].value_oper_ == '-')
         {
             op_node = &(buf_nodes_[i_node_]);
             i_node_++;
-        }
-        else if (buf_nodes_[i_node_].value_oper_ = '-')
-        {
-            op_node = &(buf_nodes_[i_node_]);
-            i_node_++;
-        }
-        else
-        {
-            // error
         }
     }
 
-    rt_node = get_expr ();
+    NodeDiff* rt_node = get_expr ();
 
     if (rt_node == nullptr)
-    {
         return lt_node;
-    }
 
     op_node->left_  = lt_node;
     op_node->right_ = rt_node;
@@ -111,20 +81,17 @@ NodeDiff* Parser::get_prnt ()
 }
 //------
 
-NodeDiff* Parser::get_numb (bool sign_flag)
+NodeDiff* Parser::get_numb ()
 {
-    NodeDiff* num_node = nullptr;
+    NodeDiff* ret_num_node = nullptr;
 
     if (buf_nodes_[i_node_].type_ == NodeType::NUMB)
     {
-        num_node = &(buf_nodes_[i_node_]);
+        ret_num_node = &(buf_nodes_[i_node_]);
         i_node_++;
-    
-        if (sign_flag)
-            num_node->value_numb_ = -num_node->value_numb_;
     }
 
-    return num_node;
+    return ret_num_node;
 }
 
 }; // namespace Differenciator

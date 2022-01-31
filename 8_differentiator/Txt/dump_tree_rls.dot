@@ -12,7 +12,7 @@ digraph Tree {
     "_0x4dbc828" [  label = "{ {type \n (NUMB) | value\n (28)}}"fillcolor = "palegreen", shape = "record"];
 
 
-    "_0x4dbc8b8" [  label = "{ {type \n (OPER) | value\n (+)}}"fillcolor = "lightcyan2", shape = "record"];
+    "_0x4dbc8b8" [  label = "{ {type \n (OPER) | value\n (-)}}"fillcolor = "lightcyan2", shape = "record"];
     "_0x4dbc8b8"->"_0x4dbc888";
     "_0x4dbc8b8"->"_0x4dbc8e8";
 

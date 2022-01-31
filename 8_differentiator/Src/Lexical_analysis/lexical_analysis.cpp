@@ -153,6 +153,40 @@ void BufNodes::create_buffer_nodes ()
     const char* start_symb  = source_text_.get_buffer_data ();
     const char* symb        = start_symb;
 
+    //const char* tmp_symb        = nullptr; 
+    //bool        minus_indicator = 0;
+
+    while (isspace (*symb))
+        symb++;
+
+    if (*symb == '-')
+    {
+        symb++;
+        while (isspace (*symb))
+            symb++;
+
+        push (symb, NodeType::NUMB);
+
+        while (symb - start_symb < num_symbols && isdigit (*symb))
+            symb++;
+
+        length_--;
+        buf_lexems_[length_].value_numb_ = -buf_lexems_[length_].value_numb_;
+        length_++;
+    }
+
+    if (*symb == '+')
+    {
+        symb++;
+        while (isspace (*symb))
+            symb++;
+
+        push (symb, NodeType::NUMB);
+
+        while (symb - start_symb < num_symbols && isdigit (*symb))
+            symb++;
+    }
+
     while (*symb != '\0')
     {
         if (strchr ("+-*/^()", *symb))
@@ -164,7 +198,6 @@ void BufNodes::create_buffer_nodes ()
         {
             push (symb, NodeType::NUMB);
 
-            symb++;
             while (symb - start_symb < num_symbols && isdigit (*symb))
                 symb++;
 
@@ -173,7 +206,6 @@ void BufNodes::create_buffer_nodes ()
         {
             push (symb, NodeType::VARB);
 
-            symb++;
             while (symb - start_symb < num_symbols && isalpha (*symb))
                 symb++;
 

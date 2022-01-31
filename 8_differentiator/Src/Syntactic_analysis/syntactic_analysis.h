@@ -48,7 +48,7 @@ class Parser
         NodeDiff* get_expr ();
         NodeDiff* get_term ();
         NodeDiff* get_prnt ();
-        NodeDiff* get_numb (bool sign_flag);
+        NodeDiff* get_numb ();
 
 }; // class Parser
 
