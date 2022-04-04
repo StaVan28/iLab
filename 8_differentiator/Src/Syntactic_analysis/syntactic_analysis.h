@@ -30,10 +30,9 @@ class Parser
 {
     private:
 
+        BufNodes    buf_nodes_;
+        Tree        syntax_tree_;
         std::size_t i_node_;
-
-        BufNodes buf_nodes_;
-        Tree     syntax_tree_;
 
     public:
 

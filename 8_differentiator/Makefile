@@ -25,7 +25,7 @@ vpath %.hpp $(HDR_DIR)
 vpath %.h   $(HDR_DIR)
 
 # compiler settings
-CXX      = g++ -std=c++17
+CXX      = g++ -std=c++11
 WARNINGS = -Wall -Wextra 
 CXXFLAGS = 
 
@@ -79,7 +79,7 @@ install:
 
 clean:
 	$(E) "  CLEAN"
-	$(Q) rm -f $(BIN)  tags $(OBJ_DIR)/*.o
+	$(Q) rm -rf $(BIN) tags $(OBJ_DIR)/*.o $(TXT_DIR)
 
 tags: ${SRC}
 	$(Q) rm -f tags

@@ -1,6 +1,0 @@
-digraph Tree {
-
-    node [shape = "circle", style = "filled", fillcolor = "red",fontcolor = "#000000", margin = "0.01"];
-    rankdir = "TB";
-    label   = "Tree Graph";
-

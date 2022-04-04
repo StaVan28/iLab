@@ -21,11 +21,11 @@
 namespace Differenciator
 {
 
-static const std::string& PATH_BUF_NODES_DUMP = "Txt/dump_BufNodes.txt";
-static const std::string& DEFAULT_SOURCE_TEXT = "./calc.txt";
-static const std::string& DEFAULT_TREE_NAME   = "syntax_tree_diff";
-
-static const std::size_t START_MAX_NODES      = 64;
+static const std::string& PATH_BUF_NODES_DUMP    = "Txt/dump_BufNodes.txt";
+static const std::string& DEFAULT_SOURCE_TEXT    = "./calc.txt";
+static const std::string& DEFAULT_TREE_NAME      = "diff_tree";
+static const std::string& DEFAULT_TREE_DUMP_PATH = "./Txt/dump_tree";
+static const std::size_t  START_MAX_NODES        = 64;
 
 };
 

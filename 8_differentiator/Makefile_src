@@ -4,7 +4,7 @@
 
 # Makefile for source_include
 # version 1.0
-#             author: Starchenko Ivan
+#        author: Starchenko Ivan
 
 #--------------------------------------------------------------------------------------
 # SETTINGS
@@ -20,11 +20,9 @@ export TXT_DIR  = Txt
 # source
 BIN = $(BIN_DIR)/diff
 
-SRC  = Src/Settings/settings.cpp   Src/Tree/tree.cpp                         Src/Differenciator/diff.cpp \
+SRC  = Src/Settings/settings.cpp   Src/Tree/tree.cpp Src/Differenciator/diff.cpp                         \
        Src/Differenciator/main.cpp                                                                       \
        Src/Lexical_analysis/lexical_analysis.cpp Src/Syntactic_analysis/syntactic_analysis.cpp
-       
-ALL_SRC = $(SRC)
 
 OBJ     = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC)))
 OBJ    := $(OBJ:%.cpp=%.o)

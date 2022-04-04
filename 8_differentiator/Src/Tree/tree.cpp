@@ -31,16 +31,14 @@ Tree::~Tree ()
 
 //----------
 
-void Tree::dump (Mode mode, const char* path_name_without_end)
+void Tree::dump (Mode mode, const std::string& path_name_without_end)
 {
-    assert (path_name_without_end);
-
     char path_name [MAX_BUFF] = {};
 
     if (mode == Mode::DEBUG)
-        sprintf (path_name, "%s_db.dot",  path_name_without_end);
+        sprintf (path_name, "%s_db.dot",  path_name_without_end.c_str ());
     else
-        sprintf (path_name, "%s_rls.dot", path_name_without_end);
+        sprintf (path_name, "%s_rls.dot", path_name_without_end.c_str ());
 
     FILE*   dump = fopen (path_name, "wb");
     assert (dump);
@@ -64,9 +62,9 @@ void Tree::dump (Mode mode, const char* path_name_without_end)
     fclose  (dump);
 
     if (mode == Mode::DEBUG)
-        vssystem ("dot -Tjpeg %s -o %s_db.jpeg",  path_name, path_name_without_end);
+        vssystem ("dot -Tjpeg %s -o %s_db.jpeg",  path_name, path_name_without_end.c_str ());
     else 
-        vssystem ("dot -Tjpeg %s -o %s_rls.jpeg", path_name, path_name_without_end);
+        vssystem ("dot -Tjpeg %s -o %s_rls.jpeg", path_name, path_name_without_end.c_str ());
 
 }
 
@@ -140,10 +138,10 @@ const NodeDiff* const Tree::print_graph_tree (const Mode mode, const NodeDiff* c
 
     fprintf(dump, "\n\n");
 
-    if (prnt_node->right_ != nullptr)
+    if (prnt_node->left_  != nullptr)
         print_graph_tree(mode, prnt_node->left_,  dump);
 
-    if (prnt_node->left_  != nullptr)
+    if (prnt_node->right_ != nullptr)
         print_graph_tree(mode, prnt_node->right_, dump);
 
     return prnt_node;
@@ -168,6 +166,10 @@ void NodeDiff::print_data (const NodeDiff* const prnt_node, FILE* dump) const
 
         case NodeType::OPER: fprintf (dump, " {type \\n (OPER) | "
                                               "value\\n (%c)}"  , value_oper_);
+                              break;
+
+        case NodeType::NONE: fprintf (dump, " {type \\n (NONE) | "
+                                              "value\\n (---)}");
                               break;
 
         default:              printf  ("ERROR! Type:\n");

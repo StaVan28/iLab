@@ -10,10 +10,10 @@
 # SETTINGS
 #--------------------------------------------------------------------------------------
 
-$(OBJ_DIR)/main.o:                              main.cpp                         settings.h syntactic_analysis.h
-$(OBJ_DIR)/diff.o:                              diff.cpp                diff.h   settings.h
-$(OBJ_DIR)/tree.o:                              tree.cpp                tree.hpp settings.h 
-$(OBJ_DIR)/Lexical_analysis.o:      lexical_analysis.cpp    lexical_analysis.h   settings.h
-$(OBJ_DIR)/Syntactic_analysis.o:  syntactic_analysis.cpp  syntactic_analysis.h   settings.h 
-$(OBJ_DIR)/settings.o:                      settings.cpp                         settings.h
+$(OBJ_DIR)/main.o:                              main.cpp
+$(OBJ_DIR)/diff.o:                              diff.cpp
+$(OBJ_DIR)/tree.o:                              tree.cpp 
+$(OBJ_DIR)/Lexical_analysis.o:      lexical_analysis.cpp
+$(OBJ_DIR)/Syntactic_analysis.o:  syntactic_analysis.cpp 
+$(OBJ_DIR)/settings.o:                      settings.cpp
 
